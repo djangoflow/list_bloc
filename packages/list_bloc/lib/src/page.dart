@@ -1,4 +1,4 @@
-class Page<T> {
+class ListPage<T> {
   static const kPageSize = 25;
   final int number;
   final int size;
@@ -9,8 +9,8 @@ class Page<T> {
   int get offset => number * size;
   int get pages => count ~/ size;
 
-  Page<T> withData({List<T> data, int count})
-    => Page<T>(data: data, number: number, size: size, count: count);
+  ListPage<T> withData({List<T> data, int count})
+    => ListPage<T>(data: data, number: number, size: size, count: count);
 
-  Page({this.data = const [], this.number = 1, this.size = kPageSize, this.count = 0});
+  ListPage({this.data = const [], this.number = 0, this.size = kPageSize, this.count = 0});
 }
