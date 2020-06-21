@@ -12,4 +12,4 @@ A simple usage example:
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: https://github.com/apexlabs-ai/list_bloc
+[tracker]: https://github.com/apexlabs-ai/list_bloc/issues
