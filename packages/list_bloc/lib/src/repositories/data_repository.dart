@@ -1,3 +1,3 @@
 abstract class DataRepository<T,F> {
-  Future <T> load([F filter]);
+  Future <T> load({F filter});
 }

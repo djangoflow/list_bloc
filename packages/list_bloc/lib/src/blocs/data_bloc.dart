@@ -16,17 +16,19 @@ class DataBloc<T,F> extends Bloc<DataEvent<T,F>,DataState<T,F>> {
 
   @override
   Stream<DataState<T,F>> mapEventToState(DataEvent<T,F> event) async* {
-    if(event is DataClear) {
+    print(event);
+    if(event is DataClear<T,F>) {
       yield DataEmpty<T,F>(null);
-    } else if(event is DataLoad) {
-      final e = event as DataLoad;
+    } else if(event is DataLoad<T,F>) {
+      final e = event as DataLoad<T,F>;
       yield state.toLoading();
-      yield DataLoaded(
-        await repository.load(e.filter), filter: e.filter);
+      yield DataLoaded<T,F>(
+        await repository.load(filter: e.filter), filter: e.filter);
+    } else {
+      throw UnimplementedError();
     }
-    throw UnimplementedError();
   }
 
-  void clear() => add(DataClear());
-  void load(F filter) => add(DataLoad(filter: filter));
+  void clear() => add(DataClear<T,F>());
+  void load(F filter) => add(DataLoad<T,F>(filter: filter));
 }

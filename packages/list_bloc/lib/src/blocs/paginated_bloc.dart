@@ -10,9 +10,4 @@ class PaginatedBloc<T,F> extends DataBloc<ListPage<T>, F> {
   final PaginatedRepository<T,F> repository;
 
   PaginatedBloc(this.repository) : super(repository);
-
-  @override
-  Stream<DataState<ListPage<T>, F>> mapEventToState(DataEvent<ListPage<T>, F> event) async* {
-    super.mapEventToState(event);
-  }
 }
