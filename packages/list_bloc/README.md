@@ -18,6 +18,13 @@ The three blocs are expecting to be initialized with a `DataRepository`, `ListRe
 or `PaginatedRepository` respectively, all of which should implement a `Future load({F filter})`
 which is slightly different for List or Paginated bloc.
 
+The filters can extend Object or any other class however `built_value` is quite
+useful for this as this allows re-building filters based on existing ones quite
+easily.
+
+In order to generate the `OffetLimitFilter` run `pub run build_runner build`
+
+
 ## Usage
 
 A simple usage example:
