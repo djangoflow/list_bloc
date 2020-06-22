@@ -20,10 +20,9 @@ class DataBloc<T,F> extends Bloc<DataEvent<T,F>,DataState<T,F>> {
     if(event is DataClear<T,F>) {
       yield DataEmpty<T,F>(null);
     } else if(event is DataLoad<T,F>) {
-      final e = event as DataLoad<T,F>;
       yield state.toLoading();
-      yield DataLoaded<T,F>(
-        await repository.load(filter: e.filter), filter: e.filter);
+      final filter = event.filter ?? state.filter;
+      yield DataLoaded<T,F>(await repository.load(filter: filter), filter: filter);
     } else {
       throw UnimplementedError();
     }

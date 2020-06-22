@@ -1,3 +1,6 @@
+## 0.0.5
+- reuse state filter if no filter is supplied with `DataLoad` event
+
 ## 0.0.4
 - Use `built_value` for the filters
 
