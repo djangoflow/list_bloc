@@ -1,0 +1,21 @@
+name: flutter_list_bloc
+description: A Flutter package to display the data loaded with list_bloc.
+version: 0.0.1
+homepage: https://github.com/apexlabs-ai/list_bloc/
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  list_bloc: ^0.0.5
+#    path: ../list_bloc
+  flutter_bloc: ^4.0.0
+
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
