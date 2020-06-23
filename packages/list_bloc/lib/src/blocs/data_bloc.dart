@@ -29,5 +29,5 @@ class DataBloc<T,F> extends Bloc<DataEvent<T,F>,DataState<T,F>> {
   }
 
   void clear() => add(DataClear<T,F>());
-  void load(F filter) => add(DataLoad<T,F>(filter: filter));
+  void load([F filter]) => add(DataLoad<T,F>(filter: filter));
 }
