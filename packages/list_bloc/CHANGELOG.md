@@ -1,3 +1,6 @@
+## [1.0.0] - 20 Jul 2020
+* First version used in production
+
 ## 0.0.5
 - reuse state filter if no filter is supplied with `DataLoad` event
 
