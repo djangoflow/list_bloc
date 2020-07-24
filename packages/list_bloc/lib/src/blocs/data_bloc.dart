@@ -7,12 +7,9 @@ part 'data_event.dart';
 part 'data_state.dart';
 
 class DataBloc<T,F> extends Bloc<DataEvent<T,F>,DataState<T,F>> {
-  @override
-  DataState<T,F> get initialState => DataEmpty<T,F>(null);
-
   final DataRepository<T,F> repository;
 
-  DataBloc(this.repository);
+  DataBloc(this.repository) : super(DataEmpty<T,F>(null));
 
   @override
   Stream<DataState<T,F>> mapEventToState(DataEvent<T,F> event) async* {
