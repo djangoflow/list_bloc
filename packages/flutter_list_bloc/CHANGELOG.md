@@ -1,3 +1,5 @@
+## [1.0.1] - 24 Jul 2020
+* Upgrade to flutter_bloc 
 ## [1.0.0] - 20 Jul 2020
 * First version used in production
 
