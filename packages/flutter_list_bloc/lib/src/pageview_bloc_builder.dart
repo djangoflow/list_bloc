@@ -41,7 +41,7 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PaginatedBloc<T, F>, DataState<ListPage<T>, F>>(
-        bloc: _bloc,
+        cubit: _bloc,
         listenWhen: (prev, next) =>
             prev.data?.number != next.data?.number &&
             _pageController.page != next.data?.number,

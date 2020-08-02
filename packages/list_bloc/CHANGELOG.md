@@ -1,3 +1,6 @@
+## [1.0.2] - 02 Aug 2020
+* Upgrade to bloc 6.0.1
+
 ## [1.0.1] - 24 Jul 2020
 * Upgrade to bloc 5.0.1
 
