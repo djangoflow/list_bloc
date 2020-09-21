@@ -1,3 +1,6 @@
+## [1.0.3] - 02 Aug 2020
+* Fix empty data null exception when loading
+
 ## [1.0.2] - 2 Aug 2020
 * Upgrade to flutter_bloc 6.0.1
 

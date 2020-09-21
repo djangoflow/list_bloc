@@ -54,7 +54,7 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
           if (widget.headerBuilder != null)
             children.add(widget.headerBuilder(context, state));
 
-          if (state.data.data?.isEmpty ?? true) {
+          if (state.data?.data?.isEmpty ?? true) {
             children.add(
                 Expanded(child: widget.emptyBuilder(context, _bloc.state)));
           } else {
