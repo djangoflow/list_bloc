@@ -1,3 +1,6 @@
+## [1.0.4] - 1 Oct 2020
+* fixed error 'positions.isNotEmpty': PageController.page cannot be accessed before a PageView is built with it.
+
 ## [1.0.3] - 02 Aug 2020
 * Fix empty data null exception when loading
 
