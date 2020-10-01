@@ -44,6 +44,7 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
         cubit: _bloc,
         listenWhen: (prev, next) =>
             prev.data?.number != next.data?.number &&
+            _pageController.positions.isNotEmpty &&
             _pageController.page != next.data?.number,
         listener: (context, state) {
           _pageController.jumpToPage(state.data.number);
