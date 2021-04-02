@@ -4,27 +4,30 @@ import 'package:equatable/equatable.dart';
 import '../repositories/data_repository.dart';
 
 part 'data_event.dart';
+
 part 'data_state.dart';
 
-class DataBloc<T,F> extends Bloc<DataEvent<T,F>,DataState<T?,F>> {
-  final DataRepository<T,F> repository;
+class DataBloc<T, F> extends Bloc<DataEvent<T, F>, DataState<T, F>> {
+  final DataRepository<T, F> repository;
 
-  DataBloc(this.repository) : super(DataEmpty<T?,F>(null));
+  DataBloc(this.repository) : super(DataEmpty<T, F>());
 
   @override
-  Stream<DataState<T,F>> mapEventToState(DataEvent<T,F> event) async* {
+  Stream<DataState<T, F>> mapEventToState(DataEvent<T, F> event) async* {
     print(event);
-    if(event is DataClear<T,F>) {
-      yield DataEmpty<T?,F>(null) as DataState<T, F>;
-    } else if(event is DataLoad<T,F>) {
+    if (event is DataClear<T, F>) {
+      yield DataEmpty<T?, F>() as DataState<T, F>;
+    } else if (event is DataLoad<T, F>) {
       yield state.toLoading();
       final filter = event.filter ?? state.filter;
-      yield DataLoaded<T,F>(await repository.load(filter: filter), filter: filter);
+      yield DataLoaded<T, F>(
+          await repository.load(filter: filter), filter: filter);
     } else {
       throw UnimplementedError();
     }
   }
 
-  void clear() => add(DataClear<T,F>());
-  void load([F? filter]) => add(DataLoad<T,F>(filter: filter));
+  void clear() => add(DataClear<T, F>());
+
+  void load([F? filter]) => add(DataLoad<T, F>(filter: filter));
 }

@@ -1,3 +1,6 @@
+## [2.0.1] - 02 Apr 2021
+* Null safety fixes
+
 ## [2.0.0] - 02 Apr 2021
 * Null safety
 
