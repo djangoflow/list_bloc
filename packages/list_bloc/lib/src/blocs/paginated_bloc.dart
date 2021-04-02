@@ -7,7 +7,7 @@ class PaginatedBloc<T,F> extends DataBloc<ListPage<T>, F> {
   final PaginatedRepository<T,F> repository;
 
   @override
-  void load([F filter]) {
+  void load([F? filter]) {
     assert(filter != null || state.filter != null);
     super.load(filter);
   }

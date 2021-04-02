@@ -1,3 +1,6 @@
+## [2.0.0] - 02 Apr 2021
+* Null safety
+
 ## [1.0.2] - 02 Aug 2020
 * Upgrade to bloc 6.0.1
 

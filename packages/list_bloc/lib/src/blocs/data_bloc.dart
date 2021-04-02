@@ -6,16 +6,16 @@ import '../repositories/data_repository.dart';
 part 'data_event.dart';
 part 'data_state.dart';
 
-class DataBloc<T,F> extends Bloc<DataEvent<T,F>,DataState<T,F>> {
+class DataBloc<T,F> extends Bloc<DataEvent<T,F>,DataState<T?,F>> {
   final DataRepository<T,F> repository;
 
-  DataBloc(this.repository) : super(DataEmpty<T,F>(null));
+  DataBloc(this.repository) : super(DataEmpty<T?,F>(null));
 
   @override
   Stream<DataState<T,F>> mapEventToState(DataEvent<T,F> event) async* {
     print(event);
     if(event is DataClear<T,F>) {
-      yield DataEmpty<T,F>(null);
+      yield DataEmpty<T?,F>(null) as DataState<T, F>;
     } else if(event is DataLoad<T,F>) {
       yield state.toLoading();
       final filter = event.filter ?? state.filter;
@@ -26,5 +26,5 @@ class DataBloc<T,F> extends Bloc<DataEvent<T,F>,DataState<T,F>> {
   }
 
   void clear() => add(DataClear<T,F>());
-  void load([F filter]) => add(DataLoad<T,F>(filter: filter));
+  void load([F? filter]) => add(DataLoad<T,F>(filter: filter));
 }
