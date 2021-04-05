@@ -1,3 +1,11 @@
+## [2.0.3] - 5 Apr 2021
+* Use equatable as filter base
+
+## [2.0.2] - 3 Apr 2021
+* fixed division by zero bug
+* experimental support for infinite pages
+
+
 ## [2.0.1] - 02 Apr 2021
 * Null safety fixes
 
