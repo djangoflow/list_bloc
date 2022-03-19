@@ -3,21 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
 class PageViewBlocBuilder<T, F> extends StatefulWidget {
-  final PaginatedCubit<T, F> cubit;
+  final PaginatedCubit<T, F>? cubit;
 
-  final Widget Function(BuildContext, Data<Page<T>, F> state)?
-      headerBuilder;
-  final Widget Function(BuildContext, Data<Page<T>, F> state)?
-      footerBuilder;
-  final Widget Function(BuildContext, Data<Page<T>, F> state)
-      pageBuilder;
-  final Widget Function(BuildContext, Data<Page<T>, F> state)
-      emptyBuilder;
+  final Widget Function(BuildContext, Data<Page<T>, F> state)? headerBuilder;
+  final Widget Function(BuildContext, Data<Page<T>, F> state)? footerBuilder;
+  final Widget Function(BuildContext, Data<Page<T>, F> state) pageBuilder;
+  final Widget Function(BuildContext, Data<Page<T>, F> state) emptyBuilder;
   final void Function(BuildContext, Data<Page<T>, F> state, int index)?
       onPageChanged;
 
   PageViewBlocBuilder(
-      {required this.cubit,
+      {this.cubit,
       this.headerBuilder,
       this.footerBuilder,
       required this.pageBuilder,
@@ -29,13 +25,13 @@ class PageViewBlocBuilder<T, F> extends StatefulWidget {
 }
 
 class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
-  PaginatedCubit<T, F> get _bloc => widget.cubit;
+  PaginatedCubit<T, F>? get _cubit => widget.cubit;
   PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PaginatedCubit<T, F>, Data<Page<T>, F>>(
-        bloc: _bloc,
+        bloc: _cubit,
         listenWhen: (prev, next) =>
             prev.data.number != next.data.number &&
             _pageController.positions.isNotEmpty &&
@@ -50,17 +46,17 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
             children.add(widget.headerBuilder!(context, state));
 
           if (state.data.data?.isEmpty ?? true) {
-            children.add(
-                Expanded(child: widget.emptyBuilder(context, _bloc.state)));
+            children.add(Expanded(child: widget.emptyBuilder(context, state)));
           } else {
             children.add(Expanded(
                 child: PageView.builder(
-                    onPageChanged: (index) =>
-                        widget.onPageChanged == null ? null : widget.onPageChanged!(context, _bloc.state, index),
+                    onPageChanged: (index) => widget.onPageChanged == null
+                        ? null
+                        : widget.onPageChanged!(context, state, index),
                     controller: _pageController,
-                    itemCount: _bloc.state.data.pages,
+                    itemCount: state.data.pages,
                     itemBuilder: (context, index) =>
-                        widget.pageBuilder(context, _bloc.state))));
+                        widget.pageBuilder(context, state))));
           }
 
           if (widget.footerBuilder != null)
