@@ -9,4 +9,7 @@ abstract class OffsetLimitFilter extends Equatable {
 
   @override
   List<Object?> get props => [offset, limit];
+
+  @override
+  bool? get stringify => true;
 }
