@@ -1,22 +1,21 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 
-import '../data_state.dart';
+import '../data.dart';
 
-abstract class DataCubit<T, F> extends Cubit<DataState<T, F>> {
-  DataCubit([DataState<T, F>? state]) : super(state ?? DataEmpty<T, F>());
+abstract class DataCubit<T, F> extends Cubit<Data<T, F>> {
+  DataCubit([Data<T, F>? state]) : super(state ?? Data.empty());
 
   /// You need to implement this in a subclass
   Future<T> fetch(F? filter);
 
-  void clear() => emit(DataEmpty<T, F>());
+  void clear() => emit(Data.empty());
 
   Future<void> load([F? filter]) async {
-    emit(state.toLoading());
+    emit(Data.loading(data: state.data, filter: state.filter));
     try {
-      emit(DataLoaded<T, F>(await fetch(filter)));
+      emit(Data(data: await fetch(filter), filter: state.filter));
     } catch (e) {
-      emit(DataError<T, F, Object>(e, state.data));
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
     }
   }
 }

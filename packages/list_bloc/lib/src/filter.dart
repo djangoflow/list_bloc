@@ -1,15 +1,12 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-// This class to be used as a mixin for a built_value filter
-abstract class OffsetLimitFilter extends Equatable {
+part 'filter.freezed.dart';
+
+@freezed
+class OffsetLimitFilter with _$OffsetLimitFilter {
   static const kPageSize = 50;
 
-  int get offset;
-  int get limit;
-
-  @override
-  List<Object?> get props => [offset, limit];
-
-  @override
-  bool? get stringify => true;
+  const factory OffsetLimitFilter(
+      {required int offset,
+      @Default(kPageSize) int limit}) = _OffsetLimitFilter;
 }

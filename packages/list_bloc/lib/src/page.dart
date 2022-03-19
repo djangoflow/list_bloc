@@ -1,19 +1,21 @@
-class ListPage<T> {
-  static const kPageSize = 25;
-  final int number;
-  final int size;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final List<T>?data;
-  final int? count;
+part 'page.freezed.dart';
+
+@freezed
+class Page<T> with _$Page {
+  static const kPageSize = 25;
+
+  const Page._();
 
   int get offset => number * size;
-  int get pages => size == 0 ? 0 : count! ~/ size + (count! % size == 0 ? 0 : 1);
 
-  ListPage<T> withData({List<T>? data, int? count})
-    => ListPage<T>(data: data, number: number, size: size, count: count);
+  int get pages =>
+      size == 0 ? 0 : count! ~/ size + (count! % size == 0 ? 0 : 1);
 
-  ListPage({this.data = const [], this.number = 0, this.size = kPageSize, this.count = 0});
-
-  @override
-  String toString() => 'page $number size $size of $pages with $runtimeType: ${data?.length} elements $count total';
+  const factory Page(
+      {List<T>? data,
+      int? count,
+      required int number,
+      required int size}) = _Page;
 }

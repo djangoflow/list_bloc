@@ -1,32 +1,31 @@
 import 'package:list_bloc/list_bloc.dart';
 
-import '../data_state.dart';
+import '../data.dart';
 import 'data_cubit.dart';
 
 abstract class ListCubit<T, F> extends DataCubit<List<T>, F> {
-  final bool growable;
+  final bool continuous;
 
-  ListCubit([DataState<List<T>, F>? state])
-      : growable = false,
-        super(state ?? DataEmpty<List<T>, F>());
+  ListCubit([Data<List<T>, F>? state])
+      : continuous = false,
+        super(state ?? Data.empty());
 
-  ListCubit.growable([DataState<List<T>, F>? state])
-      : growable = true,
-        super(state ?? DataEmpty<List<T>, F>());
+  ListCubit.continuous([Data<List<T>, F>? state])
+      : continuous = true,
+        super(state ?? Data.empty());
 
   Future<void> reload([F? filter]) => super.load(filter);
 
   @override
   Future<void> load([F? filter]) async {
-    if (growable) {
-      emit(state.toLoading());
+    if (continuous) {
+      emit(Data.loading(data: state.data, filter: state.filter));
       try {
-        emit(DataLoaded<List<T>, F>(
-            [...state.data ?? [], ...await fetch(
-                (filter == null && state.filter != null && state.filter is OffsetLimitFilter)
-                filter)]));
+        emit(Data(
+            data: [...state.data ?? [], ...await fetch(filter ?? state.filter)],
+            filter: filter ?? state.filter));
       } catch (e) {
-        emit(DataError<List<T>, F, Object>(e, state.data));
+        emit(Data.error(data: state.data, filter: state.filter, error: e));
       }
     } else {
       return await reload(filter);

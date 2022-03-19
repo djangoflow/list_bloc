@@ -1,23 +1,23 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
 class PageViewBlocBuilder<T, F> extends StatefulWidget {
-  final PaginatedBloc<T, F> bloc;
+  final PaginatedCubit<T, F> cubit;
 
-  final Widget Function(BuildContext, DataState<ListPage<T>, F> state)?
+  final Widget Function(BuildContext, Data<Page<T>, F> state)?
       headerBuilder;
-  final Widget Function(BuildContext, DataState<ListPage<T>, F> state)?
+  final Widget Function(BuildContext, Data<Page<T>, F> state)?
       footerBuilder;
-  final Widget Function(BuildContext, DataState<ListPage<T>, F> state)
+  final Widget Function(BuildContext, Data<Page<T>, F> state)
       pageBuilder;
-  final Widget Function(BuildContext, DataState<ListPage<T>, F> state)
+  final Widget Function(BuildContext, Data<Page<T>, F> state)
       emptyBuilder;
-  final void Function(BuildContext, DataState<ListPage<T>, F> state, int index)?
+  final void Function(BuildContext, Data<Page<T>, F> state, int index)?
       onPageChanged;
 
   PageViewBlocBuilder(
-      {required this.bloc,
+      {required this.cubit,
       this.headerBuilder,
       this.footerBuilder,
       required this.pageBuilder,
@@ -29,12 +29,12 @@ class PageViewBlocBuilder<T, F> extends StatefulWidget {
 }
 
 class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
-  PaginatedBloc<T, F> get _bloc => widget.bloc;
+  PaginatedCubit<T, F> get _bloc => widget.cubit;
   PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PaginatedBloc<T, F>, DataState<ListPage<T>, F>>(
+    return BlocConsumer<PaginatedCubit<T, F>, Data<Page<T>, F>>(
         bloc: _bloc,
         listenWhen: (prev, next) =>
             prev.data.number != next.data.number &&
