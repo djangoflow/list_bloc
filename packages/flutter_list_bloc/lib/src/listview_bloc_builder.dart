@@ -19,7 +19,7 @@ class ListViewBlocBuilder<B extends PaginatedCubit<T,F>, T, F> extends Stateless
       required this.loadingBuilder,
       required this.emptyBuilder,
       this.create,
-      this.scrollDirection = Axis.vertical});
+      this.scrollDirection = Axis.vertical}) : assert((cubit != null) != (create != null));
 
   @override
   Widget build(BuildContext context) {
