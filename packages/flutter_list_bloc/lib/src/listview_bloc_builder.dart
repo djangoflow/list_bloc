@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
 class ListViewBlocBuilder<T, F> extends StatelessWidget {
-  final PaginatedCubit<T, F>? cubit;
+  final PaginatedCubit<T, F> cubit;
 
   final Widget Function(BuildContext, Data<Page<T>, F> state)? headerBuilder;
   final Widget Function(BuildContext, Data<Page<T>, F> state)? footerBuilder;
@@ -13,7 +13,8 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
   final Widget Function(BuildContext, Data<Page<T>, F> state) emptyBuilder;
   final Axis scrollDirection;
 
-  ListViewBlocBuilder({this.cubit,
+  ListViewBlocBuilder({
+    required this.cubit,
     this.headerBuilder,
     this.footerBuilder,
     required this.itemBuilder,
@@ -37,7 +38,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
                 if (state.data is Empty || (state.data?.data?.isEmpty ?? true))
                   emptyBuilder(context, state)
                 else
-                  // TODO(ajil): need different solution below
+                // TODO(ajil): need different solution below
                   SizedBox(
                     height: 300, // Constrain height.
                     child:
