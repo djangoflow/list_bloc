@@ -11,13 +11,16 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
   final Widget Function(BuildContext, Data<Page<T>, F> state, int index, T item)
   itemBuilder;
   final Widget Function(BuildContext, Data<Page<T>, F> state) emptyBuilder;
+  final Axis scrollDirection;
 
   ListViewBlocBuilder({this.cubit,
     this.headerBuilder,
     this.footerBuilder,
     required this.itemBuilder,
     required this.loadingBuilder,
-    required this.emptyBuilder});
+    required this.emptyBuilder,
+    this.scrollDirection = Axis.vertical
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,21 +28,27 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
       bloc: cubit,
       builder: (context, state) =>
           Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               if (headerBuilder != null) headerBuilder!.call(context, state),
               if (state is Loading && (state.data?.data?.isEmpty ?? true))
                 loadingBuilder(context, state)
               else
                 if (state.data is Empty)
-                  Expanded(child: emptyBuilder(context, state))
+                  emptyBuilder(context, state)
                 else
-                  ListView.builder(
-                    scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) =>
-                          itemBuilder(
-                              context, state, index, state.data!.data![index]!),
-                      itemCount: state.data?.count),
+                  // TODO(ajil): need different solution below
+                  SizedBox(
+                    height: 300, // Constrain height.
+                    child:
+                    ListView.builder(
+                        scrollDirection: scrollDirection,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) =>
+                            itemBuilder(
+                                context, state, index,
+                                state.data!.data![index]!),
+                        itemCount: state.data?.count),),
               if (footerBuilder != null) footerBuilder!.call(context, state),
             ],
           ),
