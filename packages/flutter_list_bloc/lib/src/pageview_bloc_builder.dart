@@ -33,11 +33,11 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
     return BlocConsumer<PaginatedCubit<T, F>, Data<Page<T>, F>>(
         bloc: _cubit,
         listenWhen: (prev, next) =>
-            prev.data.number != next.data.number &&
+            prev.data?.number != next.data?.number &&
             _pageController.positions.isNotEmpty &&
-            _pageController.page != next.data.number,
+            _pageController.page != next.data?.number,
         listener: (context, state) {
-          _pageController.jumpToPage(state.data.number);
+          _pageController.jumpToPage(state.data?.number ?? 0);
         },
         builder: (context, state) {
           List<Widget> children = [];
@@ -45,7 +45,7 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
           if (widget.headerBuilder != null)
             children.add(widget.headerBuilder!(context, state));
 
-          if (state.data.data?.isEmpty ?? true) {
+          if (state.data?.data?.isEmpty ?? true) {
             children.add(Expanded(child: widget.emptyBuilder(context, state)));
           } else {
             children.add(Expanded(
@@ -54,7 +54,7 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
                         ? null
                         : widget.onPageChanged!(context, state, index),
                     controller: _pageController,
-                    itemCount: state.data.pages,
+                    itemCount: state.data?.pages,
                     itemBuilder: (context, index) =>
                         widget.pageBuilder(context, state))));
           }
