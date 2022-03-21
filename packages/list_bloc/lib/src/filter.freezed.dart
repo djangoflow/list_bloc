@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$OffsetLimitFilterTearOff {
   const _$OffsetLimitFilterTearOff();
 
-  _OffsetLimitFilter call({int offset = 0, int limit = kPageSize}) {
+  _OffsetLimitFilter call(
+      {int offset = 0, int limit = OffsetLimitFilter.kPageSize}) {
     return _OffsetLimitFilter(
       offset: offset,
       limit: limit,
@@ -116,7 +117,8 @@ class __$OffsetLimitFilterCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_OffsetLimitFilter implements _OffsetLimitFilter {
-  const _$_OffsetLimitFilter({this.offset = 0, this.limit = kPageSize});
+  const _$_OffsetLimitFilter(
+      {this.offset = 0, this.limit = OffsetLimitFilter.kPageSize});
 
   @JsonKey()
   @override
