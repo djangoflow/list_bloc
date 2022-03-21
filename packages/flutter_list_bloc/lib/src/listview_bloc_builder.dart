@@ -34,7 +34,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
               if (state is Loading && (state.data?.data?.isEmpty ?? true))
                 loadingBuilder(context, state)
               else
-                if (state.data is Empty)
+                if (state.data is Empty || (state.data?.data?.isEmpty ?? true))
                   emptyBuilder(context, state)
                 else
                   // TODO(ajil): need different solution below
