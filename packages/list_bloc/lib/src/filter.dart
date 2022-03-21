@@ -7,6 +7,6 @@ class OffsetLimitFilter with _$OffsetLimitFilter {
   static const kPageSize = 50;
 
   const factory OffsetLimitFilter(
-      {required int offset,
+      {@Default(0) int offset,
       @Default(kPageSize) int limit}) = _OffsetLimitFilter;
 }
