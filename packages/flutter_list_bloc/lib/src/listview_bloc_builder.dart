@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
 
-class ListViewBlocBuilder<B extends PaginatedCubit<T,F>, T, F> extends StatelessWidget {
+class ListViewPaginatedBlocBuilder<B extends PaginatedCubit<T,F>, T, F> extends StatelessWidget {
   final B? cubit;
 
   final Widget Function(BuildContext, Data<Page<T>, F> state) loadingBuilder;
@@ -13,7 +13,7 @@ class ListViewBlocBuilder<B extends PaginatedCubit<T,F>, T, F> extends Stateless
   final Axis scrollDirection;
   final B Function(BuildContext context)? create;
 
-  ListViewBlocBuilder(
+  ListViewPaginatedBlocBuilder(
       {this.cubit,
       required this.itemBuilder,
       required this.loadingBuilder,
