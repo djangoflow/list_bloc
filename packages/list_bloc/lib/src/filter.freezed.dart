@@ -15,12 +15,11 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$OffsetLimitFilterTearOff {
-  const _$OffsetLimitFilterTearOff();
+class _$OffsetLimitTearOff {
+  const _$OffsetLimitTearOff();
 
-  _OffsetLimitFilter call(
-      {int offset = 0, int limit = OffsetLimitFilter.kPageSize}) {
-    return _OffsetLimitFilter(
+  _OffsetLimit call({int offset = 0, int limit = OffsetLimit.kPageSize}) {
+    return _OffsetLimit(
       offset: offset,
       limit: limit,
     );
@@ -28,34 +27,33 @@ class _$OffsetLimitFilterTearOff {
 }
 
 /// @nodoc
-const $OffsetLimitFilter = _$OffsetLimitFilterTearOff();
+const $OffsetLimit = _$OffsetLimitTearOff();
 
 /// @nodoc
-mixin _$OffsetLimitFilter {
+mixin _$OffsetLimit {
   int get offset => throw _privateConstructorUsedError;
   int get limit => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OffsetLimitFilterCopyWith<OffsetLimitFilter> get copyWith =>
+  $OffsetLimitCopyWith<OffsetLimit> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OffsetLimitFilterCopyWith<$Res> {
-  factory $OffsetLimitFilterCopyWith(
-          OffsetLimitFilter value, $Res Function(OffsetLimitFilter) then) =
-      _$OffsetLimitFilterCopyWithImpl<$Res>;
+abstract class $OffsetLimitCopyWith<$Res> {
+  factory $OffsetLimitCopyWith(
+          OffsetLimit value, $Res Function(OffsetLimit) then) =
+      _$OffsetLimitCopyWithImpl<$Res>;
   $Res call({int offset, int limit});
 }
 
 /// @nodoc
-class _$OffsetLimitFilterCopyWithImpl<$Res>
-    implements $OffsetLimitFilterCopyWith<$Res> {
-  _$OffsetLimitFilterCopyWithImpl(this._value, this._then);
+class _$OffsetLimitCopyWithImpl<$Res> implements $OffsetLimitCopyWith<$Res> {
+  _$OffsetLimitCopyWithImpl(this._value, this._then);
 
-  final OffsetLimitFilter _value;
+  final OffsetLimit _value;
   // ignore: unused_field
-  final $Res Function(OffsetLimitFilter) _then;
+  final $Res Function(OffsetLimit) _then;
 
   @override
   $Res call({
@@ -76,32 +74,31 @@ class _$OffsetLimitFilterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$OffsetLimitFilterCopyWith<$Res>
-    implements $OffsetLimitFilterCopyWith<$Res> {
-  factory _$OffsetLimitFilterCopyWith(
-          _OffsetLimitFilter value, $Res Function(_OffsetLimitFilter) then) =
-      __$OffsetLimitFilterCopyWithImpl<$Res>;
+abstract class _$OffsetLimitCopyWith<$Res>
+    implements $OffsetLimitCopyWith<$Res> {
+  factory _$OffsetLimitCopyWith(
+          _OffsetLimit value, $Res Function(_OffsetLimit) then) =
+      __$OffsetLimitCopyWithImpl<$Res>;
   @override
   $Res call({int offset, int limit});
 }
 
 /// @nodoc
-class __$OffsetLimitFilterCopyWithImpl<$Res>
-    extends _$OffsetLimitFilterCopyWithImpl<$Res>
-    implements _$OffsetLimitFilterCopyWith<$Res> {
-  __$OffsetLimitFilterCopyWithImpl(
-      _OffsetLimitFilter _value, $Res Function(_OffsetLimitFilter) _then)
-      : super(_value, (v) => _then(v as _OffsetLimitFilter));
+class __$OffsetLimitCopyWithImpl<$Res> extends _$OffsetLimitCopyWithImpl<$Res>
+    implements _$OffsetLimitCopyWith<$Res> {
+  __$OffsetLimitCopyWithImpl(
+      _OffsetLimit _value, $Res Function(_OffsetLimit) _then)
+      : super(_value, (v) => _then(v as _OffsetLimit));
 
   @override
-  _OffsetLimitFilter get _value => super._value as _OffsetLimitFilter;
+  _OffsetLimit get _value => super._value as _OffsetLimit;
 
   @override
   $Res call({
     Object? offset = freezed,
     Object? limit = freezed,
   }) {
-    return _then(_OffsetLimitFilter(
+    return _then(_OffsetLimit(
       offset: offset == freezed
           ? _value.offset
           : offset // ignore: cast_nullable_to_non_nullable
@@ -116,9 +113,8 @@ class __$OffsetLimitFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OffsetLimitFilter implements _OffsetLimitFilter {
-  const _$_OffsetLimitFilter(
-      {this.offset = 0, this.limit = OffsetLimitFilter.kPageSize});
+class _$_OffsetLimit implements _OffsetLimit {
+  const _$_OffsetLimit({this.offset = 0, this.limit = OffsetLimit.kPageSize});
 
   @JsonKey()
   @override
@@ -129,14 +125,14 @@ class _$_OffsetLimitFilter implements _OffsetLimitFilter {
 
   @override
   String toString() {
-    return 'OffsetLimitFilter(offset: $offset, limit: $limit)';
+    return 'OffsetLimit(offset: $offset, limit: $limit)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _OffsetLimitFilter &&
+            other is _OffsetLimit &&
             const DeepCollectionEquality().equals(other.offset, offset) &&
             const DeepCollectionEquality().equals(other.limit, limit));
   }
@@ -149,13 +145,12 @@ class _$_OffsetLimitFilter implements _OffsetLimitFilter {
 
   @JsonKey(ignore: true)
   @override
-  _$OffsetLimitFilterCopyWith<_OffsetLimitFilter> get copyWith =>
-      __$OffsetLimitFilterCopyWithImpl<_OffsetLimitFilter>(this, _$identity);
+  _$OffsetLimitCopyWith<_OffsetLimit> get copyWith =>
+      __$OffsetLimitCopyWithImpl<_OffsetLimit>(this, _$identity);
 }
 
-abstract class _OffsetLimitFilter implements OffsetLimitFilter {
-  const factory _OffsetLimitFilter({int offset, int limit}) =
-      _$_OffsetLimitFilter;
+abstract class _OffsetLimit implements OffsetLimit {
+  const factory _OffsetLimit({int offset, int limit}) = _$_OffsetLimit;
 
   @override
   int get offset;
@@ -163,6 +158,6 @@ abstract class _OffsetLimitFilter implements OffsetLimitFilter {
   int get limit;
   @override
   @JsonKey(ignore: true)
-  _$OffsetLimitFilterCopyWith<_OffsetLimitFilter> get copyWith =>
+  _$OffsetLimitCopyWith<_OffsetLimit> get copyWith =>
       throw _privateConstructorUsedError;
 }

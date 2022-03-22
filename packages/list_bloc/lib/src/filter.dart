@@ -1,12 +1,7 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'filter.freezed.dart';
-
-@freezed
-class OffsetLimitFilter with _$OffsetLimitFilter {
+abstract class OffsetLimitFilter {
   static const kPageSize = 50;
+  int get offset;
+  int get limit;
 
-  const factory OffsetLimitFilter(
-      {@Default(0) int offset,
-      @Default(OffsetLimitFilter.kPageSize) int limit}) = _OffsetLimitFilter;
+  copyWithOffset(int offset);
 }
