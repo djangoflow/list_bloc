@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'page.dart';
+part of 'list_page.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$PageTearOff {
-  const _$PageTearOff();
+class _$ListPageTearOff {
+  const _$ListPageTearOff();
 
-  _Page<T> call<T>(
+  _ListPage<T> call<T>(
       {List<T>? data, int? count, required int number, required int size}) {
-    return _Page<T>(
+    return _ListPage<T>(
       data: data,
       count: count,
       number: number,
@@ -30,33 +30,35 @@ class _$PageTearOff {
 }
 
 /// @nodoc
-const $Page = _$PageTearOff();
+const $ListPage = _$ListPageTearOff();
 
 /// @nodoc
-mixin _$Page<T> {
+mixin _$ListPage<T> {
   List<T>? get data => throw _privateConstructorUsedError;
   int? get count => throw _privateConstructorUsedError;
   int get number => throw _privateConstructorUsedError;
   int get size => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PageCopyWith<T, Page<T>> get copyWith => throw _privateConstructorUsedError;
+  $ListPageCopyWith<T, ListPage<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PageCopyWith<T, $Res> {
-  factory $PageCopyWith(Page<T> value, $Res Function(Page<T>) then) =
-      _$PageCopyWithImpl<T, $Res>;
+abstract class $ListPageCopyWith<T, $Res> {
+  factory $ListPageCopyWith(
+          ListPage<T> value, $Res Function(ListPage<T>) then) =
+      _$ListPageCopyWithImpl<T, $Res>;
   $Res call({List<T>? data, int? count, int number, int size});
 }
 
 /// @nodoc
-class _$PageCopyWithImpl<T, $Res> implements $PageCopyWith<T, $Res> {
-  _$PageCopyWithImpl(this._value, this._then);
+class _$ListPageCopyWithImpl<T, $Res> implements $ListPageCopyWith<T, $Res> {
+  _$ListPageCopyWithImpl(this._value, this._then);
 
-  final Page<T> _value;
+  final ListPage<T> _value;
   // ignore: unused_field
-  final $Res Function(Page<T>) _then;
+  final $Res Function(ListPage<T>) _then;
 
   @override
   $Res call({
@@ -87,21 +89,24 @@ class _$PageCopyWithImpl<T, $Res> implements $PageCopyWith<T, $Res> {
 }
 
 /// @nodoc
-abstract class _$PageCopyWith<T, $Res> implements $PageCopyWith<T, $Res> {
-  factory _$PageCopyWith(_Page<T> value, $Res Function(_Page<T>) then) =
-      __$PageCopyWithImpl<T, $Res>;
+abstract class _$ListPageCopyWith<T, $Res>
+    implements $ListPageCopyWith<T, $Res> {
+  factory _$ListPageCopyWith(
+          _ListPage<T> value, $Res Function(_ListPage<T>) then) =
+      __$ListPageCopyWithImpl<T, $Res>;
   @override
   $Res call({List<T>? data, int? count, int number, int size});
 }
 
 /// @nodoc
-class __$PageCopyWithImpl<T, $Res> extends _$PageCopyWithImpl<T, $Res>
-    implements _$PageCopyWith<T, $Res> {
-  __$PageCopyWithImpl(_Page<T> _value, $Res Function(_Page<T>) _then)
-      : super(_value, (v) => _then(v as _Page<T>));
+class __$ListPageCopyWithImpl<T, $Res> extends _$ListPageCopyWithImpl<T, $Res>
+    implements _$ListPageCopyWith<T, $Res> {
+  __$ListPageCopyWithImpl(
+      _ListPage<T> _value, $Res Function(_ListPage<T>) _then)
+      : super(_value, (v) => _then(v as _ListPage<T>));
 
   @override
-  _Page<T> get _value => super._value as _Page<T>;
+  _ListPage<T> get _value => super._value as _ListPage<T>;
 
   @override
   $Res call({
@@ -110,7 +115,7 @@ class __$PageCopyWithImpl<T, $Res> extends _$PageCopyWithImpl<T, $Res>
     Object? number = freezed,
     Object? size = freezed,
   }) {
-    return _then(_Page<T>(
+    return _then(_ListPage<T>(
       data: data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -133,8 +138,8 @@ class __$PageCopyWithImpl<T, $Res> extends _$PageCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_Page<T> extends _Page<T> {
-  const _$_Page(
+class _$_ListPage<T> extends _ListPage<T> {
+  const _$_ListPage(
       {this.data, this.count, required this.number, required this.size})
       : super._();
 
@@ -149,14 +154,14 @@ class _$_Page<T> extends _Page<T> {
 
   @override
   String toString() {
-    return 'Page<$T>(data: $data, count: $count, number: $number, size: $size)';
+    return 'ListPage<$T>(data: $data, count: $count, number: $number, size: $size)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Page<T> &&
+            other is _ListPage<T> &&
             const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality().equals(other.count, count) &&
             const DeepCollectionEquality().equals(other.number, number) &&
@@ -173,17 +178,17 @@ class _$_Page<T> extends _Page<T> {
 
   @JsonKey(ignore: true)
   @override
-  _$PageCopyWith<T, _Page<T>> get copyWith =>
-      __$PageCopyWithImpl<T, _Page<T>>(this, _$identity);
+  _$ListPageCopyWith<T, _ListPage<T>> get copyWith =>
+      __$ListPageCopyWithImpl<T, _ListPage<T>>(this, _$identity);
 }
 
-abstract class _Page<T> extends Page<T> {
-  const factory _Page(
+abstract class _ListPage<T> extends ListPage<T> {
+  const factory _ListPage(
       {List<T>? data,
       int? count,
       required int number,
-      required int size}) = _$_Page<T>;
-  const _Page._() : super._();
+      required int size}) = _$_ListPage<T>;
+  const _ListPage._() : super._();
 
   @override
   List<T>? get data;
@@ -195,6 +200,6 @@ abstract class _Page<T> extends Page<T> {
   int get size;
   @override
   @JsonKey(ignore: true)
-  _$PageCopyWith<T, _Page<T>> get copyWith =>
+  _$ListPageCopyWith<T, _ListPage<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
