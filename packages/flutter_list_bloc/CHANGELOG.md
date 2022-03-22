@@ -1,3 +1,8 @@
+## [3.0.0-dev1] 22 Mar 2022
+* dependency on list_bloc 3.0.0
+* added ListView builders
+
+
 ## [2.0.1] - 2 Apr 2021
 * initial null safety
 

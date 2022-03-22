@@ -1,8 +1,10 @@
-## [3.0.0] - 19 Mar 2022
+## [3.0.0-dev1] - 22 Mar 2022
 
-* BREAKING: changed from bloc to cubit
-* BREAKING: replaced equatable with freezed
-* BREAKING: renamed DataState -> Data, ListPage -> Page
+This is work in progress - many breaking changes!
+
+* [BREAKING]: refactored from bloc to cubit
+* [BREAKING]: refactored equatable to freezed
+* [BREAKING]: separated ListCubit and ContinuousListCubit
 
 ## [2.0.3] - 5 Apr 2021
 
