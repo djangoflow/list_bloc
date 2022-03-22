@@ -1,3 +1,6 @@
+## [3.0.0-dev2] 22 Mar 2022
+* fixed withRefreshIndicator in ListViewBlocBuilder
+
 ## [3.0.0-dev1] 22 Mar 2022
 * dependency on list_bloc 3.0.0
 * added ListView builders
