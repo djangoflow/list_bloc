@@ -16,6 +16,7 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
   final bool withRefreshIndicator;
   final bool shrinkWrap;
   final Widget Function(BuildContext, Data<List<T>, F> state)? headerBuilder;
+  final int loadingItemsCount;
 
   const ContinuousListViewBlocBuilder(
       {this.cubit,
@@ -27,6 +28,7 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
       this.withRefreshIndicator = true,
       this.shrinkWrap = false,
       this.headerBuilder,
+      this.loadingItemsCount = 3,
       this.scrollDirection = Axis.vertical})
       : assert((cubit != null) != (create != null));
 
@@ -75,6 +77,7 @@ class _ContinuousListViewBlocBuilderState<T, F extends OffsetLimitFilter>
         cubit: _cubit,
         itemBuilder: widget.itemBuilder,
         loadingBuilder: widget.loadingBuilder,
+        loadingItemsCount: widget.loadingItemsCount,
         emptyBuilder: widget.emptyBuilder,
         controller: _scrollController,
         shrinkWrap: widget.shrinkWrap,
