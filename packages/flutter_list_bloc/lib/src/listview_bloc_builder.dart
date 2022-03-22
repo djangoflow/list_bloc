@@ -12,6 +12,9 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
   final Axis scrollDirection;
   final ScrollController? controller;
   final ListCubit<T, F> Function(BuildContext context)? create;
+  final bool withRefreshIndicator;
+  final bool shrinkWrap;
+  final int loadingItemsCount;
 
   const ListViewBlocBuilder(
       {this.cubit,
@@ -20,6 +23,9 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
       required this.emptyBuilder,
       this.controller,
       this.create,
+      this.withRefreshIndicator = false,
+        this.shrinkWrap = true,
+        this.loadingItemsCount = 3,
       this.scrollDirection = Axis.vertical})
       : assert((cubit != null) != (create != null));
 
@@ -32,20 +38,28 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
         final itemCount = isEmpty
             ? 1
             : state is Loading
-                ? (state.data?.length ?? 0) + 1
+                ? (state.data?.length ?? 0) + loadingItemsCount
                 : (state.data?.length ?? 0);
-        return ListView.builder(
+        final child = ListView.builder(
           scrollDirection: scrollDirection,
-          shrinkWrap: true,
+          shrinkWrap: shrinkWrap,
           controller: controller,
+          physics: const AlwaysScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
             if (isEmpty) return emptyBuilder(context, state);
-            if (state is Loading && index == itemCount - 1)
+            if (state is Loading && index >= itemCount - loadingItemsCount - 1)
               return loadingBuilder(context, state);
             return itemBuilder(context, state, index, state.data![index]!);
           },
           itemCount: itemCount,
         );
+        return withRefreshIndicator
+            ? RefreshIndicator(
+                child: child,
+                onRefresh: () async {
+                  return await context.read<ListCubit<T, F>>().load();
+                })
+            : child;
       },
     );
     return create != null ? BlocProvider(create: create!, child: child) : child;
