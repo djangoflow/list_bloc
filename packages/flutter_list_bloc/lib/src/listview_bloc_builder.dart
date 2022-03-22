@@ -9,6 +9,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
   final Widget Function(BuildContext, Data<List<T>, F> state, int index, T item)
       itemBuilder;
   final Widget Function(BuildContext, Data<List<T>, F> state) emptyBuilder;
+  final Widget Function(BuildContext, Data<List<T>, F> state)? headerBuilder;
   final Axis scrollDirection;
   final ScrollController? controller;
   final ListCubit<T, F> Function(BuildContext context)? create;
@@ -26,6 +27,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
       this.withRefreshIndicator = false,
         this.shrinkWrap = true,
         this.loadingItemsCount = 3,
+        this.headerBuilder,
       this.scrollDirection = Axis.vertical})
       : assert((cubit != null) != (create != null));
 
@@ -35,21 +37,24 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
       bloc: cubit,
       builder: (context, state) {
         final isEmpty = state is! Loading && (state.data?.length ?? 0) == 0;
-        final itemCount = isEmpty
+        final itemCount = (headerBuilder != null ? 1 : 0 ) + (isEmpty
             ? 1
             : state is Loading
                 ? (state.data?.length ?? 0) + loadingItemsCount
-                : (state.data?.length ?? 0);
+                : (state.data?.length ?? 0));
         final child = ListView.builder(
           scrollDirection: scrollDirection,
           shrinkWrap: shrinkWrap,
           controller: controller,
+          primary: false,
           physics: const AlwaysScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
+            if(headerBuilder != null && index == 0) return headerBuilder!(context, state);
+            final i = index - (headerBuilder != null ? 1 : 0);
             if (isEmpty) return emptyBuilder(context, state);
-            if (state is Loading && index >= itemCount - loadingItemsCount - 1)
+            if (state is Loading && i >= itemCount - loadingItemsCount - 1)
               return loadingBuilder(context, state);
-            return itemBuilder(context, state, index, state.data![index]!);
+            return itemBuilder(context, state, i, state.data![i]!);
           },
           itemCount: itemCount,
         );
