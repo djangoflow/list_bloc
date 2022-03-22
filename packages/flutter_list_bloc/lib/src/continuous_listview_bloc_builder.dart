@@ -17,20 +17,22 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
   final bool shrinkWrap;
   final Widget Function(BuildContext, Data<List<T>, F> state)? headerBuilder;
   final int loadingItemsCount;
+  final ScrollPhysics? physics;
 
-  const ContinuousListViewBlocBuilder(
-      {this.cubit,
-      required this.itemBuilder,
-      required this.loadingBuilder,
-      required this.emptyBuilder,
-      this.controller,
-      this.create,
-      this.withRefreshIndicator = true,
-      this.shrinkWrap = false,
-      this.headerBuilder,
-      this.loadingItemsCount = 3,
-      this.scrollDirection = Axis.vertical})
-      : assert((cubit != null) != (create != null));
+  const ContinuousListViewBlocBuilder({
+    this.cubit,
+    required this.itemBuilder,
+    required this.loadingBuilder,
+    required this.emptyBuilder,
+    this.controller,
+    this.create,
+    this.withRefreshIndicator = true,
+    this.shrinkWrap = false,
+    this.headerBuilder,
+    this.loadingItemsCount = 3,
+    this.scrollDirection = Axis.vertical,
+    this.physics,
+  }) : assert((cubit != null) != (create != null));
 
   @override
   State<ContinuousListViewBlocBuilder<T, F>> createState() =>
@@ -84,5 +86,6 @@ class _ContinuousListViewBlocBuilderState<T, F extends OffsetLimitFilter>
         headerBuilder: widget.headerBuilder,
         withRefreshIndicator: widget.withRefreshIndicator,
         scrollDirection: widget.scrollDirection,
+        physics: widget.physics,
       );
 }

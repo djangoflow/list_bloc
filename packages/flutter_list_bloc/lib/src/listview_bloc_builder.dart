@@ -16,6 +16,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
   final bool withRefreshIndicator;
   final bool shrinkWrap;
   final int loadingItemsCount;
+  final ScrollPhysics? physics;
 
   const ListViewBlocBuilder(
       {this.cubit,
@@ -28,7 +29,8 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
       this.shrinkWrap = true,
       this.loadingItemsCount = 3,
       this.headerBuilder,
-      this.scrollDirection = Axis.vertical})
+      this.scrollDirection = Axis.vertical,
+      this.physics = const AlwaysScrollableScrollPhysics()})
       : assert((cubit != null) != (create != null));
 
   @override
@@ -48,7 +50,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
           shrinkWrap: shrinkWrap,
           controller: controller,
           primary: false,
-          physics: const AlwaysScrollableScrollPhysics(),
+          physics: physics,
           itemBuilder: (BuildContext context, int index) {
             if (headerBuilder != null && index == 0)
               return headerBuilder!(context, state);
