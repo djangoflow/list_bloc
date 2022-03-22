@@ -25,9 +25,9 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
       this.controller,
       this.create,
       this.withRefreshIndicator = false,
-        this.shrinkWrap = true,
-        this.loadingItemsCount = 3,
-        this.headerBuilder,
+      this.shrinkWrap = true,
+      this.loadingItemsCount = 3,
+      this.headerBuilder,
       this.scrollDirection = Axis.vertical})
       : assert((cubit != null) != (create != null));
 
@@ -37,11 +37,12 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
       bloc: cubit,
       builder: (context, state) {
         final isEmpty = state is! Loading && (state.data?.length ?? 0) == 0;
-        final itemCount = (headerBuilder != null ? 1 : 0 ) + (isEmpty
-            ? 1
-            : state is Loading
-                ? (state.data?.length ?? 0) + loadingItemsCount
-                : (state.data?.length ?? 0));
+        final itemCount = (headerBuilder != null ? 1 : 0) +
+            (isEmpty
+                ? 1
+                : state is Loading
+                    ? (state.data?.length ?? 0) + loadingItemsCount
+                    : (state.data?.length ?? 0));
         final child = ListView.builder(
           scrollDirection: scrollDirection,
           shrinkWrap: shrinkWrap,
@@ -49,7 +50,8 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
           primary: false,
           physics: const AlwaysScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
-            if(headerBuilder != null && index == 0) return headerBuilder!(context, state);
+            if (headerBuilder != null && index == 0)
+              return headerBuilder!(context, state);
             final i = index - (headerBuilder != null ? 1 : 0);
             if (isEmpty) return emptyBuilder(context, state);
             if (state is Loading && i >= itemCount - loadingItemsCount - 1)
@@ -61,9 +63,10 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
         return withRefreshIndicator
             ? RefreshIndicator(
                 child: child,
-                onRefresh: () async {
-                  return await context.read<ListCubit<T, F>>().load();
-                })
+                onRefresh: cubit != null
+                    ? cubit!.load
+                    : context.read<ListCubit<T, F>>().load,
+              )
             : child;
       },
     );
