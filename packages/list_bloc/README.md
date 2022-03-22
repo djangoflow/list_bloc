@@ -1,28 +1,31 @@
 A BLoC library for loading data from an api end-point with filtering and pagination.
 
 The idea for this library is to convert the data loaded from an API into a BLoC to
-avoid boiler plate, but at the same time keeping things very simple and generic.
+avoid boilerplate, but at the same time keeping things very simple and generic.
 
-The base classes are `DataBloc<T,F>` with `DataEvent<T,F>` and `DataState<T,F>`
-where `T` is the type of the data element and `F` is a class for thr API filtering.
+The base classes are `DataCubt<T,F>` where `T` is the type of the data element and
+`F` is a class for thr API filtering. It is implemented via `freezed` union of 
+`Data`, `Empty`, `Loading`, `Error`.
 
-Then, `ListBloc<T,F>` extends `DataBloc<List<T>,F` to provide a shorthand for
+Then, `ListCubit<T,F>` extends `DataCubit<List<T>,F` to provide a shorthand for
 loading list of items.
 
-Further, `PaginatedBloc<T,F>` extends `DataBloc<ListPage<T,F>` to provide pagination.
+Further, `ContinousListBloc<T,F>` extends `ListCubit<T,F>` to facilitate implementing
+continuous lists. It requires `OffsetLimitFilter` to be implemented by `F` to be able
+to load extra data in the end of the list.
+
+Finally, `PaginatedCubit<T,F>` extends `DataCubit<ListPage<T,F>` to provide pagination
+and switching between bates.
 
 If you have an API instance that does not use filtering, you can replace the filter
 class with Object.
 
-The three blocs are expecting to be initialized with a `DataRepository`, `ListRepository`
-or `PaginatedRepository` respectively, all of which should implement a `Future load({F filter})`
-which is slightly different for List or Paginated bloc.
+All blocs are expecting to be initialized with a variant of `Future<T> loader([F? filter])`
+to get the data from the api and each is slightly different.
 
-The filters can extend Object or any other class however `built_value` is quite
+The filters can extend Object or any other class however `freezed` is quite
 useful for this as this allows re-building filters based on existing ones quite
 easily.
-
-In order to generate the `OffetLimitFilter` run `pub run build_runner build`
 
 
 ## Usage
@@ -40,17 +43,18 @@ class Item {
     int type;
     int value;
 }
-class ItemRepository implements ListRepository<Item, ItemFilter> {
-    Future List<Item>load({ItemFilter filter}) async => await apiList(type: filter);
-}
 
+typedef FruitBloc = ListBloc<Item, ItemFilter>;
+typedef FruitState = Data<List<Item>, ItemFilter>;
+
+Future List<Item> loader([ItemFilter? filter]) async => api.....
 
 main() {
-    final bloc = ListBloc<Item, ItemFilter>(ItemRepository());
+    final bloc = FruitBloc(loader);
 
     bloc.load(ItemFilter.fruits);
 ...
-    BlocBuilder<ListBloc<Item, ItemFilter>, DataState<Item, ItemFilter>(
+    BlocBuilder<FruitBloc, FruitState>(
         bloc: bloc,
         builder: (context, state) {
             for(var item in state.data) {
