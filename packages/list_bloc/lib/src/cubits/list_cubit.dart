@@ -1,22 +1,22 @@
 import 'package:list_bloc/list_bloc.dart';
 
 class ListCubit<T, F> extends DataCubit<List<T>, F> {
-  final bool growable;
+  final bool continuous;
 
   ListCubit(Future<List<T>> Function([F?]) loader, [Data<List<T>, F>? state])
-      : growable = false,
+      : continuous = false,
         super(loader, state);
 
-  ListCubit.growable(Future<List<T>> Function([F?]) loader,
+  ListCubit.continuous(Future<List<T>> Function([F?]) loader,
       [Data<List<T>, F>? state])
-      : growable = true,
+      : continuous = true,
         super(loader, state);
 
   Future<void> reload([F? filter]) => super.load(filter);
 
   @override
   Future<void> load([F? filter]) async {
-    if (growable) {
+    if (continuous) {
       emit(Data.loading(data: state.data, filter: state.filter));
       try {
         emit(Data(data: [

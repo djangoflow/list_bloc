@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
+import 'package:flutter/material.dart';
 
-class ListViewBlocBuilder<T, F> extends StatelessWidget {
+class ContinuousListViewBlocBuilder<T, F> extends StatelessWidget {
   final ListCubit<T, F>? cubit;
 
   final Widget Function(BuildContext, Data<List<T>, F> state) loadingBuilder;
@@ -12,7 +12,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
   final Axis scrollDirection;
   final ListCubit<T, F> Function(BuildContext context)? create;
 
-  ListViewBlocBuilder(
+  ContinuousListViewBlocBuilder(
       {this.cubit,
       required this.itemBuilder,
       required this.loadingBuilder,
