@@ -5,11 +5,11 @@ import 'package:list_bloc/list_bloc.dart';
 class PageViewBlocBuilder<T, F> extends StatefulWidget {
   final PaginatedCubit<T, F>? cubit;
 
-  final Widget Function(BuildContext, Data<Page<T>, F> state)? headerBuilder;
-  final Widget Function(BuildContext, Data<Page<T>, F> state)? footerBuilder;
-  final Widget Function(BuildContext, Data<Page<T>, F> state) pageBuilder;
-  final Widget Function(BuildContext, Data<Page<T>, F> state) emptyBuilder;
-  final void Function(BuildContext, Data<Page<T>, F> state, int index)?
+  final Widget Function(BuildContext, Data<ListPage<T>, F> state)? headerBuilder;
+  final Widget Function(BuildContext, Data<ListPage<T>, F> state)? footerBuilder;
+  final Widget Function(BuildContext, Data<ListPage<T>, F> state) pageBuilder;
+  final Widget Function(BuildContext, Data<ListPage<T>, F> state) emptyBuilder;
+  final void Function(BuildContext, Data<ListPage<T>, F> state, int index)?
       onPageChanged;
 
   PageViewBlocBuilder(
@@ -30,7 +30,7 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PaginatedCubit<T, F>, Data<Page<T>, F>>(
+    return BlocConsumer<PaginatedCubit<T, F>, Data<ListPage<T>, F>>(
         bloc: _cubit,
         listenWhen: (prev, next) =>
             prev.data?.number != next.data?.number &&

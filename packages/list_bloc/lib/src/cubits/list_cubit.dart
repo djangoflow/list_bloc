@@ -1,15 +1,16 @@
 import 'package:list_bloc/list_bloc.dart';
 
-abstract class ListCubit<T, F> extends DataCubit<List<T>, F> {
+class ListCubit<T, F> extends DataCubit<List<T>, F> {
   final bool continuous;
 
-  ListCubit([Data<List<T>, F>? state])
+  ListCubit(Future<List<T>> Function([F?]) loader, [Data<List<T>, F>? state])
       : continuous = false,
-        super(state ?? Data.empty());
+        super(loader, state);
 
-  ListCubit.continuous([Data<List<T>, F>? state])
+  ListCubit.continuous(Future<List<T>> Function([F?]) loader,
+      [Data<List<T>, F>? state])
       : continuous = true,
-        super(state ?? Data.empty());
+        super(loader, state);
 
   Future<void> reload([F? filter]) => super.load(filter);
 
@@ -18,9 +19,10 @@ abstract class ListCubit<T, F> extends DataCubit<List<T>, F> {
     if (continuous) {
       emit(Data.loading(data: state.data, filter: state.filter));
       try {
-        emit(Data(
-            data: [...state.data ?? [], ...await fetch(filter ?? state.filter)],
-            filter: filter ?? state.filter));
+        emit(Data(data: [
+          ...state.data ?? [],
+          ...await loader(filter ?? state.filter)
+        ], filter: filter ?? state.filter));
       } catch (e) {
         emit(Data.error(data: state.data, filter: state.filter, error: e));
       }
