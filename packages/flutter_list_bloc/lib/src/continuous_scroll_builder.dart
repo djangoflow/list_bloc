@@ -2,35 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
-class ContinuousScrollListCubitProvider<T, F extends OffsetLimitFilter>
+class ContinuousScrollBuilder<T, F extends OffsetLimitFilter>
     extends StatefulWidget {
   final ListCubit<T, F>? cubit;
-  final Widget child;
+  final Widget Function(BuildContext context, ScrollController controller)
+      builder;
   final ScrollController? controller;
-  final ListCubit<T, F> Function(BuildContext context)? create;
 
-  const ContinuousScrollListCubitProvider({
-    required this.child,
+  const ContinuousScrollBuilder({
+    required this.builder,
     this.cubit,
     this.controller,
-    this.create,
-  }) : assert((cubit != null) != (create != null));
+  });
 
   @override
-  State<ContinuousScrollListCubitProvider<T, F>> createState() =>
-      _ContinuousScrollListCubitProviderState<T, F>();
+  State<ContinuousScrollBuilder<T, F>> createState() =>
+      _ContinuousScrollBuilderState<T, F>();
 }
 
-class _ContinuousScrollListCubitProviderState<T, F extends OffsetLimitFilter>
-    extends State<ContinuousScrollListCubitProvider<T, F>> {
+class _ContinuousScrollBuilderState<T, F extends OffsetLimitFilter>
+    extends State<ContinuousScrollBuilder<T, F>> {
   late ListCubit<T, F> _cubit;
   late ScrollController _scrollController;
 
   @override
   void initState() {
-    _cubit = widget.cubit ?? widget.create!.call(context);
     _scrollController = (widget.controller ?? ScrollController())
       ..addListener(_scrollListener);
+    _cubit = widget.cubit ?? context.read<ListCubit<T, F>>();
     super.initState();
   }
 
@@ -40,9 +39,6 @@ class _ContinuousScrollListCubitProviderState<T, F extends OffsetLimitFilter>
     if (widget.controller == null) {
       _scrollController.dispose();
     }
-    if (widget.cubit == null) {
-      _cubit.close();
-    }
     super.dispose();
   }
 
@@ -50,6 +46,8 @@ class _ContinuousScrollListCubitProviderState<T, F extends OffsetLimitFilter>
     if (_scrollController.position.extentAfter < 10) {
       final offset = _cubit.state.data?.length ?? 0;
       var filter = _cubit.state.filter;
+      print(filter);
+      print(offset);
       if ((filter?.offset ?? 0) < offset) {
         _cubit.append(filter?.copyWithOffset(offset) as F);
       }
@@ -58,5 +56,5 @@ class _ContinuousScrollListCubitProviderState<T, F extends OffsetLimitFilter>
 
   @override
   Widget build(BuildContext context) =>
-      BlocProvider.value(value: _cubit, child: widget.child);
+      widget.builder(context, _scrollController);
 }
