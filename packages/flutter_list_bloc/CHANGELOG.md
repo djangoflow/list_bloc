@@ -1,5 +1,6 @@
-## [3.0.0-dev3] 22 Mar 2022
+## [3.0.0] 22 Mar 2022
 
+- Created ListBlocBuilder
 - Exposed physics in ListViewBlocBuilder
 
 ## [3.0.0-dev2] 22 Mar 2022
