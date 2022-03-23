@@ -2,7 +2,6 @@ library list_bloc;
 
 export 'src/cubits/data_cubit.dart';
 export 'src/cubits/list_cubit.dart';
-export 'src/cubits/continuous_list_cubit.dart';
 export 'src/cubits/paginated_cubit.dart';
 export 'src/data.dart';
 export 'src/filter.dart';

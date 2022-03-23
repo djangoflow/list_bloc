@@ -1,3 +1,8 @@
+## [3.0.0-dev3] - 23 Mar 2022
+
+* Removed ContinuousListCubit
+* ListCubit is back with `load` for re-loading and `append` for loading more
+
 ## [3.0.0-dev1] - 22 Mar 2022
 
 This is work in progress - many breaking changes!

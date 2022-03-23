@@ -4,7 +4,7 @@ version: 3.0.0-dev3
 homepage: https://github.com/apexlabs-ai/list_bloc/
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
   list_bloc: ^3.0.0-dev1
