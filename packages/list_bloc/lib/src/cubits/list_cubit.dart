@@ -16,4 +16,5 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
       emit(Data.error(data: state.data, filter: state.filter, error: e));
     }
   }
+  // TODO(alexis): implement remove, add, replace etc
 }

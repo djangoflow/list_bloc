@@ -18,29 +18,31 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
   final int loadingItemsCount;
   final ScrollPhysics? physics;
 
-  const ListViewBlocBuilder(
-      {this.cubit,
-      required this.itemBuilder,
-      required this.loadingBuilder,
-      required this.emptyBuilder,
-      this.controller,
-      this.create,
-      this.withRefreshIndicator = false,
-      this.shrinkWrap = true,
-      this.loadingItemsCount = 3,
-      this.headerBuilder,
-      this.scrollDirection = Axis.vertical,
-      this.physics = const AlwaysScrollableScrollPhysics()});
+  const ListViewBlocBuilder({
+    this.cubit,
+    required this.emptyBuilder,
+    required this.itemBuilder,
+    required this.loadingBuilder,
+    this.controller,
+    this.create,
+    this.headerBuilder,
+    this.loadingItemsCount = 3,
+    this.physics = const AlwaysScrollableScrollPhysics(),
+    this.scrollDirection = Axis.vertical,
+    this.shrinkWrap = true,
+    this.withRefreshIndicator = false,
+  });
 
   @override
   Widget build(BuildContext context) => ListBlocBuilder(
-        cubit: cubit,
         create: create,
+        cubit: cubit,
+        emptyBuilder: emptyBuilder,
+        headerBuilder: headerBuilder,
         itemBuilder: itemBuilder,
         loadingBuilder: loadingBuilder,
         loadingItemsCount: loadingItemsCount,
-        emptyBuilder: emptyBuilder,
-        headerBuilder: headerBuilder,
+        withRefreshIndicator: withRefreshIndicator,
         builder: (BuildContext context, Data<List<T>, F> state, int itemCount,
                 Widget Function(BuildContext, int) itemBuilder) =>
             ListView.builder(

@@ -12,6 +12,7 @@ class SliverListBlocBuilder<T, F> extends StatelessWidget {
   final ListStateBuilder<T, F> loadingBuilder;
   final ListStateBuilder<T, F>? headerBuilder;
   final int loadingItemsCount;
+  final bool withRefreshIndicator;
 
   const SliverListBlocBuilder({
     required this.emptyBuilder,
@@ -21,6 +22,7 @@ class SliverListBlocBuilder<T, F> extends StatelessWidget {
     this.cubit,
     this.headerBuilder,
     this.loadingItemsCount = 3,
+    this.withRefreshIndicator = false,
   }) : assert((cubit != null) != (create != null));
 
   @override
@@ -32,6 +34,7 @@ class SliverListBlocBuilder<T, F> extends StatelessWidget {
         cubit: cubit,
         headerBuilder: headerBuilder,
         loadingItemsCount: loadingItemsCount,
+        withRefreshIndicator: withRefreshIndicator,
         builder: (BuildContext context, Data<List<T>, F> state, int itemCount,
                 Widget Function(BuildContext, int) itemBuilder) =>
             SliverList(
