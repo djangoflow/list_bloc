@@ -59,10 +59,10 @@ class ListBlocBuilder<T, F> extends StatelessWidget {
               return emptyBuilder(context, state);
             }
             // Build trailing loading items
-            if (state is Loading && index >= (dataCount - 1)) {
+            if (state is Loading && index >= dataCount) {
               return loadingBuilder(context, state);
             }
-            return itemBuilder(context, state, index, state.data![0]!);
+            return itemBuilder(context, state, index, state.data![index]!);
           },
         );
         return withRefreshIndicator

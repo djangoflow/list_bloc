@@ -1,3 +1,6 @@
+## [3.0.1] 22 Mar 2022
+- bugfix - leftover debug code
+
 ## [3.0.0] 22 Mar 2022
 
 - Created ListBlocBuilder
