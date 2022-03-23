@@ -45,6 +45,7 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
         builder: (BuildContext context, Data<List<T>, F> state, int itemCount,
                 Widget Function(BuildContext, int) itemBuilder) =>
             ContinuousScrollBuilder<T, F>(
+          cubit: cubit,
           controller: controller,
           builder: (context, controller) => ListView.builder(
             scrollDirection: scrollDirection,

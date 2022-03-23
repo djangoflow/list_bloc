@@ -1,6 +1,9 @@
+## [3.0.3] 22 Mar 2022
+- bugfix - do not ignore the cubit arguments
+
 ## [3.0.2] 22 Mar 2022
 - bugfix - missing type arguments to ListBlocBuilder
-- 
+
 ## [3.0.1] 22 Mar 2022
 - bugfix - leftover debug code
 
