@@ -1,3 +1,6 @@
+## [3.0.4] 22 Mar 2022
+- depend on list_bloc 3.0.4
+
 ## [3.0.3] 22 Mar 2022
 - bugfix - do not ignore the cubit arguments
 

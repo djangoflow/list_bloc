@@ -18,10 +18,12 @@ class DataCubit<T, F> extends Cubit<Data<T, F>> {
       final data = await loader(f);
       if (data == null || (data is Iterable && data.isEmpty)) {
         emit(Empty(filter: f));
+      } else {
+        emit(Data(data: data, filter: f));
       }
-      emit(Data(data: data, filter: f));
     } catch (e) {
       emit(Data.error(data: state.data, filter: f, error: e));
+      rethrow;
     }
   }
 }

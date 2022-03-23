@@ -7,14 +7,18 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
   Future<void> reload([F? filter]) => super.load(filter);
 
   Future<void> append([F? filter]) async {
-    emit(Data.loading(data: state.data, filter: state.filter));
+    final f = filter ?? state.filter;
+
+    emit(Data.loading(data: state.data, filter: f));
     try {
-      emit(Data(
-          data: [...state.data ?? [], ...await loader(filter ?? state.filter)],
-          filter: filter ?? state.filter));
+      final data = <T>[...state.data ?? [], ...await loader(f)];
+      emit(
+        data.isEmpty ? Data.empty(filter: f) : Data(data: data, filter: f),
+      );
     } catch (e) {
       emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
     }
   }
-  // TODO(alexis): implement remove, add, replace etc
+// TODO(alexis): implement remove, add, replace etc
 }

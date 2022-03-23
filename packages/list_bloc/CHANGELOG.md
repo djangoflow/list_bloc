@@ -1,3 +1,7 @@
+## [3.0.4] - 23 Mar 2022
+* Bugfix: empty state not always emitting
+* Re-through exception in load
+
 ## [3.0.0] - 23 Mar 2022
 
 * Removed ContinuousListCubit
