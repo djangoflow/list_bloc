@@ -26,7 +26,7 @@ class SliverListBlocBuilder<T, F> extends StatelessWidget {
   }) : assert((cubit != null) != (create != null));
 
   @override
-  Widget build(BuildContext context) => ListBlocBuilder(
+  Widget build(BuildContext context) => ListBlocBuilder<T, F>(
         emptyBuilder: emptyBuilder,
         itemBuilder: itemBuilder,
         loadingBuilder: loadingBuilder,

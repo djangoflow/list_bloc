@@ -33,8 +33,7 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
   });
 
   @override
-  Widget build(BuildContext context) =>
-      ListBlocBuilder(
+  Widget build(BuildContext context) => ListBlocBuilder<T, F>(
         create: create,
         cubit: cubit,
         emptyBuilder: emptyBuilder,
@@ -44,19 +43,18 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
         loadingItemsCount: loadingItemsCount,
         withRefreshIndicator: withRefreshIndicator,
         builder: (BuildContext context, Data<List<T>, F> state, int itemCount,
-            Widget Function(BuildContext, int) itemBuilder) =>
+                Widget Function(BuildContext, int) itemBuilder) =>
             ContinuousScrollBuilder<T, F>(
-              controller: controller,
-              builder: (context, controller) =>
-                  ListView.builder(
-                    scrollDirection: scrollDirection,
-                    shrinkWrap: shrinkWrap,
-                    controller: controller,
-                    primary: false,
-                    physics: physics,
-                    itemCount: itemCount,
-                    itemBuilder: itemBuilder,
-                  ),
-            ),
+          controller: controller,
+          builder: (context, controller) => ListView.builder(
+            scrollDirection: scrollDirection,
+            shrinkWrap: shrinkWrap,
+            controller: controller,
+            primary: false,
+            physics: physics,
+            itemCount: itemCount,
+            itemBuilder: itemBuilder,
+          ),
+        ),
       );
 }

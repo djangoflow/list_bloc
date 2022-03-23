@@ -34,7 +34,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => ListBlocBuilder(
+  Widget build(BuildContext context) => ListBlocBuilder<T, F>(
         create: create,
         cubit: cubit,
         emptyBuilder: emptyBuilder,
