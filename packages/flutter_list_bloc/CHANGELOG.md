@@ -1,3 +1,6 @@
+## [3.0.5] 23 Mar 2022
+- removed unnecessary assertion in SliverListBlocBuilder
+
 ## [3.0.4] 22 Mar 2022
 - depend on list_bloc 3.0.4
 
