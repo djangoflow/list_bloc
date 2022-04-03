@@ -1,3 +1,6 @@
+## [3.0.6] 3 Apr 2022
+- refresh list from zero offset in case filter is OffsetLimitFilter
+
 ## [3.0.5] 23 Mar 2022
 - removed unnecessary assertion in SliverListBlocBuilder
 
