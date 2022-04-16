@@ -1,3 +1,6 @@
+## [3.0.5] - 16 Apr 2022
+* Allow direct state update via update() method
+
 ## [3.0.4] - 23 Mar 2022
 * Bugfix: empty state not always emitting
 * Re-through exception in load

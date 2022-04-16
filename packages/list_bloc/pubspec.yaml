@@ -1,6 +1,6 @@
 name: list_bloc
 description: A BLoC library for loading data from an api end-point with filtering and pagination.
-version: 3.0.4
+version: 3.0.5
 homepage: https://github.com/apexlabs-ai/list_bloc/
 
 environment:
