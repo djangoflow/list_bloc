@@ -1,3 +1,6 @@
+## [3.1.0] - 21 Apr 2022
+* Dependencies upgrades
+
 ## [3.0.6] 3 Apr 2022
 - refresh list from zero offset in case filter is OffsetLimitFilter
 

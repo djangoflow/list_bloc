@@ -1,3 +1,6 @@
+## [3.1.0] - 21 Apr 2022
+* Dependencies upgrades
+
 ## [3.0.5] - 16 Apr 2022
 * Allow direct state update via update() method
 
