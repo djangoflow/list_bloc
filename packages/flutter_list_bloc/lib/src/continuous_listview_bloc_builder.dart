@@ -16,6 +16,7 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
   final bool withRefreshIndicator;
   final int loadingItemsCount;
   final ScrollPhysics? physics;
+  final bool reverse;
 
   const ContinuousListViewBlocBuilder({
     this.cubit,
@@ -30,6 +31,7 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
     this.scrollDirection = Axis.vertical,
     this.shrinkWrap = true,
     this.withRefreshIndicator = false,
+    this.reverse = false,
   });
 
   @override
@@ -55,6 +57,7 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
             physics: physics,
             itemCount: itemCount,
             itemBuilder: itemBuilder,
+            reverse: reverse,
           ),
         ),
       );

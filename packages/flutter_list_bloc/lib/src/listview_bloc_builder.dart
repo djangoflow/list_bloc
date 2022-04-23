@@ -17,6 +17,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
   final bool withRefreshIndicator;
   final int loadingItemsCount;
   final ScrollPhysics? physics;
+  final bool reverse;
 
   const ListViewBlocBuilder({
     this.cubit,
@@ -31,6 +32,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
     this.scrollDirection = Axis.vertical,
     this.shrinkWrap = true,
     this.withRefreshIndicator = false,
+    this.reverse = false,
   });
 
   @override
@@ -53,6 +55,7 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
           physics: physics,
           itemCount: itemCount,
           itemBuilder: itemBuilder,
+          reverse: reverse,
         ),
       );
 }

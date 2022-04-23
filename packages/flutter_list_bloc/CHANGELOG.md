@@ -1,22 +1,33 @@
+## [3.1.1] - 22 Apr 2022
+
+- Exposed `reverse` attribute
+
 ## [3.1.0] - 21 Apr 2022
-* Dependencies upgrades
+
+- Dependencies upgrades
 
 ## [3.0.6] 3 Apr 2022
+
 - refresh list from zero offset in case filter is OffsetLimitFilter
 
 ## [3.0.5] 23 Mar 2022
+
 - removed unnecessary assertion in SliverListBlocBuilder
 
 ## [3.0.4] 22 Mar 2022
+
 - depend on list_bloc 3.0.4
 
 ## [3.0.3] 22 Mar 2022
+
 - bugfix - do not ignore the cubit arguments
 
 ## [3.0.2] 22 Mar 2022
+
 - bugfix - missing type arguments to ListBlocBuilder
 
 ## [3.0.1] 22 Mar 2022
+
 - bugfix - leftover debug code
 
 ## [3.0.0] 22 Mar 2022
