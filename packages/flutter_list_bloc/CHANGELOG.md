@@ -1,3 +1,6 @@
+## [3.1.2] - 25 Apr 2022
+- added `builder` argument for further `ListView.builder` customisation
+
 ## [3.1.1] - 22 Apr 2022
 
 - Exposed `reverse` attribute
