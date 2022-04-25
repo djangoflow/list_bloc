@@ -11,6 +11,8 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
   final ListStateBuilder<T, F> emptyBuilder;
   final ListStateBuilder<T, F> loadingBuilder;
   final ListStateBuilder<T, F>? headerBuilder;
+  final Function(BuildContext context, ScrollController controller,
+      Widget Function(BuildContext, int) itemBuilder, int itemCount)? builder;
   final ScrollController? controller;
   final bool shrinkWrap;
   final bool withRefreshIndicator;
@@ -23,6 +25,7 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
     required this.emptyBuilder,
     required this.itemBuilder,
     required this.loadingBuilder,
+    this.builder,
     this.controller,
     this.create,
     this.headerBuilder,
@@ -49,16 +52,18 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
             ContinuousScrollBuilder<T, F>(
           cubit: cubit,
           controller: controller,
-          builder: (context, controller) => ListView.builder(
-            scrollDirection: scrollDirection,
-            shrinkWrap: shrinkWrap,
-            controller: controller,
-            primary: false,
-            physics: physics,
-            itemCount: itemCount,
-            itemBuilder: itemBuilder,
-            reverse: reverse,
-          ),
+          builder: (context, controller) => builder != null
+              ? builder!(context, controller, itemBuilder, itemCount)
+              : ListView.builder(
+                  scrollDirection: scrollDirection,
+                  shrinkWrap: shrinkWrap,
+                  controller: controller,
+                  primary: false,
+                  physics: physics,
+                  itemCount: itemCount,
+                  itemBuilder: itemBuilder,
+                  reverse: reverse,
+                ),
         ),
       );
 }
