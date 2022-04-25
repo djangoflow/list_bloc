@@ -18,6 +18,9 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
   final int loadingItemsCount;
   final ScrollPhysics? physics;
   final bool reverse;
+  final EdgeInsetsGeometry? padding;
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
+  final String? restorationId;
 
   const ListViewBlocBuilder({
     this.cubit,
@@ -33,6 +36,9 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
     this.shrinkWrap = true,
     this.withRefreshIndicator = false,
     this.reverse = false,
+    this.padding,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.restorationId,
   });
 
   @override
@@ -48,6 +54,9 @@ class ListViewBlocBuilder<T, F> extends StatelessWidget {
         builder: (BuildContext context, Data<List<T>, F> state, int itemCount,
                 Widget Function(BuildContext, int) itemBuilder) =>
             ListView.builder(
+          padding: padding,
+          keyboardDismissBehavior: keyboardDismissBehavior,
+          restorationId: restorationId,
           scrollDirection: scrollDirection,
           shrinkWrap: shrinkWrap,
           controller: controller,

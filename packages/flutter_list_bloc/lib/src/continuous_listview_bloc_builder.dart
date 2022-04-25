@@ -17,6 +17,9 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
   final int loadingItemsCount;
   final ScrollPhysics? physics;
   final bool reverse;
+  final EdgeInsetsGeometry? padding;
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
+  final String? restorationId;
 
   const ContinuousListViewBlocBuilder({
     this.cubit,
@@ -32,6 +35,9 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
     this.shrinkWrap = true,
     this.withRefreshIndicator = false,
     this.reverse = false,
+    this.padding,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.restorationId,
   });
 
   @override
@@ -50,6 +56,9 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
           cubit: cubit,
           controller: controller,
           builder: (context, controller) => ListView.builder(
+            padding: padding,
+            keyboardDismissBehavior: keyboardDismissBehavior,
+            restorationId: restorationId,
             scrollDirection: scrollDirection,
             shrinkWrap: shrinkWrap,
             controller: controller,
