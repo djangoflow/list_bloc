@@ -1,4 +1,4 @@
-## [3.1.2] - 22 Apr 2022
+## [3.1.2] - 25 Apr 2022
 
 - Exposed `padding`, `keyboardDismissBehavior`, and `restorationId` attributes
 
