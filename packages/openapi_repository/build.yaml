@@ -12,5 +12,5 @@ builders:
     build_extensions: { ".dart": [".g.dart"] }
     auto_apply: dependents
     runs_before: [freezed_annotations|freezed_annotations]
-    build_to: cache
+    build_to: source
     applies_builders: ["source_gen|combining_builder"]
