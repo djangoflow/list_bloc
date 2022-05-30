@@ -1,0 +1,16 @@
+targets:
+  $default:
+    builders:
+      generators|annotations:
+        enabled: true
+
+builders:
+  generators:
+    target: ":generators"
+    import: "package:openapi_repository/builder.dart"
+    builder_factories: ["generateListRepository"]
+    build_extensions: { ".dart": [".g.dart"] }
+    auto_apply: dependents
+    runs_before: [freezed_annotations|freezed_annotations]
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]
