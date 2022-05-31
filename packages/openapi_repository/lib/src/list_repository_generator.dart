@@ -22,8 +22,8 @@ class OpenapiRepositoryGenerator
     if (classVisitor.listMethods.isEmpty) return '';
 
     final ignoredParams = annotation
-        .read('ignoreParams')
-        .listValue
+        .peek('ignoreParams')
+        ?.listValue
         .map((e) => e.toStringValue())
         .toList();
 
@@ -41,9 +41,11 @@ class OpenapiRepositoryGenerator
         final filterName = '${methodName.pascalCase}Filter';
         final type = model.returnType.getDisplayString(withNullability: false);
 
-        final methodParameters = model.methodElement.parameters
-            .where((parameter) => !ignoredParams.contains(parameter.name))
-            .toList();
+        final methodParameters = ignoredParams != null
+            ? model.methodElement.parameters
+                .where((parameter) => !ignoredParams.contains(parameter.name))
+                .toList()
+            : model.methodElement.parameters;
 
         final optionalParams = methodParameters.where((element) {
           return element.isOptional;
