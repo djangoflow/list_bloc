@@ -11,6 +11,9 @@ import 'model_visitor.dart';
 
 class OpenapiRepositoryGenerator
     extends GeneratorForAnnotation<OpenapiRepository> {
+  int _defaultPageSize = 100;
+  int _defaultOffset = 0;
+
   @override
   String generateForAnnotatedElement(
     Element element,
@@ -26,6 +29,16 @@ class OpenapiRepositoryGenerator
         ?.listValue
         .map((e) => e.toStringValue())
         .toList();
+
+    final defaultPageSizeValue = annotation.peek('defaultPageSize');
+    final defaultOffsetValue = annotation.peek('defaultOffset');
+
+    if (defaultPageSizeValue?.isInt ?? false) {
+      _defaultPageSize = defaultPageSizeValue!.intValue;
+    }
+    if (defaultOffsetValue?.isInt ?? false) {
+      _defaultOffset = defaultOffsetValue!.intValue;
+    }
 
     final buffer = StringBuffer();
 
@@ -173,8 +186,9 @@ class OpenapiRepositoryGenerator
     for (var parameter in parameters) {
       final requiredValue = !parameter.isOptional ? 'required ' : '';
       final isOffsetLimit = ['offset', 'limit'].contains(parameter.name);
-      final defaultValue =
-          isOffsetLimit && parameter.isOptional ? '@Default(0) ' : '';
+      final defaultValue = isOffsetLimit && parameter.isOptional
+          ? '@Default(${parameter.name == 'offset' ? _defaultOffset : _defaultPageSize}) '
+          : '';
       buffer.writeln(
         '    $defaultValue'
         '$requiredValue'
