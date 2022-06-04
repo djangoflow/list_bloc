@@ -1,7 +1,11 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:async';
+
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:mustache_template/mustache.dart';
 import 'package:openapi_repository/src/templates.dart';
 import 'package:recase/recase.dart';
@@ -16,88 +20,195 @@ class OpenapiRepositoryGenerator
   int _defaultPageSize = 100;
   int _defaultOffset = 0;
 
+  static const listChecker = TypeChecker.any([
+    TypeChecker.fromRuntime(List),
+    TypeChecker.fromRuntime(BuiltList),
+  ]);
+
   @override
-  String generateForAnnotatedElement(
+  generateForAnnotatedElement(
     Element element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    final classVisitor = ClassPropertiesVisitor();
-    element.visitChildren(classVisitor);
-    if (classVisitor.listMethods.isEmpty) return '';
-
-    final ignoredParams = annotation
-        .peek('ignoreParams')
-        ?.listValue
-        .map((e) => e.toStringValue())
-        .toList();
-
-    final defaultPageSizeValue = annotation.peek('defaultPageSize');
-    final defaultOffsetValue = annotation.peek('defaultOffset');
-
-    if (defaultPageSizeValue?.isInt ?? false) {
-      _defaultPageSize = defaultPageSizeValue!.intValue;
-    }
-    if (defaultOffsetValue?.isInt ?? false) {
-      _defaultOffset = defaultOffsetValue!.intValue;
-    }
-
     final buffer = StringBuffer();
 
-    for (final element in classVisitor.listMethods.entries) {
-      buffer.writeln('/// ${element.key.name.sentenceCase.toUpperCase()}');
-      for (final model in element.value) {
-        final methodName = model.methodElement.displayName;
+    final template = Template(apiRepositoryTemplate);
+    final reader = annotation;
 
-        final split = methodName.titleCase.split(' ');
-        final apiClass = split.isEmpty ? null : split.first.toLowerCase();
+    final buildForElement = reader.peek('buildFor')?.typeValue.element;
+    if (buildForElement == null || buildForElement is! ClassElement) {
+      throw FormatException('Invalid parameter for BuildFor');
+    }
 
-        final type = model.returnType.getDisplayString(withNullability: false);
+    final baseUrl = reader.peek('baseUrl')?.stringValue;
 
-        final methodParameters = ignoredParams != null
-            ? model.methodElement.parameters
-                .where((parameter) => !ignoredParams.contains(parameter.name))
-                .toList()
-            : model.methodElement.parameters;
+    final liveBasePath = reader.peek('liveBasePath')?.stringValue;
 
-        final optionalParams = methodParameters.where((element) {
-          return element.isOptional;
-        }).toList();
+    _defaultOffset = reader.peek('defaultOffset')?.intValue ?? 0;
+    _defaultPageSize = reader.peek('defaultPageSize')?.intValue ?? 100;
+    final connectTimeout = reader.peek('connectTimeout')?.intValue ?? 0;
+    final receiveTimeout = reader.peek('receiveTimeout')?.intValue ?? 0;
+    final sendTimeout = reader.peek('sendTimeout')?.intValue ?? 0;
+    final dioInterceptor = reader.peek('dioInterceptor')?.typeValue;
 
-        if (apiClass == null) continue;
+    final methods = buildForElement.methods.where((element) {
+      if (element.returnType.isVoid) return false;
+      if (element.returnType.isDynamic) return false;
+      if (element.isStatic) return false;
+      return true;
+    }).toList();
+
+    final builderList = reader.peek('builderList')?.listValue ?? [];
+
+    final builderData = _getBuilderString(
+      builderList.map((e) {
+        final type = e.getField('apiClass')?.toTypeValue();
+        if (type == null) return null;
+        return type;
+      }).whereType<DartType>(),
+    );
+
+    buffer.writeln(template.renderString({
+      'repositoryName': element.name?.replaceFirst(r'$', ''),
+      'baseUrl': baseUrl != null ? "'$baseUrl'" : "'' // TODO: Add base url",
+      'liveBasePath': liveBasePath != null
+          ? "'$liveBasePath'"
+          : "'' // TODO: Add live base path",
+      'connectTimeout': connectTimeout,
+      'receiveTimeout': receiveTimeout,
+      'sendTimeout': sendTimeout,
+      'dioInterceptor': dioInterceptor?.getDisplayString(
+        withNullability: false,
+      ),
+      'accessors': methods
+          .map(
+            (method) => {
+              'methodName': method.name,
+              'type': method.returnType.getDisplayString(
+                withNullability: false,
+              ),
+              'name': method.returnType
+                  .getDisplayString(withNullability: false)
+                  .sentenceCase
+                  .split(' ')
+                  .first
+                  .camelCase,
+            },
+          )
+          .toList(),
+    }));
+
+    buffer.writeln(builderData);
+
+    return buffer.toString();
+  }
+
+  String _getBuilderString(Iterable<DartType> data) {
+    final buffer = StringBuffer();
+    for (final type in data) {
+      final element = type.element;
+      if (element == null || element is! ClassElement) continue;
+      final output = _getListRepositoryForElement(element);
+      if (output.isEmpty) continue;
+
+      buffer.writeln(output);
+    }
+    return buffer.toString();
+  }
+
+  String _getListRepositoryForElement(ClassElement element) {
+    final buffer = StringBuffer();
+    for (var methodElement in element.methods) {
+      final returnType = methodElement.returnType;
+
+      if (!returnType.isDartAsyncFuture) continue;
+      final returnModel = _getInnerReturnType(returnType, false);
+      if (returnModel == null) continue;
+
+      final methodName = methodElement.displayName;
+      final apiClass = element.displayName.titleCase.split(' ').first.camelCase;
+
+      final type = returnModel.type.getDisplayString(withNullability: false);
+      final methodParameters = methodElement.parameters
+          .where((parameter) => ![
+                'cancelToken',
+                'headers',
+                'extra',
+                'validateStatus',
+                'onSendProgress',
+                'onReceiveProgress',
+              ].contains(parameter.name))
+          .toList();
+
+      final optionalParams = methodParameters.where((element) {
+        return element.isOptional;
+      }).toList();
+
+      buffer
+        ..writeln()
+        ..writeln(_buildTypeDefs(
+          type: type,
+          name: methodName.pascalCase,
+          hasFilter: methodParameters.isNotEmpty,
+        ))
+        ..writeln();
+      if (optionalParams.isNotEmpty) {
         buffer
-          ..writeln()
-          ..writeln(_buildTypeDefs(
-            type: type,
+          ..writeln(_buildFilterClass(
             name: methodName.pascalCase,
-            hasFilter: methodParameters.isNotEmpty,
+            parameters: optionalParams,
+            defaultOffset: _defaultOffset,
+            defaultPageSize: _defaultPageSize,
           ))
           ..writeln();
-        if (optionalParams.isNotEmpty) {
-          buffer
-            ..writeln(_buildFilterClass(
-              name: methodName.pascalCase,
-              parameters: optionalParams,
-            ))
-            ..writeln();
-        }
-        buffer.writeln(_buildListLoader(
-          type: type,
-          filterParameters: methodParameters,
-          hasFilter: methodParameters.isNotEmpty,
-          apiClass: apiClass,
-          methodName: methodName,
-          isInline: model.isInline,
-        ));
       }
-      buffer.writeln();
+      buffer.writeln(_buildListLoader(
+        type: type,
+        filterParameters: methodParameters,
+        hasFilter: methodParameters.isNotEmpty,
+        apiClass: apiClass,
+        methodName: methodName,
+        isInline: returnModel.isInline,
+      ));
     }
 
     return buffer.toString();
   }
 
-  /// Returns the ListRepository class for [apiClass]. Use [isInline] to handle
-  /// InlineResponse types or Paginated responses.
+  _ReturnModel? _getInnerReturnType(DartType type, bool isInline) {
+    final innerMostType = _getInnerMostType(type);
+    if (listChecker.isExactlyType(type) && innerMostType != null) {
+      return _ReturnModel(innerMostType, isInline);
+    }
+
+    if (type is! ParameterizedType) return null;
+
+    List<DartType> args = type.typeArguments;
+    if (args.isEmpty) {
+      final innerElement = innerMostType?.element;
+      if (innerMostType == null || innerElement == null) return null;
+
+      final inlineVisitor = InlineClassVisitor();
+      innerElement.visitChildren(inlineVisitor);
+      if (inlineVisitor.fields.isEmpty) return null;
+      final results = inlineVisitor.fields;
+      return _getInnerReturnType(results.first.type, true);
+    }
+    if (args.first.isVoid) return null;
+
+    return _getInnerReturnType(args.first, false);
+  }
+
+  DartType? _getInnerMostType(DartType type) {
+    if (type is ParameterizedType && type.typeArguments.isNotEmpty) {
+      final typeArgs = type.typeArguments;
+      return typeArgs.first.isVoid ? null : _getInnerMostType(typeArgs.first);
+    }
+
+    return type;
+  }
+
   String _buildListLoader({
     required String type,
     required String apiClass,
@@ -142,6 +253,8 @@ class OpenapiRepositoryGenerator
   String _buildFilterClass({
     required String name,
     required List<ParameterElement> parameters,
+    required int defaultOffset,
+    required int defaultPageSize,
   }) =>
       Template(freezedFilterTemplate).renderString({
         'name': name,
@@ -152,7 +265,7 @@ class OpenapiRepositoryGenerator
           final requiredValue = !parameter.isOptional ? 'required ' : '';
           final isOffsetLimit = ['offset', 'limit'].contains(parameter.name);
           final defaultValue = isOffsetLimit && parameter.isOptional
-              ? '@Default(${parameter.name == 'offset' ? _defaultOffset : _defaultPageSize}) '
+              ? '@Default(${parameter.name == 'offset' ? defaultOffset : defaultPageSize}) '
               : '';
 
           final type = '    $defaultValue'
@@ -163,4 +276,11 @@ class OpenapiRepositoryGenerator
           return {'type': type};
         }).toList(),
       });
+}
+
+class _ReturnModel {
+  final DartType type;
+  final bool isInline;
+
+  const _ReturnModel(this.type, [this.isInline = false]);
 }

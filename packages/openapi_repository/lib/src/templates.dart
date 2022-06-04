@@ -28,11 +28,39 @@ const repositoryTemplate = r'''
 /// List bloc repository for {{name}}
 abstract class {{name}}Repository {
   static Future<List<{{returnType}}>> loader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{name}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},]) async {
-    final r = await APIRepository.instance.{{api}}.{{methodName}}(
+    final r = await ApiRepository.instance.{{api}}.{{methodName}}(
       {{#filterParams}}{{param}},{{/filterParams}}
     );
 
     return r.data?{{#isInline}}.results{{/isInline}}.asList() ?? [];
   }
+}
+''';
+
+const apiRepositoryTemplate = r'''
+class {{repositoryName}} {
+  static {{repositoryName}} get instance => _instance;
+  static final {{repositoryName}} _instance = {{repositoryName}}._internal();
+
+  {{repositoryName}}._internal() {
+    _openapi.dio.options
+      ..baseUrl = {{{baseUrl}}}
+      ..connectTimeout = {{connectTimeout}}
+      ..receiveTimeout = {{receiveTimeout}}
+      ..sendTimeout = {{sendTimeout}};
+    {{#dioInterceptor}}_openapi.dio.interceptors.add({{dioInterceptor}}());{{/dioInterceptor}}
+  }
+
+  static const String liveBasePath = {{{liveBasePath}}};
+
+  static final Openapi _openapi = Openapi(
+    basePathOverride: kReleaseMode ? liveBasePath : null,
+    interceptors: [],
+  );
+
+  Openapi get api => _openapi;
+  {{#accessors}}
+  {{type}} get {{name}} => api.{{methodName}}();
+  {{/accessors}}
 }
 ''';

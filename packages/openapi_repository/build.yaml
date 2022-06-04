@@ -8,9 +8,9 @@ builders:
   generators:
     target: ":generators"
     import: "package:openapi_repository/builder.dart"
-    builder_factories: ["generateListRepository"]
+    builder_factories: ["generateListRepositoryBuilder"]
     build_extensions: { ".dart": [".g.dart"] }
     auto_apply: dependents
-    runs_before: [freezed_annotations|freezed_annotations]
+    runs_before: [freezed_annotations|freezed_annotations, freezed|freezed]
     build_to: source
     applies_builders: ["source_gen|combining_builder"]
