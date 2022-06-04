@@ -1,13 +1,12 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:async';
-
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:mustache_template/mustache.dart';
-import 'package:openapi_repository/src/templates.dart';
+import 'package:openapi_repository/src/templates/models.dart';
+import 'package:openapi_repository/src/templates/templates.dart';
 import 'package:recase/recase.dart';
 
 import 'package:openapi_repository_annotations/openapi_repository_annotations.dart';
@@ -31,6 +30,8 @@ class OpenapiRepositoryGenerator
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
+    if (element.name == null) return '';
+
     final buffer = StringBuffer();
 
     final template = Template(apiRepositoryTemplate);
@@ -64,41 +65,37 @@ class OpenapiRepositoryGenerator
     final builderData = _getBuilderString(
       builderList.map((e) {
         final type = e.getField('apiClass')?.toTypeValue();
+        
         if (type == null) return null;
         return type;
       }).whereType<DartType>(),
     );
 
-    buffer.writeln(template.renderString({
-      'repositoryName': element.name?.replaceFirst(r'$', ''),
-      'baseUrl': baseUrl != null ? "'$baseUrl'" : "'' // TODO: Add base url",
-      'liveBasePath': liveBasePath != null
+    final repositoryModel = RepositoryTemplateModel(
+      repositoryName: element.name!.replaceFirst(r'$', ''),
+      baseUrl: baseUrl != null ? "'$baseUrl'" : "'' // TODO: Add base url",
+      liveBasePath: liveBasePath != null
           ? "'$liveBasePath'"
           : "'' // TODO: Add live base path",
-      'connectTimeout': connectTimeout,
-      'receiveTimeout': receiveTimeout,
-      'sendTimeout': sendTimeout,
-      'dioInterceptor': dioInterceptor?.getDisplayString(
+      connectTimeout: connectTimeout,
+      receiveTimeout: receiveTimeout,
+      sendTimeout: sendTimeout,
+      dioInterceptor: dioInterceptor?.getDisplayString(
         withNullability: false,
       ),
-      'accessors': methods
-          .map(
-            (method) => {
-              'methodName': method.name,
-              'type': method.returnType.getDisplayString(
-                withNullability: false,
-              ),
-              'name': method.returnType
-                  .getDisplayString(withNullability: false)
-                  .sentenceCase
-                  .split(' ')
-                  .first
-                  .camelCase,
-            },
-          )
-          .toList(),
-    }));
-
+      accessors: methods.map((e) {
+        final type = e.returnType.getDisplayString(withNullability: false);
+        final methodName = e.name;
+        final name = e.returnType
+            .getDisplayString(withNullability: false)
+            .sentenceCase
+            .split(' ')
+            .first
+            .camelCase;
+        return AccessorModel(type: type, name: name, methodName: methodName);
+      }).toList(),
+    );
+    buffer.writeln(template.renderString(repositoryModel.toJson()));
     buffer.writeln(builderData);
 
     return buffer.toString();
@@ -167,7 +164,7 @@ class OpenapiRepositoryGenerator
         type: type,
         filterParameters: methodParameters,
         hasFilter: methodParameters.isNotEmpty,
-        apiClass: apiClass,
+        api: apiClass,
         methodName: methodName,
         isInline: returnModel.isInline,
       ));
@@ -211,57 +208,61 @@ class OpenapiRepositoryGenerator
 
   String _buildListLoader({
     required String type,
-    required String apiClass,
+    required String api,
     required String methodName,
     required bool hasFilter,
     required List<ParameterElement> filterParameters,
     bool isInline = false,
-  }) =>
-      Template(repositoryTemplate).renderString({
-        'api': apiClass,
-        'name': methodName.pascalCase,
-        'isInline': isInline,
-        'methodName': methodName,
-        'returnType': type,
-        'hasFilter': hasFilter,
-        'additionalParams': filterParameters
-            .where((element) => !element.isOptional)
-            .map(
-                (parameter) => {'param': '${parameter.type} ${parameter.name}'})
-            .toList(),
-        'filterParams': hasFilter && filterParameters.isNotEmpty
-            ? filterParameters.map((e) {
-                return {
-                  'param':
-                      '${e.name}: ${e.isOptional ? 'filter?.' : ''}${e.name}'
-                };
-              }).toList()
-            : [],
-      });
+  }) {
+    final listRepositoryModel = ListRepositoryTemplateModel(
+      api: api,
+      name: methodName.pascalCase,
+      isInline: isInline,
+      methodName: methodName,
+      returnType: type,
+      hasFilter: hasFilter,
+      additionalParams: filterParameters
+          .where((element) => !element.isOptional)
+          .map((parameter) => ParamModel('${parameter.type} ${parameter.name}'))
+          .toList(),
+      filterParams: hasFilter && filterParameters.isNotEmpty
+          ? filterParameters.map((e) {
+              return ParamModel(
+                '${e.name}: ${e.isOptional ? 'filter?.' : ''}${e.name}',
+              );
+            }).toList()
+          : [],
+    );
+    return Template(repositoryTemplate).renderString(
+      listRepositoryModel.toJson(),
+    );
+  }
 
   String _buildTypeDefs({
     required String name,
     required String type,
     required bool hasFilter,
-  }) =>
-      Template(typedefTemplate).renderString({
-        'name': name,
-        'hasFilter': hasFilter,
-        'type': type,
-      });
+  }) {
+    final typedefModel = TypedefTemplateModel(
+      type: type,
+      name: name,
+      hasFilter: hasFilter,
+    );
+    return Template(typedefTemplate).renderString(typedefModel.toJson());
+  }
 
   String _buildFilterClass({
     required String name,
     required List<ParameterElement> parameters,
     required int defaultOffset,
     required int defaultPageSize,
-  }) =>
-      Template(freezedFilterTemplate).renderString({
-        'name': name,
-        'isPaginated': parameters.any(
+  }) {
+    final filterTemplateModel = FreezedTemplateModel(
+        name: name,
+        isPaginated: parameters.any(
           (element) => ['offset', 'limit'].contains(element.name),
         ),
-        'types': parameters.map((parameter) {
+        types: parameters.map((parameter) {
           final requiredValue = !parameter.isOptional ? 'required ' : '';
           final isOffsetLimit = ['offset', 'limit'].contains(parameter.name);
           final defaultValue = isOffsetLimit && parameter.isOptional
@@ -273,9 +274,13 @@ class OpenapiRepositoryGenerator
               '${parameter.type.getDisplayString(withNullability: !isOffsetLimit)} '
               '${parameter.name},';
 
-          return {'type': type};
-        }).toList(),
-      });
+          return TypeModel(type);
+        }).toList());
+        
+    return Template(freezedFilterTemplate).renderString(
+      filterTemplateModel.toJson(),
+    );
+  }
 }
 
 class _ReturnModel {
