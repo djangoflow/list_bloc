@@ -7,7 +7,12 @@ class {{name}}Filter with _${{name}}Filter{{#isPaginated}} implements OffsetLimi
 
   {{#isPaginated}}@Implements<OffsetLimitFilter>(){{/isPaginated}}
   const factory {{name}}Filter({
-    {{#types}}{{type}}{{/types}}
+    {{#types}}
+    {{#defaultValue}}{{defaultValue}}{{/defaultValue}}
+    {{#isRequired}}required {{/isRequired}}
+    {{#type}}{{type}}{{#isNullable}}? {{/isNullable}}{{/type}}
+    {{name}},
+    {{/types}}
   }) = _{{name}}Filter;
 
   factory {{name}}Filter.fromJson(
@@ -27,7 +32,7 @@ typedef {{name}}Bloc = ListCubit<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFil
 const repositoryTemplate = r'''
 /// List bloc repository for {{name}}
 abstract class {{name}}Repository {
-  static Future<List<{{returnType}}>> loader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{name}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},]) async {
+  static Future<List<{{returnType}}>> loader({{#additionalParams}}{{param}},{{/additionalParams}}{{#hasFilter}}{{name}}Filter filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},) async {
     final r = await ApiRepository.instance.{{api}}.{{methodName}}(
       {{#filterParams}}{{param}},{{/filterParams}}
     );

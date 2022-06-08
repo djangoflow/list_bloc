@@ -69,12 +69,20 @@ Map<String, dynamic> _$$_FreezedTemplateModelToJson(
     };
 
 _$_TypeModel _$$_TypeModelFromJson(Map<String, dynamic> json) => _$_TypeModel(
-      json['type'] as String,
+      isRequired: json['isRequired'] as bool,
+      isNullable: json['isNullable'] as bool,
+      defaultValue: json['defaultValue'] as String?,
+      type: json['type'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$$_TypeModelToJson(_$_TypeModel instance) =>
     <String, dynamic>{
+      'isRequired': instance.isRequired,
+      'isNullable': instance.isNullable,
+      'defaultValue': instance.defaultValue,
       'type': instance.type,
+      'name': instance.name,
     };
 
 _$_TypedefTemplateModel _$$_TypedefTemplateModelFromJson(

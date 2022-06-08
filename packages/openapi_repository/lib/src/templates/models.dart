@@ -50,7 +50,13 @@ class FreezedTemplateModel with _$FreezedTemplateModel {
 
 @freezed
 class TypeModel with _$TypeModel {
-  const factory TypeModel(String type) = _TypeModel;
+  const factory TypeModel({
+    required bool isRequired,
+    required bool isNullable,
+    String? defaultValue,
+    required String type,
+    required String name,
+  }) = _TypeModel;
 
   factory TypeModel.fromJson(Map<String, dynamic> map) =>
       _$TypeModelFromJson(map);
@@ -80,8 +86,7 @@ class ListRepositoryTemplateModel with _$ListRepositoryTemplateModel {
     @Default(false) bool hasFilter,
     @Default([]) List<ParamModel> additionalParams,
     @Default([]) List<ParamModel> filterParams,
-  }) =
-      _ListRepositoryTemplateModel;
+  }) = _ListRepositoryTemplateModel;
 
   factory ListRepositoryTemplateModel.fromJson(Map<String, dynamic> map) =>
       _$ListRepositoryTemplateModelFromJson(map);

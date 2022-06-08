@@ -65,7 +65,7 @@ class OpenapiRepositoryGenerator
     final builderData = _getBuilderString(
       builderList.map((e) {
         final type = e.getField('apiClass')?.toTypeValue();
-        
+
         if (type == null) return null;
         return type;
       }).whereType<DartType>(),
@@ -154,7 +154,7 @@ class OpenapiRepositoryGenerator
         buffer
           ..writeln(_buildFilterClass(
             name: methodName.pascalCase,
-            parameters: optionalParams,
+            parameters: methodParameters,
             defaultOffset: _defaultOffset,
             defaultPageSize: _defaultPageSize,
           ))
@@ -221,15 +221,9 @@ class OpenapiRepositoryGenerator
       methodName: methodName,
       returnType: type,
       hasFilter: hasFilter,
-      additionalParams: filterParameters
-          .where((element) => !element.isOptional)
-          .map((parameter) => ParamModel('${parameter.type} ${parameter.name}'))
-          .toList(),
       filterParams: hasFilter && filterParameters.isNotEmpty
           ? filterParameters.map((e) {
-              return ParamModel(
-                '${e.name}: ${e.isOptional ? 'filter?.' : ''}${e.name}',
-              );
+              return ParamModel('${e.name}: filter.${e.name}');
             }).toList()
           : [],
     );
@@ -263,20 +257,25 @@ class OpenapiRepositoryGenerator
           (element) => ['offset', 'limit'].contains(element.name),
         ),
         types: parameters.map((parameter) {
-          final requiredValue = !parameter.isOptional ? 'required ' : '';
           final isOffsetLimit = ['offset', 'limit'].contains(parameter.name);
           final defaultValue = isOffsetLimit && parameter.isOptional
               ? '@Default(${parameter.name == 'offset' ? defaultOffset : defaultPageSize}) '
               : '';
 
-          final type = '    $defaultValue'
-              '$requiredValue'
-              '${parameter.type.getDisplayString(withNullability: !isOffsetLimit)} '
-              '${parameter.name},';
+          final isRequired = defaultValue.isEmpty && !parameter.isOptional;
+          final isNullable = defaultValue.isEmpty && parameter.isOptional;
 
-          return TypeModel(type);
+          return TypeModel(
+            isRequired: isRequired,
+            isNullable: isNullable,
+            defaultValue: defaultValue,
+            name: parameter.name,
+            type: parameter.type.getDisplayString(
+              withNullability: false,
+            ),
+          );
         }).toList());
-        
+
     return Template(freezedFilterTemplate).renderString(
       filterTemplateModel.toJson(),
     );

@@ -678,7 +678,11 @@ TypeModel _$TypeModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TypeModel {
+  bool get isRequired => throw _privateConstructorUsedError;
+  bool get isNullable => throw _privateConstructorUsedError;
+  String? get defaultValue => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -690,7 +694,12 @@ mixin _$TypeModel {
 abstract class $TypeModelCopyWith<$Res> {
   factory $TypeModelCopyWith(TypeModel value, $Res Function(TypeModel) then) =
       _$TypeModelCopyWithImpl<$Res>;
-  $Res call({String type});
+  $Res call(
+      {bool isRequired,
+      bool isNullable,
+      String? defaultValue,
+      String type,
+      String name});
 }
 
 /// @nodoc
@@ -703,12 +712,32 @@ class _$TypeModelCopyWithImpl<$Res> implements $TypeModelCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? isRequired = freezed,
+    Object? isNullable = freezed,
+    Object? defaultValue = freezed,
     Object? type = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
+      isRequired: isRequired == freezed
+          ? _value.isRequired
+          : isRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isNullable: isNullable == freezed
+          ? _value.isNullable
+          : isNullable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      defaultValue: defaultValue == freezed
+          ? _value.defaultValue
+          : defaultValue // ignore: cast_nullable_to_non_nullable
+              as String?,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -720,7 +749,12 @@ abstract class _$$_TypeModelCopyWith<$Res> implements $TypeModelCopyWith<$Res> {
           _$_TypeModel value, $Res Function(_$_TypeModel) then) =
       __$$_TypeModelCopyWithImpl<$Res>;
   @override
-  $Res call({String type});
+  $Res call(
+      {bool isRequired,
+      bool isNullable,
+      String? defaultValue,
+      String type,
+      String name});
 }
 
 /// @nodoc
@@ -735,12 +769,32 @@ class __$$_TypeModelCopyWithImpl<$Res> extends _$TypeModelCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? isRequired = freezed,
+    Object? isNullable = freezed,
+    Object? defaultValue = freezed,
     Object? type = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$_TypeModel(
-      type == freezed
+      isRequired: isRequired == freezed
+          ? _value.isRequired
+          : isRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isNullable: isNullable == freezed
+          ? _value.isNullable
+          : isNullable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      defaultValue: defaultValue == freezed
+          ? _value.defaultValue
+          : defaultValue // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -749,17 +803,30 @@ class __$$_TypeModelCopyWithImpl<$Res> extends _$TypeModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_TypeModel implements _TypeModel {
-  const _$_TypeModel(this.type);
+  const _$_TypeModel(
+      {required this.isRequired,
+      required this.isNullable,
+      this.defaultValue,
+      required this.type,
+      required this.name});
 
   factory _$_TypeModel.fromJson(Map<String, dynamic> json) =>
       _$$_TypeModelFromJson(json);
 
   @override
+  final bool isRequired;
+  @override
+  final bool isNullable;
+  @override
+  final String? defaultValue;
+  @override
   final String type;
+  @override
+  final String name;
 
   @override
   String toString() {
-    return 'TypeModel(type: $type)';
+    return 'TypeModel(isRequired: $isRequired, isNullable: $isNullable, defaultValue: $defaultValue, type: $type, name: $name)';
   }
 
   @override
@@ -767,13 +834,25 @@ class _$_TypeModel implements _TypeModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TypeModel &&
-            const DeepCollectionEquality().equals(other.type, type));
+            const DeepCollectionEquality()
+                .equals(other.isRequired, isRequired) &&
+            const DeepCollectionEquality()
+                .equals(other.isNullable, isNullable) &&
+            const DeepCollectionEquality()
+                .equals(other.defaultValue, defaultValue) &&
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other.name, name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(type));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(isRequired),
+      const DeepCollectionEquality().hash(isNullable),
+      const DeepCollectionEquality().hash(defaultValue),
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(name));
 
   @JsonKey(ignore: true)
   @override
@@ -787,13 +866,26 @@ class _$_TypeModel implements _TypeModel {
 }
 
 abstract class _TypeModel implements TypeModel {
-  const factory _TypeModel(final String type) = _$_TypeModel;
+  const factory _TypeModel(
+      {required final bool isRequired,
+      required final bool isNullable,
+      final String? defaultValue,
+      required final String type,
+      required final String name}) = _$_TypeModel;
 
   factory _TypeModel.fromJson(Map<String, dynamic> json) =
       _$_TypeModel.fromJson;
 
   @override
+  bool get isRequired => throw _privateConstructorUsedError;
+  @override
+  bool get isNullable => throw _privateConstructorUsedError;
+  @override
+  String? get defaultValue => throw _privateConstructorUsedError;
+  @override
   String get type => throw _privateConstructorUsedError;
+  @override
+  String get name => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_TypeModelCopyWith<_$_TypeModel> get copyWith =>
