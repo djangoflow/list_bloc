@@ -1,6 +1,6 @@
 class OpenapiRepository {
   final Type buildFor;
-  final List<ListBuilder> builderList;
+  final List<ListRepositoryBuilder> builderList;
   final int connectTimeout;
   final int receiveTimeout;
   final int sendTimeout;
@@ -24,9 +24,26 @@ class OpenapiRepository {
   });
 }
 
-class ListBuilder {
+class ListRepositoryBuilder {
   final Type apiClass;
-  final List<String> ignoreMethods;
+  final List<String> listEndpoints;
+  final List<String> ignoreEndpoints;
 
-  const ListBuilder(this.apiClass, [this.ignoreMethods = const []]);
+  const ListRepositoryBuilder(
+    this.apiClass, {
+    this.listEndpoints = const ['*'],
+    this.ignoreEndpoints = const [],
+  });
+}
+
+class DataRepositoryBuilder {
+  final Type apiClass;
+  final List<String> dataEndpoints;
+  final List<String> ignoreEndpoints;
+
+  const DataRepositoryBuilder(
+    this.apiClass, {
+    this.dataEndpoints = const ['*'],
+    this.ignoreEndpoints = const [],
+  });
 }

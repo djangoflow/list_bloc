@@ -32,51 +32,33 @@ class OpenapiRepositoryGenerator
   ) {
     if (element.name == null) return '';
 
-    final buffer = StringBuffer();
+    final parsedAnnotation = _ReaderTypes.fromReader(annotation);
 
-    final template = Template(apiRepositoryTemplate);
-    final reader = annotation;
+    _defaultOffset = parsedAnnotation.defaultOffset;
+    _defaultPageSize = parsedAnnotation.defaultPageSize;
 
-    final buildForElement = reader.peek('buildFor')?.typeValue.element;
-    if (buildForElement == null || buildForElement is! ClassElement) {
-      throw FormatException('Invalid parameter for BuildFor');
-    }
+    final baseUrl = parsedAnnotation.baseUrl;
+    final liveBasePath = parsedAnnotation.liveBasePath;
+    final connectTimeout = parsedAnnotation.connectTimeout;
+    final receiveTimeout = parsedAnnotation.receiveTimeout;
+    final sendTimeout = parsedAnnotation.sendTimeout;
+    final dioInterceptor = parsedAnnotation.dioInterceptor;
 
-    final baseUrl = reader.peek('baseUrl')?.stringValue;
-
-    final liveBasePath = reader.peek('liveBasePath')?.stringValue;
-
-    _defaultOffset = reader.peek('defaultOffset')?.intValue ?? 0;
-    _defaultPageSize = reader.peek('defaultPageSize')?.intValue ?? 100;
-    final connectTimeout = reader.peek('connectTimeout')?.intValue ?? 0;
-    final receiveTimeout = reader.peek('receiveTimeout')?.intValue ?? 0;
-    final sendTimeout = reader.peek('sendTimeout')?.intValue ?? 0;
-    final dioInterceptor = reader.peek('dioInterceptor')?.typeValue;
-
-    final methods = buildForElement.methods.where((element) {
+    final methods = parsedAnnotation.buildForElement.methods.where((element) {
       if (element.returnType.isVoid) return false;
       if (element.returnType.isDynamic) return false;
       if (element.isStatic) return false;
       return true;
     }).toList();
 
-    final builderList = reader.peek('builderList')?.listValue ?? [];
-
-    final builderData = _getBuilderString(
-      builderList.map((e) {
-        final type = e.getField('apiClass')?.toTypeValue();
-
-        if (type == null) return null;
-        return type;
-      }).whereType<DartType>(),
-    );
+    final builderData = _getBuilderString(parsedAnnotation.builderList);
 
     final repositoryModel = RepositoryTemplateModel(
       repositoryName: element.name!.replaceFirst(r'$', ''),
       baseUrl: baseUrl != null ? "'$baseUrl'" : "'' // TODO: Add base url",
       liveBasePath: liveBasePath != null
           ? "'$liveBasePath'"
-          : "'' // TODO: Add live base path",
+          : "''; // TODO: Add live base path",
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
       sendTimeout: sendTimeout,
@@ -95,18 +77,20 @@ class OpenapiRepositoryGenerator
         return AccessorModel(type: type, name: name, methodName: methodName);
       }).toList(),
     );
+
+    final template = Template(apiRepositoryTemplate);
+    final buffer = StringBuffer();
+
     buffer.writeln(template.renderString(repositoryModel.toJson()));
     buffer.writeln(builderData);
 
     return buffer.toString();
   }
 
-  String _getBuilderString(Iterable<DartType> data) {
+  String _getBuilderString(Iterable<_ListRepositoryBuilder> data) {
     final buffer = StringBuffer();
-    for (final type in data) {
-      final element = type.element;
-      if (element == null || element is! ClassElement) continue;
-      final output = _getListRepositoryForElement(element);
+    for (final builder in data) {
+      final output = _getListRepositoryFromBuilder(builder);
       if (output.isEmpty) continue;
 
       buffer.writeln(output);
@@ -114,18 +98,31 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
-  String _getListRepositoryForElement(ClassElement element) {
+  String _getListRepositoryFromBuilder(_ListRepositoryBuilder builder) {
     final buffer = StringBuffer();
-    for (var methodElement in element.methods) {
+    final classElement = builder.apiClass;
+
+    for (final methodElement in classElement.methods) {
       final returnType = methodElement.returnType;
 
       if (!returnType.isDartAsyncFuture) continue;
-      final returnModel = _getInnerReturnType(returnType, false);
-      if (returnModel == null) continue;
 
       final methodName = methodElement.displayName;
-      final apiClass = element.displayName.titleCase.split(' ').first.camelCase;
+      if (builder.ignoreEndpoints.contains('*')) {
+        continue;
+      } else if (builder.ignoreEndpoints.contains(methodName)) {
+        continue;
+      }
 
+      if (!builder.listEndpoints.contains('*')) {
+        if (!builder.listEndpoints.contains(methodName)) continue;
+      }
+
+      final apiClass =
+          classElement.displayName.titleCase.split(' ').first.camelCase;
+
+      final returnModel = _getInnerReturnType(returnType, false);
+      if (returnModel == null) continue;
       final type = returnModel.type.getDisplayString(withNullability: false);
       final methodParameters = methodElement.parameters
           .where((parameter) => ![
@@ -287,4 +284,111 @@ class _ReturnModel {
   final bool isInline;
 
   const _ReturnModel(this.type, [this.isInline = false]);
+}
+
+class _ReaderTypes {
+  final ClassElement buildForElement;
+  final Iterable<_ListRepositoryBuilder> builderList;
+  final int connectTimeout;
+  final int receiveTimeout;
+  final int sendTimeout;
+  final int defaultOffset;
+  final int defaultPageSize;
+  final DartType? dioInterceptor;
+  final String? liveBasePath;
+  final String? baseUrl;
+
+  const _ReaderTypes._({
+    required this.buildForElement,
+    this.builderList = const [],
+    this.connectTimeout = 10000,
+    this.receiveTimeout = 15000,
+    this.sendTimeout = 15000,
+    this.defaultOffset = 0,
+    this.defaultPageSize = 100,
+    this.dioInterceptor,
+    this.liveBasePath,
+    this.baseUrl,
+  });
+
+  factory _ReaderTypes.fromReader(ConstantReader reader) {
+    final buildFor = reader.peek('buildFor')?.typeValue;
+    final buildForElement = buildFor?.element;
+    if (buildForElement == null || buildForElement is! ClassElement) {
+      throw FormatException('Invalid parameter for BuildFor');
+    }
+
+    final baseUrl = reader.peek('baseUrl')?.stringValue;
+
+    final liveBasePath = reader.peek('liveBasePath')?.stringValue;
+
+    final defaultOffset = reader.peek('defaultOffset')?.intValue ?? 0;
+    final defaultPageSize = reader.peek('defaultPageSize')?.intValue ?? 100;
+    final connectTimeout = reader.peek('connectTimeout')?.intValue ?? 0;
+    final receiveTimeout = reader.peek('receiveTimeout')?.intValue ?? 0;
+    final sendTimeout = reader.peek('sendTimeout')?.intValue ?? 0;
+    final dioInterceptor = reader.peek('dioInterceptor')?.typeValue;
+
+    final builderList = reader.peek('builderList')?.listValue ?? [];
+    final builderData = builderList.map((e) {
+      final type = e.getField('apiClass')?.toTypeValue();
+      if (type == null) return null;
+
+      final element = type.element;
+      if (element is! ClassElement) return null;
+
+      final listEndpoints = e.getField('listEndpoints')?.toListValue();
+      final ignoreEndpoints = e.getField('ignoreEndpoints')?.toListValue();
+
+      final parsedEndpoints = <String>[];
+      final parsedIgnoreEndpoints = <String>[];
+
+      if (listEndpoints != null) {
+        for (final endpoint in listEndpoints) {
+          final value = endpoint.toStringValue();
+          if (value == null) continue;
+          parsedEndpoints.add(value);
+        }
+      }
+
+      if (ignoreEndpoints != null) {
+        for (final endpoint in ignoreEndpoints) {
+          final value = endpoint.toStringValue();
+          if (value == null) continue;
+          parsedIgnoreEndpoints.add(value);
+        }
+      }
+
+      return _ListRepositoryBuilder(
+        element,
+        listEndpoints: parsedEndpoints,
+        ignoreEndpoints: parsedIgnoreEndpoints,
+      );
+    }).whereType<_ListRepositoryBuilder>();
+
+    return _ReaderTypes._(
+      buildForElement: buildForElement,
+      baseUrl: baseUrl,
+      builderList: builderData,
+      liveBasePath: liveBasePath,
+      defaultOffset: defaultOffset,
+      defaultPageSize: defaultPageSize,
+      connectTimeout: connectTimeout,
+      receiveTimeout: receiveTimeout,
+      sendTimeout: sendTimeout,
+      dioInterceptor: dioInterceptor,
+    );
+  }
+}
+
+class _ListRepositoryBuilder {
+  final ClassElement apiClass;
+  final List<String> listEndpoints;
+  final List<String> ignoreEndpoints;
+
+  const _ListRepositoryBuilder(
+    this.apiClass, {
+    this.ignoreEndpoints = const [],
+    this.listEndpoints = const [],
+  });
 }
