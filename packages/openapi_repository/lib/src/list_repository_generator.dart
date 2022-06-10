@@ -2,6 +2,7 @@
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:analyzer/dart/constant/value.dart';
 import 'package:build/build.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:mustache_template/mustache.dart';
@@ -121,7 +122,7 @@ class OpenapiRepositoryGenerator
       final apiClass =
           classElement.displayName.titleCase.split(' ').first.camelCase;
 
-      final returnModel = _getInnerReturnType(returnType, false);
+      final returnModel = _getInnerListReturnType(returnType, false);
       if (returnModel == null) continue;
       final type = returnModel.type.getDisplayString(withNullability: false);
       final methodParameters = methodElement.parameters
@@ -170,7 +171,7 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
-  _ReturnModel? _getInnerReturnType(DartType type, bool isInline) {
+  _ReturnModel? _getInnerListReturnType(DartType type, bool isInline) {
     final innerMostType = _getInnerMostType(type);
     if (listChecker.isExactlyType(type) && innerMostType != null) {
       return _ReturnModel(innerMostType, isInline);
@@ -187,11 +188,11 @@ class OpenapiRepositoryGenerator
       innerElement.visitChildren(inlineVisitor);
       if (inlineVisitor.fields.isEmpty) return null;
       final results = inlineVisitor.fields;
-      return _getInnerReturnType(results.first.type, true);
+      return _getInnerListReturnType(results.first.type, true);
     }
     if (args.first.isVoid) return null;
 
-    return _getInnerReturnType(args.first, false);
+    return _getInnerListReturnType(args.first, false);
   }
 
   DartType? _getInnerMostType(DartType type) {
@@ -330,41 +331,9 @@ class _ReaderTypes {
     final dioInterceptor = reader.peek('dioInterceptor')?.typeValue;
 
     final builderList = reader.peek('builderList')?.listValue ?? [];
-    final builderData = builderList.map((e) {
-      final type = e.getField('apiClass')?.toTypeValue();
-      if (type == null) return null;
-
-      final element = type.element;
-      if (element is! ClassElement) return null;
-
-      final listEndpoints = e.getField('listEndpoints')?.toListValue();
-      final ignoreEndpoints = e.getField('ignoreEndpoints')?.toListValue();
-
-      final parsedEndpoints = <String>[];
-      final parsedIgnoreEndpoints = <String>[];
-
-      if (listEndpoints != null) {
-        for (final endpoint in listEndpoints) {
-          final value = endpoint.toStringValue();
-          if (value == null) continue;
-          parsedEndpoints.add(value);
-        }
-      }
-
-      if (ignoreEndpoints != null) {
-        for (final endpoint in ignoreEndpoints) {
-          final value = endpoint.toStringValue();
-          if (value == null) continue;
-          parsedIgnoreEndpoints.add(value);
-        }
-      }
-
-      return _ListRepositoryBuilder(
-        element,
-        listEndpoints: parsedEndpoints,
-        ignoreEndpoints: parsedIgnoreEndpoints,
-      );
-    }).whereType<_ListRepositoryBuilder>();
+    final builderData = builderList.map(
+      (e) => _ListRepositoryBuilder.fromDartObject(e),
+    );
 
     return _ReaderTypes._(
       buildForElement: buildForElement,
@@ -386,9 +355,49 @@ class _ListRepositoryBuilder {
   final List<String> listEndpoints;
   final List<String> ignoreEndpoints;
 
-  const _ListRepositoryBuilder(
+  const _ListRepositoryBuilder._(
     this.apiClass, {
     this.ignoreEndpoints = const [],
     this.listEndpoints = const [],
   });
+
+  factory _ListRepositoryBuilder.fromDartObject(DartObject e) {
+    final type = e.getField('apiClass')?.toTypeValue();
+    if (type == null) {
+      throw FormatException('ApiClass field must be a type');
+    }
+
+    final element = type.element;
+    if (element is! ClassElement) {
+      throw 'ApiClass field should be a Class Type';
+    }
+
+    final listEndpoints = e.getField('listEndpoints')?.toListValue();
+    final ignoreEndpoints = e.getField('ignoreEndpoints')?.toListValue();
+
+    final parsedEndpoints = <String>[];
+    final parsedIgnoreEndpoints = <String>[];
+
+    if (listEndpoints != null) {
+      for (final endpoint in listEndpoints) {
+        final value = endpoint.toStringValue();
+        if (value == null) continue;
+        parsedEndpoints.add(value);
+      }
+    }
+
+    if (ignoreEndpoints != null) {
+      for (final endpoint in ignoreEndpoints) {
+        final value = endpoint.toStringValue();
+        if (value == null) continue;
+        parsedIgnoreEndpoints.add(value);
+      }
+    }
+
+    return _ListRepositoryBuilder._(
+      element,
+      ignoreEndpoints: parsedIgnoreEndpoints,
+      listEndpoints: parsedEndpoints,
+    );
+  }
 }
