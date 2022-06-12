@@ -52,8 +52,6 @@ class OpenapiRepositoryGenerator
       return true;
     }).toList();
 
-    final builderData = _getBuilderString(parsedAnnotation.builderList);
-
     final repositoryModel = RepositoryTemplateModel(
       repositoryName: element.name!.replaceFirst(r'$', ''),
       baseUrl: baseUrl != null ? "'$baseUrl'" : "'' // TODO: Add base url",
@@ -82,20 +80,17 @@ class OpenapiRepositoryGenerator
     final template = Template(apiRepositoryTemplate);
     final buffer = StringBuffer();
 
+    // Write openapi repository
     buffer.writeln(template.renderString(repositoryModel.toJson()));
-    buffer.writeln(builderData);
 
-    return buffer.toString();
-  }
-
-  String _getBuilderString(Iterable<_ListRepositoryBuilder> data) {
-    final buffer = StringBuffer();
-    for (final builder in data) {
+    // Write list blocs, filter, repository
+    for (final builder in parsedAnnotation.builderList) {
       final output = _getListRepositoryFromBuilder(builder);
       if (output.isEmpty) continue;
 
       buffer.writeln(output);
     }
+
     return buffer.toString();
   }
 
@@ -212,8 +207,17 @@ class OpenapiRepositoryGenerator
     required List<ParameterElement> filterParameters,
     bool isInline = false,
   }) {
+    for (var e in filterParameters) {
+      if (e.isRequired) log.info('required: $e');
+    }
+
+    final hasRequiredParam = filterParameters.any(
+      (element) => element.isRequired,
+    );
+
     final listRepositoryModel = ListRepositoryTemplateModel(
       api: api,
+      hasRequiredParam: hasRequiredParam,
       name: methodName.pascalCase,
       isInline: isInline,
       methodName: methodName,
@@ -221,7 +225,8 @@ class OpenapiRepositoryGenerator
       hasFilter: hasFilter,
       filterParams: hasFilter && filterParameters.isNotEmpty
           ? filterParameters.map((e) {
-              return ParamModel('${e.name}: filter.${e.name}');
+              return ParamModel(
+                  '${e.name}: filter${hasRequiredParam ? '' : '?'}.${e.name}');
             }).toList()
           : [],
     );
