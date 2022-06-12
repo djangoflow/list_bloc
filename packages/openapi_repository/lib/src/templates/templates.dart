@@ -32,7 +32,10 @@ typedef {{name}}Bloc = ListCubit<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFil
 const repositoryTemplate = r'''
 /// List bloc repository for {{name}}
 abstract class {{name}}Repository {
-  static Future<List<{{returnType}}>> loader({{#additionalParams}}{{param}},{{/additionalParams}}{{#hasFilter}}{{name}}Filter filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},) async {
+  static Future<List<{{returnType}}>> loader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{name}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
+    {{#hasRequiredParam}}if (filter == null) {
+      throw Exception('Invalid filter');
+    }{{/hasRequiredParam}}
     final r = await ApiRepository.instance.{{api}}.{{methodName}}(
       {{#filterParams}}{{param}},{{/filterParams}}
     );

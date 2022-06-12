@@ -80,6 +80,7 @@ class ListRepositoryTemplateModel with _$ListRepositoryTemplateModel {
   const factory ListRepositoryTemplateModel({
     required String api,
     required String name,
+    @Default(false) hasRequiredParam,
     @Default(false) bool isInline,
     required String methodName,
     required String returnType,

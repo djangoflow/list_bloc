@@ -1074,6 +1074,7 @@ ListRepositoryTemplateModel _$ListRepositoryTemplateModelFromJson(
 mixin _$ListRepositoryTemplateModel {
   String get api => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  dynamic get hasRequiredParam => throw _privateConstructorUsedError;
   bool get isInline => throw _privateConstructorUsedError;
   String get methodName => throw _privateConstructorUsedError;
   String get returnType => throw _privateConstructorUsedError;
@@ -1096,6 +1097,7 @@ abstract class $ListRepositoryTemplateModelCopyWith<$Res> {
   $Res call(
       {String api,
       String name,
+      dynamic hasRequiredParam,
       bool isInline,
       String methodName,
       String returnType,
@@ -1117,6 +1119,7 @@ class _$ListRepositoryTemplateModelCopyWithImpl<$Res>
   $Res call({
     Object? api = freezed,
     Object? name = freezed,
+    Object? hasRequiredParam = freezed,
     Object? isInline = freezed,
     Object? methodName = freezed,
     Object? returnType = freezed,
@@ -1133,6 +1136,10 @@ class _$ListRepositoryTemplateModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      hasRequiredParam: hasRequiredParam == freezed
+          ? _value.hasRequiredParam
+          : hasRequiredParam // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       isInline: isInline == freezed
           ? _value.isInline
           : isInline // ignore: cast_nullable_to_non_nullable
@@ -1172,6 +1179,7 @@ abstract class _$$_ListRepositoryTemplateModelCopyWith<$Res>
   $Res call(
       {String api,
       String name,
+      dynamic hasRequiredParam,
       bool isInline,
       String methodName,
       String returnType,
@@ -1197,6 +1205,7 @@ class __$$_ListRepositoryTemplateModelCopyWithImpl<$Res>
   $Res call({
     Object? api = freezed,
     Object? name = freezed,
+    Object? hasRequiredParam = freezed,
     Object? isInline = freezed,
     Object? methodName = freezed,
     Object? returnType = freezed,
@@ -1213,6 +1222,9 @@ class __$$_ListRepositoryTemplateModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      hasRequiredParam: hasRequiredParam == freezed
+          ? _value.hasRequiredParam
+          : hasRequiredParam,
       isInline: isInline == freezed
           ? _value.isInline
           : isInline // ignore: cast_nullable_to_non_nullable
@@ -1248,6 +1260,7 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
   const _$_ListRepositoryTemplateModel(
       {required this.api,
       required this.name,
+      this.hasRequiredParam = false,
       this.isInline = false,
       required this.methodName,
       required this.returnType,
@@ -1264,6 +1277,9 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
   final String api;
   @override
   final String name;
+  @override
+  @JsonKey()
+  final dynamic hasRequiredParam;
   @override
   @JsonKey()
   final bool isInline;
@@ -1292,7 +1308,7 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
 
   @override
   String toString() {
-    return 'ListRepositoryTemplateModel(api: $api, name: $name, isInline: $isInline, methodName: $methodName, returnType: $returnType, hasFilter: $hasFilter, additionalParams: $additionalParams, filterParams: $filterParams)';
+    return 'ListRepositoryTemplateModel(api: $api, name: $name, hasRequiredParam: $hasRequiredParam, isInline: $isInline, methodName: $methodName, returnType: $returnType, hasFilter: $hasFilter, additionalParams: $additionalParams, filterParams: $filterParams)';
   }
 
   @override
@@ -1302,6 +1318,8 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
             other is _$_ListRepositoryTemplateModel &&
             const DeepCollectionEquality().equals(other.api, api) &&
             const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality()
+                .equals(other.hasRequiredParam, hasRequiredParam) &&
             const DeepCollectionEquality().equals(other.isInline, isInline) &&
             const DeepCollectionEquality()
                 .equals(other.methodName, methodName) &&
@@ -1320,6 +1338,7 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
       runtimeType,
       const DeepCollectionEquality().hash(api),
       const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(hasRequiredParam),
       const DeepCollectionEquality().hash(isInline),
       const DeepCollectionEquality().hash(methodName),
       const DeepCollectionEquality().hash(returnType),
@@ -1344,6 +1363,7 @@ abstract class _ListRepositoryTemplateModel
   const factory _ListRepositoryTemplateModel(
       {required final String api,
       required final String name,
+      final dynamic hasRequiredParam,
       final bool isInline,
       required final String methodName,
       required final String returnType,
@@ -1358,6 +1378,8 @@ abstract class _ListRepositoryTemplateModel
   String get api => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
+  @override
+  dynamic get hasRequiredParam => throw _privateConstructorUsedError;
   @override
   bool get isInline => throw _privateConstructorUsedError;
   @override

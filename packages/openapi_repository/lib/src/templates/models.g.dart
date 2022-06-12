@@ -106,6 +106,7 @@ _$_ListRepositoryTemplateModel _$$_ListRepositoryTemplateModelFromJson(
     _$_ListRepositoryTemplateModel(
       api: json['api'] as String,
       name: json['name'] as String,
+      hasRequiredParam: json['hasRequiredParam'] ?? false,
       isInline: json['isInline'] as bool? ?? false,
       methodName: json['methodName'] as String,
       returnType: json['returnType'] as String,
@@ -125,6 +126,7 @@ Map<String, dynamic> _$$_ListRepositoryTemplateModelToJson(
     <String, dynamic>{
       'api': instance.api,
       'name': instance.name,
+      'hasRequiredParam': instance.hasRequiredParam,
       'isInline': instance.isInline,
       'methodName': instance.methodName,
       'returnType': instance.returnType,
