@@ -1564,6 +1564,7 @@ MethodModel _$MethodModelFromJson(Map<String, dynamic> json) {
 mixin _$MethodModel {
   String get returnType => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get operation => throw _privateConstructorUsedError;
   List<ParamModel> get arguments => throw _privateConstructorUsedError;
   List<ParamModel> get parameters => throw _privateConstructorUsedError;
 
@@ -1581,6 +1582,7 @@ abstract class $MethodModelCopyWith<$Res> {
   $Res call(
       {String returnType,
       String name,
+      String operation,
       List<ParamModel> arguments,
       List<ParamModel> parameters});
 }
@@ -1597,6 +1599,7 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
   $Res call({
     Object? returnType = freezed,
     Object? name = freezed,
+    Object? operation = freezed,
     Object? arguments = freezed,
     Object? parameters = freezed,
   }) {
@@ -1608,6 +1611,10 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      operation: operation == freezed
+          ? _value.operation
+          : operation // ignore: cast_nullable_to_non_nullable
               as String,
       arguments: arguments == freezed
           ? _value.arguments
@@ -1631,6 +1638,7 @@ abstract class _$$_MethodModelCopyWith<$Res>
   $Res call(
       {String returnType,
       String name,
+      String operation,
       List<ParamModel> arguments,
       List<ParamModel> parameters});
 }
@@ -1649,6 +1657,7 @@ class __$$_MethodModelCopyWithImpl<$Res> extends _$MethodModelCopyWithImpl<$Res>
   $Res call({
     Object? returnType = freezed,
     Object? name = freezed,
+    Object? operation = freezed,
     Object? arguments = freezed,
     Object? parameters = freezed,
   }) {
@@ -1660,6 +1669,10 @@ class __$$_MethodModelCopyWithImpl<$Res> extends _$MethodModelCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      operation: operation == freezed
+          ? _value.operation
+          : operation // ignore: cast_nullable_to_non_nullable
               as String,
       arguments: arguments == freezed
           ? _value._arguments
@@ -1680,6 +1693,7 @@ class _$_MethodModel implements _MethodModel {
   const _$_MethodModel(
       {required this.returnType,
       required this.name,
+      required this.operation,
       required final List<ParamModel> arguments,
       required final List<ParamModel> parameters})
       : _arguments = arguments,
@@ -1692,6 +1706,8 @@ class _$_MethodModel implements _MethodModel {
   final String returnType;
   @override
   final String name;
+  @override
+  final String operation;
   final List<ParamModel> _arguments;
   @override
   List<ParamModel> get arguments {
@@ -1708,7 +1724,7 @@ class _$_MethodModel implements _MethodModel {
 
   @override
   String toString() {
-    return 'MethodModel(returnType: $returnType, name: $name, arguments: $arguments, parameters: $parameters)';
+    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters)';
   }
 
   @override
@@ -1719,6 +1735,7 @@ class _$_MethodModel implements _MethodModel {
             const DeepCollectionEquality()
                 .equals(other.returnType, returnType) &&
             const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.operation, operation) &&
             const DeepCollectionEquality()
                 .equals(other._arguments, _arguments) &&
             const DeepCollectionEquality()
@@ -1731,6 +1748,7 @@ class _$_MethodModel implements _MethodModel {
       runtimeType,
       const DeepCollectionEquality().hash(returnType),
       const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(operation),
       const DeepCollectionEquality().hash(_arguments),
       const DeepCollectionEquality().hash(_parameters));
 
@@ -1749,6 +1767,7 @@ abstract class _MethodModel implements MethodModel {
   const factory _MethodModel(
       {required final String returnType,
       required final String name,
+      required final String operation,
       required final List<ParamModel> arguments,
       required final List<ParamModel> parameters}) = _$_MethodModel;
 
@@ -1759,6 +1778,8 @@ abstract class _MethodModel implements MethodModel {
   String get returnType => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
+  @override
+  String get operation => throw _privateConstructorUsedError;
   @override
   List<ParamModel> get arguments => throw _privateConstructorUsedError;
   @override

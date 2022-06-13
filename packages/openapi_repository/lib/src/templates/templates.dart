@@ -26,11 +26,15 @@ class {{name}}Filter with _${{name}}Filter{{#isPaginated}} implements OffsetLimi
 
 const typedefTemplate = r'''
 typedef {{name}}State = Data<List<{{type}}>, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}>;
-typedef {{name}}Bloc = ListCubit<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}>;
+
+/// List bloc for {{name}}
+class {{name}}Bloc extends ListCubit<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
+  {{name}}Bloc(super.loader);
+}
 ''';
 
 const repositoryTemplate = r'''
-/// List bloc repository for {{name}}
+/// Repository for {{name}}
 abstract class {{name}}Repository {
   static Future<List<{{returnType}}>> loader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{name}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
     {{#hasRequiredParam}}if (filter == null) {
@@ -43,7 +47,7 @@ abstract class {{name}}Repository {
     return r.data?{{#isInline}}.results{{/isInline}}.asList() ?? [];
   }
 
-  {{#crudMethods}}static Future<void> {{name}}(
+  {{#crudMethods}}Future<void> {{operation}}Object(
     {{#arguments}}{{param}},
     {{/arguments}}
   ) async {

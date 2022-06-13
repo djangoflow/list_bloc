@@ -108,6 +108,7 @@ class MethodModel with _$MethodModel {
   const factory MethodModel({
     required String returnType,
     required String name,
+    required String operation,
     required List<ParamModel> arguments,
     required List<ParamModel> parameters,
   }) = _MethodModel;

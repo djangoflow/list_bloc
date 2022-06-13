@@ -154,6 +154,7 @@ _$_MethodModel _$$_MethodModelFromJson(Map<String, dynamic> json) =>
     _$_MethodModel(
       returnType: json['returnType'] as String,
       name: json['name'] as String,
+      operation: json['operation'] as String,
       arguments: (json['arguments'] as List<dynamic>)
           .map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -166,6 +167,7 @@ Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
     <String, dynamic>{
       'returnType': instance.returnType,
       'name': instance.name,
+      'operation': instance.operation,
       'arguments': instance.arguments.map((e) => e.toJson()).toList(),
       'parameters': instance.parameters.map((e) => e.toJson()).toList(),
     };

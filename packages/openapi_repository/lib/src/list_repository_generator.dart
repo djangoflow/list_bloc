@@ -240,10 +240,10 @@ class OpenapiRepositoryGenerator
       return element.displayName == '${namePrefix}Delete';
     });
 
-    final createModel = _getMethodModel(createMethod);
-    final partialUpdateModel = _getMethodModel(partialUpdateMethod);
-    final updateModel = _getMethodModel(updateMethod);
-    final deleteModel = _getMethodModel(deleteMethod);
+    final createModel = _getMethodModel('create', createMethod);
+    final partialUpdateModel = _getMethodModel('partialUpdate', partialUpdateMethod);
+    final updateModel = _getMethodModel('update', updateMethod);
+    final deleteModel = _getMethodModel('delete', deleteMethod);
 
     final listRepositoryModel = ListRepositoryTemplateModel(
       api: api,
@@ -271,7 +271,10 @@ class OpenapiRepositoryGenerator
     );
   }
 
-  MethodModel? _getMethodModel(MethodElement? method) {
+  MethodModel? _getMethodModel(
+    String operation,
+    MethodElement? method,
+  ) {
     if (method == null) return null;
 
     final params = method.parameters.where((element) {
@@ -292,6 +295,7 @@ class OpenapiRepositoryGenerator
       returnType: method.returnType.getDisplayString(
         withNullability: false,
       ),
+      operation: operation,
       name: method.displayName,
       arguments: arguments,
       parameters: parameters,
