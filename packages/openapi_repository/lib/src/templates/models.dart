@@ -82,6 +82,7 @@ class ListRepositoryTemplateModel with _$ListRepositoryTemplateModel {
     required String name,
     @Default(false) hasRequiredParam,
     @Default(false) bool isInline,
+    required List<MethodModel> crudMethods,
     required String methodName,
     required String returnType,
     @Default(false) bool hasFilter,
@@ -99,4 +100,18 @@ class ParamModel with _$ParamModel {
 
   factory ParamModel.fromJson(Map<String, dynamic> map) =>
       _$ParamModelFromJson(map);
+}
+
+@freezed
+class MethodModel with _$MethodModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory MethodModel({
+    required String returnType,
+    required String name,
+    required List<ParamModel> arguments,
+    required List<ParamModel> parameters,
+  }) = _MethodModel;
+
+  factory MethodModel.fromJson(Map<String, dynamic> map) =>
+      _$MethodModelFromJson(map);
 }

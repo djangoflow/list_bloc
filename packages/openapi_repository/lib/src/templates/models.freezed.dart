@@ -1076,6 +1076,7 @@ mixin _$ListRepositoryTemplateModel {
   String get name => throw _privateConstructorUsedError;
   dynamic get hasRequiredParam => throw _privateConstructorUsedError;
   bool get isInline => throw _privateConstructorUsedError;
+  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
   String get methodName => throw _privateConstructorUsedError;
   String get returnType => throw _privateConstructorUsedError;
   bool get hasFilter => throw _privateConstructorUsedError;
@@ -1099,6 +1100,7 @@ abstract class $ListRepositoryTemplateModelCopyWith<$Res> {
       String name,
       dynamic hasRequiredParam,
       bool isInline,
+      List<MethodModel> crudMethods,
       String methodName,
       String returnType,
       bool hasFilter,
@@ -1121,6 +1123,7 @@ class _$ListRepositoryTemplateModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? hasRequiredParam = freezed,
     Object? isInline = freezed,
+    Object? crudMethods = freezed,
     Object? methodName = freezed,
     Object? returnType = freezed,
     Object? hasFilter = freezed,
@@ -1144,6 +1147,10 @@ class _$ListRepositoryTemplateModelCopyWithImpl<$Res>
           ? _value.isInline
           : isInline // ignore: cast_nullable_to_non_nullable
               as bool,
+      crudMethods: crudMethods == freezed
+          ? _value.crudMethods
+          : crudMethods // ignore: cast_nullable_to_non_nullable
+              as List<MethodModel>,
       methodName: methodName == freezed
           ? _value.methodName
           : methodName // ignore: cast_nullable_to_non_nullable
@@ -1181,6 +1188,7 @@ abstract class _$$_ListRepositoryTemplateModelCopyWith<$Res>
       String name,
       dynamic hasRequiredParam,
       bool isInline,
+      List<MethodModel> crudMethods,
       String methodName,
       String returnType,
       bool hasFilter,
@@ -1207,6 +1215,7 @@ class __$$_ListRepositoryTemplateModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? hasRequiredParam = freezed,
     Object? isInline = freezed,
+    Object? crudMethods = freezed,
     Object? methodName = freezed,
     Object? returnType = freezed,
     Object? hasFilter = freezed,
@@ -1229,6 +1238,10 @@ class __$$_ListRepositoryTemplateModelCopyWithImpl<$Res>
           ? _value.isInline
           : isInline // ignore: cast_nullable_to_non_nullable
               as bool,
+      crudMethods: crudMethods == freezed
+          ? _value._crudMethods
+          : crudMethods // ignore: cast_nullable_to_non_nullable
+              as List<MethodModel>,
       methodName: methodName == freezed
           ? _value.methodName
           : methodName // ignore: cast_nullable_to_non_nullable
@@ -1262,12 +1275,14 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
       required this.name,
       this.hasRequiredParam = false,
       this.isInline = false,
+      required final List<MethodModel> crudMethods,
       required this.methodName,
       required this.returnType,
       this.hasFilter = false,
       final List<ParamModel> additionalParams = const [],
       final List<ParamModel> filterParams = const []})
-      : _additionalParams = additionalParams,
+      : _crudMethods = crudMethods,
+        _additionalParams = additionalParams,
         _filterParams = filterParams;
 
   factory _$_ListRepositoryTemplateModel.fromJson(Map<String, dynamic> json) =>
@@ -1283,6 +1298,13 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
   @override
   @JsonKey()
   final bool isInline;
+  final List<MethodModel> _crudMethods;
+  @override
+  List<MethodModel> get crudMethods {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_crudMethods);
+  }
+
   @override
   final String methodName;
   @override
@@ -1308,7 +1330,7 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
 
   @override
   String toString() {
-    return 'ListRepositoryTemplateModel(api: $api, name: $name, hasRequiredParam: $hasRequiredParam, isInline: $isInline, methodName: $methodName, returnType: $returnType, hasFilter: $hasFilter, additionalParams: $additionalParams, filterParams: $filterParams)';
+    return 'ListRepositoryTemplateModel(api: $api, name: $name, hasRequiredParam: $hasRequiredParam, isInline: $isInline, crudMethods: $crudMethods, methodName: $methodName, returnType: $returnType, hasFilter: $hasFilter, additionalParams: $additionalParams, filterParams: $filterParams)';
   }
 
   @override
@@ -1321,6 +1343,8 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
             const DeepCollectionEquality()
                 .equals(other.hasRequiredParam, hasRequiredParam) &&
             const DeepCollectionEquality().equals(other.isInline, isInline) &&
+            const DeepCollectionEquality()
+                .equals(other._crudMethods, _crudMethods) &&
             const DeepCollectionEquality()
                 .equals(other.methodName, methodName) &&
             const DeepCollectionEquality()
@@ -1340,6 +1364,7 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(hasRequiredParam),
       const DeepCollectionEquality().hash(isInline),
+      const DeepCollectionEquality().hash(_crudMethods),
       const DeepCollectionEquality().hash(methodName),
       const DeepCollectionEquality().hash(returnType),
       const DeepCollectionEquality().hash(hasFilter),
@@ -1365,6 +1390,7 @@ abstract class _ListRepositoryTemplateModel
       required final String name,
       final dynamic hasRequiredParam,
       final bool isInline,
+      required final List<MethodModel> crudMethods,
       required final String methodName,
       required final String returnType,
       final bool hasFilter,
@@ -1382,6 +1408,8 @@ abstract class _ListRepositoryTemplateModel
   dynamic get hasRequiredParam => throw _privateConstructorUsedError;
   @override
   bool get isInline => throw _privateConstructorUsedError;
+  @override
+  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
   @override
   String get methodName => throw _privateConstructorUsedError;
   @override
@@ -1525,5 +1553,218 @@ abstract class _ParamModel implements ParamModel {
   @override
   @JsonKey(ignore: true)
   _$$_ParamModelCopyWith<_$_ParamModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MethodModel _$MethodModelFromJson(Map<String, dynamic> json) {
+  return _MethodModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MethodModel {
+  String get returnType => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  List<ParamModel> get arguments => throw _privateConstructorUsedError;
+  List<ParamModel> get parameters => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MethodModelCopyWith<MethodModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MethodModelCopyWith<$Res> {
+  factory $MethodModelCopyWith(
+          MethodModel value, $Res Function(MethodModel) then) =
+      _$MethodModelCopyWithImpl<$Res>;
+  $Res call(
+      {String returnType,
+      String name,
+      List<ParamModel> arguments,
+      List<ParamModel> parameters});
+}
+
+/// @nodoc
+class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
+  _$MethodModelCopyWithImpl(this._value, this._then);
+
+  final MethodModel _value;
+  // ignore: unused_field
+  final $Res Function(MethodModel) _then;
+
+  @override
+  $Res call({
+    Object? returnType = freezed,
+    Object? name = freezed,
+    Object? arguments = freezed,
+    Object? parameters = freezed,
+  }) {
+    return _then(_value.copyWith(
+      returnType: returnType == freezed
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      arguments: arguments == freezed
+          ? _value.arguments
+          : arguments // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+      parameters: parameters == freezed
+          ? _value.parameters
+          : parameters // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_MethodModelCopyWith<$Res>
+    implements $MethodModelCopyWith<$Res> {
+  factory _$$_MethodModelCopyWith(
+          _$_MethodModel value, $Res Function(_$_MethodModel) then) =
+      __$$_MethodModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String returnType,
+      String name,
+      List<ParamModel> arguments,
+      List<ParamModel> parameters});
+}
+
+/// @nodoc
+class __$$_MethodModelCopyWithImpl<$Res> extends _$MethodModelCopyWithImpl<$Res>
+    implements _$$_MethodModelCopyWith<$Res> {
+  __$$_MethodModelCopyWithImpl(
+      _$_MethodModel _value, $Res Function(_$_MethodModel) _then)
+      : super(_value, (v) => _then(v as _$_MethodModel));
+
+  @override
+  _$_MethodModel get _value => super._value as _$_MethodModel;
+
+  @override
+  $Res call({
+    Object? returnType = freezed,
+    Object? name = freezed,
+    Object? arguments = freezed,
+    Object? parameters = freezed,
+  }) {
+    return _then(_$_MethodModel(
+      returnType: returnType == freezed
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      arguments: arguments == freezed
+          ? _value._arguments
+          : arguments // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+      parameters: parameters == freezed
+          ? _value._parameters
+          : parameters // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_MethodModel implements _MethodModel {
+  const _$_MethodModel(
+      {required this.returnType,
+      required this.name,
+      required final List<ParamModel> arguments,
+      required final List<ParamModel> parameters})
+      : _arguments = arguments,
+        _parameters = parameters;
+
+  factory _$_MethodModel.fromJson(Map<String, dynamic> json) =>
+      _$$_MethodModelFromJson(json);
+
+  @override
+  final String returnType;
+  @override
+  final String name;
+  final List<ParamModel> _arguments;
+  @override
+  List<ParamModel> get arguments {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_arguments);
+  }
+
+  final List<ParamModel> _parameters;
+  @override
+  List<ParamModel> get parameters {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_parameters);
+  }
+
+  @override
+  String toString() {
+    return 'MethodModel(returnType: $returnType, name: $name, arguments: $arguments, parameters: $parameters)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MethodModel &&
+            const DeepCollectionEquality()
+                .equals(other.returnType, returnType) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality()
+                .equals(other._arguments, _arguments) &&
+            const DeepCollectionEquality()
+                .equals(other._parameters, _parameters));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(returnType),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(_arguments),
+      const DeepCollectionEquality().hash(_parameters));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_MethodModelCopyWith<_$_MethodModel> get copyWith =>
+      __$$_MethodModelCopyWithImpl<_$_MethodModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MethodModelToJson(this);
+  }
+}
+
+abstract class _MethodModel implements MethodModel {
+  const factory _MethodModel(
+      {required final String returnType,
+      required final String name,
+      required final List<ParamModel> arguments,
+      required final List<ParamModel> parameters}) = _$_MethodModel;
+
+  factory _MethodModel.fromJson(Map<String, dynamic> json) =
+      _$_MethodModel.fromJson;
+
+  @override
+  String get returnType => throw _privateConstructorUsedError;
+  @override
+  String get name => throw _privateConstructorUsedError;
+  @override
+  List<ParamModel> get arguments => throw _privateConstructorUsedError;
+  @override
+  List<ParamModel> get parameters => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MethodModelCopyWith<_$_MethodModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

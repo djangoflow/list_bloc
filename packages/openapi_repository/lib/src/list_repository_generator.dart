@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:analyzer/dart/element/element.dart';
+import 'package:collection/collection.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:build/build.dart';
@@ -19,6 +20,15 @@ class OpenapiRepositoryGenerator
     extends GeneratorForAnnotation<OpenapiRepository> {
   int _defaultPageSize = 100;
   int _defaultOffset = 0;
+
+  static const _ignoreParams = [
+    'cancelToken',
+    'headers',
+    'extra',
+    'validateStatus',
+    'onSendProgress',
+    'onReceiveProgress',
+  ];
 
   static const listChecker = TypeChecker.any([
     TypeChecker.fromRuntime(List),
@@ -98,6 +108,8 @@ class OpenapiRepositoryGenerator
     final buffer = StringBuffer();
     final classElement = builder.apiClass;
 
+    final methods = classElement.methods;
+
     for (final methodElement in classElement.methods) {
       final returnType = methodElement.returnType;
 
@@ -121,14 +133,7 @@ class OpenapiRepositoryGenerator
       if (returnModel == null) continue;
       final type = returnModel.type.getDisplayString(withNullability: false);
       final methodParameters = methodElement.parameters
-          .where((parameter) => ![
-                'cancelToken',
-                'headers',
-                'extra',
-                'validateStatus',
-                'onSendProgress',
-                'onReceiveProgress',
-              ].contains(parameter.name))
+          .where((parameter) => !_ignoreParams.contains(parameter.name))
           .toList();
 
       final optionalParams = methodParameters.where((element) {
@@ -159,6 +164,7 @@ class OpenapiRepositoryGenerator
         hasFilter: methodParameters.isNotEmpty,
         api: apiClass,
         methodName: methodName,
+        methods: methods,
         isInline: returnModel.isInline,
       ));
     }
@@ -203,17 +209,41 @@ class OpenapiRepositoryGenerator
     required String type,
     required String api,
     required String methodName,
+    required Iterable<MethodElement> methods,
     required bool hasFilter,
     required List<ParameterElement> filterParameters,
     bool isInline = false,
   }) {
-    for (var e in filterParameters) {
-      if (e.isRequired) log.info('required: $e');
-    }
-
     final hasRequiredParam = filterParameters.any(
       (element) => element.isRequired,
     );
+
+    final namePrefixList = methodName.sentenceCase.split(' ');
+    String namePrefix = '';
+
+    for (int i = 0; i < namePrefixList.length; i += 1) {
+      if (i < namePrefixList.length - 1) {
+        namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
+      }
+    }
+
+    final createMethod = methods.firstWhereOrNull((element) {
+      return element.displayName == '${namePrefix}Create';
+    });
+    final partialUpdateMethod = methods.firstWhereOrNull((element) {
+      return element.displayName == '${namePrefix}PartialUpdate';
+    });
+    final updateMethod = methods.firstWhereOrNull((element) {
+      return element.displayName == '${namePrefix}Update';
+    });
+    final deleteMethod = methods.firstWhereOrNull((element) {
+      return element.displayName == '${namePrefix}Delete';
+    });
+
+    final createModel = _getMethodModel(createMethod);
+    final partialUpdateModel = _getMethodModel(partialUpdateMethod);
+    final updateModel = _getMethodModel(updateMethod);
+    final deleteModel = _getMethodModel(deleteMethod);
 
     final listRepositoryModel = ListRepositoryTemplateModel(
       api: api,
@@ -221,6 +251,12 @@ class OpenapiRepositoryGenerator
       name: methodName.pascalCase,
       isInline: isInline,
       methodName: methodName,
+      crudMethods: [
+        createModel,
+        partialUpdateModel,
+        updateModel,
+        deleteModel,
+      ].whereType<MethodModel>().toList(),
       returnType: type,
       hasFilter: hasFilter,
       filterParams: hasFilter && filterParameters.isNotEmpty
@@ -232,6 +268,33 @@ class OpenapiRepositoryGenerator
     );
     return Template(repositoryTemplate).renderString(
       listRepositoryModel.toJson(),
+    );
+  }
+
+  MethodModel? _getMethodModel(MethodElement? method) {
+    if (method == null) return null;
+
+    final params = method.parameters.where((element) {
+      return !_ignoreParams.contains(element.displayName);
+    });
+
+    final arguments = params.map((e) {
+      return ParamModel(
+        '${e.type.getDisplayString(withNullability: false)} ${e.displayName}',
+      );
+    }).toList();
+
+    final parameters = params
+        .map((e) => ParamModel('${e.displayName}: ${e.displayName}'))
+        .toList();
+
+    return MethodModel(
+      returnType: method.returnType.getDisplayString(
+        withNullability: false,
+      ),
+      name: method.displayName,
+      arguments: arguments,
+      parameters: parameters,
     );
   }
 

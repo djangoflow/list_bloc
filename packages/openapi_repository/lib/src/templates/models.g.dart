@@ -108,6 +108,9 @@ _$_ListRepositoryTemplateModel _$$_ListRepositoryTemplateModelFromJson(
       name: json['name'] as String,
       hasRequiredParam: json['hasRequiredParam'] ?? false,
       isInline: json['isInline'] as bool? ?? false,
+      crudMethods: (json['crudMethods'] as List<dynamic>)
+          .map((e) => MethodModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       methodName: json['methodName'] as String,
       returnType: json['returnType'] as String,
       hasFilter: json['hasFilter'] as bool? ?? false,
@@ -128,6 +131,7 @@ Map<String, dynamic> _$$_ListRepositoryTemplateModelToJson(
       'name': instance.name,
       'hasRequiredParam': instance.hasRequiredParam,
       'isInline': instance.isInline,
+      'crudMethods': instance.crudMethods.map((e) => e.toJson()).toList(),
       'methodName': instance.methodName,
       'returnType': instance.returnType,
       'hasFilter': instance.hasFilter,
@@ -144,4 +148,24 @@ _$_ParamModel _$$_ParamModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_ParamModelToJson(_$_ParamModel instance) =>
     <String, dynamic>{
       'param': instance.param,
+    };
+
+_$_MethodModel _$$_MethodModelFromJson(Map<String, dynamic> json) =>
+    _$_MethodModel(
+      returnType: json['returnType'] as String,
+      name: json['name'] as String,
+      arguments: (json['arguments'] as List<dynamic>)
+          .map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      parameters: (json['parameters'] as List<dynamic>)
+          .map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
+    <String, dynamic>{
+      'returnType': instance.returnType,
+      'name': instance.name,
+      'arguments': instance.arguments.map((e) => e.toJson()).toList(),
+      'parameters': instance.parameters.map((e) => e.toJson()).toList(),
     };

@@ -42,6 +42,17 @@ abstract class {{name}}Repository {
 
     return r.data?{{#isInline}}.results{{/isInline}}.asList() ?? [];
   }
+
+  {{#crudMethods}}static Future<void> {{name}}(
+    {{#arguments}}{{param}},
+    {{/arguments}}
+  ) async {
+    await ApiRepository.instance.{{api}}.{{name}}(
+      {{#parameters}}{{param}},
+      {{/parameters}}
+    );
+  }
+  {{/crudMethods}}
 }
 ''';
 
