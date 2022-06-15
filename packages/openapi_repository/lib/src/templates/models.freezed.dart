@@ -1556,6 +1556,193 @@ abstract class _ParamModel implements ParamModel {
       throw _privateConstructorUsedError;
 }
 
+ArgModel _$ArgModelFromJson(Map<String, dynamic> json) {
+  return _ArgModelModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ArgModel {
+  String get argType => throw _privateConstructorUsedError;
+  String get argName => throw _privateConstructorUsedError;
+  bool get isNullableArg => throw _privateConstructorUsedError;
+  bool get isRequiredArg => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ArgModelCopyWith<ArgModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ArgModelCopyWith<$Res> {
+  factory $ArgModelCopyWith(ArgModel value, $Res Function(ArgModel) then) =
+      _$ArgModelCopyWithImpl<$Res>;
+  $Res call(
+      {String argType, String argName, bool isNullableArg, bool isRequiredArg});
+}
+
+/// @nodoc
+class _$ArgModelCopyWithImpl<$Res> implements $ArgModelCopyWith<$Res> {
+  _$ArgModelCopyWithImpl(this._value, this._then);
+
+  final ArgModel _value;
+  // ignore: unused_field
+  final $Res Function(ArgModel) _then;
+
+  @override
+  $Res call({
+    Object? argType = freezed,
+    Object? argName = freezed,
+    Object? isNullableArg = freezed,
+    Object? isRequiredArg = freezed,
+  }) {
+    return _then(_value.copyWith(
+      argType: argType == freezed
+          ? _value.argType
+          : argType // ignore: cast_nullable_to_non_nullable
+              as String,
+      argName: argName == freezed
+          ? _value.argName
+          : argName // ignore: cast_nullable_to_non_nullable
+              as String,
+      isNullableArg: isNullableArg == freezed
+          ? _value.isNullableArg
+          : isNullableArg // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRequiredArg: isRequiredArg == freezed
+          ? _value.isRequiredArg
+          : isRequiredArg // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_ArgModelModelCopyWith<$Res>
+    implements $ArgModelCopyWith<$Res> {
+  factory _$$_ArgModelModelCopyWith(
+          _$_ArgModelModel value, $Res Function(_$_ArgModelModel) then) =
+      __$$_ArgModelModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String argType, String argName, bool isNullableArg, bool isRequiredArg});
+}
+
+/// @nodoc
+class __$$_ArgModelModelCopyWithImpl<$Res> extends _$ArgModelCopyWithImpl<$Res>
+    implements _$$_ArgModelModelCopyWith<$Res> {
+  __$$_ArgModelModelCopyWithImpl(
+      _$_ArgModelModel _value, $Res Function(_$_ArgModelModel) _then)
+      : super(_value, (v) => _then(v as _$_ArgModelModel));
+
+  @override
+  _$_ArgModelModel get _value => super._value as _$_ArgModelModel;
+
+  @override
+  $Res call({
+    Object? argType = freezed,
+    Object? argName = freezed,
+    Object? isNullableArg = freezed,
+    Object? isRequiredArg = freezed,
+  }) {
+    return _then(_$_ArgModelModel(
+      argType == freezed
+          ? _value.argType
+          : argType // ignore: cast_nullable_to_non_nullable
+              as String,
+      argName == freezed
+          ? _value.argName
+          : argName // ignore: cast_nullable_to_non_nullable
+              as String,
+      isNullableArg == freezed
+          ? _value.isNullableArg
+          : isNullableArg // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRequiredArg == freezed
+          ? _value.isRequiredArg
+          : isRequiredArg // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ArgModelModel implements _ArgModelModel {
+  const _$_ArgModelModel(
+      this.argType, this.argName, this.isNullableArg, this.isRequiredArg);
+
+  factory _$_ArgModelModel.fromJson(Map<String, dynamic> json) =>
+      _$$_ArgModelModelFromJson(json);
+
+  @override
+  final String argType;
+  @override
+  final String argName;
+  @override
+  final bool isNullableArg;
+  @override
+  final bool isRequiredArg;
+
+  @override
+  String toString() {
+    return 'ArgModel(argType: $argType, argName: $argName, isNullableArg: $isNullableArg, isRequiredArg: $isRequiredArg)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ArgModelModel &&
+            const DeepCollectionEquality().equals(other.argType, argType) &&
+            const DeepCollectionEquality().equals(other.argName, argName) &&
+            const DeepCollectionEquality()
+                .equals(other.isNullableArg, isNullableArg) &&
+            const DeepCollectionEquality()
+                .equals(other.isRequiredArg, isRequiredArg));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(argType),
+      const DeepCollectionEquality().hash(argName),
+      const DeepCollectionEquality().hash(isNullableArg),
+      const DeepCollectionEquality().hash(isRequiredArg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_ArgModelModelCopyWith<_$_ArgModelModel> get copyWith =>
+      __$$_ArgModelModelCopyWithImpl<_$_ArgModelModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ArgModelModelToJson(this);
+  }
+}
+
+abstract class _ArgModelModel implements ArgModel {
+  const factory _ArgModelModel(final String argType, final String argName,
+      final bool isNullableArg, final bool isRequiredArg) = _$_ArgModelModel;
+
+  factory _ArgModelModel.fromJson(Map<String, dynamic> json) =
+      _$_ArgModelModel.fromJson;
+
+  @override
+  String get argType => throw _privateConstructorUsedError;
+  @override
+  String get argName => throw _privateConstructorUsedError;
+  @override
+  bool get isNullableArg => throw _privateConstructorUsedError;
+  @override
+  bool get isRequiredArg => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ArgModelModelCopyWith<_$_ArgModelModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 MethodModel _$MethodModelFromJson(Map<String, dynamic> json) {
   return _MethodModel.fromJson(json);
 }
@@ -1565,7 +1752,7 @@ mixin _$MethodModel {
   String get returnType => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get operation => throw _privateConstructorUsedError;
-  List<ParamModel> get arguments => throw _privateConstructorUsedError;
+  List<ArgModel> get arguments => throw _privateConstructorUsedError;
   List<ParamModel> get parameters => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1583,7 +1770,7 @@ abstract class $MethodModelCopyWith<$Res> {
       {String returnType,
       String name,
       String operation,
-      List<ParamModel> arguments,
+      List<ArgModel> arguments,
       List<ParamModel> parameters});
 }
 
@@ -1619,7 +1806,7 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
       arguments: arguments == freezed
           ? _value.arguments
           : arguments // ignore: cast_nullable_to_non_nullable
-              as List<ParamModel>,
+              as List<ArgModel>,
       parameters: parameters == freezed
           ? _value.parameters
           : parameters // ignore: cast_nullable_to_non_nullable
@@ -1639,7 +1826,7 @@ abstract class _$$_MethodModelCopyWith<$Res>
       {String returnType,
       String name,
       String operation,
-      List<ParamModel> arguments,
+      List<ArgModel> arguments,
       List<ParamModel> parameters});
 }
 
@@ -1677,7 +1864,7 @@ class __$$_MethodModelCopyWithImpl<$Res> extends _$MethodModelCopyWithImpl<$Res>
       arguments: arguments == freezed
           ? _value._arguments
           : arguments // ignore: cast_nullable_to_non_nullable
-              as List<ParamModel>,
+              as List<ArgModel>,
       parameters: parameters == freezed
           ? _value._parameters
           : parameters // ignore: cast_nullable_to_non_nullable
@@ -1694,7 +1881,7 @@ class _$_MethodModel implements _MethodModel {
       {required this.returnType,
       required this.name,
       required this.operation,
-      required final List<ParamModel> arguments,
+      required final List<ArgModel> arguments,
       required final List<ParamModel> parameters})
       : _arguments = arguments,
         _parameters = parameters;
@@ -1708,9 +1895,9 @@ class _$_MethodModel implements _MethodModel {
   final String name;
   @override
   final String operation;
-  final List<ParamModel> _arguments;
+  final List<ArgModel> _arguments;
   @override
-  List<ParamModel> get arguments {
+  List<ArgModel> get arguments {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_arguments);
   }
@@ -1768,7 +1955,7 @@ abstract class _MethodModel implements MethodModel {
       {required final String returnType,
       required final String name,
       required final String operation,
-      required final List<ParamModel> arguments,
+      required final List<ArgModel> arguments,
       required final List<ParamModel> parameters}) = _$_MethodModel;
 
   factory _MethodModel.fromJson(Map<String, dynamic> json) =
@@ -1781,7 +1968,7 @@ abstract class _MethodModel implements MethodModel {
   @override
   String get operation => throw _privateConstructorUsedError;
   @override
-  List<ParamModel> get arguments => throw _privateConstructorUsedError;
+  List<ArgModel> get arguments => throw _privateConstructorUsedError;
   @override
   List<ParamModel> get parameters => throw _privateConstructorUsedError;
   @override

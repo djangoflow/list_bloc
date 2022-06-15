@@ -103,13 +103,22 @@ class ParamModel with _$ParamModel {
 }
 
 @freezed
+class ArgModel with _$ArgModel {
+  const factory ArgModel(String argType, String argName, bool isNullableArg,
+      bool isRequiredArg) = _ArgModelModel;
+
+  factory ArgModel.fromJson(Map<String, dynamic> map) =>
+      _$ArgModelFromJson(map);
+}
+
+@freezed
 class MethodModel with _$MethodModel {
   @JsonSerializable(explicitToJson: true)
   const factory MethodModel({
     required String returnType,
     required String name,
     required String operation,
-    required List<ParamModel> arguments,
+    required List<ArgModel> arguments,
     required List<ParamModel> parameters,
   }) = _MethodModel;
 

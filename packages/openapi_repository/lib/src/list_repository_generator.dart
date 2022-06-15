@@ -216,7 +216,7 @@ class OpenapiRepositoryGenerator
   }) {
     final hasRequiredParam = filterParameters.any(
       (element) => element.isRequired,
-    );
+    ); // for PK values the filter can not be null
 
     final namePrefixList = methodName.sentenceCase.split(' ');
     String namePrefix = '';
@@ -240,10 +240,11 @@ class OpenapiRepositoryGenerator
       return element.displayName == '${namePrefix}Delete';
     });
 
-    final createModel = _getMethodModel('create', createMethod);
-    final partialUpdateModel = _getMethodModel('partialUpdate', partialUpdateMethod);
-    final updateModel = _getMethodModel('update', updateMethod);
-    final deleteModel = _getMethodModel('delete', deleteMethod);
+    final createModel = _getMethodModel('createModel', createMethod);
+    final partialUpdateModel =
+        _getMethodModel('partialUpdateModel', partialUpdateMethod);
+    final updateModel = _getMethodModel('updateModel', updateMethod);
+    final deleteModel = _getMethodModel('deleteModel', deleteMethod);
 
     final listRepositoryModel = ListRepositoryTemplateModel(
       api: api,
@@ -266,7 +267,7 @@ class OpenapiRepositoryGenerator
             }).toList()
           : [],
     );
-    return Template(repositoryTemplate).renderString(
+    return Template(repositoryListTemplate).renderString(
       listRepositoryModel.toJson(),
     );
   }
@@ -282,8 +283,12 @@ class OpenapiRepositoryGenerator
     });
 
     final arguments = params.map((e) {
-      return ParamModel(
-        '${e.type.getDisplayString(withNullability: false)} ${e.displayName}',
+      return ArgModel(
+        e.type.getDisplayString(withNullability: false),
+        e.displayName,
+        !e.isRequired,
+        e.isRequired,
+        // '${e.type.getDisplayString(withNullability: false)} ${e.displayName}',
       );
     }).toList();
 

@@ -26,14 +26,26 @@ class {{name}}Filter with _${{name}}Filter{{#isPaginated}} implements OffsetLimi
 
 const typedefTemplate = r'''
 typedef {{name}}State = Data<List<{{type}}>, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}>;
-
-/// List bloc for {{name}}
-class {{name}}Bloc extends ListCubit<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}Bloc(super.loader);
-}
 ''';
 
-const repositoryTemplate = r'''
+const repositoryListTemplate = r'''
+/// List bloc for {{name}}
+class {{name}}Bloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
+  {{name}}Bloc(Future<List<{{returnType}}>> Function([ {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter]) loader,) : super(loader);
+
+  {{#crudMethods}}
+  @override
+    Future<void> {{operation}}({
+    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
+    {{/arguments}} }
+  ) async {
+      await super.{{operation}}({{#parameters}}{{param}},
+      {{/parameters}});
+      await super.reload();
+  }
+  {{/crudMethods}}
+
+}
 /// Repository for {{name}}
 abstract class {{name}}Repository {
   static Future<List<{{returnType}}>> loader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{name}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
@@ -47,9 +59,9 @@ abstract class {{name}}Repository {
     return r.data?{{#isInline}}.results{{/isInline}}.asList() ?? [];
   }
 
-  {{#crudMethods}}Future<void> {{operation}}Object(
-    {{#arguments}}{{param}},
-    {{/arguments}}
+  {{#crudMethods}}Future<void> {{operation}}({
+    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
+    {{/arguments}} }
   ) async {
     await ApiRepository.instance.{{api}}.{{name}}(
       {{#parameters}}{{param}},
@@ -58,6 +70,10 @@ abstract class {{name}}Repository {
   }
   {{/crudMethods}}
 }
+''';
+
+const repositoryDataTemplate = r'''
+// Repository for data template
 ''';
 
 const apiRepositoryTemplate = r'''

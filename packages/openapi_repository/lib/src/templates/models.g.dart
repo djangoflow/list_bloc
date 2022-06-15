@@ -150,13 +150,29 @@ Map<String, dynamic> _$$_ParamModelToJson(_$_ParamModel instance) =>
       'param': instance.param,
     };
 
+_$_ArgModelModel _$$_ArgModelModelFromJson(Map<String, dynamic> json) =>
+    _$_ArgModelModel(
+      json['argType'] as String,
+      json['argName'] as String,
+      json['isNullableArg'] as bool,
+      json['isRequiredArg'] as bool,
+    );
+
+Map<String, dynamic> _$$_ArgModelModelToJson(_$_ArgModelModel instance) =>
+    <String, dynamic>{
+      'argType': instance.argType,
+      'argName': instance.argName,
+      'isNullableArg': instance.isNullableArg,
+      'isRequiredArg': instance.isRequiredArg,
+    };
+
 _$_MethodModel _$$_MethodModelFromJson(Map<String, dynamic> json) =>
     _$_MethodModel(
       returnType: json['returnType'] as String,
       name: json['name'] as String,
       operation: json['operation'] as String,
       arguments: (json['arguments'] as List<dynamic>)
-          .map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
+          .map((e) => ArgModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       parameters: (json['parameters'] as List<dynamic>)
           .map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
