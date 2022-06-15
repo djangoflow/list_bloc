@@ -1426,6 +1426,312 @@ abstract class _ListRepositoryTemplateModel
       get copyWith => throw _privateConstructorUsedError;
 }
 
+DataCubitTemplateModel _$DataCubitTemplateModelFromJson(
+    Map<String, dynamic> json) {
+  return _DataCubitTemplateModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DataCubitTemplateModel {
+  String get api => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  dynamic get hasRequiredParam => throw _privateConstructorUsedError;
+  bool get isInline => throw _privateConstructorUsedError;
+  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  String get methodName => throw _privateConstructorUsedError;
+  String get returnType => throw _privateConstructorUsedError;
+  List<ParamModel> get additionalParams => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DataCubitTemplateModelCopyWith<DataCubitTemplateModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DataCubitTemplateModelCopyWith<$Res> {
+  factory $DataCubitTemplateModelCopyWith(DataCubitTemplateModel value,
+          $Res Function(DataCubitTemplateModel) then) =
+      _$DataCubitTemplateModelCopyWithImpl<$Res>;
+  $Res call(
+      {String api,
+      String name,
+      dynamic hasRequiredParam,
+      bool isInline,
+      List<MethodModel> crudMethods,
+      String methodName,
+      String returnType,
+      List<ParamModel> additionalParams});
+}
+
+/// @nodoc
+class _$DataCubitTemplateModelCopyWithImpl<$Res>
+    implements $DataCubitTemplateModelCopyWith<$Res> {
+  _$DataCubitTemplateModelCopyWithImpl(this._value, this._then);
+
+  final DataCubitTemplateModel _value;
+  // ignore: unused_field
+  final $Res Function(DataCubitTemplateModel) _then;
+
+  @override
+  $Res call({
+    Object? api = freezed,
+    Object? name = freezed,
+    Object? hasRequiredParam = freezed,
+    Object? isInline = freezed,
+    Object? crudMethods = freezed,
+    Object? methodName = freezed,
+    Object? returnType = freezed,
+    Object? additionalParams = freezed,
+  }) {
+    return _then(_value.copyWith(
+      api: api == freezed
+          ? _value.api
+          : api // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasRequiredParam: hasRequiredParam == freezed
+          ? _value.hasRequiredParam
+          : hasRequiredParam // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isInline: isInline == freezed
+          ? _value.isInline
+          : isInline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      crudMethods: crudMethods == freezed
+          ? _value.crudMethods
+          : crudMethods // ignore: cast_nullable_to_non_nullable
+              as List<MethodModel>,
+      methodName: methodName == freezed
+          ? _value.methodName
+          : methodName // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnType: returnType == freezed
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      additionalParams: additionalParams == freezed
+          ? _value.additionalParams
+          : additionalParams // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_DataCubitTemplateModelCopyWith<$Res>
+    implements $DataCubitTemplateModelCopyWith<$Res> {
+  factory _$$_DataCubitTemplateModelCopyWith(_$_DataCubitTemplateModel value,
+          $Res Function(_$_DataCubitTemplateModel) then) =
+      __$$_DataCubitTemplateModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String api,
+      String name,
+      dynamic hasRequiredParam,
+      bool isInline,
+      List<MethodModel> crudMethods,
+      String methodName,
+      String returnType,
+      List<ParamModel> additionalParams});
+}
+
+/// @nodoc
+class __$$_DataCubitTemplateModelCopyWithImpl<$Res>
+    extends _$DataCubitTemplateModelCopyWithImpl<$Res>
+    implements _$$_DataCubitTemplateModelCopyWith<$Res> {
+  __$$_DataCubitTemplateModelCopyWithImpl(_$_DataCubitTemplateModel _value,
+      $Res Function(_$_DataCubitTemplateModel) _then)
+      : super(_value, (v) => _then(v as _$_DataCubitTemplateModel));
+
+  @override
+  _$_DataCubitTemplateModel get _value =>
+      super._value as _$_DataCubitTemplateModel;
+
+  @override
+  $Res call({
+    Object? api = freezed,
+    Object? name = freezed,
+    Object? hasRequiredParam = freezed,
+    Object? isInline = freezed,
+    Object? crudMethods = freezed,
+    Object? methodName = freezed,
+    Object? returnType = freezed,
+    Object? additionalParams = freezed,
+  }) {
+    return _then(_$_DataCubitTemplateModel(
+      api: api == freezed
+          ? _value.api
+          : api // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasRequiredParam: hasRequiredParam == freezed
+          ? _value.hasRequiredParam
+          : hasRequiredParam,
+      isInline: isInline == freezed
+          ? _value.isInline
+          : isInline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      crudMethods: crudMethods == freezed
+          ? _value._crudMethods
+          : crudMethods // ignore: cast_nullable_to_non_nullable
+              as List<MethodModel>,
+      methodName: methodName == freezed
+          ? _value.methodName
+          : methodName // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnType: returnType == freezed
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      additionalParams: additionalParams == freezed
+          ? _value._additionalParams
+          : additionalParams // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_DataCubitTemplateModel implements _DataCubitTemplateModel {
+  const _$_DataCubitTemplateModel(
+      {required this.api,
+      required this.name,
+      this.hasRequiredParam = false,
+      this.isInline = false,
+      required final List<MethodModel> crudMethods,
+      required this.methodName,
+      required this.returnType,
+      final List<ParamModel> additionalParams = const []})
+      : _crudMethods = crudMethods,
+        _additionalParams = additionalParams;
+
+  factory _$_DataCubitTemplateModel.fromJson(Map<String, dynamic> json) =>
+      _$$_DataCubitTemplateModelFromJson(json);
+
+  @override
+  final String api;
+  @override
+  final String name;
+  @override
+  @JsonKey()
+  final dynamic hasRequiredParam;
+  @override
+  @JsonKey()
+  final bool isInline;
+  final List<MethodModel> _crudMethods;
+  @override
+  List<MethodModel> get crudMethods {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_crudMethods);
+  }
+
+  @override
+  final String methodName;
+  @override
+  final String returnType;
+  final List<ParamModel> _additionalParams;
+  @override
+  @JsonKey()
+  List<ParamModel> get additionalParams {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_additionalParams);
+  }
+
+  @override
+  String toString() {
+    return 'DataCubitTemplateModel(api: $api, name: $name, hasRequiredParam: $hasRequiredParam, isInline: $isInline, crudMethods: $crudMethods, methodName: $methodName, returnType: $returnType, additionalParams: $additionalParams)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DataCubitTemplateModel &&
+            const DeepCollectionEquality().equals(other.api, api) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality()
+                .equals(other.hasRequiredParam, hasRequiredParam) &&
+            const DeepCollectionEquality().equals(other.isInline, isInline) &&
+            const DeepCollectionEquality()
+                .equals(other._crudMethods, _crudMethods) &&
+            const DeepCollectionEquality()
+                .equals(other.methodName, methodName) &&
+            const DeepCollectionEquality()
+                .equals(other.returnType, returnType) &&
+            const DeepCollectionEquality()
+                .equals(other._additionalParams, _additionalParams));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(api),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(hasRequiredParam),
+      const DeepCollectionEquality().hash(isInline),
+      const DeepCollectionEquality().hash(_crudMethods),
+      const DeepCollectionEquality().hash(methodName),
+      const DeepCollectionEquality().hash(returnType),
+      const DeepCollectionEquality().hash(_additionalParams));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_DataCubitTemplateModelCopyWith<_$_DataCubitTemplateModel> get copyWith =>
+      __$$_DataCubitTemplateModelCopyWithImpl<_$_DataCubitTemplateModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DataCubitTemplateModelToJson(this);
+  }
+}
+
+abstract class _DataCubitTemplateModel implements DataCubitTemplateModel {
+  const factory _DataCubitTemplateModel(
+      {required final String api,
+      required final String name,
+      final dynamic hasRequiredParam,
+      final bool isInline,
+      required final List<MethodModel> crudMethods,
+      required final String methodName,
+      required final String returnType,
+      final List<ParamModel> additionalParams}) = _$_DataCubitTemplateModel;
+
+  factory _DataCubitTemplateModel.fromJson(Map<String, dynamic> json) =
+      _$_DataCubitTemplateModel.fromJson;
+
+  @override
+  String get api => throw _privateConstructorUsedError;
+  @override
+  String get name => throw _privateConstructorUsedError;
+  @override
+  dynamic get hasRequiredParam => throw _privateConstructorUsedError;
+  @override
+  bool get isInline => throw _privateConstructorUsedError;
+  @override
+  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  @override
+  String get methodName => throw _privateConstructorUsedError;
+  @override
+  String get returnType => throw _privateConstructorUsedError;
+  @override
+  List<ParamModel> get additionalParams => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DataCubitTemplateModelCopyWith<_$_DataCubitTemplateModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 ParamModel _$ParamModelFromJson(Map<String, dynamic> json) {
   return _ParamModel.fromJson(json);
 }

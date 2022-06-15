@@ -140,6 +140,38 @@ Map<String, dynamic> _$$_ListRepositoryTemplateModelToJson(
       'filterParams': instance.filterParams.map((e) => e.toJson()).toList(),
     };
 
+_$_DataCubitTemplateModel _$$_DataCubitTemplateModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_DataCubitTemplateModel(
+      api: json['api'] as String,
+      name: json['name'] as String,
+      hasRequiredParam: json['hasRequiredParam'] ?? false,
+      isInline: json['isInline'] as bool? ?? false,
+      crudMethods: (json['crudMethods'] as List<dynamic>)
+          .map((e) => MethodModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      methodName: json['methodName'] as String,
+      returnType: json['returnType'] as String,
+      additionalParams: (json['additionalParams'] as List<dynamic>?)
+              ?.map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$$_DataCubitTemplateModelToJson(
+        _$_DataCubitTemplateModel instance) =>
+    <String, dynamic>{
+      'api': instance.api,
+      'name': instance.name,
+      'hasRequiredParam': instance.hasRequiredParam,
+      'isInline': instance.isInline,
+      'crudMethods': instance.crudMethods.map((e) => e.toJson()).toList(),
+      'methodName': instance.methodName,
+      'returnType': instance.returnType,
+      'additionalParams':
+          instance.additionalParams.map((e) => e.toJson()).toList(),
+    };
+
 _$_ParamModel _$$_ParamModelFromJson(Map<String, dynamic> json) =>
     _$_ParamModel(
       json['param'] as String,

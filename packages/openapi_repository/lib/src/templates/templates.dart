@@ -28,6 +28,10 @@ const typedefTemplate = r'''
 typedef {{name}}State = Data<List<{{type}}>, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}>;
 ''';
 
+const typedefDataCubitTemplate = r'''
+typedef {{name}}State = Data<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}>;
+''';
+
 const repositoryListTemplate = r'''
 /// List bloc for {{name}}
 class {{name}}Bloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
@@ -73,7 +77,52 @@ abstract class {{name}}Repository {
 ''';
 
 const repositoryDataTemplate = r'''
+
+class {{name}}Bloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}DataRepository {
+  {{name}}Bloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter]) loader,) : super(loader);
+
+  {{#crudMethods}}
+  @override
+    Future<void> {{operation}}({
+    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
+    {{/arguments}} }
+  ) async {
+      await super.{{operation}}({{#parameters}}{{param}},
+      {{/parameters}});
+      await super.load(state.filter);
+  }
+  {{/crudMethods}}
+
+}
 // Repository for data template
+/// Repository for {{name}}
+abstract class {{name}}DataRepository {
+  static Future<{{returnType}}> loader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{name}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
+    {{#hasRequiredParam}}if (filter == null) {
+      throw Exception('Invalid filter');
+    }{{/hasRequiredParam}}
+    final r = await ApiRepository.instance.{{api}}.{{methodName}}(
+      {{#filterParams}}{{param}},{{/filterParams}}
+    );
+    if(r.data == null) {
+      throw Exception('Failed to load data!');
+    }else{
+      return r.data!;
+    }
+    
+  }
+
+  {{#crudMethods}}Future<void> {{operation}}({
+    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
+    {{/arguments}} }
+  ) async {
+    await ApiRepository.instance.{{api}}.{{name}}(
+      {{#parameters}}{{param}},
+      {{/parameters}}
+    );
+  }
+  {{/crudMethods}}
+}
 ''';
 
 const apiRepositoryTemplate = r'''

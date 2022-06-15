@@ -97,8 +97,10 @@ class OpenapiRepositoryGenerator
     for (final builder in parsedAnnotation.builderList) {
       final output = _getListRepositoryFromBuilder(builder);
       if (output.isEmpty) continue;
-
       buffer.writeln(output);
+      final dataOutput = _getDataRepositoryFromBuilder(builder);
+      if (dataOutput.isEmpty) continue;
+      buffer.writeln(dataOutput);
     }
 
     return buffer.toString();
@@ -172,6 +174,69 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
+  String _getDataRepositoryFromBuilder(_ListRepositoryBuilder builder) {
+    final buffer = StringBuffer();
+    final classElement = builder.apiClass;
+
+    final methods = classElement.methods;
+
+    for (final methodElement in classElement.methods) {
+      final returnType = methodElement.returnType;
+
+      if (!returnType.isDartAsyncFuture) continue;
+
+      final methodName = methodElement.displayName;
+      if (methodName.contains('Read')) {
+        final apiClass =
+            classElement.displayName.titleCase.split(' ').first.camelCase;
+        final innerMostType = _getInnerMostType(returnType);
+        if (innerMostType != null) {
+          final returnModel = _ReturnModel(innerMostType, false);
+          final type =
+              returnModel.type.getDisplayString(withNullability: false);
+          final methodParameters = methodElement.parameters
+              .where((parameter) => !_ignoreParams.contains(parameter.name))
+              .toList();
+
+          buffer
+            ..writeln()
+            ..writeln(_buildTypeDefsDataCubit(
+              type: type,
+              name: methodName.pascalCase,
+              hasFilter: methodParameters.isNotEmpty,
+            ))
+            ..writeln();
+
+          buffer
+            ..writeln(_buildFilterClass(
+              name: methodName.pascalCase,
+              parameters: methodParameters,
+              defaultOffset: _defaultOffset,
+              defaultPageSize: _defaultPageSize,
+            ))
+            ..writeln();
+
+          buffer.writeln(_buildListLoader(
+            type: type,
+            filterParameters: methodParameters,
+            hasFilter: methodParameters.isNotEmpty,
+            api: apiClass,
+            methodName: methodName,
+            methods: methods,
+            isInline: returnModel.isInline,
+            isDataCubit: true,
+          ));
+
+          return buffer.toString();
+        } else {
+          continue;
+        }
+      }
+    }
+
+    return '';
+  }
+
   _ReturnModel? _getInnerListReturnType(DartType type, bool isInline) {
     final innerMostType = _getInnerMostType(type);
     if (listChecker.isExactlyType(type) && innerMostType != null) {
@@ -213,6 +278,7 @@ class OpenapiRepositoryGenerator
     required bool hasFilter,
     required List<ParameterElement> filterParameters,
     bool isInline = false,
+    bool isDataCubit = false,
   }) {
     final hasRequiredParam = filterParameters.any(
       (element) => element.isRequired,
@@ -267,8 +333,75 @@ class OpenapiRepositoryGenerator
             }).toList()
           : [],
     );
-    return Template(repositoryListTemplate).renderString(
+    return Template(
+            isDataCubit ? repositoryDataTemplate : repositoryListTemplate)
+        .renderString(
       listRepositoryModel.toJson(),
+    );
+  }
+
+  String _buildDataCubitLoader({
+    required String type,
+    required String api,
+    required String methodName,
+    required Iterable<MethodElement> methods,
+    required bool hasFilter,
+    required List<ParameterElement> filterParameters,
+    bool isInline = false,
+  }) {
+    final hasRequiredParam = filterParameters.any(
+      (element) => element.isRequired,
+    ); // for PK values the filter can not be null
+
+    final namePrefixList = methodName.sentenceCase.split(' ');
+    String namePrefix = '';
+
+    for (int i = 0; i < namePrefixList.length; i += 1) {
+      if (i < namePrefixList.length - 1) {
+        namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
+      }
+    }
+
+    final createMethod = methods.firstWhereOrNull((element) {
+      return element.displayName == '${namePrefix}Create';
+    });
+    final partialUpdateMethod = methods.firstWhereOrNull((element) {
+      return element.displayName == '${namePrefix}PartialUpdate';
+    });
+    final updateMethod = methods.firstWhereOrNull((element) {
+      return element.displayName == '${namePrefix}Update';
+    });
+    final deleteMethod = methods.firstWhereOrNull((element) {
+      return element.displayName == '${namePrefix}Delete';
+    });
+
+    final readMethod = methods.firstWhereOrNull((element) {
+      return element.displayName == '${namePrefix}Read';
+    });
+
+    final createModel = _getMethodModel('createModel', createMethod);
+    final partialUpdateModel =
+        _getMethodModel('partialUpdateModel', partialUpdateMethod);
+    final updateModel = _getMethodModel('updateModel', updateMethod);
+    final deleteModel = _getMethodModel('deleteModel', deleteMethod);
+    final readModel = _getMethodModel('readModel', readMethod);
+
+    final dataCubitTemplateModel = DataCubitTemplateModel(
+      api: api,
+      hasRequiredParam: hasRequiredParam,
+      name: methodName.pascalCase,
+      isInline: isInline,
+      methodName: methodName,
+      crudMethods: [
+        createModel,
+        partialUpdateModel,
+        updateModel,
+        deleteModel,
+      ].whereType<MethodModel>().toList(),
+      returnType: type,
+    );
+    return Template(repositoryDataTemplate).renderString(
+      dataCubitTemplateModel.toJson(),
     );
   }
 
@@ -318,6 +451,20 @@ class OpenapiRepositoryGenerator
       hasFilter: hasFilter,
     );
     return Template(typedefTemplate).renderString(typedefModel.toJson());
+  }
+
+  String _buildTypeDefsDataCubit({
+    required String name,
+    required String type,
+    required bool hasFilter,
+  }) {
+    final typedefModel = TypedefTemplateModel(
+      type: type,
+      name: name,
+      hasFilter: hasFilter,
+    );
+    return Template(typedefDataCubitTemplate)
+        .renderString(typedefModel.toJson());
   }
 
   String _buildFilterClass({

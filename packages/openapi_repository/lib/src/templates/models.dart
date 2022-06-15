@@ -95,6 +95,24 @@ class ListRepositoryTemplateModel with _$ListRepositoryTemplateModel {
 }
 
 @freezed
+class DataCubitTemplateModel with _$DataCubitTemplateModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory DataCubitTemplateModel({
+    required String api,
+    required String name,
+    @Default(false) hasRequiredParam,
+    @Default(false) bool isInline,
+    required List<MethodModel> crudMethods,
+    required String methodName,
+    required String returnType,
+    @Default([]) List<ParamModel> additionalParams,
+  }) = _DataCubitTemplateModel;
+
+  factory DataCubitTemplateModel.fromJson(Map<String, dynamic> map) =>
+      _$DataCubitTemplateModelFromJson(map);
+}
+
+@freezed
 class ParamModel with _$ParamModel {
   const factory ParamModel(String param) = _ParamModel;
 
