@@ -1,4 +1,6 @@
 const freezedFilterTemplate = r'''
+//Filter for {{name}}Filter 
+
 @freezed
 class {{name}}Filter with _${{name}}Filter{{#isPaginated}} implements OffsetLimitFilter{{/isPaginated}} {
   {{#isPaginated}}
@@ -36,100 +38,9 @@ const typedefDataCubitStateTemplate = r'''
 typedef {{name}}State = Data<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}>;
 ''';
 
-const repositoryListTemplate = r'''
-/// List bloc for {{name}}
-class {{name}}Bloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}Bloc(Future<List<{{returnType}}>> Function([ {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter]) loader,) : super(loader);
-
-  {{#crudMethods}}
-  @override
-    Future<void> {{operation}}({
-    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
-    {{/arguments}} }
-  ) async {
-      await super.{{operation}}({{#parameters}}{{param}},
-      {{/parameters}});
-      await super.reload();
-  }
-  {{/crudMethods}}
-
-}
-/// Repository for {{name}}
-abstract class {{name}}Repository {
-  static Future<List<{{returnType}}>> loader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{name}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
-    {{#hasRequiredParam}}if (filter == null) {
-      throw Exception('Invalid filter');
-    }{{/hasRequiredParam}}
-    final r = await ApiRepository.instance.{{api}}.{{methodName}}(
-      {{#filterParams}}{{param}},{{/filterParams}}
-    );
-
-    return r.data?{{#isInline}}.results{{/isInline}}.asList() ?? [];
-  }
-
-  {{#crudMethods}}Future<void> {{operation}}({
-    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
-    {{/arguments}} }
-  ) async {
-    await ApiRepository.instance.{{api}}.{{name}}(
-      {{#parameters}}{{param}},
-      {{/parameters}}
-    );
-  }
-  {{/crudMethods}}
-}
-''';
-
-const repositoryDataTemplate = r'''
-
-class {{name}}Bloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}DataRepository {
-  {{name}}Bloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter]) loader,) : super(loader);
-
-  {{#crudMethods}}
-  @override
-    Future<void> {{operation}}({
-    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
-    {{/arguments}} }
-  ) async {
-      await super.{{operation}}({{#parameters}}{{param}},
-      {{/parameters}});
-      await super.load(state.filter);
-  }
-  {{/crudMethods}}
-
-}
-// Repository for data template
-/// Repository for {{name}}
-abstract class {{name}}DataRepository {
-  static Future<{{returnType}}> loader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{name}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
-    {{#hasRequiredParam}}if (filter == null) {
-      throw Exception('Invalid filter');
-    }{{/hasRequiredParam}}
-    final r = await ApiRepository.instance.{{api}}.{{methodName}}(
-      {{#filterParams}}{{param}},{{/filterParams}}
-    );
-    if(r.data == null) {
-      throw Exception('Failed to load data!');
-    }else{
-      return r.data!;
-    }
-    
-  }
-
-  {{#crudMethods}}Future<void> {{operation}}({
-    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
-    {{/arguments}} }
-  ) async {
-    await ApiRepository.instance.{{api}}.{{name}}(
-      {{#parameters}}{{param}},
-      {{/parameters}}
-    );
-  }
-  {{/crudMethods}}
-}
-''';
-
 const dataCubitTemplate = r'''
+// DataCubit for {{name}}
+
 class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
   {{name}}DataBloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter]) loader,) : super(dataLoader);
 
@@ -149,6 +60,8 @@ class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}R
 ''';
 
 const listCubitTemplate = r'''
+// ListCubit for {{name}}
+
 class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
   {{name}}ListBloc(Future<List<{{returnType}}>> Function([ {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter]) loader,) : super(listLoader);
 
@@ -168,6 +81,8 @@ class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}L
 ''';
 
 const repositoryTemplate = r'''
+// Repository for {{repositoryName}}Repository
+
 abstract class {{repositoryName}}Repository {
   {{#hasDataLoader}}
   {{#dataLoader}}
