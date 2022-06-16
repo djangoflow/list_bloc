@@ -1,5 +1,4 @@
 // ignore_for_file: depend_on_referenced_packages
-
 import 'package:analyzer/dart/element/element.dart';
 import 'package:collection/collection.dart';
 import 'package:analyzer/dart/element/type.dart';
@@ -104,12 +103,16 @@ class OpenapiRepositoryGenerator
   }
 
   String _getListRepositoryFromBuilder(_ListRepositoryBuilder builder) {
+    final generatedMethodElements = <MethodElement>[];
     final buffer = StringBuffer();
     final classElement = builder.apiClass;
 
     final methods = classElement.methods;
 
     for (final methodElement in classElement.methods) {
+      if (generatedMethodElements.contains(methodElement)) {
+        continue;
+      }
       final returnType = methodElement.returnType;
 
       if (!returnType.isDartAsyncFuture) continue;
@@ -135,42 +138,79 @@ class OpenapiRepositoryGenerator
           namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
         }
       }
-
-      if (methodName.contains('Read') &&
-          methodName == '${namePrefix}Read' &&
-          _getInnerMostType(returnType) != null) {
+      final isReadMethod =
+          methodName.contains('Read') && methodName == '${namePrefix}Read';
+      final isListMethod =
+          methodName.contains('List') && methodName == '${namePrefix}List';
+      if (isReadMethod || isListMethod) {
         List<LoaderMethodModel> loaders = [];
-        final dataLoaderMethodModel = _DataMethodElementProcesser(
-          methodElement: methodElement,
-          defaultOffset: _defaultOffset,
-          defaultPageSize: _defaultPageSize,
-          ignoreParams: _ignoreParams,
-        ).getLoaderMethodModel();
-        if (dataLoaderMethodModel != null) {
-          loaders.add(dataLoaderMethodModel);
-        }
+        if (isReadMethod) {
+          final dataLoaderMethodModel = _DataMethodElementProcesser(
+            methodElement: methodElement,
+            defaultOffset: _defaultOffset,
+            defaultPageSize: _defaultPageSize,
+            ignoreParams: _ignoreParams,
+          ).getLoaderMethodModel();
+          if (dataLoaderMethodModel != null) {
+            generatedMethodElements.add(methodElement);
+            loaders.add(dataLoaderMethodModel);
+          }
 
-        final listMethod = methods.firstWhereOrNull((element) {
-          return (element.displayName == '${namePrefix}List' &&
-              element.returnType.isDartAsyncFuture);
-        });
-        if (listMethod != null) {
+          final listMethod = methods.firstWhereOrNull((element) {
+            return (element.displayName == '${namePrefix}List' &&
+                element.returnType.isDartAsyncFuture);
+          });
+          if (listMethod != null) {
+            final listLoaderMethodModel = _ListMethodElementProcesser(
+              methodElement: listMethod,
+              defaultOffset: _defaultOffset,
+              defaultPageSize: _defaultPageSize,
+              ignoreParams: _ignoreParams,
+            ).getLoaderMethodModel();
+
+            if (listLoaderMethodModel != null) {
+              generatedMethodElements.add(listMethod);
+              loaders.add(listLoaderMethodModel);
+            }
+          }
+        } else {
           final listLoaderMethodModel = _ListMethodElementProcesser(
-            methodElement: listMethod,
+            methodElement: methodElement,
             defaultOffset: _defaultOffset,
             defaultPageSize: _defaultPageSize,
             ignoreParams: _ignoreParams,
           ).getLoaderMethodModel();
 
           if (listLoaderMethodModel != null) {
+            generatedMethodElements.add(methodElement);
             loaders.add(listLoaderMethodModel);
+          }
+          final readMethod = methods.firstWhereOrNull((element) {
+            return (element.displayName == '${namePrefix}Read' &&
+                element.returnType.isDartAsyncFuture);
+          });
+          if (readMethod != null) {
+            final listLoaderMethodModel = _DataMethodElementProcesser(
+              methodElement: readMethod,
+              defaultOffset: _defaultOffset,
+              defaultPageSize: _defaultPageSize,
+              ignoreParams: _ignoreParams,
+            ).getLoaderMethodModel();
+
+            if (listLoaderMethodModel != null) {
+              generatedMethodElements.add(readMethod);
+              loaders.add(listLoaderMethodModel);
+            }
           }
         }
         return _processRepositoryData(
-            loaders: loaders,
-            methods: methods,
-            api: apiClass,
-            prefix: namePrefix);
+          loaders: loaders,
+          methods: methods,
+          api: apiClass,
+          prefix: namePrefix,
+        );
+      } else {
+        continue;
       }
     }
 
@@ -189,17 +229,16 @@ class OpenapiRepositoryGenerator
     } else {
       for (var loader in loaders) {
         String typeDefs = '';
-        if (loader.isListLoader) {
-          typeDefs = _buildTypeDefs(
-              name: loader.name,
-              type: loader.returnType,
-              hasFilter: loader.hasFilter);
-        } else {
-          typeDefs = _buildTypeDefsDataCubit(
-              name: loader.name,
-              type: loader.returnType,
-              hasFilter: loader.hasFilter);
-        }
+
+        typeDefs = _buildTypeDefs(
+          name: loader.name,
+          type: loader.returnType,
+          hasFilter: loader.hasFilter,
+          template: loader.isListLoader
+              ? typedefListCubitStateTemplate
+              : typedefDataCubitStateTemplate,
+        );
+
         buffer
           ..writeln(typeDefs)
           ..writeln();
@@ -224,39 +263,6 @@ class OpenapiRepositoryGenerator
 
       return buffer.toString();
     }
-  }
-
-  _ReturnModel? _getInnerListReturnType(DartType type, bool isInline) {
-    final innerMostType = _getInnerMostType(type);
-    if (listChecker.isExactlyType(type) && innerMostType != null) {
-      return _ReturnModel(innerMostType, isInline);
-    }
-
-    if (type is! ParameterizedType) return null;
-
-    List<DartType> args = type.typeArguments;
-    if (args.isEmpty) {
-      final innerElement = innerMostType?.element;
-      if (innerMostType == null || innerElement == null) return null;
-
-      final inlineVisitor = InlineClassVisitor();
-      innerElement.visitChildren(inlineVisitor);
-      if (inlineVisitor.fields.isEmpty) return null;
-      final results = inlineVisitor.fields;
-      return _getInnerListReturnType(results.first.type, true);
-    }
-    if (args.first.isVoid) return null;
-
-    return _getInnerListReturnType(args.first, false);
-  }
-
-  DartType? _getInnerMostType(DartType type) {
-    if (type is ParameterizedType && type.typeArguments.isNotEmpty) {
-      final typeArgs = type.typeArguments;
-      return typeArgs.first.isVoid ? null : _getInnerMostType(typeArgs.first);
-    }
-
-    return type;
   }
 
   String _buildRepository({
@@ -309,11 +315,11 @@ class OpenapiRepositoryGenerator
       return element.displayName == '${namePrefix}Delete';
     });
 
-    final createModel = _getMethodModel('createModel', createMethod);
+    final createModel = _getMethodModel('create', createMethod);
     final partialUpdateModel =
-        _getMethodModel('partialUpdateModel', partialUpdateMethod);
-    final updateModel = _getMethodModel('updateModel', updateMethod);
-    final deleteModel = _getMethodModel('deleteModel', deleteMethod);
+        _getMethodModel('partialUpdate', partialUpdateMethod);
+    final updateModel = _getMethodModel('updateObject', updateMethod);
+    final deleteModel = _getMethodModel('delete', deleteMethod);
     final crudMethods = [
       createModel,
       partialUpdateModel,
@@ -373,7 +379,6 @@ class OpenapiRepositoryGenerator
         e.displayName,
         !e.isRequired,
         e.isRequired,
-        // '${e.type.getDisplayString(withNullability: false)} ${e.displayName}',
       );
     }).toList();
 
@@ -396,27 +401,14 @@ class OpenapiRepositoryGenerator
     required String name,
     required String type,
     required bool hasFilter,
+    required String template,
   }) {
     final typedefModel = TypedefTemplateModel(
       type: type,
       name: name,
       hasFilter: hasFilter,
     );
-    return Template(typedefTemplate).renderString(typedefModel.toJson());
-  }
-
-  String _buildTypeDefsDataCubit({
-    required String name,
-    required String type,
-    required bool hasFilter,
-  }) {
-    final typedefModel = TypedefTemplateModel(
-      type: type,
-      name: name,
-      hasFilter: hasFilter,
-    );
-    return Template(typedefDataCubitTemplate)
-        .renderString(typedefModel.toJson());
+    return Template(template).renderString(typedefModel.toJson());
   }
 
   String _buildLoaderFilterClass({
