@@ -1,7 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-
+import 'package:analyzer/dart/element/element.dart';
 part 'models.freezed.dart';
 part 'models.g.dart';
 
@@ -142,4 +142,74 @@ class MethodModel with _$MethodModel {
 
   factory MethodModel.fromJson(Map<String, dynamic> map) =>
       _$MethodModelFromJson(map);
+}
+
+@freezed
+class LoaderMethodModel with _$LoaderMethodModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory LoaderMethodModel({
+    required String returnType,
+    required String name,
+    required bool hasFilter,
+    required bool isListLoader,
+    required bool isPaginated,
+    required bool hasRequiredParam,
+    required List<TypeModel> types,
+    required List<ParamModel> filterParams,
+    required int defaultOffset,
+    required int defaultPageSize,
+    @Default(false) bool isInline,
+  }) = _LoaderMethodModel;
+
+  factory LoaderMethodModel.fromJson(Map<String, dynamic> map) =>
+      _$LoaderMethodModelFromJson(map);
+}
+
+@freezed
+class LoaderRepositoryTemplateModel with _$LoaderRepositoryTemplateModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory LoaderRepositoryTemplateModel({
+    LoaderTemplateModel? dataLoader,
+    LoaderTemplateModel? listLoader,
+    required bool hasDataLoader,
+    required bool hasListLoader,
+    required List<MethodModel> crudMethods,
+    required String repositoryName,
+    required String api,
+  }) = _LoaderRepositoryTemplateModel;
+
+  factory LoaderRepositoryTemplateModel.fromJson(Map<String, dynamic> map) =>
+      _$LoaderRepositoryTemplateModelFromJson(map);
+}
+
+@freezed
+class LoaderTemplateModel with _$LoaderTemplateModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory LoaderTemplateModel({
+    required String api,
+    @Default(false) hasRequiredParam,
+    @Default(false) bool isInline,
+    required String methodName,
+    required String returnType,
+    @Default(false) bool hasFilter,
+    @Default([]) List<ParamModel> additionalParams,
+    @Default([]) List<ParamModel> filterParams,
+  }) = _LoaderTemplateModel;
+
+  factory LoaderTemplateModel.fromJson(Map<String, dynamic> map) =>
+      _$LoaderTemplateModelFromJson(map);
+}
+
+@freezed
+class CubitTemplateModel with _$CubitTemplateModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory CubitTemplateModel({
+    required String name,
+    required String returnType,
+    @Default(false) bool hasFilter,
+    required List<MethodModel> crudMethods,
+  }) = _CubitTemplateModel;
+
+  factory CubitTemplateModel.fromJson(Map<String, dynamic> map) =>
+      _$CubitTemplateModelFromJson(map);
 }

@@ -98,9 +98,6 @@ class OpenapiRepositoryGenerator
       final output = _getListRepositoryFromBuilder(builder);
       if (output.isEmpty) continue;
       buffer.writeln(output);
-      final dataOutput = _getDataRepositoryFromBuilder(builder);
-      if (dataOutput.isEmpty) continue;
-      buffer.writeln(dataOutput);
     }
 
     return buffer.toString();
@@ -130,111 +127,103 @@ class OpenapiRepositoryGenerator
 
       final apiClass =
           classElement.displayName.titleCase.split(' ').first.camelCase;
+      final namePrefixList = methodName.sentenceCase.split(' ');
+      String namePrefix = '';
 
-      final returnModel = _getInnerListReturnType(returnType, false);
-      if (returnModel == null) continue;
-      final type = returnModel.type.getDisplayString(withNullability: false);
-      final methodParameters = methodElement.parameters
-          .where((parameter) => !_ignoreParams.contains(parameter.name))
-          .toList();
+      for (int i = 0; i < namePrefixList.length; i += 1) {
+        if (i < namePrefixList.length - 1) {
+          namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
+        }
+      }
 
-      final optionalParams = methodParameters.where((element) {
-        return element.isOptional;
-      }).toList();
+      if (methodName.contains('Read') &&
+          methodName == '${namePrefix}Read' &&
+          _getInnerMostType(returnType) != null) {
+        List<LoaderMethodModel> loaders = [];
+        final dataLoaderMethodModel = _DataMethodElementProcesser(
+          methodElement: methodElement,
+          defaultOffset: _defaultOffset,
+          defaultPageSize: _defaultPageSize,
+          ignoreParams: _ignoreParams,
+        ).getLoaderMethodModel();
+        if (dataLoaderMethodModel != null) {
+          loaders.add(dataLoaderMethodModel);
+        }
 
-      buffer
-        ..writeln()
-        ..writeln(_buildTypeDefs(
-          type: type,
-          name: methodName.pascalCase,
-          hasFilter: methodParameters.isNotEmpty,
-        ))
-        ..writeln();
-      if (optionalParams.isNotEmpty) {
-        buffer
-          ..writeln(_buildFilterClass(
-            name: methodName.pascalCase,
-            parameters: methodParameters,
+        final listMethod = methods.firstWhereOrNull((element) {
+          return (element.displayName == '${namePrefix}List' &&
+              element.returnType.isDartAsyncFuture);
+        });
+        if (listMethod != null) {
+          final listLoaderMethodModel = _ListMethodElementProcesser(
+            methodElement: listMethod,
             defaultOffset: _defaultOffset,
             defaultPageSize: _defaultPageSize,
-          ))
-          ..writeln();
+            ignoreParams: _ignoreParams,
+          ).getLoaderMethodModel();
+
+          if (listLoaderMethodModel != null) {
+            loaders.add(listLoaderMethodModel);
+          }
+        }
+        return _processRepositoryData(
+            loaders: loaders,
+            methods: methods,
+            api: apiClass,
+            prefix: namePrefix);
       }
-      buffer.writeln(_buildListLoader(
-        type: type,
-        filterParameters: methodParameters,
-        hasFilter: methodParameters.isNotEmpty,
-        api: apiClass,
-        methodName: methodName,
-        methods: methods,
-        isInline: returnModel.isInline,
-      ));
     }
 
     return buffer.toString();
   }
 
-  String _getDataRepositoryFromBuilder(_ListRepositoryBuilder builder) {
+  String _processRepositoryData({
+    required List<LoaderMethodModel> loaders,
+    required Iterable<MethodElement> methods,
+    required String api,
+    required String prefix,
+  }) {
     final buffer = StringBuffer();
-    final classElement = builder.apiClass;
-
-    final methods = classElement.methods;
-
-    for (final methodElement in classElement.methods) {
-      final returnType = methodElement.returnType;
-
-      if (!returnType.isDartAsyncFuture) continue;
-
-      final methodName = methodElement.displayName;
-      if (methodName.contains('Read')) {
-        final apiClass =
-            classElement.displayName.titleCase.split(' ').first.camelCase;
-        final innerMostType = _getInnerMostType(returnType);
-        if (innerMostType != null) {
-          final returnModel = _ReturnModel(innerMostType, false);
-          final type =
-              returnModel.type.getDisplayString(withNullability: false);
-          final methodParameters = methodElement.parameters
-              .where((parameter) => !_ignoreParams.contains(parameter.name))
-              .toList();
-
-          buffer
-            ..writeln()
-            ..writeln(_buildTypeDefsDataCubit(
-              type: type,
-              name: methodName.pascalCase,
-              hasFilter: methodParameters.isNotEmpty,
-            ))
-            ..writeln();
-
-          buffer
-            ..writeln(_buildFilterClass(
-              name: methodName.pascalCase,
-              parameters: methodParameters,
-              defaultOffset: _defaultOffset,
-              defaultPageSize: _defaultPageSize,
-            ))
-            ..writeln();
-
-          buffer.writeln(_buildListLoader(
-            type: type,
-            filterParameters: methodParameters,
-            hasFilter: methodParameters.isNotEmpty,
-            api: apiClass,
-            methodName: methodName,
-            methods: methods,
-            isInline: returnModel.isInline,
-            isDataCubit: true,
-          ));
-
-          return buffer.toString();
+    if (loaders.isEmpty) {
+      return '';
+    } else {
+      for (var loader in loaders) {
+        String typeDefs = '';
+        if (loader.isListLoader) {
+          typeDefs = _buildTypeDefs(
+              name: loader.name,
+              type: loader.returnType,
+              hasFilter: loader.hasFilter);
         } else {
-          continue;
+          typeDefs = _buildTypeDefsDataCubit(
+              name: loader.name,
+              type: loader.returnType,
+              hasFilter: loader.hasFilter);
         }
-      }
-    }
+        buffer
+          ..writeln(typeDefs)
+          ..writeln();
 
-    return '';
+        buffer
+          ..writeln(_buildLoaderFilterClass(
+            name: loader.name,
+            isPaginated: loader.isPaginated,
+            types: loader.types,
+          ))
+          ..writeln();
+      }
+
+      buffer
+        ..writeln(_buildRepository(
+          api: api,
+          loaders: loaders,
+          methods: methods,
+          namePrefix: prefix,
+        ))
+        ..writeln();
+
+      return buffer.toString();
+    }
   }
 
   _ReturnModel? _getInnerListReturnType(DartType type, bool isInline) {
@@ -270,27 +259,41 @@ class OpenapiRepositoryGenerator
     return type;
   }
 
-  String _buildListLoader({
-    required String type,
+  String _buildRepository({
     required String api,
-    required String methodName,
+    required String namePrefix,
+    required List<LoaderMethodModel> loaders,
     required Iterable<MethodElement> methods,
-    required bool hasFilter,
-    required List<ParameterElement> filterParameters,
-    bool isInline = false,
-    bool isDataCubit = false,
   }) {
-    final hasRequiredParam = filterParameters.any(
-      (element) => element.isRequired,
-    ); // for PK values the filter can not be null
+    LoaderTemplateModel? listLoaderForTemplate;
+    LoaderTemplateModel? dataLoaderForTemplate;
 
-    final namePrefixList = methodName.sentenceCase.split(' ');
-    String namePrefix = '';
+    final listLoaderModel =
+        loaders.firstWhereOrNull((element) => element.isListLoader);
+    final dataLoaderModel =
+        loaders.firstWhereOrNull((element) => !element.isListLoader);
 
-    for (int i = 0; i < namePrefixList.length; i += 1) {
-      if (i < namePrefixList.length - 1) {
-        namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
-      }
+    if (listLoaderModel != null) {
+      listLoaderForTemplate = LoaderTemplateModel(
+        api: api,
+        methodName: listLoaderModel.name.camelCase,
+        returnType: listLoaderModel.returnType,
+        hasFilter: listLoaderModel.hasFilter,
+        filterParams: listLoaderModel.filterParams,
+        hasRequiredParam: listLoaderModel.hasRequiredParam,
+        isInline: listLoaderModel.isInline,
+      );
+    }
+    if (dataLoaderModel != null) {
+      dataLoaderForTemplate = LoaderTemplateModel(
+        api: api,
+        methodName: dataLoaderModel.name.camelCase,
+        returnType: dataLoaderModel.returnType,
+        hasFilter: dataLoaderModel.hasFilter,
+        filterParams: dataLoaderModel.filterParams,
+        hasRequiredParam: dataLoaderModel.hasRequiredParam,
+        isInline: dataLoaderModel.isInline,
+      );
     }
 
     final createMethod = methods.firstWhereOrNull((element) {
@@ -311,98 +314,47 @@ class OpenapiRepositoryGenerator
         _getMethodModel('partialUpdateModel', partialUpdateMethod);
     final updateModel = _getMethodModel('updateModel', updateMethod);
     final deleteModel = _getMethodModel('deleteModel', deleteMethod);
-
-    final listRepositoryModel = ListRepositoryTemplateModel(
+    final crudMethods = [
+      createModel,
+      partialUpdateModel,
+      updateModel,
+      deleteModel,
+    ].whereType<MethodModel>().toList();
+    final loaderTemplateModel = LoaderRepositoryTemplateModel(
       api: api,
-      hasRequiredParam: hasRequiredParam,
-      name: methodName.pascalCase,
-      isInline: isInline,
-      methodName: methodName,
-      crudMethods: [
-        createModel,
-        partialUpdateModel,
-        updateModel,
-        deleteModel,
-      ].whereType<MethodModel>().toList(),
-      returnType: type,
-      hasFilter: hasFilter,
-      filterParams: hasFilter && filterParameters.isNotEmpty
-          ? filterParameters.map((e) {
-              return ParamModel(
-                  '${e.name}: filter${hasRequiredParam ? '' : '?'}.${e.name}');
-            }).toList()
-          : [],
+      dataLoader: dataLoaderForTemplate,
+      listLoader: listLoaderForTemplate,
+      hasDataLoader: dataLoaderForTemplate != null ? true : false,
+      hasListLoader: listLoaderForTemplate != null ? true : false,
+      repositoryName: namePrefix.pascalCase,
+      crudMethods: crudMethods,
     );
-    return Template(
-            isDataCubit ? repositoryDataTemplate : repositoryListTemplate)
-        .renderString(
-      listRepositoryModel.toJson(),
+
+    final repository = Template(repositoryTemplate).renderString(
+      loaderTemplateModel.toJson(),
     );
-  }
 
-  String _buildDataCubitLoader({
-    required String type,
-    required String api,
-    required String methodName,
-    required Iterable<MethodElement> methods,
-    required bool hasFilter,
-    required List<ParameterElement> filterParameters,
-    bool isInline = false,
-  }) {
-    final hasRequiredParam = filterParameters.any(
-      (element) => element.isRequired,
-    ); // for PK values the filter can not be null
-
-    final namePrefixList = methodName.sentenceCase.split(' ');
-    String namePrefix = '';
-
-    for (int i = 0; i < namePrefixList.length; i += 1) {
-      if (i < namePrefixList.length - 1) {
-        namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
-      }
-    }
-
-    final createMethod = methods.firstWhereOrNull((element) {
-      return element.displayName == '${namePrefix}Create';
-    });
-    final partialUpdateMethod = methods.firstWhereOrNull((element) {
-      return element.displayName == '${namePrefix}PartialUpdate';
-    });
-    final updateMethod = methods.firstWhereOrNull((element) {
-      return element.displayName == '${namePrefix}Update';
-    });
-    final deleteMethod = methods.firstWhereOrNull((element) {
-      return element.displayName == '${namePrefix}Delete';
-    });
-
-    final readMethod = methods.firstWhereOrNull((element) {
-      return element.displayName == '${namePrefix}Read';
-    });
-
-    final createModel = _getMethodModel('createModel', createMethod);
-    final partialUpdateModel =
-        _getMethodModel('partialUpdateModel', partialUpdateMethod);
-    final updateModel = _getMethodModel('updateModel', updateMethod);
-    final deleteModel = _getMethodModel('deleteModel', deleteMethod);
-    final readModel = _getMethodModel('readModel', readMethod);
-
-    final dataCubitTemplateModel = DataCubitTemplateModel(
-      api: api,
-      hasRequiredParam: hasRequiredParam,
-      name: methodName.pascalCase,
-      isInline: isInline,
-      methodName: methodName,
-      crudMethods: [
-        createModel,
-        partialUpdateModel,
-        updateModel,
-        deleteModel,
-      ].whereType<MethodModel>().toList(),
-      returnType: type,
-    );
-    return Template(repositoryDataTemplate).renderString(
-      dataCubitTemplateModel.toJson(),
-    );
+    final dataCubit = dataLoaderForTemplate != null
+        ? Template(dataCubitTemplate).renderString(
+            CubitTemplateModel(
+              name: namePrefix.pascalCase,
+              returnType: dataLoaderForTemplate.returnType,
+              hasFilter: dataLoaderForTemplate.hasFilter,
+              crudMethods: crudMethods,
+            ).toJson(),
+          )
+        : '';
+    final listCubit = listLoaderForTemplate != null
+        ? Template(listCubitTemplate).renderString(
+            CubitTemplateModel(
+              name: namePrefix.pascalCase,
+              returnType: listLoaderForTemplate.returnType,
+              hasFilter: listLoaderForTemplate.hasFilter,
+              crudMethods: crudMethods,
+            ).toJson(),
+          )
+        : '';
+    return '$repository\n$dataCubit\n$listCubit';
   }
 
   MethodModel? _getMethodModel(
@@ -467,36 +419,13 @@ class OpenapiRepositoryGenerator
         .renderString(typedefModel.toJson());
   }
 
-  String _buildFilterClass({
+  String _buildLoaderFilterClass({
     required String name,
-    required List<ParameterElement> parameters,
-    required int defaultOffset,
-    required int defaultPageSize,
+    required List<TypeModel> types,
+    required bool isPaginated,
   }) {
     final filterTemplateModel = FreezedTemplateModel(
-        name: name,
-        isPaginated: parameters.any(
-          (element) => ['offset', 'limit'].contains(element.name),
-        ),
-        types: parameters.map((parameter) {
-          final isOffsetLimit = ['offset', 'limit'].contains(parameter.name);
-          final defaultValue = isOffsetLimit && parameter.isOptional
-              ? '@Default(${parameter.name == 'offset' ? defaultOffset : defaultPageSize}) '
-              : '';
-
-          final isRequired = defaultValue.isEmpty && !parameter.isOptional;
-          final isNullable = defaultValue.isEmpty && parameter.isOptional;
-
-          return TypeModel(
-            isRequired: isRequired,
-            isNullable: isNullable,
-            defaultValue: defaultValue,
-            name: parameter.name,
-            type: parameter.type.getDisplayString(
-              withNullability: false,
-            ),
-          );
-        }).toList());
+        name: name, isPaginated: isPaginated, types: types);
 
     return Template(freezedFilterTemplate).renderString(
       filterTemplateModel.toJson(),
@@ -623,5 +552,167 @@ class _ListRepositoryBuilder {
       ignoreEndpoints: parsedIgnoreEndpoints,
       listEndpoints: parsedEndpoints,
     );
+  }
+}
+
+abstract class _MethodElementProcessor {
+  final MethodElement methodElement;
+  final int defaultOffset;
+  final int defaultPageSize;
+  final List<String> ignoreParams;
+
+  _MethodElementProcessor({
+    required this.methodElement,
+    required this.defaultOffset,
+    required this.defaultPageSize,
+    this.ignoreParams = const [],
+  });
+  DartType? _getInnerMostType(DartType type) {
+    if (type is ParameterizedType && type.typeArguments.isNotEmpty) {
+      final typeArgs = type.typeArguments;
+      return typeArgs.first.isVoid ? null : _getInnerMostType(typeArgs.first);
+    }
+
+    return type;
+  }
+
+  List<TypeModel> _getTypesFromParams(List<ParameterElement> methodParameters) {
+    return methodParameters.map((parameter) {
+      final isOffsetLimit = ['offset', 'limit'].contains(parameter.name);
+      final defaultValue = isOffsetLimit && parameter.isOptional
+          ? '@Default(${parameter.name == 'offset' ? defaultOffset : defaultPageSize}) '
+          : '';
+
+      final isRequired = defaultValue.isEmpty && !parameter.isOptional;
+      final isNullable = defaultValue.isEmpty && parameter.isOptional;
+
+      return TypeModel(
+        isRequired: isRequired,
+        isNullable: isNullable,
+        defaultValue: defaultValue,
+        name: parameter.name,
+        type: parameter.type.getDisplayString(
+          withNullability: false,
+        ),
+      );
+    }).toList();
+  }
+
+  List<ParameterElement> _getMethodParameters() {
+    return methodElement.parameters
+        .where((parameter) => !ignoreParams.contains(parameter.name))
+        .toList();
+  }
+
+  LoaderMethodModel _getLoaderMethodModel(
+      _ReturnModel returnModel, bool isList) {
+    final methodParameters = _getMethodParameters();
+
+    final types = _getTypesFromParams(methodParameters);
+    final hasFilter = methodParameters.isNotEmpty;
+    final hasRequiredParam = methodParameters.any(
+      (element) => element.isRequired,
+    );
+
+    return LoaderMethodModel(
+        returnType: returnModel.type.getDisplayString(withNullability: false),
+        name: methodElement.displayName.pascalCase,
+        hasFilter: hasFilter,
+        isListLoader: isList,
+        isPaginated: methodParameters.any(
+          (element) => ['offset', 'limit'].contains(element.name),
+        ),
+        types: types,
+        filterParams: hasFilter && methodParameters.isNotEmpty
+            ? methodParameters.map((e) {
+                return ParamModel(
+                    '${e.name}: filter${hasRequiredParam ? '' : '?'}.${e.name}');
+              }).toList()
+            : [],
+        isInline: returnModel.isInline,
+        hasRequiredParam: methodParameters.any((element) => element.isRequired),
+        defaultOffset: defaultOffset,
+        defaultPageSize: defaultPageSize);
+  }
+
+  _ReturnModel? getInnerReturnType(DartType type, bool isInline);
+
+  LoaderMethodModel? getLoaderMethodModel();
+}
+
+class _ListMethodElementProcesser extends _MethodElementProcessor {
+  _ListMethodElementProcesser({
+    required super.methodElement,
+    required super.defaultOffset,
+    required super.defaultPageSize,
+    super.ignoreParams,
+  });
+
+  @override
+  _ReturnModel? getInnerReturnType(DartType type, bool isInline) {
+    const listChecker = TypeChecker.any([
+      TypeChecker.fromRuntime(List),
+      TypeChecker.fromRuntime(BuiltList),
+    ]);
+    final innerMostType = _getInnerMostType(type);
+    if (listChecker.isExactlyType(type) && innerMostType != null) {
+      return _ReturnModel(innerMostType, isInline);
+    }
+
+    if (type is! ParameterizedType) return null;
+
+    List<DartType> args = type.typeArguments;
+    if (args.isEmpty) {
+      final innerElement = innerMostType?.element;
+      if (innerMostType == null || innerElement == null) return null;
+
+      final inlineVisitor = InlineClassVisitor();
+      innerElement.visitChildren(inlineVisitor);
+      if (inlineVisitor.fields.isEmpty) return null;
+      final results = inlineVisitor.fields;
+      return getInnerReturnType(results.first.type, true);
+    }
+    if (args.first.isVoid) return null;
+
+    return getInnerReturnType(args.first, false);
+  }
+
+  @override
+  LoaderMethodModel? getLoaderMethodModel() {
+    final returnModel = getInnerReturnType(methodElement.returnType, false);
+    if (returnModel != null) {
+      return _getLoaderMethodModel(returnModel, true);
+    } else {
+      return null;
+    }
+  }
+}
+
+class _DataMethodElementProcesser extends _MethodElementProcessor {
+  _DataMethodElementProcesser({
+    required super.methodElement,
+    required super.defaultOffset,
+    required super.defaultPageSize,
+    super.ignoreParams,
+  });
+
+  @override
+  _ReturnModel? getInnerReturnType(DartType type, bool isInline) {
+    final innerMostType = _getInnerMostType(type);
+    if (innerMostType != null) {
+      return _ReturnModel(innerMostType, isInline);
+    }
+
+    return null;
+  }
+
+  @override
+  LoaderMethodModel? getLoaderMethodModel() {
+    final returnModel = getInnerReturnType(methodElement.returnType, false);
+    if (returnModel != null) {
+      return _getLoaderMethodModel(returnModel, false);
+    } else {
+      return null;
+    }
   }
 }
