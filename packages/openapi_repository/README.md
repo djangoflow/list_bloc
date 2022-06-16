@@ -6,6 +6,9 @@ The aim of this generator is to generate list repositories, and freezed models f
 
 Make sure you've generated Client library using OpenApi(Swagger) schema definitions. And make sure that each `operationId` in the schema has operations(create, update, partialUpdate, read, delete etc) suffix which helps the library to detect methods.
 
+For example: UserApi endpoint should have `operationId` for CRUD operation in this format.
+`user_create`, `user_update`, `user_partial_update`, `user_read`, `user_delete`.
+
 Then create a flutter/dart project and use `OpenapiRepository` annotation on the class that will hold the generated files. Use annoation params to configure how the files should be generated. Example: [a Annotation Usage](example/open_api_flutter_example/lib/data/api_repository/api_repository.dart)
 
 Here `$ApiRepository` class will holding the generated files in `part 'api_repository.openapi.dart'; part 'api_repository.freezed.dart'; part 'api_repository.g.dart';` directories.
