@@ -24,11 +24,11 @@ class {{name}}Filter with _${{name}}Filter{{#isPaginated}} implements OffsetLimi
 }
 ''';
 
-const typedefTemplate = r'''
+const typedefListCubitStateTemplate = r'''
 typedef {{name}}State = Data<List<{{type}}>, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}>;
 ''';
 
-const typedefDataCubitTemplate = r'''
+const typedefDataCubitStateTemplate = r'''
 typedef {{name}}State = Data<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}>;
 ''';
 
