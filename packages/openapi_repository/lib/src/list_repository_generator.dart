@@ -118,14 +118,11 @@ class OpenapiRepositoryGenerator
       if (!returnType.isDartAsyncFuture) continue;
 
       final methodName = methodElement.displayName;
-      if (builder.ignoreEndpoints.contains('*')) {
+      if (shouldIgnore(
+          methodName: methodName,
+          ignoreEndpoints: builder.ignoreEndpoints,
+          listEndpoints: builder.listEndpoints)) {
         continue;
-      } else if (builder.ignoreEndpoints.contains(methodName)) {
-        continue;
-      }
-
-      if (!builder.listEndpoints.contains('*')) {
-        if (!builder.listEndpoints.contains(methodName)) continue;
       }
 
       final apiClass =
@@ -160,7 +157,11 @@ class OpenapiRepositoryGenerator
             return (element.displayName == '${namePrefix}List' &&
                 element.returnType.isDartAsyncFuture);
           });
-          if (listMethod != null) {
+          if (listMethod != null &&
+              !(shouldIgnore(
+                  methodName: listMethod.displayName,
+                  ignoreEndpoints: builder.ignoreEndpoints,
+                  listEndpoints: builder.listEndpoints))) {
             final listLoaderMethodModel = _ListMethodElementProcesser(
               methodElement: listMethod,
               defaultOffset: _defaultOffset,
@@ -189,7 +190,11 @@ class OpenapiRepositoryGenerator
             return (element.displayName == '${namePrefix}Read' &&
                 element.returnType.isDartAsyncFuture);
           });
-          if (readMethod != null) {
+          if (readMethod != null &&
+              !(shouldIgnore(
+                  methodName: readMethod.displayName,
+                  ignoreEndpoints: builder.ignoreEndpoints,
+                  listEndpoints: builder.listEndpoints))) {
             final listLoaderMethodModel = _DataMethodElementProcesser(
               methodElement: readMethod,
               defaultOffset: _defaultOffset,
@@ -422,6 +427,27 @@ class OpenapiRepositoryGenerator
     return Template(freezedFilterTemplate).renderString(
       filterTemplateModel.toJson(),
     );
+  }
+
+  bool shouldIgnore({
+    required String methodName,
+    required List<String> ignoreEndpoints,
+    required List<String> listEndpoints,
+  }) {
+    if (ignoreEndpoints.contains('*')) {
+      return true;
+    } else if (ignoreEndpoints.contains(methodName)) {
+      return true;
+    }
+
+    if (!listEndpoints.contains('*')) {
+      if (!listEndpoints.contains(methodName)) {
+        return true;
+      }
+
+      return false;
+    }
+    return false;
   }
 }
 
