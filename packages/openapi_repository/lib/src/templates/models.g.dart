@@ -219,3 +219,123 @@ Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
       'arguments': instance.arguments.map((e) => e.toJson()).toList(),
       'parameters': instance.parameters.map((e) => e.toJson()).toList(),
     };
+
+_$_LoaderMethodModel _$$_LoaderMethodModelFromJson(Map<String, dynamic> json) =>
+    _$_LoaderMethodModel(
+      returnType: json['returnType'] as String,
+      name: json['name'] as String,
+      hasFilter: json['hasFilter'] as bool,
+      isListLoader: json['isListLoader'] as bool,
+      isPaginated: json['isPaginated'] as bool,
+      hasRequiredParam: json['hasRequiredParam'] as bool,
+      types: (json['types'] as List<dynamic>)
+          .map((e) => TypeModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      filterParams: (json['filterParams'] as List<dynamic>)
+          .map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      defaultOffset: json['defaultOffset'] as int,
+      defaultPageSize: json['defaultPageSize'] as int,
+      isInline: json['isInline'] as bool? ?? false,
+    );
+
+Map<String, dynamic> _$$_LoaderMethodModelToJson(
+        _$_LoaderMethodModel instance) =>
+    <String, dynamic>{
+      'returnType': instance.returnType,
+      'name': instance.name,
+      'hasFilter': instance.hasFilter,
+      'isListLoader': instance.isListLoader,
+      'isPaginated': instance.isPaginated,
+      'hasRequiredParam': instance.hasRequiredParam,
+      'types': instance.types.map((e) => e.toJson()).toList(),
+      'filterParams': instance.filterParams.map((e) => e.toJson()).toList(),
+      'defaultOffset': instance.defaultOffset,
+      'defaultPageSize': instance.defaultPageSize,
+      'isInline': instance.isInline,
+    };
+
+_$_LoaderRepositoryTemplateModel _$$_LoaderRepositoryTemplateModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_LoaderRepositoryTemplateModel(
+      dataLoader: json['dataLoader'] == null
+          ? null
+          : LoaderTemplateModel.fromJson(
+              json['dataLoader'] as Map<String, dynamic>),
+      listLoader: json['listLoader'] == null
+          ? null
+          : LoaderTemplateModel.fromJson(
+              json['listLoader'] as Map<String, dynamic>),
+      hasDataLoader: json['hasDataLoader'] as bool,
+      hasListLoader: json['hasListLoader'] as bool,
+      crudMethods: (json['crudMethods'] as List<dynamic>)
+          .map((e) => MethodModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      repositoryName: json['repositoryName'] as String,
+      api: json['api'] as String,
+    );
+
+Map<String, dynamic> _$$_LoaderRepositoryTemplateModelToJson(
+        _$_LoaderRepositoryTemplateModel instance) =>
+    <String, dynamic>{
+      'dataLoader': instance.dataLoader?.toJson(),
+      'listLoader': instance.listLoader?.toJson(),
+      'hasDataLoader': instance.hasDataLoader,
+      'hasListLoader': instance.hasListLoader,
+      'crudMethods': instance.crudMethods.map((e) => e.toJson()).toList(),
+      'repositoryName': instance.repositoryName,
+      'api': instance.api,
+    };
+
+_$_LoaderTemplateModel _$$_LoaderTemplateModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_LoaderTemplateModel(
+      api: json['api'] as String,
+      hasRequiredParam: json['hasRequiredParam'] ?? false,
+      isInline: json['isInline'] as bool? ?? false,
+      methodName: json['methodName'] as String,
+      returnType: json['returnType'] as String,
+      hasFilter: json['hasFilter'] as bool? ?? false,
+      additionalParams: (json['additionalParams'] as List<dynamic>?)
+              ?.map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      filterParams: (json['filterParams'] as List<dynamic>?)
+              ?.map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$$_LoaderTemplateModelToJson(
+        _$_LoaderTemplateModel instance) =>
+    <String, dynamic>{
+      'api': instance.api,
+      'hasRequiredParam': instance.hasRequiredParam,
+      'isInline': instance.isInline,
+      'methodName': instance.methodName,
+      'returnType': instance.returnType,
+      'hasFilter': instance.hasFilter,
+      'additionalParams':
+          instance.additionalParams.map((e) => e.toJson()).toList(),
+      'filterParams': instance.filterParams.map((e) => e.toJson()).toList(),
+    };
+
+_$_CubitTemplateModel _$$_CubitTemplateModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_CubitTemplateModel(
+      name: json['name'] as String,
+      returnType: json['returnType'] as String,
+      hasFilter: json['hasFilter'] as bool? ?? false,
+      crudMethods: (json['crudMethods'] as List<dynamic>)
+          .map((e) => MethodModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_CubitTemplateModelToJson(
+        _$_CubitTemplateModel instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'returnType': instance.returnType,
+      'hasFilter': instance.hasFilter,
+      'crudMethods': instance.crudMethods.map((e) => e.toJson()).toList(),
+    };

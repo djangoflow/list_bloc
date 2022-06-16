@@ -24,11 +24,11 @@ class {{name}}Filter with _${{name}}Filter{{#isPaginated}} implements OffsetLimi
 }
 ''';
 
-const typedefTemplate = r'''
+const typedefListCubitStateTemplate = r'''
 typedef {{name}}State = Data<List<{{type}}>, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}>;
 ''';
 
-const typedefDataCubitTemplate = r'''
+const typedefDataCubitStateTemplate = r'''
 typedef {{name}}State = Data<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}>;
 ''';
 
@@ -112,6 +112,92 @@ abstract class {{name}}DataRepository {
     
   }
 
+  {{#crudMethods}}Future<void> {{operation}}({
+    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
+    {{/arguments}} }
+  ) async {
+    await ApiRepository.instance.{{api}}.{{name}}(
+      {{#parameters}}{{param}},
+      {{/parameters}}
+    );
+  }
+  {{/crudMethods}}
+}
+''';
+
+const dataCubitTemplate = r'''
+class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
+  {{name}}DataBloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter]) loader,) : super(dataLoader);
+
+  {{#crudMethods}}
+  @override
+    Future<void> {{operation}}({
+    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
+    {{/arguments}} }
+  ) async {
+      await super.{{operation}}({{#parameters}}{{param}},
+      {{/parameters}});
+      await super.load(state.filter);
+  }
+  {{/crudMethods}}
+
+}
+''';
+
+const listCubitTemplate = r'''
+class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
+  {{name}}ListBloc(Future<List<{{returnType}}>> Function([ {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter]) loader,) : super(listLoader);
+
+  {{#crudMethods}}
+  @override
+    Future<void> {{operation}}({
+    {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
+    {{/arguments}} }
+  ) async {
+      await super.{{operation}}({{#parameters}}{{param}},
+      {{/parameters}});
+      await super.reload();
+  }
+  {{/crudMethods}}
+
+}
+''';
+
+const repositoryTemplate = r'''
+abstract class {{repositoryName}}Repository {
+  {{#hasDataLoader}}
+  {{#dataLoader}}
+static Future<{{returnType}}> dataLoader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}ReadFilter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
+    {{#hasRequiredParam}}if (filter == null) {
+      throw Exception('Invalid filter');
+    }{{/hasRequiredParam}}
+    final r = await ApiRepository.instance.{{api}}.{{methodName}}(
+      {{#filterParams}}{{param}},{{/filterParams}}
+    );
+    if(r.data == null) {
+      throw Exception('Failed to load data!');
+    }else{
+      return r.data!;
+    }
+    
+  }
+  {{/dataLoader}}
+  {{/hasDataLoader}}
+  
+  {{#hasListLoader}}
+  {{#listLoader}}
+static Future<List<{{returnType}}>> listLoader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}ListFilter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
+    {{#hasRequiredParam}}if (filter == null) {
+      throw Exception('Invalid filter');
+    }{{/hasRequiredParam}}
+    final r = await ApiRepository.instance.{{api}}.{{methodName}}(
+      {{#filterParams}}{{param}},{{/filterParams}}
+    );
+
+    return r.data?{{#isInline}}.results{{/isInline}}.asList() ?? [];
+  }
+  {{/listLoader}}
+{{/hasListLoader}}
   {{#crudMethods}}Future<void> {{operation}}({
     {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
     {{/arguments}} }

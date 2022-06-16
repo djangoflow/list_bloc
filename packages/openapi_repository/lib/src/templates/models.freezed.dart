@@ -2282,3 +2282,1203 @@ abstract class _MethodModel implements MethodModel {
   _$$_MethodModelCopyWith<_$_MethodModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+LoaderMethodModel _$LoaderMethodModelFromJson(Map<String, dynamic> json) {
+  return _LoaderMethodModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LoaderMethodModel {
+  String get returnType => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  bool get hasFilter => throw _privateConstructorUsedError;
+  bool get isListLoader => throw _privateConstructorUsedError;
+  bool get isPaginated => throw _privateConstructorUsedError;
+  bool get hasRequiredParam => throw _privateConstructorUsedError;
+  List<TypeModel> get types => throw _privateConstructorUsedError;
+  List<ParamModel> get filterParams => throw _privateConstructorUsedError;
+  int get defaultOffset => throw _privateConstructorUsedError;
+  int get defaultPageSize => throw _privateConstructorUsedError;
+  bool get isInline => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LoaderMethodModelCopyWith<LoaderMethodModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LoaderMethodModelCopyWith<$Res> {
+  factory $LoaderMethodModelCopyWith(
+          LoaderMethodModel value, $Res Function(LoaderMethodModel) then) =
+      _$LoaderMethodModelCopyWithImpl<$Res>;
+  $Res call(
+      {String returnType,
+      String name,
+      bool hasFilter,
+      bool isListLoader,
+      bool isPaginated,
+      bool hasRequiredParam,
+      List<TypeModel> types,
+      List<ParamModel> filterParams,
+      int defaultOffset,
+      int defaultPageSize,
+      bool isInline});
+}
+
+/// @nodoc
+class _$LoaderMethodModelCopyWithImpl<$Res>
+    implements $LoaderMethodModelCopyWith<$Res> {
+  _$LoaderMethodModelCopyWithImpl(this._value, this._then);
+
+  final LoaderMethodModel _value;
+  // ignore: unused_field
+  final $Res Function(LoaderMethodModel) _then;
+
+  @override
+  $Res call({
+    Object? returnType = freezed,
+    Object? name = freezed,
+    Object? hasFilter = freezed,
+    Object? isListLoader = freezed,
+    Object? isPaginated = freezed,
+    Object? hasRequiredParam = freezed,
+    Object? types = freezed,
+    Object? filterParams = freezed,
+    Object? defaultOffset = freezed,
+    Object? defaultPageSize = freezed,
+    Object? isInline = freezed,
+  }) {
+    return _then(_value.copyWith(
+      returnType: returnType == freezed
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasFilter: hasFilter == freezed
+          ? _value.hasFilter
+          : hasFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isListLoader: isListLoader == freezed
+          ? _value.isListLoader
+          : isListLoader // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPaginated: isPaginated == freezed
+          ? _value.isPaginated
+          : isPaginated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasRequiredParam: hasRequiredParam == freezed
+          ? _value.hasRequiredParam
+          : hasRequiredParam // ignore: cast_nullable_to_non_nullable
+              as bool,
+      types: types == freezed
+          ? _value.types
+          : types // ignore: cast_nullable_to_non_nullable
+              as List<TypeModel>,
+      filterParams: filterParams == freezed
+          ? _value.filterParams
+          : filterParams // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+      defaultOffset: defaultOffset == freezed
+          ? _value.defaultOffset
+          : defaultOffset // ignore: cast_nullable_to_non_nullable
+              as int,
+      defaultPageSize: defaultPageSize == freezed
+          ? _value.defaultPageSize
+          : defaultPageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      isInline: isInline == freezed
+          ? _value.isInline
+          : isInline // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_LoaderMethodModelCopyWith<$Res>
+    implements $LoaderMethodModelCopyWith<$Res> {
+  factory _$$_LoaderMethodModelCopyWith(_$_LoaderMethodModel value,
+          $Res Function(_$_LoaderMethodModel) then) =
+      __$$_LoaderMethodModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String returnType,
+      String name,
+      bool hasFilter,
+      bool isListLoader,
+      bool isPaginated,
+      bool hasRequiredParam,
+      List<TypeModel> types,
+      List<ParamModel> filterParams,
+      int defaultOffset,
+      int defaultPageSize,
+      bool isInline});
+}
+
+/// @nodoc
+class __$$_LoaderMethodModelCopyWithImpl<$Res>
+    extends _$LoaderMethodModelCopyWithImpl<$Res>
+    implements _$$_LoaderMethodModelCopyWith<$Res> {
+  __$$_LoaderMethodModelCopyWithImpl(
+      _$_LoaderMethodModel _value, $Res Function(_$_LoaderMethodModel) _then)
+      : super(_value, (v) => _then(v as _$_LoaderMethodModel));
+
+  @override
+  _$_LoaderMethodModel get _value => super._value as _$_LoaderMethodModel;
+
+  @override
+  $Res call({
+    Object? returnType = freezed,
+    Object? name = freezed,
+    Object? hasFilter = freezed,
+    Object? isListLoader = freezed,
+    Object? isPaginated = freezed,
+    Object? hasRequiredParam = freezed,
+    Object? types = freezed,
+    Object? filterParams = freezed,
+    Object? defaultOffset = freezed,
+    Object? defaultPageSize = freezed,
+    Object? isInline = freezed,
+  }) {
+    return _then(_$_LoaderMethodModel(
+      returnType: returnType == freezed
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasFilter: hasFilter == freezed
+          ? _value.hasFilter
+          : hasFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isListLoader: isListLoader == freezed
+          ? _value.isListLoader
+          : isListLoader // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPaginated: isPaginated == freezed
+          ? _value.isPaginated
+          : isPaginated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasRequiredParam: hasRequiredParam == freezed
+          ? _value.hasRequiredParam
+          : hasRequiredParam // ignore: cast_nullable_to_non_nullable
+              as bool,
+      types: types == freezed
+          ? _value._types
+          : types // ignore: cast_nullable_to_non_nullable
+              as List<TypeModel>,
+      filterParams: filterParams == freezed
+          ? _value._filterParams
+          : filterParams // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+      defaultOffset: defaultOffset == freezed
+          ? _value.defaultOffset
+          : defaultOffset // ignore: cast_nullable_to_non_nullable
+              as int,
+      defaultPageSize: defaultPageSize == freezed
+          ? _value.defaultPageSize
+          : defaultPageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      isInline: isInline == freezed
+          ? _value.isInline
+          : isInline // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_LoaderMethodModel implements _LoaderMethodModel {
+  const _$_LoaderMethodModel(
+      {required this.returnType,
+      required this.name,
+      required this.hasFilter,
+      required this.isListLoader,
+      required this.isPaginated,
+      required this.hasRequiredParam,
+      required final List<TypeModel> types,
+      required final List<ParamModel> filterParams,
+      required this.defaultOffset,
+      required this.defaultPageSize,
+      this.isInline = false})
+      : _types = types,
+        _filterParams = filterParams;
+
+  factory _$_LoaderMethodModel.fromJson(Map<String, dynamic> json) =>
+      _$$_LoaderMethodModelFromJson(json);
+
+  @override
+  final String returnType;
+  @override
+  final String name;
+  @override
+  final bool hasFilter;
+  @override
+  final bool isListLoader;
+  @override
+  final bool isPaginated;
+  @override
+  final bool hasRequiredParam;
+  final List<TypeModel> _types;
+  @override
+  List<TypeModel> get types {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_types);
+  }
+
+  final List<ParamModel> _filterParams;
+  @override
+  List<ParamModel> get filterParams {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filterParams);
+  }
+
+  @override
+  final int defaultOffset;
+  @override
+  final int defaultPageSize;
+  @override
+  @JsonKey()
+  final bool isInline;
+
+  @override
+  String toString() {
+    return 'LoaderMethodModel(returnType: $returnType, name: $name, hasFilter: $hasFilter, isListLoader: $isListLoader, isPaginated: $isPaginated, hasRequiredParam: $hasRequiredParam, types: $types, filterParams: $filterParams, defaultOffset: $defaultOffset, defaultPageSize: $defaultPageSize, isInline: $isInline)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LoaderMethodModel &&
+            const DeepCollectionEquality()
+                .equals(other.returnType, returnType) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.hasFilter, hasFilter) &&
+            const DeepCollectionEquality()
+                .equals(other.isListLoader, isListLoader) &&
+            const DeepCollectionEquality()
+                .equals(other.isPaginated, isPaginated) &&
+            const DeepCollectionEquality()
+                .equals(other.hasRequiredParam, hasRequiredParam) &&
+            const DeepCollectionEquality().equals(other._types, _types) &&
+            const DeepCollectionEquality()
+                .equals(other._filterParams, _filterParams) &&
+            const DeepCollectionEquality()
+                .equals(other.defaultOffset, defaultOffset) &&
+            const DeepCollectionEquality()
+                .equals(other.defaultPageSize, defaultPageSize) &&
+            const DeepCollectionEquality().equals(other.isInline, isInline));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(returnType),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(hasFilter),
+      const DeepCollectionEquality().hash(isListLoader),
+      const DeepCollectionEquality().hash(isPaginated),
+      const DeepCollectionEquality().hash(hasRequiredParam),
+      const DeepCollectionEquality().hash(_types),
+      const DeepCollectionEquality().hash(_filterParams),
+      const DeepCollectionEquality().hash(defaultOffset),
+      const DeepCollectionEquality().hash(defaultPageSize),
+      const DeepCollectionEquality().hash(isInline));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LoaderMethodModelCopyWith<_$_LoaderMethodModel> get copyWith =>
+      __$$_LoaderMethodModelCopyWithImpl<_$_LoaderMethodModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LoaderMethodModelToJson(this);
+  }
+}
+
+abstract class _LoaderMethodModel implements LoaderMethodModel {
+  const factory _LoaderMethodModel(
+      {required final String returnType,
+      required final String name,
+      required final bool hasFilter,
+      required final bool isListLoader,
+      required final bool isPaginated,
+      required final bool hasRequiredParam,
+      required final List<TypeModel> types,
+      required final List<ParamModel> filterParams,
+      required final int defaultOffset,
+      required final int defaultPageSize,
+      final bool isInline}) = _$_LoaderMethodModel;
+
+  factory _LoaderMethodModel.fromJson(Map<String, dynamic> json) =
+      _$_LoaderMethodModel.fromJson;
+
+  @override
+  String get returnType => throw _privateConstructorUsedError;
+  @override
+  String get name => throw _privateConstructorUsedError;
+  @override
+  bool get hasFilter => throw _privateConstructorUsedError;
+  @override
+  bool get isListLoader => throw _privateConstructorUsedError;
+  @override
+  bool get isPaginated => throw _privateConstructorUsedError;
+  @override
+  bool get hasRequiredParam => throw _privateConstructorUsedError;
+  @override
+  List<TypeModel> get types => throw _privateConstructorUsedError;
+  @override
+  List<ParamModel> get filterParams => throw _privateConstructorUsedError;
+  @override
+  int get defaultOffset => throw _privateConstructorUsedError;
+  @override
+  int get defaultPageSize => throw _privateConstructorUsedError;
+  @override
+  bool get isInline => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LoaderMethodModelCopyWith<_$_LoaderMethodModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+LoaderRepositoryTemplateModel _$LoaderRepositoryTemplateModelFromJson(
+    Map<String, dynamic> json) {
+  return _LoaderRepositoryTemplateModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LoaderRepositoryTemplateModel {
+  LoaderTemplateModel? get dataLoader => throw _privateConstructorUsedError;
+  LoaderTemplateModel? get listLoader => throw _privateConstructorUsedError;
+  bool get hasDataLoader => throw _privateConstructorUsedError;
+  bool get hasListLoader => throw _privateConstructorUsedError;
+  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  String get repositoryName => throw _privateConstructorUsedError;
+  String get api => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LoaderRepositoryTemplateModelCopyWith<LoaderRepositoryTemplateModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LoaderRepositoryTemplateModelCopyWith<$Res> {
+  factory $LoaderRepositoryTemplateModelCopyWith(
+          LoaderRepositoryTemplateModel value,
+          $Res Function(LoaderRepositoryTemplateModel) then) =
+      _$LoaderRepositoryTemplateModelCopyWithImpl<$Res>;
+  $Res call(
+      {LoaderTemplateModel? dataLoader,
+      LoaderTemplateModel? listLoader,
+      bool hasDataLoader,
+      bool hasListLoader,
+      List<MethodModel> crudMethods,
+      String repositoryName,
+      String api});
+
+  $LoaderTemplateModelCopyWith<$Res>? get dataLoader;
+  $LoaderTemplateModelCopyWith<$Res>? get listLoader;
+}
+
+/// @nodoc
+class _$LoaderRepositoryTemplateModelCopyWithImpl<$Res>
+    implements $LoaderRepositoryTemplateModelCopyWith<$Res> {
+  _$LoaderRepositoryTemplateModelCopyWithImpl(this._value, this._then);
+
+  final LoaderRepositoryTemplateModel _value;
+  // ignore: unused_field
+  final $Res Function(LoaderRepositoryTemplateModel) _then;
+
+  @override
+  $Res call({
+    Object? dataLoader = freezed,
+    Object? listLoader = freezed,
+    Object? hasDataLoader = freezed,
+    Object? hasListLoader = freezed,
+    Object? crudMethods = freezed,
+    Object? repositoryName = freezed,
+    Object? api = freezed,
+  }) {
+    return _then(_value.copyWith(
+      dataLoader: dataLoader == freezed
+          ? _value.dataLoader
+          : dataLoader // ignore: cast_nullable_to_non_nullable
+              as LoaderTemplateModel?,
+      listLoader: listLoader == freezed
+          ? _value.listLoader
+          : listLoader // ignore: cast_nullable_to_non_nullable
+              as LoaderTemplateModel?,
+      hasDataLoader: hasDataLoader == freezed
+          ? _value.hasDataLoader
+          : hasDataLoader // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasListLoader: hasListLoader == freezed
+          ? _value.hasListLoader
+          : hasListLoader // ignore: cast_nullable_to_non_nullable
+              as bool,
+      crudMethods: crudMethods == freezed
+          ? _value.crudMethods
+          : crudMethods // ignore: cast_nullable_to_non_nullable
+              as List<MethodModel>,
+      repositoryName: repositoryName == freezed
+          ? _value.repositoryName
+          : repositoryName // ignore: cast_nullable_to_non_nullable
+              as String,
+      api: api == freezed
+          ? _value.api
+          : api // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  @override
+  $LoaderTemplateModelCopyWith<$Res>? get dataLoader {
+    if (_value.dataLoader == null) {
+      return null;
+    }
+
+    return $LoaderTemplateModelCopyWith<$Res>(_value.dataLoader!, (value) {
+      return _then(_value.copyWith(dataLoader: value));
+    });
+  }
+
+  @override
+  $LoaderTemplateModelCopyWith<$Res>? get listLoader {
+    if (_value.listLoader == null) {
+      return null;
+    }
+
+    return $LoaderTemplateModelCopyWith<$Res>(_value.listLoader!, (value) {
+      return _then(_value.copyWith(listLoader: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_LoaderRepositoryTemplateModelCopyWith<$Res>
+    implements $LoaderRepositoryTemplateModelCopyWith<$Res> {
+  factory _$$_LoaderRepositoryTemplateModelCopyWith(
+          _$_LoaderRepositoryTemplateModel value,
+          $Res Function(_$_LoaderRepositoryTemplateModel) then) =
+      __$$_LoaderRepositoryTemplateModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {LoaderTemplateModel? dataLoader,
+      LoaderTemplateModel? listLoader,
+      bool hasDataLoader,
+      bool hasListLoader,
+      List<MethodModel> crudMethods,
+      String repositoryName,
+      String api});
+
+  @override
+  $LoaderTemplateModelCopyWith<$Res>? get dataLoader;
+  @override
+  $LoaderTemplateModelCopyWith<$Res>? get listLoader;
+}
+
+/// @nodoc
+class __$$_LoaderRepositoryTemplateModelCopyWithImpl<$Res>
+    extends _$LoaderRepositoryTemplateModelCopyWithImpl<$Res>
+    implements _$$_LoaderRepositoryTemplateModelCopyWith<$Res> {
+  __$$_LoaderRepositoryTemplateModelCopyWithImpl(
+      _$_LoaderRepositoryTemplateModel _value,
+      $Res Function(_$_LoaderRepositoryTemplateModel) _then)
+      : super(_value, (v) => _then(v as _$_LoaderRepositoryTemplateModel));
+
+  @override
+  _$_LoaderRepositoryTemplateModel get _value =>
+      super._value as _$_LoaderRepositoryTemplateModel;
+
+  @override
+  $Res call({
+    Object? dataLoader = freezed,
+    Object? listLoader = freezed,
+    Object? hasDataLoader = freezed,
+    Object? hasListLoader = freezed,
+    Object? crudMethods = freezed,
+    Object? repositoryName = freezed,
+    Object? api = freezed,
+  }) {
+    return _then(_$_LoaderRepositoryTemplateModel(
+      dataLoader: dataLoader == freezed
+          ? _value.dataLoader
+          : dataLoader // ignore: cast_nullable_to_non_nullable
+              as LoaderTemplateModel?,
+      listLoader: listLoader == freezed
+          ? _value.listLoader
+          : listLoader // ignore: cast_nullable_to_non_nullable
+              as LoaderTemplateModel?,
+      hasDataLoader: hasDataLoader == freezed
+          ? _value.hasDataLoader
+          : hasDataLoader // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasListLoader: hasListLoader == freezed
+          ? _value.hasListLoader
+          : hasListLoader // ignore: cast_nullable_to_non_nullable
+              as bool,
+      crudMethods: crudMethods == freezed
+          ? _value._crudMethods
+          : crudMethods // ignore: cast_nullable_to_non_nullable
+              as List<MethodModel>,
+      repositoryName: repositoryName == freezed
+          ? _value.repositoryName
+          : repositoryName // ignore: cast_nullable_to_non_nullable
+              as String,
+      api: api == freezed
+          ? _value.api
+          : api // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_LoaderRepositoryTemplateModel
+    implements _LoaderRepositoryTemplateModel {
+  const _$_LoaderRepositoryTemplateModel(
+      {this.dataLoader,
+      this.listLoader,
+      required this.hasDataLoader,
+      required this.hasListLoader,
+      required final List<MethodModel> crudMethods,
+      required this.repositoryName,
+      required this.api})
+      : _crudMethods = crudMethods;
+
+  factory _$_LoaderRepositoryTemplateModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_LoaderRepositoryTemplateModelFromJson(json);
+
+  @override
+  final LoaderTemplateModel? dataLoader;
+  @override
+  final LoaderTemplateModel? listLoader;
+  @override
+  final bool hasDataLoader;
+  @override
+  final bool hasListLoader;
+  final List<MethodModel> _crudMethods;
+  @override
+  List<MethodModel> get crudMethods {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_crudMethods);
+  }
+
+  @override
+  final String repositoryName;
+  @override
+  final String api;
+
+  @override
+  String toString() {
+    return 'LoaderRepositoryTemplateModel(dataLoader: $dataLoader, listLoader: $listLoader, hasDataLoader: $hasDataLoader, hasListLoader: $hasListLoader, crudMethods: $crudMethods, repositoryName: $repositoryName, api: $api)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LoaderRepositoryTemplateModel &&
+            const DeepCollectionEquality()
+                .equals(other.dataLoader, dataLoader) &&
+            const DeepCollectionEquality()
+                .equals(other.listLoader, listLoader) &&
+            const DeepCollectionEquality()
+                .equals(other.hasDataLoader, hasDataLoader) &&
+            const DeepCollectionEquality()
+                .equals(other.hasListLoader, hasListLoader) &&
+            const DeepCollectionEquality()
+                .equals(other._crudMethods, _crudMethods) &&
+            const DeepCollectionEquality()
+                .equals(other.repositoryName, repositoryName) &&
+            const DeepCollectionEquality().equals(other.api, api));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(dataLoader),
+      const DeepCollectionEquality().hash(listLoader),
+      const DeepCollectionEquality().hash(hasDataLoader),
+      const DeepCollectionEquality().hash(hasListLoader),
+      const DeepCollectionEquality().hash(_crudMethods),
+      const DeepCollectionEquality().hash(repositoryName),
+      const DeepCollectionEquality().hash(api));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LoaderRepositoryTemplateModelCopyWith<_$_LoaderRepositoryTemplateModel>
+      get copyWith => __$$_LoaderRepositoryTemplateModelCopyWithImpl<
+          _$_LoaderRepositoryTemplateModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LoaderRepositoryTemplateModelToJson(this);
+  }
+}
+
+abstract class _LoaderRepositoryTemplateModel
+    implements LoaderRepositoryTemplateModel {
+  const factory _LoaderRepositoryTemplateModel(
+      {final LoaderTemplateModel? dataLoader,
+      final LoaderTemplateModel? listLoader,
+      required final bool hasDataLoader,
+      required final bool hasListLoader,
+      required final List<MethodModel> crudMethods,
+      required final String repositoryName,
+      required final String api}) = _$_LoaderRepositoryTemplateModel;
+
+  factory _LoaderRepositoryTemplateModel.fromJson(Map<String, dynamic> json) =
+      _$_LoaderRepositoryTemplateModel.fromJson;
+
+  @override
+  LoaderTemplateModel? get dataLoader => throw _privateConstructorUsedError;
+  @override
+  LoaderTemplateModel? get listLoader => throw _privateConstructorUsedError;
+  @override
+  bool get hasDataLoader => throw _privateConstructorUsedError;
+  @override
+  bool get hasListLoader => throw _privateConstructorUsedError;
+  @override
+  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  @override
+  String get repositoryName => throw _privateConstructorUsedError;
+  @override
+  String get api => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LoaderRepositoryTemplateModelCopyWith<_$_LoaderRepositoryTemplateModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+LoaderTemplateModel _$LoaderTemplateModelFromJson(Map<String, dynamic> json) {
+  return _LoaderTemplateModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LoaderTemplateModel {
+  String get api => throw _privateConstructorUsedError;
+  dynamic get hasRequiredParam => throw _privateConstructorUsedError;
+  bool get isInline => throw _privateConstructorUsedError;
+  String get methodName => throw _privateConstructorUsedError;
+  String get returnType => throw _privateConstructorUsedError;
+  bool get hasFilter => throw _privateConstructorUsedError;
+  List<ParamModel> get additionalParams => throw _privateConstructorUsedError;
+  List<ParamModel> get filterParams => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LoaderTemplateModelCopyWith<LoaderTemplateModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LoaderTemplateModelCopyWith<$Res> {
+  factory $LoaderTemplateModelCopyWith(
+          LoaderTemplateModel value, $Res Function(LoaderTemplateModel) then) =
+      _$LoaderTemplateModelCopyWithImpl<$Res>;
+  $Res call(
+      {String api,
+      dynamic hasRequiredParam,
+      bool isInline,
+      String methodName,
+      String returnType,
+      bool hasFilter,
+      List<ParamModel> additionalParams,
+      List<ParamModel> filterParams});
+}
+
+/// @nodoc
+class _$LoaderTemplateModelCopyWithImpl<$Res>
+    implements $LoaderTemplateModelCopyWith<$Res> {
+  _$LoaderTemplateModelCopyWithImpl(this._value, this._then);
+
+  final LoaderTemplateModel _value;
+  // ignore: unused_field
+  final $Res Function(LoaderTemplateModel) _then;
+
+  @override
+  $Res call({
+    Object? api = freezed,
+    Object? hasRequiredParam = freezed,
+    Object? isInline = freezed,
+    Object? methodName = freezed,
+    Object? returnType = freezed,
+    Object? hasFilter = freezed,
+    Object? additionalParams = freezed,
+    Object? filterParams = freezed,
+  }) {
+    return _then(_value.copyWith(
+      api: api == freezed
+          ? _value.api
+          : api // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasRequiredParam: hasRequiredParam == freezed
+          ? _value.hasRequiredParam
+          : hasRequiredParam // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isInline: isInline == freezed
+          ? _value.isInline
+          : isInline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      methodName: methodName == freezed
+          ? _value.methodName
+          : methodName // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnType: returnType == freezed
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasFilter: hasFilter == freezed
+          ? _value.hasFilter
+          : hasFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
+      additionalParams: additionalParams == freezed
+          ? _value.additionalParams
+          : additionalParams // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+      filterParams: filterParams == freezed
+          ? _value.filterParams
+          : filterParams // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_LoaderTemplateModelCopyWith<$Res>
+    implements $LoaderTemplateModelCopyWith<$Res> {
+  factory _$$_LoaderTemplateModelCopyWith(_$_LoaderTemplateModel value,
+          $Res Function(_$_LoaderTemplateModel) then) =
+      __$$_LoaderTemplateModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String api,
+      dynamic hasRequiredParam,
+      bool isInline,
+      String methodName,
+      String returnType,
+      bool hasFilter,
+      List<ParamModel> additionalParams,
+      List<ParamModel> filterParams});
+}
+
+/// @nodoc
+class __$$_LoaderTemplateModelCopyWithImpl<$Res>
+    extends _$LoaderTemplateModelCopyWithImpl<$Res>
+    implements _$$_LoaderTemplateModelCopyWith<$Res> {
+  __$$_LoaderTemplateModelCopyWithImpl(_$_LoaderTemplateModel _value,
+      $Res Function(_$_LoaderTemplateModel) _then)
+      : super(_value, (v) => _then(v as _$_LoaderTemplateModel));
+
+  @override
+  _$_LoaderTemplateModel get _value => super._value as _$_LoaderTemplateModel;
+
+  @override
+  $Res call({
+    Object? api = freezed,
+    Object? hasRequiredParam = freezed,
+    Object? isInline = freezed,
+    Object? methodName = freezed,
+    Object? returnType = freezed,
+    Object? hasFilter = freezed,
+    Object? additionalParams = freezed,
+    Object? filterParams = freezed,
+  }) {
+    return _then(_$_LoaderTemplateModel(
+      api: api == freezed
+          ? _value.api
+          : api // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasRequiredParam: hasRequiredParam == freezed
+          ? _value.hasRequiredParam
+          : hasRequiredParam,
+      isInline: isInline == freezed
+          ? _value.isInline
+          : isInline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      methodName: methodName == freezed
+          ? _value.methodName
+          : methodName // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnType: returnType == freezed
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasFilter: hasFilter == freezed
+          ? _value.hasFilter
+          : hasFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
+      additionalParams: additionalParams == freezed
+          ? _value._additionalParams
+          : additionalParams // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+      filterParams: filterParams == freezed
+          ? _value._filterParams
+          : filterParams // ignore: cast_nullable_to_non_nullable
+              as List<ParamModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_LoaderTemplateModel implements _LoaderTemplateModel {
+  const _$_LoaderTemplateModel(
+      {required this.api,
+      this.hasRequiredParam = false,
+      this.isInline = false,
+      required this.methodName,
+      required this.returnType,
+      this.hasFilter = false,
+      final List<ParamModel> additionalParams = const [],
+      final List<ParamModel> filterParams = const []})
+      : _additionalParams = additionalParams,
+        _filterParams = filterParams;
+
+  factory _$_LoaderTemplateModel.fromJson(Map<String, dynamic> json) =>
+      _$$_LoaderTemplateModelFromJson(json);
+
+  @override
+  final String api;
+  @override
+  @JsonKey()
+  final dynamic hasRequiredParam;
+  @override
+  @JsonKey()
+  final bool isInline;
+  @override
+  final String methodName;
+  @override
+  final String returnType;
+  @override
+  @JsonKey()
+  final bool hasFilter;
+  final List<ParamModel> _additionalParams;
+  @override
+  @JsonKey()
+  List<ParamModel> get additionalParams {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_additionalParams);
+  }
+
+  final List<ParamModel> _filterParams;
+  @override
+  @JsonKey()
+  List<ParamModel> get filterParams {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filterParams);
+  }
+
+  @override
+  String toString() {
+    return 'LoaderTemplateModel(api: $api, hasRequiredParam: $hasRequiredParam, isInline: $isInline, methodName: $methodName, returnType: $returnType, hasFilter: $hasFilter, additionalParams: $additionalParams, filterParams: $filterParams)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LoaderTemplateModel &&
+            const DeepCollectionEquality().equals(other.api, api) &&
+            const DeepCollectionEquality()
+                .equals(other.hasRequiredParam, hasRequiredParam) &&
+            const DeepCollectionEquality().equals(other.isInline, isInline) &&
+            const DeepCollectionEquality()
+                .equals(other.methodName, methodName) &&
+            const DeepCollectionEquality()
+                .equals(other.returnType, returnType) &&
+            const DeepCollectionEquality().equals(other.hasFilter, hasFilter) &&
+            const DeepCollectionEquality()
+                .equals(other._additionalParams, _additionalParams) &&
+            const DeepCollectionEquality()
+                .equals(other._filterParams, _filterParams));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(api),
+      const DeepCollectionEquality().hash(hasRequiredParam),
+      const DeepCollectionEquality().hash(isInline),
+      const DeepCollectionEquality().hash(methodName),
+      const DeepCollectionEquality().hash(returnType),
+      const DeepCollectionEquality().hash(hasFilter),
+      const DeepCollectionEquality().hash(_additionalParams),
+      const DeepCollectionEquality().hash(_filterParams));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LoaderTemplateModelCopyWith<_$_LoaderTemplateModel> get copyWith =>
+      __$$_LoaderTemplateModelCopyWithImpl<_$_LoaderTemplateModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LoaderTemplateModelToJson(this);
+  }
+}
+
+abstract class _LoaderTemplateModel implements LoaderTemplateModel {
+  const factory _LoaderTemplateModel(
+      {required final String api,
+      final dynamic hasRequiredParam,
+      final bool isInline,
+      required final String methodName,
+      required final String returnType,
+      final bool hasFilter,
+      final List<ParamModel> additionalParams,
+      final List<ParamModel> filterParams}) = _$_LoaderTemplateModel;
+
+  factory _LoaderTemplateModel.fromJson(Map<String, dynamic> json) =
+      _$_LoaderTemplateModel.fromJson;
+
+  @override
+  String get api => throw _privateConstructorUsedError;
+  @override
+  dynamic get hasRequiredParam => throw _privateConstructorUsedError;
+  @override
+  bool get isInline => throw _privateConstructorUsedError;
+  @override
+  String get methodName => throw _privateConstructorUsedError;
+  @override
+  String get returnType => throw _privateConstructorUsedError;
+  @override
+  bool get hasFilter => throw _privateConstructorUsedError;
+  @override
+  List<ParamModel> get additionalParams => throw _privateConstructorUsedError;
+  @override
+  List<ParamModel> get filterParams => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LoaderTemplateModelCopyWith<_$_LoaderTemplateModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+CubitTemplateModel _$CubitTemplateModelFromJson(Map<String, dynamic> json) {
+  return _CubitTemplateModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CubitTemplateModel {
+  String get name => throw _privateConstructorUsedError;
+  String get returnType => throw _privateConstructorUsedError;
+  bool get hasFilter => throw _privateConstructorUsedError;
+  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CubitTemplateModelCopyWith<CubitTemplateModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CubitTemplateModelCopyWith<$Res> {
+  factory $CubitTemplateModelCopyWith(
+          CubitTemplateModel value, $Res Function(CubitTemplateModel) then) =
+      _$CubitTemplateModelCopyWithImpl<$Res>;
+  $Res call(
+      {String name,
+      String returnType,
+      bool hasFilter,
+      List<MethodModel> crudMethods});
+}
+
+/// @nodoc
+class _$CubitTemplateModelCopyWithImpl<$Res>
+    implements $CubitTemplateModelCopyWith<$Res> {
+  _$CubitTemplateModelCopyWithImpl(this._value, this._then);
+
+  final CubitTemplateModel _value;
+  // ignore: unused_field
+  final $Res Function(CubitTemplateModel) _then;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? returnType = freezed,
+    Object? hasFilter = freezed,
+    Object? crudMethods = freezed,
+  }) {
+    return _then(_value.copyWith(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnType: returnType == freezed
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasFilter: hasFilter == freezed
+          ? _value.hasFilter
+          : hasFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
+      crudMethods: crudMethods == freezed
+          ? _value.crudMethods
+          : crudMethods // ignore: cast_nullable_to_non_nullable
+              as List<MethodModel>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_CubitTemplateModelCopyWith<$Res>
+    implements $CubitTemplateModelCopyWith<$Res> {
+  factory _$$_CubitTemplateModelCopyWith(_$_CubitTemplateModel value,
+          $Res Function(_$_CubitTemplateModel) then) =
+      __$$_CubitTemplateModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String name,
+      String returnType,
+      bool hasFilter,
+      List<MethodModel> crudMethods});
+}
+
+/// @nodoc
+class __$$_CubitTemplateModelCopyWithImpl<$Res>
+    extends _$CubitTemplateModelCopyWithImpl<$Res>
+    implements _$$_CubitTemplateModelCopyWith<$Res> {
+  __$$_CubitTemplateModelCopyWithImpl(
+      _$_CubitTemplateModel _value, $Res Function(_$_CubitTemplateModel) _then)
+      : super(_value, (v) => _then(v as _$_CubitTemplateModel));
+
+  @override
+  _$_CubitTemplateModel get _value => super._value as _$_CubitTemplateModel;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? returnType = freezed,
+    Object? hasFilter = freezed,
+    Object? crudMethods = freezed,
+  }) {
+    return _then(_$_CubitTemplateModel(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnType: returnType == freezed
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasFilter: hasFilter == freezed
+          ? _value.hasFilter
+          : hasFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
+      crudMethods: crudMethods == freezed
+          ? _value._crudMethods
+          : crudMethods // ignore: cast_nullable_to_non_nullable
+              as List<MethodModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_CubitTemplateModel implements _CubitTemplateModel {
+  const _$_CubitTemplateModel(
+      {required this.name,
+      required this.returnType,
+      this.hasFilter = false,
+      required final List<MethodModel> crudMethods})
+      : _crudMethods = crudMethods;
+
+  factory _$_CubitTemplateModel.fromJson(Map<String, dynamic> json) =>
+      _$$_CubitTemplateModelFromJson(json);
+
+  @override
+  final String name;
+  @override
+  final String returnType;
+  @override
+  @JsonKey()
+  final bool hasFilter;
+  final List<MethodModel> _crudMethods;
+  @override
+  List<MethodModel> get crudMethods {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_crudMethods);
+  }
+
+  @override
+  String toString() {
+    return 'CubitTemplateModel(name: $name, returnType: $returnType, hasFilter: $hasFilter, crudMethods: $crudMethods)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CubitTemplateModel &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality()
+                .equals(other.returnType, returnType) &&
+            const DeepCollectionEquality().equals(other.hasFilter, hasFilter) &&
+            const DeepCollectionEquality()
+                .equals(other._crudMethods, _crudMethods));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(returnType),
+      const DeepCollectionEquality().hash(hasFilter),
+      const DeepCollectionEquality().hash(_crudMethods));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_CubitTemplateModelCopyWith<_$_CubitTemplateModel> get copyWith =>
+      __$$_CubitTemplateModelCopyWithImpl<_$_CubitTemplateModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CubitTemplateModelToJson(this);
+  }
+}
+
+abstract class _CubitTemplateModel implements CubitTemplateModel {
+  const factory _CubitTemplateModel(
+      {required final String name,
+      required final String returnType,
+      final bool hasFilter,
+      required final List<MethodModel> crudMethods}) = _$_CubitTemplateModel;
+
+  factory _CubitTemplateModel.fromJson(Map<String, dynamic> json) =
+      _$_CubitTemplateModel.fromJson;
+
+  @override
+  String get name => throw _privateConstructorUsedError;
+  @override
+  String get returnType => throw _privateConstructorUsedError;
+  @override
+  bool get hasFilter => throw _privateConstructorUsedError;
+  @override
+  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CubitTemplateModelCopyWith<_$_CubitTemplateModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
