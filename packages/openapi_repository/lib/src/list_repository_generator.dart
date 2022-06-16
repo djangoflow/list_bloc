@@ -29,11 +29,6 @@ class OpenapiRepositoryGenerator
     'onReceiveProgress',
   ];
 
-  static const listChecker = TypeChecker.any([
-    TypeChecker.fromRuntime(List),
-    TypeChecker.fromRuntime(BuiltList),
-  ]);
-
   @override
   generateForAnnotatedElement(
     Element element,
