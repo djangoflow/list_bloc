@@ -7,11 +7,15 @@ The aim of this generator is to generate list repositories, and freezed models f
 Make sure you've generated Client library using OpenApi(Swagger) schema definitions. And make sure that each `operationId` in the schema has operations(`create`, `update`, `partialUpdate`, `read`, `delete` etc) suffix which helps the library to detect methods.
 
 For example: `/user` [UserApi class from OpenApi Repo](example/openapi/lib/src/api/user_api.dart) endpoint should have `operationId` for CRUD operation in this format.
-`user_create`, `user_update`, `user_partial_update`, `user_read`, `user_delete`.
+`user_create`, `user_update`, `user_partial_update`, `user_read`, `user_delete`. All the api calls will be put inside the same `Repository` object when generated based on the `operationId` described format.
 
 Then create a flutter/dart project and use `OpenapiRepository` annotation on the class that will hold the generated files. Use annoation params to configure how the files should be generated. Example: [Annotation Usage](example/open_api_flutter_example/lib/data/api_repository/api_repository.dart)
 
 Here `$ApiRepository` class will holding the generated files in `part 'api_repository.openapi.dart'; part 'api_repository.freezed.dart'; part 'api_repository.g.dart';` directories.
+
+After adding annotation run `flutter pub run build_runner build --delete-conflicting-outputs`
+or
+`dart run build_runner build --delete-conflicting-outputs
 
 ### Annotation
 
