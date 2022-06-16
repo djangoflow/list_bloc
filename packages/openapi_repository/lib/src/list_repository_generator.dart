@@ -81,7 +81,7 @@ class OpenapiRepositoryGenerator
       }).toList(),
     );
 
-    final template = Template(apiRepositoryTemplate);
+    final template = Template(apiRepositoryTemplate, htmlEscapeValues: false);
     final buffer = StringBuffer();
 
     // Write openapi repository
@@ -336,7 +336,8 @@ class OpenapiRepositoryGenerator
       crudMethods: crudMethods,
     );
 
-    final repository = Template(repositoryTemplate).renderString(
+    final repository =
+        Template(repositoryTemplate, htmlEscapeValues: false).renderString(
       loaderTemplateModel.toJson(),
     );
 
@@ -351,7 +352,7 @@ class OpenapiRepositoryGenerator
           )
         : '';
     final listCubit = listLoaderForTemplate != null
-        ? Template(listCubitTemplate).renderString(
+        ? Template(listCubitTemplate, htmlEscapeValues: false).renderString(
             CubitTemplateModel(
               name: namePrefix.pascalCase,
               returnType: listLoaderForTemplate.returnType,
@@ -408,7 +409,8 @@ class OpenapiRepositoryGenerator
       name: name,
       hasFilter: hasFilter,
     );
-    return Template(template).renderString(typedefModel.toJson());
+    return Template(template, htmlEscapeValues: false)
+        .renderString(typedefModel.toJson());
   }
 
   String _buildLoaderFilterClass({
@@ -419,7 +421,8 @@ class OpenapiRepositoryGenerator
     final filterTemplateModel = FreezedTemplateModel(
         name: name, isPaginated: isPaginated, types: types);
 
-    return Template(freezedFilterTemplate).renderString(
+    return Template(freezedFilterTemplate, htmlEscapeValues: false)
+        .renderString(
       filterTemplateModel.toJson(),
     );
   }
