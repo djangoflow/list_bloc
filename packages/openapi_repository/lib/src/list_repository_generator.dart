@@ -1,4 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:collection/collection.dart';
 import 'package:analyzer/dart/element/type.dart';
@@ -34,7 +35,7 @@ class OpenapiRepositoryGenerator
     Element element,
     ConstantReader annotation,
     BuildStep buildStep,
-  ) {
+  ) async {
     if (element.name == null) return '';
 
     final parsedAnnotation = _ReaderTypes.fromReader(annotation);
@@ -89,7 +90,7 @@ class OpenapiRepositoryGenerator
 
     // Write list blocs, filter, repository
     for (final builder in parsedAnnotation.builderList) {
-      final output = _getListRepositoryFromBuilder(builder);
+      final output = await _getListRepositoryFromBuilder(builder, buildStep);
       if (output.isEmpty) continue;
       buffer.writeln(output);
     }
@@ -97,22 +98,36 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
-  String _getListRepositoryFromBuilder(_ListRepositoryBuilder builder) {
-    final generatedMethodElements = <MethodElement>[];
+  Future<String> _getListRepositoryFromBuilder(
+      _ListRepositoryBuilder builder, BuildStep buildStep) async {
+    final generatedMethodElements = <String>[];
     final buffer = StringBuffer();
     final classElement = builder.apiClass;
+    // await _visitAndGetMethodTypes(buildStep);
 
     final methods = classElement.methods;
 
-    for (final methodElement in classElement.methods) {
-      if (generatedMethodElements.contains(methodElement)) {
-        continue;
-      }
+    for (int j = 0; j < methods.length; j++) {
+      final methodElement = methods[j];
+
       final returnType = methodElement.returnType;
 
       if (!returnType.isDartAsyncFuture) continue;
 
       final methodName = methodElement.displayName;
+
+      final namePrefixList = methodName.sentenceCase.split(' ');
+      String namePrefix = '';
+
+      for (int i = 0; i < namePrefixList.length; i += 1) {
+        if (i < namePrefixList.length - 1) {
+          namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
+        }
+      }
+
+      if (generatedMethodElements.contains(namePrefix)) {
+        continue;
+      }
       if (shouldIgnore(
           methodName: methodName,
           ignoreEndpoints: builder.ignoreEndpoints,
@@ -122,29 +137,26 @@ class OpenapiRepositoryGenerator
 
       final apiClass =
           classElement.displayName.titleCase.split(' ').first.camelCase;
-      final namePrefixList = methodName.sentenceCase.split(' ');
-      String namePrefix = '';
 
-      for (int i = 0; i < namePrefixList.length; i += 1) {
-        if (i < namePrefixList.length - 1) {
-          namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
-        }
-      }
       final isReadMethod =
           methodName.contains('Read') && methodName == '${namePrefix}Read';
       final isListMethod =
           methodName.contains('List') && methodName == '${namePrefix}List';
+
       if (isReadMethod || isListMethod) {
         List<LoaderMethodModel> loaders = [];
+        final methodElementCopy = methodElement;
         if (isReadMethod) {
-          final dataLoaderMethodModel = _DataMethodElementProcesser(
-            methodElement: methodElement,
+          final dataMethodElementProcessor = _DataMethodElementProcesser(
+            methodElement: methodElementCopy,
             defaultOffset: _defaultOffset,
             defaultPageSize: _defaultPageSize,
             ignoreParams: _ignoreParams,
-          ).getLoaderMethodModel();
+          )..getLoaderMethodModel();
+          final dataLoaderMethodModel =
+              dataMethodElementProcessor.getLoaderMethodModel();
           if (dataLoaderMethodModel != null) {
-            generatedMethodElements.add(methodElement);
+            generatedMethodElements.add(namePrefix);
             loaders.add(dataLoaderMethodModel);
           }
 
@@ -165,7 +177,7 @@ class OpenapiRepositoryGenerator
             ).getLoaderMethodModel();
 
             if (listLoaderMethodModel != null) {
-              generatedMethodElements.add(listMethod);
+              generatedMethodElements.add(namePrefix);
               loaders.add(listLoaderMethodModel);
             }
           }
@@ -178,7 +190,7 @@ class OpenapiRepositoryGenerator
           ).getLoaderMethodModel();
 
           if (listLoaderMethodModel != null) {
-            generatedMethodElements.add(methodElement);
+            generatedMethodElements.add(namePrefix);
             loaders.add(listLoaderMethodModel);
           }
           final readMethod = methods.firstWhereOrNull((element) {
@@ -198,17 +210,17 @@ class OpenapiRepositoryGenerator
             ).getLoaderMethodModel();
 
             if (listLoaderMethodModel != null) {
-              generatedMethodElements.add(readMethod);
+              generatedMethodElements.add(namePrefix);
               loaders.add(listLoaderMethodModel);
             }
           }
         }
-        return _processRepositoryData(
+        buffer.write(_processRepositoryData(
           loaders: loaders,
           methods: methods,
           api: apiClass,
           prefix: namePrefix,
-        );
+        ));
       } else {
         continue;
       }
@@ -217,9 +229,19 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
+  Future<void> _visitAndGetMethodTypes(BuildStep buildStep) async {
+    final inputLibrary = await buildStep.inputLibrary;
+
+    final visitor = TestVisitor();
+
+    var ast = await buildStep.resolver
+        .astNodeFor(inputLibrary.topLevelElements.first, resolve: true);
+    ast?.visitChildren(visitor);
+  }
+
   String _processRepositoryData({
     required List<LoaderMethodModel> loaders,
-    required Iterable<MethodElement> methods,
+    required List<MethodElement> methods,
     required String api,
     required String prefix,
   }) {
@@ -419,7 +441,11 @@ class OpenapiRepositoryGenerator
     required bool isPaginated,
   }) {
     final filterTemplateModel = FreezedTemplateModel(
-        name: name, isPaginated: isPaginated, types: types);
+      name: name,
+      isPaginated: isPaginated,
+      types: types,
+      isTypesEmpty: types.isEmpty,
+    );
 
     return Template(freezedFilterTemplate, htmlEscapeValues: false)
         .renderString(

@@ -8,14 +8,14 @@ class {{name}}Filter with _${{name}}Filter{{#isPaginated}} implements OffsetLimi
   const {{name}}Filter._();
 
   {{#isPaginated}}@Implements<OffsetLimitFilter>(){{/isPaginated}}
-  const factory {{name}}Filter({
+  const factory {{name}}Filter({{^isTypesEmpty}}{ {{/isTypesEmpty}}
     {{#types}}
     {{#defaultValue}}{{defaultValue}}{{/defaultValue}}
     {{#isRequired}}required {{/isRequired}}
     {{#type}}{{type}}{{#isNullable}}? {{/isNullable}}{{/type}}
     {{name}},
     {{/types}}
-  }) = _{{name}}Filter;
+  {{^isTypesEmpty}} }{{/isTypesEmpty}}) = _{{name}}Filter;
 
   factory {{name}}Filter.fromJson(
     Map<String, dynamic> map,

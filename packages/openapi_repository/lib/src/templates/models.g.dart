@@ -58,6 +58,7 @@ _$_FreezedTemplateModel _$$_FreezedTemplateModelFromJson(
               ?.map((e) => TypeModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      isTypesEmpty: json['isTypesEmpty'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_FreezedTemplateModelToJson(
@@ -66,6 +67,7 @@ Map<String, dynamic> _$$_FreezedTemplateModelToJson(
       'name': instance.name,
       'isPaginated': instance.isPaginated,
       'types': instance.types.map((e) => e.toJson()).toList(),
+      'isTypesEmpty': instance.isTypesEmpty,
     };
 
 _$_TypeModel _$$_TypeModelFromJson(Map<String, dynamic> json) => _$_TypeModel(

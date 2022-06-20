@@ -498,6 +498,7 @@ mixin _$FreezedTemplateModel {
   String get name => throw _privateConstructorUsedError;
   bool get isPaginated => throw _privateConstructorUsedError;
   List<TypeModel> get types => throw _privateConstructorUsedError;
+  bool get isTypesEmpty => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -510,7 +511,11 @@ abstract class $FreezedTemplateModelCopyWith<$Res> {
   factory $FreezedTemplateModelCopyWith(FreezedTemplateModel value,
           $Res Function(FreezedTemplateModel) then) =
       _$FreezedTemplateModelCopyWithImpl<$Res>;
-  $Res call({String name, bool isPaginated, List<TypeModel> types});
+  $Res call(
+      {String name,
+      bool isPaginated,
+      List<TypeModel> types,
+      bool isTypesEmpty});
 }
 
 /// @nodoc
@@ -527,6 +532,7 @@ class _$FreezedTemplateModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? isPaginated = freezed,
     Object? types = freezed,
+    Object? isTypesEmpty = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -541,6 +547,10 @@ class _$FreezedTemplateModelCopyWithImpl<$Res>
           ? _value.types
           : types // ignore: cast_nullable_to_non_nullable
               as List<TypeModel>,
+      isTypesEmpty: isTypesEmpty == freezed
+          ? _value.isTypesEmpty
+          : isTypesEmpty // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -552,7 +562,11 @@ abstract class _$$_FreezedTemplateModelCopyWith<$Res>
           $Res Function(_$_FreezedTemplateModel) then) =
       __$$_FreezedTemplateModelCopyWithImpl<$Res>;
   @override
-  $Res call({String name, bool isPaginated, List<TypeModel> types});
+  $Res call(
+      {String name,
+      bool isPaginated,
+      List<TypeModel> types,
+      bool isTypesEmpty});
 }
 
 /// @nodoc
@@ -571,6 +585,7 @@ class __$$_FreezedTemplateModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? isPaginated = freezed,
     Object? types = freezed,
+    Object? isTypesEmpty = freezed,
   }) {
     return _then(_$_FreezedTemplateModel(
       name: name == freezed
@@ -585,6 +600,10 @@ class __$$_FreezedTemplateModelCopyWithImpl<$Res>
           ? _value._types
           : types // ignore: cast_nullable_to_non_nullable
               as List<TypeModel>,
+      isTypesEmpty: isTypesEmpty == freezed
+          ? _value.isTypesEmpty
+          : isTypesEmpty // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -596,7 +615,8 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
   const _$_FreezedTemplateModel(
       {required this.name,
       this.isPaginated = true,
-      final List<TypeModel> types = const []})
+      final List<TypeModel> types = const [],
+      this.isTypesEmpty = false})
       : _types = types;
 
   factory _$_FreezedTemplateModel.fromJson(Map<String, dynamic> json) =>
@@ -616,8 +636,12 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
   }
 
   @override
+  @JsonKey()
+  final bool isTypesEmpty;
+
+  @override
   String toString() {
-    return 'FreezedTemplateModel(name: $name, isPaginated: $isPaginated, types: $types)';
+    return 'FreezedTemplateModel(name: $name, isPaginated: $isPaginated, types: $types, isTypesEmpty: $isTypesEmpty)';
   }
 
   @override
@@ -628,7 +652,9 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.isPaginated, isPaginated) &&
-            const DeepCollectionEquality().equals(other._types, _types));
+            const DeepCollectionEquality().equals(other._types, _types) &&
+            const DeepCollectionEquality()
+                .equals(other.isTypesEmpty, isTypesEmpty));
   }
 
   @JsonKey(ignore: true)
@@ -637,7 +663,8 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(isPaginated),
-      const DeepCollectionEquality().hash(_types));
+      const DeepCollectionEquality().hash(_types),
+      const DeepCollectionEquality().hash(isTypesEmpty));
 
   @JsonKey(ignore: true)
   @override
@@ -655,7 +682,8 @@ abstract class _FreezedTemplateModel implements FreezedTemplateModel {
   const factory _FreezedTemplateModel(
       {required final String name,
       final bool isPaginated,
-      final List<TypeModel> types}) = _$_FreezedTemplateModel;
+      final List<TypeModel> types,
+      final bool isTypesEmpty}) = _$_FreezedTemplateModel;
 
   factory _FreezedTemplateModel.fromJson(Map<String, dynamic> json) =
       _$_FreezedTemplateModel.fromJson;
@@ -666,6 +694,8 @@ abstract class _FreezedTemplateModel implements FreezedTemplateModel {
   bool get isPaginated => throw _privateConstructorUsedError;
   @override
   List<TypeModel> get types => throw _privateConstructorUsedError;
+  @override
+  bool get isTypesEmpty => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_FreezedTemplateModelCopyWith<_$_FreezedTemplateModel> get copyWith =>

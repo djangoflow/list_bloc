@@ -41,6 +41,7 @@ class FreezedTemplateModel with _$FreezedTemplateModel {
     required String name,
     @Default(true) bool isPaginated,
     @Default([]) List<TypeModel> types,
+    @Default(false) bool isTypesEmpty,
   }) = _FreezedTemplateModel;
 
   factory FreezedTemplateModel.fromJson(Map<String, dynamic> map) =>
