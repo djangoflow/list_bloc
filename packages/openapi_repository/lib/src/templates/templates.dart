@@ -117,7 +117,7 @@ static Future<List<{{returnType}}>> listLoader({{#additionalParams}}{{param}},{{
   }
   {{/listLoader}}
 {{/hasListLoader}}
-  {{#crudMethods}}Future<void> {{operation}}({{^isEmptyArgs}}{ {{/isEmptyArgs}}
+  {{#crudMethods}}static Future<void> {{operation}}({{^isEmptyArgs}}{ {{/isEmptyArgs}}
     {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
     {{/arguments}} {{^isEmptyArgs}} }{{/isEmptyArgs}}
   ) async {
