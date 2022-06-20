@@ -454,9 +454,17 @@ class OpenapiRepositoryGenerator
 
     final dataReturntype =
         dataProcessor.getInnerReturnType(method.returnType, false);
-
+    final listReturntype =
+        listProcessor.getInnerReturnType(method.returnType, false);
     String? type;
-    if (dataReturntype?.type != null) {
+
+    bool isList = false;
+    if (listReturntype?.type != null) {
+      isList = true;
+
+      type =
+          'List<${listReturntype!.type.getDisplayString(withNullability: false)}>';
+    } else if (dataReturntype?.type != null) {
       type =
           '${dataReturntype!.type.getDisplayString(withNullability: false)}?';
     }
@@ -468,7 +476,7 @@ class OpenapiRepositoryGenerator
       arguments: arguments,
       parameters: parameters,
       isEmptyArgs: arguments.isEmpty,
-      isInline: false,
+      isList: isList,
     );
   }
 

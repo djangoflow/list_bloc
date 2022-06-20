@@ -212,7 +212,7 @@ _$_MethodModel _$$_MethodModelFromJson(Map<String, dynamic> json) =>
           .map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       isEmptyArgs: json['isEmptyArgs'] as bool? ?? false,
-      isInline: json['isInline'] as bool? ?? false,
+      isList: json['isList'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
@@ -223,7 +223,7 @@ Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
       'arguments': instance.arguments.map((e) => e.toJson()).toList(),
       'parameters': instance.parameters.map((e) => e.toJson()).toList(),
       'isEmptyArgs': instance.isEmptyArgs,
-      'isInline': instance.isInline,
+      'isList': instance.isList,
     };
 
 _$_LoaderMethodModel _$$_LoaderMethodModelFromJson(Map<String, dynamic> json) =>

@@ -2091,7 +2091,7 @@ mixin _$MethodModel {
   List<ArgModel> get arguments => throw _privateConstructorUsedError;
   List<ParamModel> get parameters => throw _privateConstructorUsedError;
   bool get isEmptyArgs => throw _privateConstructorUsedError;
-  bool get isInline => throw _privateConstructorUsedError;
+  bool get isList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2111,7 +2111,7 @@ abstract class $MethodModelCopyWith<$Res> {
       List<ArgModel> arguments,
       List<ParamModel> parameters,
       bool isEmptyArgs,
-      bool isInline});
+      bool isList});
 }
 
 /// @nodoc
@@ -2130,7 +2130,7 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
     Object? arguments = freezed,
     Object? parameters = freezed,
     Object? isEmptyArgs = freezed,
-    Object? isInline = freezed,
+    Object? isList = freezed,
   }) {
     return _then(_value.copyWith(
       returnType: returnType == freezed
@@ -2157,9 +2157,9 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
           ? _value.isEmptyArgs
           : isEmptyArgs // ignore: cast_nullable_to_non_nullable
               as bool,
-      isInline: isInline == freezed
-          ? _value.isInline
-          : isInline // ignore: cast_nullable_to_non_nullable
+      isList: isList == freezed
+          ? _value.isList
+          : isList // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -2179,7 +2179,7 @@ abstract class _$$_MethodModelCopyWith<$Res>
       List<ArgModel> arguments,
       List<ParamModel> parameters,
       bool isEmptyArgs,
-      bool isInline});
+      bool isList});
 }
 
 /// @nodoc
@@ -2200,7 +2200,7 @@ class __$$_MethodModelCopyWithImpl<$Res> extends _$MethodModelCopyWithImpl<$Res>
     Object? arguments = freezed,
     Object? parameters = freezed,
     Object? isEmptyArgs = freezed,
-    Object? isInline = freezed,
+    Object? isList = freezed,
   }) {
     return _then(_$_MethodModel(
       returnType: returnType == freezed
@@ -2227,9 +2227,9 @@ class __$$_MethodModelCopyWithImpl<$Res> extends _$MethodModelCopyWithImpl<$Res>
           ? _value.isEmptyArgs
           : isEmptyArgs // ignore: cast_nullable_to_non_nullable
               as bool,
-      isInline: isInline == freezed
-          ? _value.isInline
-          : isInline // ignore: cast_nullable_to_non_nullable
+      isList: isList == freezed
+          ? _value.isList
+          : isList // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -2246,7 +2246,7 @@ class _$_MethodModel implements _MethodModel {
       required final List<ArgModel> arguments,
       required final List<ParamModel> parameters,
       this.isEmptyArgs = false,
-      this.isInline = false})
+      this.isList = false})
       : _arguments = arguments,
         _parameters = parameters;
 
@@ -2278,11 +2278,11 @@ class _$_MethodModel implements _MethodModel {
   final bool isEmptyArgs;
   @override
   @JsonKey()
-  final bool isInline;
+  final bool isList;
 
   @override
   String toString() {
-    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters, isEmptyArgs: $isEmptyArgs, isInline: $isInline)';
+    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters, isEmptyArgs: $isEmptyArgs, isList: $isList)';
   }
 
   @override
@@ -2300,7 +2300,7 @@ class _$_MethodModel implements _MethodModel {
                 .equals(other._parameters, _parameters) &&
             const DeepCollectionEquality()
                 .equals(other.isEmptyArgs, isEmptyArgs) &&
-            const DeepCollectionEquality().equals(other.isInline, isInline));
+            const DeepCollectionEquality().equals(other.isList, isList));
   }
 
   @JsonKey(ignore: true)
@@ -2313,7 +2313,7 @@ class _$_MethodModel implements _MethodModel {
       const DeepCollectionEquality().hash(_arguments),
       const DeepCollectionEquality().hash(_parameters),
       const DeepCollectionEquality().hash(isEmptyArgs),
-      const DeepCollectionEquality().hash(isInline));
+      const DeepCollectionEquality().hash(isList));
 
   @JsonKey(ignore: true)
   @override
@@ -2334,7 +2334,7 @@ abstract class _MethodModel implements MethodModel {
       required final List<ArgModel> arguments,
       required final List<ParamModel> parameters,
       final bool isEmptyArgs,
-      final bool isInline}) = _$_MethodModel;
+      final bool isList}) = _$_MethodModel;
 
   factory _MethodModel.fromJson(Map<String, dynamic> json) =
       _$_MethodModel.fromJson;
@@ -2352,7 +2352,7 @@ abstract class _MethodModel implements MethodModel {
   @override
   bool get isEmptyArgs => throw _privateConstructorUsedError;
   @override
-  bool get isInline => throw _privateConstructorUsedError;
+  bool get isList => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_MethodModelCopyWith<_$_MethodModel> get copyWith =>
