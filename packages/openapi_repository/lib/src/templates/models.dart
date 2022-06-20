@@ -139,6 +139,7 @@ class MethodModel with _$MethodModel {
     required List<ArgModel> arguments,
     required List<ParamModel> parameters,
     @Default(false) bool isEmptyArgs,
+    @Default(false) bool isInline,
   }) = _MethodModel;
 
   factory MethodModel.fromJson(Map<String, dynamic> map) =>

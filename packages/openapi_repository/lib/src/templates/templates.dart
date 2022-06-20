@@ -46,13 +46,15 @@ class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}R
 
   {{#crudMethods}}
   @override
-    Future<void> {{operation}}({
+    Future<{{returnType}}> {{operation}}({
     {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
     {{/arguments}} }
   ) async {
-      await super.{{operation}}({{#parameters}}{{param}},
+      final r = await super.{{operation}}({{#parameters}}{{param}},
       {{/parameters}});
       await super.load(state.filter);
+
+      return r;
   }
   {{/crudMethods}}
 
@@ -67,13 +69,15 @@ class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}L
 
   {{#crudMethods}}
   @override
-    Future<void> {{operation}}({
+    Future<{{returnType}}> {{operation}}({
     {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
     {{/arguments}} }
   ) async {
-      await super.{{operation}}({{#parameters}}{{param}},
+      final r = await super.{{operation}}({{#parameters}}{{param}},
       {{/parameters}});
       await super.reload();
+      
+      return r;
   }
   {{/crudMethods}}
 
@@ -117,14 +121,16 @@ static Future<List<{{returnType}}>> listLoader({{#additionalParams}}{{param}},{{
   }
   {{/listLoader}}
 {{/hasListLoader}}
-  {{#crudMethods}}static Future<void> {{operation}}({{^isEmptyArgs}}{ {{/isEmptyArgs}}
+  {{#crudMethods}}Future<{{returnType}}> {{operation}}({{^isEmptyArgs}}{ {{/isEmptyArgs}}
     {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
     {{/arguments}} {{^isEmptyArgs}} }{{/isEmptyArgs}}
   ) async {
-    await ApiRepository.instance.{{api}}.{{name}}(
+    final r = (await ApiRepository.instance.{{api}}.{{name}}(
       {{#parameters}}{{param}},
       {{/parameters}}
-    );
+    ));
+
+    return r.data;
   }
   {{/crudMethods}}
 }

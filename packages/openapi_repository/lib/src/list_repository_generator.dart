@@ -39,7 +39,7 @@ class OpenapiRepositoryGenerator
     BuildStep buildStep,
   ) async {
     if (element.name == null) return '';
-
+    BuildStepProvider.instance.buildStep = buildStep;
     final parsedAnnotation = _ReaderTypes.fromReader(annotation);
 
     _defaultOffset = parsedAnnotation.defaultOffset;
@@ -92,7 +92,7 @@ class OpenapiRepositoryGenerator
 
     // Write list blocs, filter, repository
     for (final builder in parsedAnnotation.builderList) {
-      final output = await _getListRepositoryFromBuilder(builder, buildStep);
+      final output = await _getListRepositoryFromBuilder(builder);
       if (output.isEmpty) continue;
       buffer.writeln(output);
     }
@@ -101,11 +101,10 @@ class OpenapiRepositoryGenerator
   }
 
   Future<String> _getListRepositoryFromBuilder(
-      _ListRepositoryBuilder builder, BuildStep buildStep) async {
+      _ListRepositoryBuilder builder) async {
     final generatedMethodElements = <String>[];
     final buffer = StringBuffer();
     final classElement = builder.apiClass;
-    // await _visitAndGetMethodTypes(buildStep);
 
     final methods = classElement.methods;
 
@@ -231,13 +230,11 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
-  Future<void> _visitAndGetMethodTypes(BuildStep buildStep) async {
-    final inputLibrary = await buildStep.inputLibrary;
-
+  Future<void> _visitAndGetMethodTypes(
+      BuildStep buildStep, ClassElement classElement) async {
     final visitor = TestVisitor();
 
-    var ast = await buildStep.resolver
-        .astNodeFor(inputLibrary.topLevelElements.first, resolve: true);
+    var ast = await buildStep.resolver.astNodeFor(classElement, resolve: true);
     ast?.visitChildren(visitor);
   }
 
@@ -441,16 +438,37 @@ class OpenapiRepositoryGenerator
     final parameters = params
         .map((e) => ParamModel('${e.displayName}: ${e.displayName}'))
         .toList();
+    final dataProcessor = _DataMethodElementProcesser(
+      methodElement: method,
+      defaultOffset: _defaultOffset,
+      defaultPageSize: _defaultPageSize,
+      ignoreParams: _ignoreParams,
+    );
+
+    final listProcessor = _ListMethodElementProcesser(
+      methodElement: method,
+      defaultOffset: _defaultOffset,
+      defaultPageSize: _defaultPageSize,
+      ignoreParams: _ignoreParams,
+    );
+
+    final dataReturntype =
+        dataProcessor.getInnerReturnType(method.returnType, false);
+
+    String? type;
+    if (dataReturntype?.type != null) {
+      type =
+          '${dataReturntype!.type.getDisplayString(withNullability: false)}?';
+    }
 
     return MethodModel(
-      returnType: method.returnType.getDisplayString(
-        withNullability: false,
-      ),
+      returnType: type ?? 'void',
       operation: operation,
       name: method.displayName,
       arguments: arguments,
       parameters: parameters,
       isEmptyArgs: arguments.isEmpty,
+      isInline: false,
     );
   }
 
@@ -803,4 +821,17 @@ class _DataMethodElementProcesser extends _MethodElementProcessor {
       return null;
     }
   }
+}
+
+class BuildStepProvider {
+  static BuildStepProvider get instance => _instance;
+  static final BuildStepProvider _instance = BuildStepProvider._internal();
+
+  BuildStepProvider._internal();
+
+  set buildStep(BuildStep? buildStep) => _buildStep = buildStep;
+
+  BuildStep? get buildStep => _buildStep;
+
+  BuildStep? _buildStep;
 }
