@@ -46,9 +46,9 @@ class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}R
 
   {{#crudMethods}}
   @override
-    Future<{{returnType}}> {{operation}}({
+    Future<{{returnType}}> {{operation}}({{^isEmptyArgs}}{ {{/isEmptyArgs}}
     {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
-    {{/arguments}} }
+    {{/arguments}} {{^isEmptyArgs}} }{{/isEmptyArgs}}
   ) async {
       final r = await super.{{operation}}({{#parameters}}{{param}},
       {{/parameters}});
@@ -69,9 +69,9 @@ class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}L
 
   {{#crudMethods}}
   @override
-    Future<{{returnType}}> {{operation}}({
+    Future<{{returnType}}> {{operation}}({{^isEmptyArgs}}{ {{/isEmptyArgs}}
     {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
-    {{/arguments}} }
+    {{/arguments}} {{^isEmptyArgs}} }{{/isEmptyArgs}}
   ) async {
       final r = await super.{{operation}}({{#parameters}}{{param}},
       {{/parameters}});
@@ -130,7 +130,7 @@ static Future<List<{{returnType}}>> list({{#additionalParams}}{{param}},{{/addit
       {{/parameters}}
     ));
 
-    return r.data{{#isInline}}?.asList() ?? []{{/isInline}};
+    return r.data{{#isList}}?.asList() ?? []{{/isList}};
   }
   {{/crudMethods}}
 }

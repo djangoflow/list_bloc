@@ -394,12 +394,12 @@ class OpenapiRepositoryGenerator
     );
 
     final dataCubit = dataLoaderForTemplate != null
-        ? Template(dataCubitTemplate).renderString(
+        ? Template(dataCubitTemplate, htmlEscapeValues: false).renderString(
             CubitTemplateModel(
               name: namePrefix.pascalCase,
               returnType: dataLoaderForTemplate.returnType,
               hasFilter: dataLoaderForTemplate.hasFilter,
-              crudMethods: crudMethods,
+              crudMethods: [...crudMethods, ...operationModels],
             ).toJson(),
           )
         : '';
@@ -409,7 +409,7 @@ class OpenapiRepositoryGenerator
               name: namePrefix.pascalCase,
               returnType: listLoaderForTemplate.returnType,
               hasFilter: listLoaderForTemplate.hasFilter,
-              crudMethods: crudMethods,
+              crudMethods: [...crudMethods, ...operationModels],
             ).toJson(),
           )
         : '';
