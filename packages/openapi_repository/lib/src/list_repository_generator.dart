@@ -1,4 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
+import 'dart:math';
+
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:collection/collection.dart';
@@ -337,6 +339,12 @@ class OpenapiRepositoryGenerator
       return element.displayName == '${namePrefix}Delete';
     });
 
+    final crudElements = [
+      createMethod,
+      partialUpdateMethod,
+      updateMethod,
+      deleteMethod,
+    ];
     final createModel = _getMethodModel('create', createMethod);
     final partialUpdateModel =
         _getMethodModel('partialUpdate', partialUpdateMethod);
@@ -346,8 +354,33 @@ class OpenapiRepositoryGenerator
       createModel,
       partialUpdateModel,
       updateModel,
-      deleteModel,
+      deleteModel
     ].whereType<MethodModel>().toList();
+    final prefixedMethods = methods.where((element) {
+      final blackListedSuffixs = ['Read', 'List'];
+      if (crudElements.contains(element)) {
+        return false;
+      } else {
+        for (var blackSuffix in blackListedSuffixs) {
+          if ('$namePrefix$blackSuffix' == element.displayName) {
+            return false;
+          }
+        }
+        final namePrefixForThisMethod = getPrefixName(element.displayName);
+        return namePrefixForThisMethod == namePrefix;
+      }
+    });
+
+    final operationModels = prefixedMethods
+        .map((e) {
+          final operationName =
+              e.displayName.substring(namePrefix.length).camelCase;
+
+          return _getMethodModel(operationName, e);
+        })
+        .whereType<MethodModel>()
+        .toList();
+
     final loaderTemplateModel = LoaderRepositoryTemplateModel(
       api: api,
       dataLoader: dataLoaderForTemplate,
@@ -355,7 +388,7 @@ class OpenapiRepositoryGenerator
       hasDataLoader: dataLoaderForTemplate != null ? true : false,
       hasListLoader: listLoaderForTemplate != null ? true : false,
       repositoryName: namePrefix.pascalCase,
-      crudMethods: crudMethods,
+      crudMethods: [...crudMethods, ...operationModels],
     );
 
     final repository =
@@ -417,6 +450,7 @@ class OpenapiRepositoryGenerator
       name: method.displayName,
       arguments: arguments,
       parameters: parameters,
+      isEmptyArgs: arguments.isEmpty,
     );
   }
 
@@ -472,6 +506,18 @@ class OpenapiRepositoryGenerator
       return false;
     }
     return false;
+  }
+
+  String getPrefixName(String methodName) {
+    final namePrefixList = methodName.sentenceCase.split(' ');
+    String namePrefix = '';
+
+    for (int i = 0; i < namePrefixList.length; i += 1) {
+      if (i < namePrefixList.length - 1) {
+        namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
+      }
+    }
+    return namePrefix;
   }
 }
 

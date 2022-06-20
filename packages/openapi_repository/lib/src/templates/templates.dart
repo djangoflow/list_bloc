@@ -117,9 +117,9 @@ static Future<List<{{returnType}}>> listLoader({{#additionalParams}}{{param}},{{
   }
   {{/listLoader}}
 {{/hasListLoader}}
-  {{#crudMethods}}Future<void> {{operation}}({
+  {{#crudMethods}}Future<void> {{operation}}({{^isEmptyArgs}}{ {{/isEmptyArgs}}
     {{#arguments}}{{#isRequiredArg}}required {{/isRequiredArg}} {{argType}}{{#isNullableArg}}?{{/isNullableArg}} {{argName}},
-    {{/arguments}} }
+    {{/arguments}} {{^isEmptyArgs}} }{{/isEmptyArgs}}
   ) async {
     await ApiRepository.instance.{{api}}.{{name}}(
       {{#parameters}}{{param}},
