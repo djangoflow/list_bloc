@@ -41,6 +41,7 @@ class FreezedTemplateModel with _$FreezedTemplateModel {
     required String name,
     @Default(true) bool isPaginated,
     @Default([]) List<TypeModel> types,
+    @Default(false) bool isTypesEmpty,
   }) = _FreezedTemplateModel;
 
   factory FreezedTemplateModel.fromJson(Map<String, dynamic> map) =>
@@ -137,6 +138,8 @@ class MethodModel with _$MethodModel {
     required String operation,
     required List<ArgModel> arguments,
     required List<ParamModel> parameters,
+    @Default(false) bool isEmptyArgs,
+    @Default(false) bool isList,
   }) = _MethodModel;
 
   factory MethodModel.fromJson(Map<String, dynamic> map) =>

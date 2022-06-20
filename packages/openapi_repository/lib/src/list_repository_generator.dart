@@ -1,4 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
+import 'dart:math';
+
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:collection/collection.dart';
 import 'package:analyzer/dart/element/type.dart';
@@ -34,9 +37,9 @@ class OpenapiRepositoryGenerator
     Element element,
     ConstantReader annotation,
     BuildStep buildStep,
-  ) {
+  ) async {
     if (element.name == null) return '';
-
+    BuildStepProvider.instance.buildStep = buildStep;
     final parsedAnnotation = _ReaderTypes.fromReader(annotation);
 
     _defaultOffset = parsedAnnotation.defaultOffset;
@@ -89,7 +92,7 @@ class OpenapiRepositoryGenerator
 
     // Write list blocs, filter, repository
     for (final builder in parsedAnnotation.builderList) {
-      final output = _getListRepositoryFromBuilder(builder);
+      final output = await _getListRepositoryFromBuilder(builder);
       if (output.isEmpty) continue;
       buffer.writeln(output);
     }
@@ -97,22 +100,35 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
-  String _getListRepositoryFromBuilder(_ListRepositoryBuilder builder) {
-    final generatedMethodElements = <MethodElement>[];
+  Future<String> _getListRepositoryFromBuilder(
+      _ListRepositoryBuilder builder) async {
+    final generatedMethodElements = <String>[];
     final buffer = StringBuffer();
     final classElement = builder.apiClass;
 
     final methods = classElement.methods;
 
-    for (final methodElement in classElement.methods) {
-      if (generatedMethodElements.contains(methodElement)) {
-        continue;
-      }
+    for (int j = 0; j < methods.length; j++) {
+      final methodElement = methods[j];
+
       final returnType = methodElement.returnType;
 
       if (!returnType.isDartAsyncFuture) continue;
 
       final methodName = methodElement.displayName;
+
+      final namePrefixList = methodName.sentenceCase.split(' ');
+      String namePrefix = '';
+
+      for (int i = 0; i < namePrefixList.length; i += 1) {
+        if (i < namePrefixList.length - 1) {
+          namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
+        }
+      }
+
+      if (generatedMethodElements.contains(namePrefix)) {
+        continue;
+      }
       if (shouldIgnore(
           methodName: methodName,
           ignoreEndpoints: builder.ignoreEndpoints,
@@ -122,29 +138,26 @@ class OpenapiRepositoryGenerator
 
       final apiClass =
           classElement.displayName.titleCase.split(' ').first.camelCase;
-      final namePrefixList = methodName.sentenceCase.split(' ');
-      String namePrefix = '';
 
-      for (int i = 0; i < namePrefixList.length; i += 1) {
-        if (i < namePrefixList.length - 1) {
-          namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
-        }
-      }
       final isReadMethod =
           methodName.contains('Read') && methodName == '${namePrefix}Read';
       final isListMethod =
           methodName.contains('List') && methodName == '${namePrefix}List';
+
       if (isReadMethod || isListMethod) {
         List<LoaderMethodModel> loaders = [];
+        final methodElementCopy = methodElement;
         if (isReadMethod) {
-          final dataLoaderMethodModel = _DataMethodElementProcesser(
-            methodElement: methodElement,
+          final dataMethodElementProcessor = _DataMethodElementProcesser(
+            methodElement: methodElementCopy,
             defaultOffset: _defaultOffset,
             defaultPageSize: _defaultPageSize,
             ignoreParams: _ignoreParams,
-          ).getLoaderMethodModel();
+          )..getLoaderMethodModel();
+          final dataLoaderMethodModel =
+              dataMethodElementProcessor.getLoaderMethodModel();
           if (dataLoaderMethodModel != null) {
-            generatedMethodElements.add(methodElement);
+            generatedMethodElements.add(namePrefix);
             loaders.add(dataLoaderMethodModel);
           }
 
@@ -165,7 +178,7 @@ class OpenapiRepositoryGenerator
             ).getLoaderMethodModel();
 
             if (listLoaderMethodModel != null) {
-              generatedMethodElements.add(listMethod);
+              generatedMethodElements.add(namePrefix);
               loaders.add(listLoaderMethodModel);
             }
           }
@@ -178,7 +191,7 @@ class OpenapiRepositoryGenerator
           ).getLoaderMethodModel();
 
           if (listLoaderMethodModel != null) {
-            generatedMethodElements.add(methodElement);
+            generatedMethodElements.add(namePrefix);
             loaders.add(listLoaderMethodModel);
           }
           final readMethod = methods.firstWhereOrNull((element) {
@@ -198,17 +211,17 @@ class OpenapiRepositoryGenerator
             ).getLoaderMethodModel();
 
             if (listLoaderMethodModel != null) {
-              generatedMethodElements.add(readMethod);
+              generatedMethodElements.add(namePrefix);
               loaders.add(listLoaderMethodModel);
             }
           }
         }
-        return _processRepositoryData(
+        buffer.write(_processRepositoryData(
           loaders: loaders,
           methods: methods,
           api: apiClass,
           prefix: namePrefix,
-        );
+        ));
       } else {
         continue;
       }
@@ -217,9 +230,17 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
+  Future<void> _visitAndGetMethodTypes(
+      BuildStep buildStep, ClassElement classElement) async {
+    final visitor = TestVisitor();
+
+    var ast = await buildStep.resolver.astNodeFor(classElement, resolve: true);
+    ast?.visitChildren(visitor);
+  }
+
   String _processRepositoryData({
     required List<LoaderMethodModel> loaders,
-    required Iterable<MethodElement> methods,
+    required List<MethodElement> methods,
     required String api,
     required String prefix,
   }) {
@@ -315,6 +336,12 @@ class OpenapiRepositoryGenerator
       return element.displayName == '${namePrefix}Delete';
     });
 
+    final crudElements = [
+      createMethod,
+      partialUpdateMethod,
+      updateMethod,
+      deleteMethod,
+    ];
     final createModel = _getMethodModel('create', createMethod);
     final partialUpdateModel =
         _getMethodModel('partialUpdate', partialUpdateMethod);
@@ -324,8 +351,33 @@ class OpenapiRepositoryGenerator
       createModel,
       partialUpdateModel,
       updateModel,
-      deleteModel,
+      deleteModel
     ].whereType<MethodModel>().toList();
+    final prefixedMethods = methods.where((element) {
+      final blackListedSuffixs = ['Read', 'List'];
+      if (crudElements.contains(element)) {
+        return false;
+      } else {
+        for (var blackSuffix in blackListedSuffixs) {
+          if ('$namePrefix$blackSuffix' == element.displayName) {
+            return false;
+          }
+        }
+        final namePrefixForThisMethod = getPrefixName(element.displayName);
+        return namePrefixForThisMethod == namePrefix;
+      }
+    });
+
+    final operationModels = prefixedMethods
+        .map((e) {
+          final operationName =
+              e.displayName.substring(namePrefix.length).camelCase;
+
+          return _getMethodModel(operationName, e);
+        })
+        .whereType<MethodModel>()
+        .toList();
+
     final loaderTemplateModel = LoaderRepositoryTemplateModel(
       api: api,
       dataLoader: dataLoaderForTemplate,
@@ -333,7 +385,7 @@ class OpenapiRepositoryGenerator
       hasDataLoader: dataLoaderForTemplate != null ? true : false,
       hasListLoader: listLoaderForTemplate != null ? true : false,
       repositoryName: namePrefix.pascalCase,
-      crudMethods: crudMethods,
+      crudMethods: [...crudMethods, ...operationModels],
     );
 
     final repository =
@@ -386,15 +438,45 @@ class OpenapiRepositoryGenerator
     final parameters = params
         .map((e) => ParamModel('${e.displayName}: ${e.displayName}'))
         .toList();
+    final dataProcessor = _DataMethodElementProcesser(
+      methodElement: method,
+      defaultOffset: _defaultOffset,
+      defaultPageSize: _defaultPageSize,
+      ignoreParams: _ignoreParams,
+    );
+
+    final listProcessor = _ListMethodElementProcesser(
+      methodElement: method,
+      defaultOffset: _defaultOffset,
+      defaultPageSize: _defaultPageSize,
+      ignoreParams: _ignoreParams,
+    );
+
+    final dataReturntype =
+        dataProcessor.getInnerReturnType(method.returnType, false);
+    final listReturntype =
+        listProcessor.getInnerReturnType(method.returnType, false);
+    String? type;
+
+    bool isList = false;
+    if (listReturntype?.type != null) {
+      isList = true;
+
+      type =
+          'List<${listReturntype!.type.getDisplayString(withNullability: false)}>';
+    } else if (dataReturntype?.type != null) {
+      type =
+          '${dataReturntype!.type.getDisplayString(withNullability: false)}?';
+    }
 
     return MethodModel(
-      returnType: method.returnType.getDisplayString(
-        withNullability: false,
-      ),
+      returnType: type ?? 'void',
       operation: operation,
       name: method.displayName,
       arguments: arguments,
       parameters: parameters,
+      isEmptyArgs: arguments.isEmpty,
+      isList: isList,
     );
   }
 
@@ -419,7 +501,11 @@ class OpenapiRepositoryGenerator
     required bool isPaginated,
   }) {
     final filterTemplateModel = FreezedTemplateModel(
-        name: name, isPaginated: isPaginated, types: types);
+      name: name,
+      isPaginated: isPaginated,
+      types: types,
+      isTypesEmpty: types.isEmpty,
+    );
 
     return Template(freezedFilterTemplate, htmlEscapeValues: false)
         .renderString(
@@ -446,6 +532,18 @@ class OpenapiRepositoryGenerator
       return false;
     }
     return false;
+  }
+
+  String getPrefixName(String methodName) {
+    final namePrefixList = methodName.sentenceCase.split(' ');
+    String namePrefix = '';
+
+    for (int i = 0; i < namePrefixList.length; i += 1) {
+      if (i < namePrefixList.length - 1) {
+        namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
+      }
+    }
+    return namePrefix;
   }
 }
 
@@ -731,4 +829,17 @@ class _DataMethodElementProcesser extends _MethodElementProcessor {
       return null;
     }
   }
+}
+
+class BuildStepProvider {
+  static BuildStepProvider get instance => _instance;
+  static final BuildStepProvider _instance = BuildStepProvider._internal();
+
+  BuildStepProvider._internal();
+
+  set buildStep(BuildStep? buildStep) => _buildStep = buildStep;
+
+  BuildStep? get buildStep => _buildStep;
+
+  BuildStep? _buildStep;
 }

@@ -58,6 +58,7 @@ _$_FreezedTemplateModel _$$_FreezedTemplateModelFromJson(
               ?.map((e) => TypeModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      isTypesEmpty: json['isTypesEmpty'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_FreezedTemplateModelToJson(
@@ -66,6 +67,7 @@ Map<String, dynamic> _$$_FreezedTemplateModelToJson(
       'name': instance.name,
       'isPaginated': instance.isPaginated,
       'types': instance.types.map((e) => e.toJson()).toList(),
+      'isTypesEmpty': instance.isTypesEmpty,
     };
 
 _$_TypeModel _$$_TypeModelFromJson(Map<String, dynamic> json) => _$_TypeModel(
@@ -209,6 +211,8 @@ _$_MethodModel _$$_MethodModelFromJson(Map<String, dynamic> json) =>
       parameters: (json['parameters'] as List<dynamic>)
           .map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isEmptyArgs: json['isEmptyArgs'] as bool? ?? false,
+      isList: json['isList'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
@@ -218,6 +222,8 @@ Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
       'operation': instance.operation,
       'arguments': instance.arguments.map((e) => e.toJson()).toList(),
       'parameters': instance.parameters.map((e) => e.toJson()).toList(),
+      'isEmptyArgs': instance.isEmptyArgs,
+      'isList': instance.isList,
     };
 
 _$_LoaderMethodModel _$$_LoaderMethodModelFromJson(Map<String, dynamic> json) =>
