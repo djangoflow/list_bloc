@@ -42,7 +42,7 @@ const dataCubitTemplate = r'''
 // DataCubit for {{name}}
 
 class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}DataBloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter]) loader,) : super(dataLoader);
+  {{name}}DataBloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter,]) loader,) : super(read);
 
   {{#crudMethods}}
   @override
@@ -65,7 +65,7 @@ const listCubitTemplate = r'''
 // ListCubit for {{name}}
 
 class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}ListBloc(Future<List<{{returnType}}>> Function([ {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter]) loader,) : super(listLoader);
+  {{name}}ListBloc(Future<List<{{returnType}}>> Function([ {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter,]) loader,) : super(list);
 
   {{#crudMethods}}
   @override
@@ -90,7 +90,7 @@ const repositoryTemplate = r'''
 abstract class {{repositoryName}}Repository {
   {{#hasDataLoader}}
   {{#dataLoader}}
-static Future<{{returnType}}> dataLoader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}ReadFilter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
+static Future<{{returnType}}> read({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}ReadFilter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
     {{#hasRequiredParam}}if (filter == null) {
       throw Exception('Invalid filter');
     }{{/hasRequiredParam}}
@@ -109,7 +109,7 @@ static Future<{{returnType}}> dataLoader({{#additionalParams}}{{param}},{{/addit
   
   {{#hasListLoader}}
   {{#listLoader}}
-static Future<List<{{returnType}}>> listLoader({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}ListFilter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
+static Future<List<{{returnType}}>> list({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}ListFilter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
     {{#hasRequiredParam}}if (filter == null) {
       throw Exception('Invalid filter');
     }{{/hasRequiredParam}}
@@ -130,7 +130,7 @@ static Future<List<{{returnType}}>> listLoader({{#additionalParams}}{{param}},{{
       {{/parameters}}
     ));
 
-    return r.data;
+    return r.data{{#isInline}}?.asList() ?? []{{/isInline}};
   }
   {{/crudMethods}}
 }
