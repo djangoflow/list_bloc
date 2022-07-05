@@ -108,13 +108,12 @@ class OpenapiRepositoryGenerator
 
     final methods = classElement.methods;
 
-    for (int j = 0; j < methods.length; j++) {
-      final methodElement = methods[j];
-
+    for (var methodElement in methods) {
       final returnType = methodElement.returnType;
 
       if (!returnType.isDartAsyncFuture) continue;
-
+      final apiMethodType = await _visitAndGetMethodTypes(
+          BuildStepProvider.instance.buildStep!, methodElement);
       final methodName = methodElement.displayName;
 
       final namePrefixList = methodName.sentenceCase.split(' ');
@@ -144,7 +143,8 @@ class OpenapiRepositoryGenerator
       final isListMethod =
           methodName.contains('List') && methodName == '${namePrefix}List';
 
-      if (isReadMethod || isListMethod) {
+      if ((isReadMethod || isListMethod) &&
+          (apiMethodType != null && apiMethodType.contains('GET'))) {
         List<LoaderMethodModel> loaders = [];
         final methodElementCopy = methodElement;
         if (isReadMethod) {
@@ -216,12 +216,12 @@ class OpenapiRepositoryGenerator
             }
           }
         }
-        buffer.write(_processRepositoryData(
+        buffer.write((await _processRepositoryData(
           loaders: loaders,
           methods: methods,
           api: apiClass,
           prefix: namePrefix,
-        ));
+        )));
       } else {
         continue;
       }
@@ -230,20 +230,21 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
-  Future<void> _visitAndGetMethodTypes(
-      BuildStep buildStep, ClassElement classElement) async {
-    final visitor = TestVisitor();
+  Future<String?> _visitAndGetMethodTypes(
+      BuildStep buildStep, Element element) async {
+    final visitor = NamedExpressionVisitor();
 
-    var ast = await buildStep.resolver.astNodeFor(classElement, resolve: true);
+    var ast = await buildStep.resolver.astNodeFor(element, resolve: true);
     ast?.visitChildren(visitor);
+    return visitor.methodType;
   }
 
-  String _processRepositoryData({
+  Future<String> _processRepositoryData({
     required List<LoaderMethodModel> loaders,
     required List<MethodElement> methods,
     required String api,
     required String prefix,
-  }) {
+  }) async {
     final buffer = StringBuffer();
     if (loaders.isEmpty) {
       return '';
@@ -274,24 +275,24 @@ class OpenapiRepositoryGenerator
       }
 
       buffer
-        ..writeln(_buildRepository(
+        ..writeln((await _buildRepository(
           api: api,
           loaders: loaders,
           methods: methods,
           namePrefix: prefix,
-        ))
+        )))
         ..writeln();
 
       return buffer.toString();
     }
   }
 
-  String _buildRepository({
+  Future<String> _buildRepository({
     required String api,
     required String namePrefix,
     required List<LoaderMethodModel> loaders,
     required Iterable<MethodElement> methods,
-  }) {
+  }) async {
     LoaderTemplateModel? listLoaderForTemplate;
     LoaderTemplateModel? dataLoaderForTemplate;
 
@@ -342,11 +343,26 @@ class OpenapiRepositoryGenerator
       updateMethod,
       deleteMethod,
     ];
-    final createModel = _getMethodModel('create', createMethod);
-    final partialUpdateModel =
-        _getMethodModel('partialUpdate', partialUpdateMethod);
-    final updateModel = _getMethodModel('updateObject', updateMethod);
-    final deleteModel = _getMethodModel('delete', deleteMethod);
+    final createModel = await _getMethodModel(
+      operation: 'create',
+      method: createMethod,
+      apiMethodType: 'POST',
+    );
+    final partialUpdateModel = await _getMethodModel(
+      operation: 'partialUpdate',
+      method: partialUpdateMethod,
+      apiMethodType: 'PATCH',
+    );
+    final updateModel = await _getMethodModel(
+      operation: 'updateObject',
+      method: updateMethod,
+      apiMethodType: 'PUT',
+    );
+    final deleteModel = await _getMethodModel(
+      operation: 'delete',
+      method: deleteMethod,
+      apiMethodType: 'DELETE',
+    );
     final crudMethods = [
       createModel,
       partialUpdateModel,
@@ -368,15 +384,21 @@ class OpenapiRepositoryGenerator
       }
     });
 
-    final operationModels = prefixedMethods
-        .map((e) {
-          final operationName =
-              e.displayName.substring(namePrefix.length).camelCase;
+    final operationModels = <MethodModel>[];
+    for (var e in prefixedMethods) {
+      final operationName =
+          e.displayName.substring(namePrefix.length).camelCase;
 
-          return _getMethodModel(operationName, e);
-        })
-        .whereType<MethodModel>()
-        .toList();
+      final methodModel = await _getMethodModel(
+        operation: operationName,
+        method: e,
+        isCrud: false,
+      );
+
+      if (methodModel != null) {
+        operationModels.add(methodModel);
+      }
+    }
 
     final loaderTemplateModel = LoaderRepositoryTemplateModel(
       api: api,
@@ -416,68 +438,79 @@ class OpenapiRepositoryGenerator
     return '$repository\n$dataCubit\n$listCubit';
   }
 
-  MethodModel? _getMethodModel(
-    String operation,
-    MethodElement? method,
-  ) {
+  Future<MethodModel?> _getMethodModel({
+    required String operation,
+    required MethodElement? method,
+    String? apiMethodType,
+    bool? isCrud = true,
+  }) async {
     if (method == null) return null;
+    final elementApiMethodType = await _visitAndGetMethodTypes(
+        BuildStepProvider.instance.buildStep!, method);
 
-    final params = method.parameters.where((element) {
-      return !_ignoreParams.contains(element.displayName);
-    });
+    if (isCrud == false ||
+        (elementApiMethodType != null &&
+            apiMethodType != null &&
+            elementApiMethodType.contains(apiMethodType))) {
+      final params = method.parameters.where((element) {
+        return !_ignoreParams.contains(element.displayName);
+      });
 
-    final arguments = params.map((e) {
-      return ArgModel(
-        e.type.getDisplayString(withNullability: false),
-        e.displayName,
-        !e.isRequired,
-        e.isRequired,
+      final arguments = params.map((e) {
+        return ArgModel(
+          e.type.getDisplayString(withNullability: false),
+          e.displayName,
+          !e.isRequired,
+          e.isRequired,
+        );
+      }).toList();
+
+      final parameters = params
+          .map((e) => ParamModel('${e.displayName}: ${e.displayName}'))
+          .toList();
+      final dataProcessor = _DataMethodElementProcesser(
+        methodElement: method,
+        defaultOffset: _defaultOffset,
+        defaultPageSize: _defaultPageSize,
+        ignoreParams: _ignoreParams,
       );
-    }).toList();
 
-    final parameters = params
-        .map((e) => ParamModel('${e.displayName}: ${e.displayName}'))
-        .toList();
-    final dataProcessor = _DataMethodElementProcesser(
-      methodElement: method,
-      defaultOffset: _defaultOffset,
-      defaultPageSize: _defaultPageSize,
-      ignoreParams: _ignoreParams,
-    );
+      final listProcessor = _ListMethodElementProcesser(
+        methodElement: method,
+        defaultOffset: _defaultOffset,
+        defaultPageSize: _defaultPageSize,
+        ignoreParams: _ignoreParams,
+      );
 
-    final listProcessor = _ListMethodElementProcesser(
-      methodElement: method,
-      defaultOffset: _defaultOffset,
-      defaultPageSize: _defaultPageSize,
-      ignoreParams: _ignoreParams,
-    );
+      final dataReturntype =
+          dataProcessor.getInnerReturnType(method.returnType, false);
+      final listReturntype =
+          listProcessor.getInnerReturnType(method.returnType, false);
+      String? type;
 
-    final dataReturntype =
-        dataProcessor.getInnerReturnType(method.returnType, false);
-    final listReturntype =
-        listProcessor.getInnerReturnType(method.returnType, false);
-    String? type;
+      bool isList = false;
+      if (listReturntype?.type != null) {
+        isList = true;
 
-    bool isList = false;
-    if (listReturntype?.type != null) {
-      isList = true;
+        type =
+            'List<${listReturntype!.type.getDisplayString(withNullability: false)}>';
+      } else if (dataReturntype?.type != null) {
+        type =
+            '${dataReturntype!.type.getDisplayString(withNullability: false)}?';
+      }
 
-      type =
-          'List<${listReturntype!.type.getDisplayString(withNullability: false)}>';
-    } else if (dataReturntype?.type != null) {
-      type =
-          '${dataReturntype!.type.getDisplayString(withNullability: false)}?';
+      return MethodModel(
+        returnType: type ?? 'void',
+        operation: operation,
+        name: method.displayName,
+        arguments: arguments,
+        parameters: parameters,
+        isEmptyArgs: arguments.isEmpty,
+        isList: isList,
+      );
+    } else {
+      return null;
     }
-
-    return MethodModel(
-      returnType: type ?? 'void',
-      operation: operation,
-      name: method.displayName,
-      arguments: arguments,
-      parameters: parameters,
-      isEmptyArgs: arguments.isEmpty,
-      isList: isList,
-    );
   }
 
   String _buildTypeDefs({
