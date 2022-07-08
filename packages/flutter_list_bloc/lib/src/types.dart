@@ -12,3 +12,13 @@ typedef Widget ListItemBuilder<T, F>(
   int index,
   T item,
 );
+
+typedef Widget DataStateBuilder<T, F>(
+  BuildContext context,
+  Data<T, F> state,
+);
+
+typedef Widget DataItemBuilder<T, F>(
+  BuildContext context,
+  Data<T, F> state,
+);

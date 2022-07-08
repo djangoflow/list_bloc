@@ -6,4 +6,5 @@ export 'src/list_bloc_builder.dart';
 export 'src/listview_bloc_builder.dart';
 export 'src/page_view_bloc_builder.dart';
 export 'src/sliver_list_bloc_builder.dart';
+export 'src/data_bloc_builder.dart';
 export 'src/types.dart';
