@@ -444,6 +444,7 @@ class OpenapiRepositoryGenerator
     String? apiMethodType,
     bool? isCrud = true,
   }) async {
+    final shouldNotReloadOperations = ['create', 'delete'];
     if (method == null) return null;
     final elementApiMethodType = await _visitAndGetMethodTypes(
         BuildStepProvider.instance.buildStep!, method);
@@ -507,6 +508,9 @@ class OpenapiRepositoryGenerator
         parameters: parameters,
         isEmptyArgs: arguments.isEmpty,
         isList: isList,
+        shouldDataBlocReload: !shouldNotReloadOperations.contains(
+          operation.toLowerCase(),
+        ),
       );
     } else {
       return null;
