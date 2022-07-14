@@ -18,6 +18,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   openapi_repository_annotations:
     path: /Users/adar/Development/apexlabs/list_bloc-1/packages/openapi_repository_annotations
+  flutter_bloc: ^8.0.1
+  bloc: ^8.0.3
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +33,8 @@ dev_dependencies:
   json_serializable: ^6.2.0
   list_bloc:
     path: /Users/adar/Development/apexlabs/list_bloc-1/packages/list_bloc
+  flutter_list_bloc:
+    path: /Users/adar/Development/apexlabs/list_bloc-1/packages/flutter_list_bloc
 dependency_overrides:
   dio: 4.0.4
 
