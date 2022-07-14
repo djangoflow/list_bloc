@@ -102,9 +102,13 @@ This class is created to perform the following steps
 
 1. Iterate over all methods in a class.
 2. For every method in the class, check if the return type is `Future<T>` such that
-   - `T` is either an instance of `List` or `BuiltList` **OR**
-   - `T` has a parameter called `results` such that `results` is an instance of `List` or `BuiltList`. This happens when the API returns a paginated response. To acheive this another visitor called `InlineClassVisitor` is used.
+   - `T` is either an instance of `List` or `BuiltList` for List method, or any object for Read method **OR**
+   - For List method, `T` has a parameter called `results` such that `results` is an instance of `List` or `BuiltList`. This happens when the API returns a paginated response. To acheive this another visitor called `InlineClassVisitor` is used.
 3. If 2 is satisfied, the required data is parsed into a class called `RepositoryModel` and saved in the `listMethods` field of the visitor which can then be accessed from the calling `Element`.
+
+#### NamedExpressionVisitor
+
+This class helps to find the api call type(PUT, POST, DELETE etc) of an method.
 
 ### Builder
 
