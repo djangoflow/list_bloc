@@ -4,9 +4,9 @@ import 'package:list_bloc/list_bloc.dart';
 
 import 'types.dart';
 
-class DataBlocBuilder<T, F> extends StatelessWidget {
-  final DataCubit<T, F> Function(BuildContext context)? create;
-  final DataCubit<T, F>? cubit;
+class DataBlocBuilder<B extends DataCubit<T, F>, T, F> extends StatelessWidget {
+  final B Function(BuildContext context)? create;
+  final B? cubit;
   final DataItemBuilder<T, F> itemBuilder;
   final DataStateBuilder<T, F> emptyBuilder;
   final DataStateBuilder<T, F> loadingBuilder;
@@ -30,7 +30,7 @@ class DataBlocBuilder<T, F> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final child = BlocBuilder<DataCubit<T, F>, Data<T, F>>(
+    final child = BlocBuilder<B, Data<T, F>>(
       bloc: cubit,
       builder: (context, state) {
         final child = builder(context, state, (context) {
