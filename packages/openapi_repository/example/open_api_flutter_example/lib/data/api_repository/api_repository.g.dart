@@ -6,16 +6,14 @@ part of 'api_repository.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FindPetByStatusListFilter _$$_FindPetByStatusListFilterFromJson(
-        Map<String, dynamic> json) =>
-    _$_FindPetByStatusListFilter(
-      status: json['status'],
+_$_PetReadFilter _$$_PetReadFilterFromJson(Map<String, dynamic> json) =>
+    _$_PetReadFilter(
+      petId: json['petId'] as int,
     );
 
-Map<String, dynamic> _$$_FindPetByStatusListFilterToJson(
-        _$_FindPetByStatusListFilter instance) =>
+Map<String, dynamic> _$$_PetReadFilterToJson(_$_PetReadFilter instance) =>
     <String, dynamic>{
-      'status': instance.status,
+      'petId': instance.petId,
     };
 
 _$_OrderReadFilter _$$_OrderReadFilterFromJson(Map<String, dynamic> json) =>

@@ -42,7 +42,7 @@ const dataCubitTemplate = r'''
 // DataCubit for {{name}}
 
 class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}DataBloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter,]) loader,) : super(read);
+  {{name}}DataBloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter,]) loader,) : super({{name}}Repository.read);
 
   {{#crudMethods}}
   @override
@@ -52,7 +52,7 @@ class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}R
   ) async {
       final r = await super.{{operation}}({{#parameters}}{{param}},
       {{/parameters}});
-      await super.load(state.filter);
+      {{#shouldDataBlocReload}}await super.load(state.filter); {{/shouldDataBlocReload}}
 
       return r;
   }
@@ -65,7 +65,7 @@ const listCubitTemplate = r'''
 // ListCubit for {{name}}
 
 class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}ListBloc(Future<List<{{returnType}}>> Function([ {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter,]) loader,) : super(list);
+  {{name}}ListBloc(Future<List<{{returnType}}>> Function([ {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter,]) loader,) : super({{name}}Repository.list);
 
   {{#crudMethods}}
   @override

@@ -14,149 +14,145 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-FindPetByStatusListFilter _$FindPetByStatusListFilterFromJson(
-    Map<String, dynamic> json) {
-  return _FindPetByStatusListFilter.fromJson(json);
+PetReadFilter _$PetReadFilterFromJson(Map<String, dynamic> json) {
+  return _PetReadFilter.fromJson(json);
 }
 
 /// @nodoc
-mixin _$FindPetByStatusListFilter {
-  dynamic get status => throw _privateConstructorUsedError;
+mixin _$PetReadFilter {
+  int get petId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $FindPetByStatusListFilterCopyWith<FindPetByStatusListFilter> get copyWith =>
+  $PetReadFilterCopyWith<PetReadFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FindPetByStatusListFilterCopyWith<$Res> {
-  factory $FindPetByStatusListFilterCopyWith(FindPetByStatusListFilter value,
-          $Res Function(FindPetByStatusListFilter) then) =
-      _$FindPetByStatusListFilterCopyWithImpl<$Res>;
-  $Res call({dynamic status});
+abstract class $PetReadFilterCopyWith<$Res> {
+  factory $PetReadFilterCopyWith(
+          PetReadFilter value, $Res Function(PetReadFilter) then) =
+      _$PetReadFilterCopyWithImpl<$Res>;
+  $Res call({int petId});
 }
 
 /// @nodoc
-class _$FindPetByStatusListFilterCopyWithImpl<$Res>
-    implements $FindPetByStatusListFilterCopyWith<$Res> {
-  _$FindPetByStatusListFilterCopyWithImpl(this._value, this._then);
+class _$PetReadFilterCopyWithImpl<$Res>
+    implements $PetReadFilterCopyWith<$Res> {
+  _$PetReadFilterCopyWithImpl(this._value, this._then);
 
-  final FindPetByStatusListFilter _value;
+  final PetReadFilter _value;
   // ignore: unused_field
-  final $Res Function(FindPetByStatusListFilter) _then;
+  final $Res Function(PetReadFilter) _then;
 
   @override
   $Res call({
-    Object? status = freezed,
+    Object? petId = freezed,
   }) {
     return _then(_value.copyWith(
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      petId: petId == freezed
+          ? _value.petId
+          : petId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$$_FindPetByStatusListFilterCopyWith<$Res>
-    implements $FindPetByStatusListFilterCopyWith<$Res> {
-  factory _$$_FindPetByStatusListFilterCopyWith(
-          _$_FindPetByStatusListFilter value,
-          $Res Function(_$_FindPetByStatusListFilter) then) =
-      __$$_FindPetByStatusListFilterCopyWithImpl<$Res>;
+abstract class _$$_PetReadFilterCopyWith<$Res>
+    implements $PetReadFilterCopyWith<$Res> {
+  factory _$$_PetReadFilterCopyWith(
+          _$_PetReadFilter value, $Res Function(_$_PetReadFilter) then) =
+      __$$_PetReadFilterCopyWithImpl<$Res>;
   @override
-  $Res call({dynamic status});
+  $Res call({int petId});
 }
 
 /// @nodoc
-class __$$_FindPetByStatusListFilterCopyWithImpl<$Res>
-    extends _$FindPetByStatusListFilterCopyWithImpl<$Res>
-    implements _$$_FindPetByStatusListFilterCopyWith<$Res> {
-  __$$_FindPetByStatusListFilterCopyWithImpl(
-      _$_FindPetByStatusListFilter _value,
-      $Res Function(_$_FindPetByStatusListFilter) _then)
-      : super(_value, (v) => _then(v as _$_FindPetByStatusListFilter));
+class __$$_PetReadFilterCopyWithImpl<$Res>
+    extends _$PetReadFilterCopyWithImpl<$Res>
+    implements _$$_PetReadFilterCopyWith<$Res> {
+  __$$_PetReadFilterCopyWithImpl(
+      _$_PetReadFilter _value, $Res Function(_$_PetReadFilter) _then)
+      : super(_value, (v) => _then(v as _$_PetReadFilter));
 
   @override
-  _$_FindPetByStatusListFilter get _value =>
-      super._value as _$_FindPetByStatusListFilter;
+  _$_PetReadFilter get _value => super._value as _$_PetReadFilter;
 
   @override
   $Res call({
-    Object? status = freezed,
+    Object? petId = freezed,
   }) {
-    return _then(_$_FindPetByStatusListFilter(
-      status: status == freezed ? _value.status : status,
+    return _then(_$_PetReadFilter(
+      petId: petId == freezed
+          ? _value.petId
+          : petId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_FindPetByStatusListFilter extends _FindPetByStatusListFilter
-    with DiagnosticableTreeMixin {
-  const _$_FindPetByStatusListFilter({required this.status}) : super._();
+class _$_PetReadFilter extends _PetReadFilter with DiagnosticableTreeMixin {
+  const _$_PetReadFilter({required this.petId}) : super._();
 
-  factory _$_FindPetByStatusListFilter.fromJson(Map<String, dynamic> json) =>
-      _$$_FindPetByStatusListFilterFromJson(json);
+  factory _$_PetReadFilter.fromJson(Map<String, dynamic> json) =>
+      _$$_PetReadFilterFromJson(json);
 
   @override
-  final dynamic status;
+  final int petId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FindPetByStatusListFilter(status: $status)';
+    return 'PetReadFilter(petId: $petId)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'FindPetByStatusListFilter'))
-      ..add(DiagnosticsProperty('status', status));
+      ..add(DiagnosticsProperty('type', 'PetReadFilter'))
+      ..add(DiagnosticsProperty('petId', petId));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FindPetByStatusListFilter &&
-            const DeepCollectionEquality().equals(other.status, status));
+            other is _$_PetReadFilter &&
+            const DeepCollectionEquality().equals(other.petId, petId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(status));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(petId));
 
   @JsonKey(ignore: true)
   @override
-  _$$_FindPetByStatusListFilterCopyWith<_$_FindPetByStatusListFilter>
-      get copyWith => __$$_FindPetByStatusListFilterCopyWithImpl<
-          _$_FindPetByStatusListFilter>(this, _$identity);
+  _$$_PetReadFilterCopyWith<_$_PetReadFilter> get copyWith =>
+      __$$_PetReadFilterCopyWithImpl<_$_PetReadFilter>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FindPetByStatusListFilterToJson(this);
+    return _$$_PetReadFilterToJson(this);
   }
 }
 
-abstract class _FindPetByStatusListFilter extends FindPetByStatusListFilter {
-  const factory _FindPetByStatusListFilter({required final dynamic status}) =
-      _$_FindPetByStatusListFilter;
-  const _FindPetByStatusListFilter._() : super._();
+abstract class _PetReadFilter extends PetReadFilter {
+  const factory _PetReadFilter({required final int petId}) = _$_PetReadFilter;
+  const _PetReadFilter._() : super._();
 
-  factory _FindPetByStatusListFilter.fromJson(Map<String, dynamic> json) =
-      _$_FindPetByStatusListFilter.fromJson;
+  factory _PetReadFilter.fromJson(Map<String, dynamic> json) =
+      _$_PetReadFilter.fromJson;
 
   @override
-  dynamic get status => throw _privateConstructorUsedError;
+  int get petId;
   @override
   @JsonKey(ignore: true)
-  _$$_FindPetByStatusListFilterCopyWith<_$_FindPetByStatusListFilter>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_PetReadFilterCopyWith<_$_PetReadFilter> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 OrderReadFilter _$OrderReadFilterFromJson(Map<String, dynamic> json) {
@@ -294,7 +290,7 @@ abstract class _OrderReadFilter extends OrderReadFilter {
       _$_OrderReadFilter.fromJson;
 
   @override
-  int get orderId => throw _privateConstructorUsedError;
+  int get orderId;
   @override
   @JsonKey(ignore: true)
   _$$_OrderReadFilterCopyWith<_$_OrderReadFilter> get copyWith =>
@@ -441,7 +437,7 @@ abstract class _UserByUsernameReadFilter extends UserByUsernameReadFilter {
       _$_UserByUsernameReadFilter.fromJson;
 
   @override
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @override
   @JsonKey(ignore: true)
   _$$_UserByUsernameReadFilterCopyWith<_$_UserByUsernameReadFilter>

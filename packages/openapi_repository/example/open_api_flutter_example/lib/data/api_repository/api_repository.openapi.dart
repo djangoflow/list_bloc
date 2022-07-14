@@ -32,50 +32,123 @@ class ApiRepository {
   UserApi get user => api.getUserApi();
 }
 
-//Typdef for FindPetByStatusListState
+//Typdef for PetReadState
 
-typedef FindPetByStatusListState = Data<List<Pet>, FindPetByStatusListFilter>;
+typedef PetReadState = Data<Pet, PetReadFilter>;
 
-//Filter for FindPetByStatusListFilter
+//Filter for PetReadFilter
 
 @freezed
-class FindPetByStatusListFilter with _$FindPetByStatusListFilter {
-  const FindPetByStatusListFilter._();
+class PetReadFilter with _$PetReadFilter {
+  const PetReadFilter._();
 
-  const factory FindPetByStatusListFilter({
-    required BuiltList<String> status,
-  }) = _FindPetByStatusListFilter;
+  const factory PetReadFilter({
+    required int petId,
+  }) = _PetReadFilter;
 
-  factory FindPetByStatusListFilter.fromJson(
+  factory PetReadFilter.fromJson(
     Map<String, dynamic> map,
   ) =>
-      _$FindPetByStatusListFilterFromJson(map);
+      _$PetReadFilterFromJson(map);
 }
 
-// Repository for FindPetByStatusRepository
+// Repository for PetRepository
 
-abstract class FindPetByStatusRepository {
-  static Future<List<Pet>> listLoader([
-    FindPetByStatusListFilter? filter,
+abstract class PetRepository {
+  static Future<Pet> read([
+    PetReadFilter? filter,
   ]) async {
     if (filter == null) {
       throw Exception('Invalid filter');
     }
-    final r = await ApiRepository.instance.pet.findPetByStatusList(
-      status: filter.status,
+    final r = await ApiRepository.instance.pet.petRead(
+      petId: filter.petId,
     );
+    if (r.data == null) {
+      throw Exception('Failed to load data!');
+    } else {
+      return r.data!;
+    }
+  }
 
-    return r.data?.asList() ?? [];
+  Future<void> create({
+    required Pet body,
+  }) async {
+    final r = (await ApiRepository.instance.pet.petCreate(
+      body: body,
+    ));
+
+    return r.data;
+  }
+
+  Future<void> updateObject({
+    required Pet body,
+  }) async {
+    final r = (await ApiRepository.instance.pet.petUpdate(
+      body: body,
+    ));
+
+    return r.data;
+  }
+
+  Future<void> delete({
+    required int petId,
+    String? apiKey,
+  }) async {
+    final r = (await ApiRepository.instance.pet.petDelete(
+      petId: petId,
+      apiKey: apiKey,
+    ));
+
+    return r.data;
   }
 }
 
-// ListCubit for FindPetByStatus
+// DataCubit for Pet
 
-class FindPetByStatusListBloc extends ListCubit<Pet, FindPetByStatusListFilter>
-    with FindPetByStatusRepository {
-  FindPetByStatusListBloc(
-    Future<List<Pet>> Function([FindPetByStatusListFilter? filter]) loader,
-  ) : super(listLoader);
+class PetDataBloc extends DataCubit<Pet, PetReadFilter> with PetRepository {
+  PetDataBloc(
+    Future<Pet> Function([
+      PetReadFilter? filter,
+    ])
+        loader,
+  ) : super(PetRepository.read);
+
+  @override
+  Future<void> create({
+    required Pet body,
+  }) async {
+    final r = await super.create(
+      body: body,
+    );
+
+    return r;
+  }
+
+  @override
+  Future<void> updateObject({
+    required Pet body,
+  }) async {
+    final r = await super.updateObject(
+      body: body,
+    );
+    await super.load(state.filter);
+
+    return r;
+  }
+
+  @override
+  Future<void> delete({
+    required int petId,
+    String? apiKey,
+  }) async {
+    final r = await super.delete(
+      petId: petId,
+      apiKey: apiKey,
+    );
+
+    return r;
+  }
 }
 
 //Typdef for OrderReadState
@@ -101,7 +174,7 @@ class OrderReadFilter with _$OrderReadFilter {
 // Repository for OrderRepository
 
 abstract class OrderRepository {
-  static Future<Order> dataLoader([
+  static Future<Order> read([
     OrderReadFilter? filter,
   ]) async {
     if (filter == null) {
@@ -117,20 +190,24 @@ abstract class OrderRepository {
     }
   }
 
-  Future<void> create({
+  Future<Order?> create({
     required Order body,
   }) async {
-    await ApiRepository.instance.store.orderCreate(
+    final r = (await ApiRepository.instance.store.orderCreate(
       body: body,
-    );
+    ));
+
+    return r.data;
   }
 
   Future<void> delete({
     required int orderId,
   }) async {
-    await ApiRepository.instance.store.orderDelete(
+    final r = (await ApiRepository.instance.store.orderDelete(
       orderId: orderId,
-    );
+    ));
+
+    return r.data;
   }
 }
 
@@ -139,27 +216,32 @@ abstract class OrderRepository {
 class OrderDataBloc extends DataCubit<Order, OrderReadFilter>
     with OrderRepository {
   OrderDataBloc(
-    Future<Order> Function([OrderReadFilter? filter]) loader,
-  ) : super(dataLoader);
+    Future<Order> Function([
+      OrderReadFilter? filter,
+    ])
+        loader,
+  ) : super(OrderRepository.read);
 
   @override
-  Future<void> create({
+  Future<Order?> create({
     required Order body,
   }) async {
-    await super.create(
+    final r = await super.create(
       body: body,
     );
-    await super.load(state.filter);
+
+    return r;
   }
 
   @override
   Future<void> delete({
     required int orderId,
   }) async {
-    await super.delete(
+    final r = await super.delete(
       orderId: orderId,
     );
-    await super.load(state.filter);
+
+    return r;
   }
 }
 
@@ -186,7 +268,7 @@ class UserByUsernameReadFilter with _$UserByUsernameReadFilter {
 // Repository for UserByUsernameRepository
 
 abstract class UserByUsernameRepository {
-  static Future<User> dataLoader([
+  static Future<User> read([
     UserByUsernameReadFilter? filter,
   ]) async {
     if (filter == null) {
@@ -208,6 +290,9 @@ abstract class UserByUsernameRepository {
 class UserByUsernameDataBloc extends DataCubit<User, UserByUsernameReadFilter>
     with UserByUsernameRepository {
   UserByUsernameDataBloc(
-    Future<User> Function([UserByUsernameReadFilter? filter]) loader,
-  ) : super(dataLoader);
+    Future<User> Function([
+      UserByUsernameReadFilter? filter,
+    ])
+        loader,
+  ) : super(UserByUsernameRepository.read);
 }

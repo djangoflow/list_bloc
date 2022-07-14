@@ -140,6 +140,7 @@ class MethodModel with _$MethodModel {
     required List<ParamModel> parameters,
     @Default(false) bool isEmptyArgs,
     @Default(false) bool isList,
+    @Default(true) bool shouldDataBlocReload,
   }) = _MethodModel;
 
   factory MethodModel.fromJson(Map<String, dynamic> map) =>

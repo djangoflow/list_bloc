@@ -2092,6 +2092,7 @@ mixin _$MethodModel {
   List<ParamModel> get parameters => throw _privateConstructorUsedError;
   bool get isEmptyArgs => throw _privateConstructorUsedError;
   bool get isList => throw _privateConstructorUsedError;
+  bool get shouldDataBlocReload => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2111,7 +2112,8 @@ abstract class $MethodModelCopyWith<$Res> {
       List<ArgModel> arguments,
       List<ParamModel> parameters,
       bool isEmptyArgs,
-      bool isList});
+      bool isList,
+      bool shouldDataBlocReload});
 }
 
 /// @nodoc
@@ -2131,6 +2133,7 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
     Object? parameters = freezed,
     Object? isEmptyArgs = freezed,
     Object? isList = freezed,
+    Object? shouldDataBlocReload = freezed,
   }) {
     return _then(_value.copyWith(
       returnType: returnType == freezed
@@ -2161,6 +2164,10 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
           ? _value.isList
           : isList // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldDataBlocReload: shouldDataBlocReload == freezed
+          ? _value.shouldDataBlocReload
+          : shouldDataBlocReload // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2179,7 +2186,8 @@ abstract class _$$_MethodModelCopyWith<$Res>
       List<ArgModel> arguments,
       List<ParamModel> parameters,
       bool isEmptyArgs,
-      bool isList});
+      bool isList,
+      bool shouldDataBlocReload});
 }
 
 /// @nodoc
@@ -2201,6 +2209,7 @@ class __$$_MethodModelCopyWithImpl<$Res> extends _$MethodModelCopyWithImpl<$Res>
     Object? parameters = freezed,
     Object? isEmptyArgs = freezed,
     Object? isList = freezed,
+    Object? shouldDataBlocReload = freezed,
   }) {
     return _then(_$_MethodModel(
       returnType: returnType == freezed
@@ -2231,6 +2240,10 @@ class __$$_MethodModelCopyWithImpl<$Res> extends _$MethodModelCopyWithImpl<$Res>
           ? _value.isList
           : isList // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldDataBlocReload: shouldDataBlocReload == freezed
+          ? _value.shouldDataBlocReload
+          : shouldDataBlocReload // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2246,7 +2259,8 @@ class _$_MethodModel implements _MethodModel {
       required final List<ArgModel> arguments,
       required final List<ParamModel> parameters,
       this.isEmptyArgs = false,
-      this.isList = false})
+      this.isList = false,
+      this.shouldDataBlocReload = true})
       : _arguments = arguments,
         _parameters = parameters;
 
@@ -2279,10 +2293,13 @@ class _$_MethodModel implements _MethodModel {
   @override
   @JsonKey()
   final bool isList;
+  @override
+  @JsonKey()
+  final bool shouldDataBlocReload;
 
   @override
   String toString() {
-    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters, isEmptyArgs: $isEmptyArgs, isList: $isList)';
+    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters, isEmptyArgs: $isEmptyArgs, isList: $isList, shouldDataBlocReload: $shouldDataBlocReload)';
   }
 
   @override
@@ -2300,7 +2317,9 @@ class _$_MethodModel implements _MethodModel {
                 .equals(other._parameters, _parameters) &&
             const DeepCollectionEquality()
                 .equals(other.isEmptyArgs, isEmptyArgs) &&
-            const DeepCollectionEquality().equals(other.isList, isList));
+            const DeepCollectionEquality().equals(other.isList, isList) &&
+            const DeepCollectionEquality()
+                .equals(other.shouldDataBlocReload, shouldDataBlocReload));
   }
 
   @JsonKey(ignore: true)
@@ -2313,7 +2332,8 @@ class _$_MethodModel implements _MethodModel {
       const DeepCollectionEquality().hash(_arguments),
       const DeepCollectionEquality().hash(_parameters),
       const DeepCollectionEquality().hash(isEmptyArgs),
-      const DeepCollectionEquality().hash(isList));
+      const DeepCollectionEquality().hash(isList),
+      const DeepCollectionEquality().hash(shouldDataBlocReload));
 
   @JsonKey(ignore: true)
   @override
@@ -2334,7 +2354,8 @@ abstract class _MethodModel implements MethodModel {
       required final List<ArgModel> arguments,
       required final List<ParamModel> parameters,
       final bool isEmptyArgs,
-      final bool isList}) = _$_MethodModel;
+      final bool isList,
+      final bool shouldDataBlocReload}) = _$_MethodModel;
 
   factory _MethodModel.fromJson(Map<String, dynamic> json) =
       _$_MethodModel.fromJson;
@@ -2353,6 +2374,8 @@ abstract class _MethodModel implements MethodModel {
   bool get isEmptyArgs => throw _privateConstructorUsedError;
   @override
   bool get isList => throw _privateConstructorUsedError;
+  @override
+  bool get shouldDataBlocReload => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_MethodModelCopyWith<_$_MethodModel> get copyWith =>
