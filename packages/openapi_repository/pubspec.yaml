@@ -5,13 +5,18 @@ version: 1.0.0
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
+  flutter: ">=1.17.0"
 
 dependencies:
+  flutter:
+    sdk: flutter
   openapi_repository_annotations:
     path: "../openapi_repository_annotations"
     # git:
     #   url: "https://github.com/ajilo297/list_bloc.git"
     #   path: packages/openapi_repository_annotations
+  list_bloc:
+    path: "../list_bloc"
   build: ^2.3.0
   built_collection: ^5.1.1
   built_value: ^8.3.2
