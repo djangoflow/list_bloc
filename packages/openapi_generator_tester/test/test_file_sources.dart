@@ -2,9 +2,9 @@ class TestFileSources {
   static final apiRepositoryWithBuilderList = r'''
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:open_api_gen_tester/models/test_api_repository.dart';
-import 'package:open_api_gen_tester/models/test_item_repository.dart';
-import 'package:open_api_gen_tester/test_interceptor.dart';
+import 'package:openapi_generator_tester/models/test_api_repository.dart';
+import 'package:openapi_generator_tester/models/test_item_repository.dart';
+import 'package:openapi_generator_tester/test_interceptor.dart';
 import 'package:openapi_repository_annotations/openapi_repository_annotations.dart';
 import 'package:list_bloc/list_bloc.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
@@ -34,9 +34,9 @@ abstract class $ApiRepository {}
   static final apiRepositoryWithoutBuilderListItem = r'''
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:open_api_gen_tester/models/test_api_repository.dart';
-import 'package:open_api_gen_tester/models/test_item_repository.dart';
-import 'package:open_api_gen_tester/test_interceptor.dart';
+import 'package:openapi_generator_tester/models/test_api_repository.dart';
+import 'package:openapi_generator_tester/models/test_item_repository.dart';
+import 'package:openapi_generator_tester/test_interceptor.dart';
 import 'package:openapi_repository_annotations/openapi_repository_annotations.dart';
 import 'package:list_bloc/list_bloc.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
@@ -64,9 +64,9 @@ abstract class $ApiRepository {}
   static final apiRepositoryWithIngoreIgnoreListItemEndpoints = r'''
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:open_api_gen_tester/models/test_api_repository.dart';
-import 'package:open_api_gen_tester/models/test_item_repository.dart';
-import 'package:open_api_gen_tester/test_interceptor.dart';
+import 'package:openapi_generator_tester/models/test_api_repository.dart';
+import 'package:openapi_generator_tester/models/test_item_repository.dart';
+import 'package:openapi_generator_tester/test_interceptor.dart';
 import 'package:openapi_repository_annotations/openapi_repository_annotations.dart';
 import 'package:list_bloc/list_bloc.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
