@@ -6,8 +6,8 @@ The aim of this generator is to generate list repositories, and freezed models f
 
 Make sure you've generated Client library using OpenApi(Swagger) schema definitions. And make sure that each `operationId` in the schema has operations(`create`, `update`, `partialUpdate`, `read`, `delete` etc) suffix which helps the library to detect methods.
 
-For example: `/user` [UserApi class from OpenApi Repo](example/openapi/lib/src/api/user_api.dart) endpoint should have `operationId` for CRUD operation in this format.
-`user_create`, `user_update`, `user_partial_update`, `user_read`, `user_delete`. All the api calls will be put inside the same `Repository` object when generated based on the `operationId` described format.
+For example: `/user` [UserApi class from OpenApi Repo](example/openapi/lib/src/api/pet_api.dart) endpoint should have `operationId` for CRUD operation in this format.
+`pet_create`(POST), `pet_update`(PUT), `pet_partial_update`(PATCH), `pet_read`(GET), `pet_delete`(DELETE). All the api calls will be put inside the same `Repository` object when generated based on the `operationId` described format along with DataBlocs and ListBlocs.
 
 Then create a flutter/dart project and use `OpenapiRepository` annotation on the class that will hold the generated files. Use annoation params to configure how the files should be generated. Example: [Annotation Usage](example/open_api_flutter_example/lib/data/api_repository/api_repository.dart)
 
@@ -16,6 +16,12 @@ Here `$ApiRepository` class will holding the generated files in `part 'api_repos
 After adding annotation run `flutter pub run build_runner build --delete-conflicting-outputs`
 or
 `dart run build_runner build --delete-conflicting-outputs
+
+### How this library works
+
+This library uses annotation(@OpenapiRepository) on a class. This annonated class will hold all the generated Repository, DataBlocs, ListBlocs. It searches for {methodPrefix}Read/List (where request api call method is also GET) and then finds relevant {methodPrefix}Update/PartialUpdate/Delete/{randomMethod sufix} and put them inside annotated class in Repository pattern. Based on the generated class from annotation it will generate DataBlocs(for {methodPrefix}Read) and ListBlocs(for {methodPrefix}List) and these Blocs will inherite other methods inside the generated class. These Blocs can be directly used with flutter_list_bloc or list_bloc widgets.
+
+![Flow](https://i.ibb.co/ydP1QKT/flow.png)
 
 ### Annotation
 
