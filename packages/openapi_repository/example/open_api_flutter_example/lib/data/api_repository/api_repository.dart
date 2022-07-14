@@ -12,7 +12,10 @@ part 'api_repository.g.dart';
 @OpenapiRepository(
   buildFor: Openapi,
   builderList: [
-    ListRepositoryBuilder(PetApi),
+    ListRepositoryBuilder(PetApi, ignoreEndpoints: [
+      'findPetByStatusList',
+      'findPetByTagList',
+    ]),
     ListRepositoryBuilder(StoreApi),
     ListRepositoryBuilder(UserApi),
   ],
