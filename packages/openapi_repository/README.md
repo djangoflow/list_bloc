@@ -9,7 +9,33 @@ Make sure you've generated Client library using OpenApi(Swagger) schema definiti
 For example: `/user` [UserApi class from OpenApi Repo](example/openapi/lib/src/api/pet_api.dart) endpoint should have `operationId` for CRUD operation in this format.
 `pet_create`(POST), `pet_update`(PUT), `pet_partial_update`(PATCH), `pet_read`(GET), `pet_delete`(DELETE). All the api calls will be put inside the same `Repository` object when generated based on the `operationId` described format along with DataBlocs and ListBlocs.
 
-Then create a flutter/dart project and use `OpenapiRepository` annotation on the class that will hold the generated files. Use annoation params to configure how the files should be generated. Example: [Annotation Usage](example/open_api_flutter_example/lib/data/api_repository/api_repository.dart)
+Then create a flutter/dart project install these depdencies
+
+For Flutter:
+
+```Dart
+flutter pub add openapi_repository_annotations
+flutter pub add list_bloc
+flutter pub add flutter_list_bloc
+flutter pub add dio
+flutter pub add openapi_repository --dev
+flutter pub add build_runner --dev
+flutter pub add built_value_generator --dev
+```
+
+For Dart:
+
+```Dart
+dart pub add openapi_repository_annotations
+dart pub add list_bloc
+dart pub add flutter_list_bloc
+dart pub add dio
+dart pub add openapi_repository --dev
+dart pub add build_runner --dev
+dart pub add built_value_generator --dev
+```
+
+Use `@OpenapiRepository` annotation on the class that will hold the generated files. Use annoation params to configure how the files should be generated. Example: [Annotation Usage](example/open_api_flutter_example/lib/data/api_repository/api_repository.dart)
 
 Here `$ApiRepository` class will holding the generated files in `part 'api_repository.openapi.dart'; part 'api_repository.freezed.dart'; part 'api_repository.g.dart';` directories.
 
