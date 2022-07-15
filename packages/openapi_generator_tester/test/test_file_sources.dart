@@ -16,7 +16,7 @@ part 'api_repository.g.dart';
 @OpenapiRepository(
   buildFor: TestApiRepository,
   builderList: [
-    ListRepositoryBuilder(TestItemRepository),
+    RepositoryBuilder(TestItemRepository),
   ],
   liveBasePath: r'https://127.0.0.1/api/v0',
   baseUrl: r'https://127.0.0.1/api/v0',
@@ -78,7 +78,7 @@ part 'api_repository.g.dart';
 @OpenapiRepository(
   buildFor: TestApiRepository,
   builderList: [
-    ListRepositoryBuilder(TestItemRepository, ignoreEndpoints: ['itemList']),
+    RepositoryBuilder(TestItemRepository, ignoreEndpoints: ['itemList']),
   ],
   liveBasePath: r'https://127.0.0.1/api/v0',
   baseUrl: r'https://127.0.0.1/api/v0',

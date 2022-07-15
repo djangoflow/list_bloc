@@ -11,12 +11,12 @@ part 'api_repository.g.dart';
 @OpenapiRepository(
   buildFor: Openapi,
   builderList: [
-    ListRepositoryBuilder(PetApi, ignoreEndpoints: [
+    RepositoryBuilder(PetApi, ignoreEndpoints: [
       'findPetByStatusList',
       'findPetByTagList',
     ]),
-    ListRepositoryBuilder(StoreApi),
-    ListRepositoryBuilder(UserApi),
+    RepositoryBuilder(StoreApi),
+    RepositoryBuilder(UserApi),
   ],
   liveBasePath: r'https://petstore.swagger.io/v2',
   baseUrl: r'https://petstore.swagger.io/v2',

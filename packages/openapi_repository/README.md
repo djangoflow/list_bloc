@@ -60,7 +60,7 @@ For the purpose of this project, we have created an annotation called `@OpenapiR
 `@OpenapiRepository()` Takes multiple values
 
 - `Type buildFor` : The main OpenApi class which contains all the API Objects(which are used to fetch Api methods for each API Object. Ex: OpenApi -> AccountsApi -> {AccountsApi related API methods}).
-- `List<ListRepositoryBuilder> builderList` : It helps to pass allowed/ingorable methods for a API class object. `ListRepositoryBuilder` contains List of allowed and ingorable api method names. if the value is [*] then all will be counted for allowed/ingorable for that method. For example: We can pass `ListRepositoryBuilder(AccountsApi, listEndpoints: [*], ignoreEndpoints = [])` then it will generate for all the endpoints that is included inside `AccountsApi` class and ingore none of the endpoints.
+- `List<RepositoryBuilder> builderList` : It helps to pass allowed/ingorable methods for a API class object. `RepositoryBuilder` contains List of allowed and ingorable api method names. if the value is [*] then all will be counted for allowed/ingorable for that method. For example: We can pass `RepositoryBuilder(AccountsApi, allowedEndpoints: [*], ignoreEndpoints = [])` then it will generate for all the endpoints that is included inside `AccountsApi` class and ingore none of the endpoints.
 - `int connectTimeout` : timeout for the connecting with the server. Default: 10000
 - `int receiveTimeout` : timeout for to receive data from server. Default: 15000
 - `int sendTimeout` : timeout to send/upload data to the server. Default: 15000
