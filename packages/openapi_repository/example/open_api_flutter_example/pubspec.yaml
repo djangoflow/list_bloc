@@ -17,20 +17,20 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   openapi_repository_annotations:
-    path: /Users/adar/Development/apexlabs/list_bloc-1/packages/openapi_repository_annotations
+    path: "../../../openapi_repository_annotations"
   flutter_bloc: ^8.0.1
   bloc: ^8.0.3
   list_bloc:
-    path: /Users/adar/Development/apexlabs/list_bloc-1/packages/list_bloc
+    path: "../../../list_bloc"
   flutter_list_bloc:
-    path: /Users/adar/Development/apexlabs/list_bloc-1/packages/flutter_list_bloc
+    path: "../../../flutter_list_bloc"
   freezed_annotation: ^2.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   openapi_repository:
-    path: /Users/adar/Development/apexlabs/list_bloc-1/packages/openapi_repository
+    path: "../../../openapi_repository"
   build_runner: ^2.1.11
   built_value_generator: ^8.3.2
   flutter_lints: ^2.0.1
