@@ -78,7 +78,7 @@ This will generate Filter, DataCubit, ListCubit, Repository classes with Dio con
 Generated files will in `{fileName}.openapi.dart`.
 
 For generated example file please follow this link:
-[a Generated Classes](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
+[Generated Classes](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
 
 ### Generator
 
