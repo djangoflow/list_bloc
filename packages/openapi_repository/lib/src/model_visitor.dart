@@ -5,6 +5,7 @@ import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/visitor.dart';
 
+/// This class visit elements and detects if any method return type has a field called `results`
 class InlineClassVisitor extends SimpleElementVisitor {
   final fields = <FieldElement>[];
   final parameters = [];
@@ -16,6 +17,8 @@ class InlineClassVisitor extends SimpleElementVisitor {
   }
 }
 
+/// This class visits ASTNodes and detects the api call type by
+/// checking the value of 'method' variable if it is GET, POST, etc and returns it.
 class NamedExpressionVisitor extends RecursiveAstVisitor<void> {
   String? methodType;
 
