@@ -163,6 +163,13 @@ This library uses annotation(`@OpenapiRepository`) on a class. This annonated cl
 
 ![Flow](https://i.ibb.co/CBjPJwy/doc.png)
 
+### Tutorials for code generation from annotation
+
+To learn more about code generation using annotation:
+
+- https://developpaper.com/dart-generate-code-from-annotations/
+- https://www.raywenderlich.com/22180993-flutter-code-generation-getting-started
+
 ### Annotation
 
 A package called `openapi_repository_annotations` is created to hold all annotations. This will be added as a `dependency` module in the projects, while the generator itself will be a `dev-dependency`.
@@ -291,10 +298,3 @@ builders:
     build_to: source # Tells builder to generate file to the same path of the file where annotation was created and not to the default .dart_tool/build/generated/ path.
     applies_builders: ["source_gen|combining_builder"]
 ```
-
-### Tutorials
-
-To learn more about code generation using annotation:
-
-- https://developpaper.com/dart-generate-code-from-annotations/
-- https://www.raywenderlich.com/22180993-flutter-code-generation-getting-started
