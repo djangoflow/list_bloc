@@ -1,21 +1,55 @@
 # Openapi Repository Generator
 
-The aim of this generator is to generate list repositories, and freezed models for query params filters.
+The aim of this generator is to generate repositories, blocs and freezed models for query params filters for OpenApi module.
 
 ## Usage
 
-Make sure you've generated Client library using OpenApi(Swagger) schema definitions. And make sure that each `operationId` in the schema has operations(`create`, `update`, `partialUpdate`, `read`, `delete` etc) suffix which helps the library to detect methods.
+Make sure you've generated `OpenApi` client library using OpenApi(Swagger) schema definitions and [openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator-cli). And make sure that each `operationId` in the OpenApi(Swagger) schema has operations(`create`, `update`, `partial_update`, `read`, `delete`, `list` etc) suffix which helps the library to detect methods. For each CRUD operations it also checks api call method. (read -> GET, list -> GET, create -> POST, update -> PUT, partial_update -> PATCH, delete -> DELETE)
 
-For example: `/user` [UserApi class from OpenApi Repo](example/openapi/lib/src/api/user_api.dart) endpoint should have `operationId` for CRUD operation in this format.
-`user_create`, `user_update`, `user_partial_update`, `user_read`, `user_delete`. All the api calls will be put inside the same `Repository` object when generated based on the `operationId` described format.
+For example: `/user` [UserApi class from OpenApi Repo](example/openapi/lib/src/api/pet_api.dart) endpoint should have `operationId` for CRUD operation in this format.
+`pet_create`(POST), `pet_update`(PUT), `pet_partial_update`(PATCH), `pet_read`(GET), `pet_delete`(DELETE). All the api calls will be put inside the same `Repository` object when generated based on the `operationId` described format along with DataBlocs and ListBlocs.
 
-Then create a flutter/dart project and use `OpenapiRepository` annotation on the class that will hold the generated files. Use annoation params to configure how the files should be generated. Example: [Annotation Usage](example/open_api_flutter_example/lib/data/api_repository/api_repository.dart)
+Then create a flutter/dart project. Make sure previously generated(using openapi-generator-cli) OpenApi module can be imported in the flutter/dart project. Then install these depdencies
 
-Here `$ApiRepository` class will holding the generated files in `part 'api_repository.openapi.dart'; part 'api_repository.freezed.dart'; part 'api_repository.g.dart';` directories.
+For Flutter:
+
+```Dart
+flutter pub add openapi_repository_annotations
+flutter pub add list_bloc
+flutter pub add flutter_list_bloc
+flutter pub add dio
+flutter pub add openapi_repository --dev
+flutter pub add build_runner --dev
+flutter pub add built_value_generator --dev
+```
+
+For Dart:
+
+```Dart
+dart pub add openapi_repository_annotations
+dart pub add list_bloc
+dart pub add flutter_list_bloc
+dart pub add dio
+dart pub add openapi_repository --dev
+dart pub add build_runner --dev
+dart pub add built_value_generator --dev
+```
+
+Use `@OpenapiRepository` annotation on the class that will hold the generated files. Use annoation params to configure how the files should be generated. Example: [Annotation Usage](example/open_api_flutter_example/lib/data/api_repository/api_repository.dart)
+
+Here `$ApiRepository` class will holding the generated files in `part 'api_repository.openapi.dart'; part 'api_repository.freezed.dart'; part 'api_repository.g.dart';` directories. This generator will add files to `part 'api_repository.openapi.dart';` first.
 
 After adding annotation run `flutter pub run build_runner build --delete-conflicting-outputs`
 or
-`dart run build_runner build --delete-conflicting-outputs
+`dart run build_runner build --delete-conflicting-outputs`
+
+This should generate Repository, DataBlocs, ListBlocs in the same directory as the `$ApiRepository` class. Example: [Example generated files](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
+
+### How this library works
+
+This library uses annotation(`@OpenapiRepository`) on a class. This annonated class will hold all the generated `Repository, DataBlocs, ListBlocs`. It searches for `{methodPrefix}Read/List` (where request api call method is also `GET`) and then finds relevant `{methodPrefix}Update/PartialUpdate/Delete/{randomMethod sufix}` and put them inside annotated class in Repository pattern. Based on the generated class from annotation it will generate `DataBlocs`(for `{methodPrefix}Read`) and `ListBlocs`(for `{methodPrefix}List`) and these `Blocs` will inherite other methods inside the generated class. These Blocs can be directly used with [flutter_list_bloc](../flutter_list_bloc/) or [list_bloc](../list_bloc/) widgets.
+
+![Flow](https://i.ibb.co/ydP1QKT/flow.png)
 
 ### Annotation
 
@@ -26,7 +60,7 @@ For the purpose of this project, we have created an annotation called `@OpenapiR
 `@OpenapiRepository()` Takes multiple values
 
 - `Type buildFor` : The main OpenApi class which contains all the API Objects(which are used to fetch Api methods for each API Object. Ex: OpenApi -> AccountsApi -> {AccountsApi related API methods}).
-- `List<ListRepositoryBuilder> builderList` : It helps to pass allowed/ingorable methods for a API class object. `ListRepositoryBuilder` contains List of allowed and ingorable api method names. if the value is [*] then all will be counted for allowed/ingorable for that method. For example: We can pass `ListRepositoryBuilder(AccountsApi, listEndpoints: [*], ignoreEndpoints = [])` then it will generate for all the endpoints that is included inside `AccountsApi` class and ingore none of the endpoints.
+- `List<RepositoryBuilder> builderList` : It helps to pass allowed/ingorable methods for a API class object. `RepositoryBuilder` contains List of allowed and ingorable api method names. if the value is [*] then all will be counted for allowed/ingorable for that method. For example: We can pass `RepositoryBuilder(AccountsApi, allowedEndpoints: [*], ignoreEndpoints = [])` then it will generate for all the endpoints that is included inside `AccountsApi` class and ingore none of the endpoints.
 - `int connectTimeout` : timeout for the connecting with the server. Default: 10000
 - `int receiveTimeout` : timeout for to receive data from server. Default: 15000
 - `int sendTimeout` : timeout to send/upload data to the server. Default: 15000
@@ -44,7 +78,7 @@ This will generate Filter, DataCubit, ListCubit, Repository classes with Dio con
 Generated files will in `{fileName}.openapi.dart`.
 
 For generated example file please follow this link:
-[a Generated Classes](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
+[Generated Classes](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
 
 ### Generator
 
@@ -96,9 +130,13 @@ This class is created to perform the following steps
 
 1. Iterate over all methods in a class.
 2. For every method in the class, check if the return type is `Future<T>` such that
-   - `T` is either an instance of `List` or `BuiltList` **OR**
-   - `T` has a parameter called `results` such that `results` is an instance of `List` or `BuiltList`. This happens when the API returns a paginated response. To acheive this another visitor called `InlineClassVisitor` is used.
+   - `T` is either an instance of `List` or `BuiltList` for List method, or any object for Read method **OR**
+   - For List method, `T` has a parameter called `results` such that `results` is an instance of `List` or `BuiltList`. This happens when the API returns a paginated response. To acheive this another visitor called `InlineClassVisitor` is used.
 3. If 2 is satisfied, the required data is parsed into a class called `RepositoryModel` and saved in the `listMethods` field of the visitor which can then be accessed from the calling `Element`.
+
+#### NamedExpressionVisitor
+
+This class helps to find the api call type(PUT, POST, DELETE etc) of an method.
 
 ### Builder
 
@@ -141,3 +179,10 @@ builders:
     build_to: source # Tells builder to generate file to the same path of the file where annotation was created and not to the default .dart_tool/build/generated/ path.
     applies_builders: ["source_gen|combining_builder"]
 ```
+
+### Tutorials
+
+To learn more about code generation using annotation:
+
+- https://developpaper.com/dart-generate-code-from-annotations/
+- https://www.raywenderlich.com/22180993-flutter-code-generation-getting-started

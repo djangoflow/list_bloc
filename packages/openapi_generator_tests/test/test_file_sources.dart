@@ -2,9 +2,9 @@ class TestFileSources {
   static final apiRepositoryWithBuilderList = r'''
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:openapi_generator_tester/models/test_api_repository.dart';
-import 'package:openapi_generator_tester/models/test_item_repository.dart';
-import 'package:openapi_generator_tester/test_interceptor.dart';
+import 'package:openapi_generator_tests/models/test_api_repository.dart';
+import 'package:openapi_generator_tests/models/test_item_repository.dart';
+import 'package:openapi_generator_tests/test_interceptor.dart';
 import 'package:openapi_repository_annotations/openapi_repository_annotations.dart';
 import 'package:list_bloc/list_bloc.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
@@ -16,7 +16,7 @@ part 'api_repository.g.dart';
 @OpenapiRepository(
   buildFor: TestApiRepository,
   builderList: [
-    ListRepositoryBuilder(TestItemRepository),
+    RepositoryBuilder(TestItemRepository),
   ],
   liveBasePath: r'https://127.0.0.1/api/v0',
   baseUrl: r'https://127.0.0.1/api/v0',
@@ -34,9 +34,9 @@ abstract class $ApiRepository {}
   static final apiRepositoryWithoutBuilderListItem = r'''
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:openapi_generator_tester/models/test_api_repository.dart';
-import 'package:openapi_generator_tester/models/test_item_repository.dart';
-import 'package:openapi_generator_tester/test_interceptor.dart';
+import 'package:openapi_generator_tests/models/test_api_repository.dart';
+import 'package:openapi_generator_tests/models/test_item_repository.dart';
+import 'package:openapi_generator_tests/test_interceptor.dart';
 import 'package:openapi_repository_annotations/openapi_repository_annotations.dart';
 import 'package:list_bloc/list_bloc.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
@@ -64,9 +64,9 @@ abstract class $ApiRepository {}
   static final apiRepositoryWithIngoreIgnoreListItemEndpoints = r'''
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:openapi_generator_tester/models/test_api_repository.dart';
-import 'package:openapi_generator_tester/models/test_item_repository.dart';
-import 'package:openapi_generator_tester/test_interceptor.dart';
+import 'package:openapi_generator_tests/models/test_api_repository.dart';
+import 'package:openapi_generator_tests/models/test_item_repository.dart';
+import 'package:openapi_generator_tests/test_interceptor.dart';
 import 'package:openapi_repository_annotations/openapi_repository_annotations.dart';
 import 'package:list_bloc/list_bloc.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
@@ -78,7 +78,7 @@ part 'api_repository.g.dart';
 @OpenapiRepository(
   buildFor: TestApiRepository,
   builderList: [
-    ListRepositoryBuilder(TestItemRepository, ignoreEndpoints: ['itemList']),
+    RepositoryBuilder(TestItemRepository, ignoreEndpoints: ['itemList']),
   ],
   liveBasePath: r'https://127.0.0.1/api/v0',
   baseUrl: r'https://127.0.0.1/api/v0',

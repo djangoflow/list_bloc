@@ -4,7 +4,6 @@ import 'package:openapi/openapi.dart';
 import 'package:openapi_repository_annotations/openapi_repository_annotations.dart';
 import 'package:dio/dio.dart';
 import 'package:list_bloc/list_bloc.dart';
-import 'package:built_collection/built_collection.dart';
 part 'api_repository.openapi.dart';
 part 'api_repository.freezed.dart';
 part 'api_repository.g.dart';
@@ -12,12 +11,12 @@ part 'api_repository.g.dart';
 @OpenapiRepository(
   buildFor: Openapi,
   builderList: [
-    ListRepositoryBuilder(PetApi, ignoreEndpoints: [
+    RepositoryBuilder(PetApi, ignoreEndpoints: [
       'findPetByStatusList',
       'findPetByTagList',
     ]),
-    ListRepositoryBuilder(StoreApi),
-    ListRepositoryBuilder(UserApi),
+    RepositoryBuilder(StoreApi),
+    RepositoryBuilder(UserApi),
   ],
   liveBasePath: r'https://petstore.swagger.io/v2',
   baseUrl: r'https://petstore.swagger.io/v2',

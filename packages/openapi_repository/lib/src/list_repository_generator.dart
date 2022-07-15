@@ -1,7 +1,4 @@
 // ignore_for_file: depend_on_referenced_packages
-import 'dart:math';
-
-import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:collection/collection.dart';
 import 'package:analyzer/dart/element/type.dart';
@@ -92,7 +89,7 @@ class OpenapiRepositoryGenerator
 
     // Write list blocs, filter, repository
     for (final builder in parsedAnnotation.builderList) {
-      final output = await _getListRepositoryFromBuilder(builder);
+      final output = await _getGeneratedCodesFromBuilder(builder);
       if (output.isEmpty) continue;
       buffer.writeln(output);
     }
@@ -100,8 +97,8 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
-  Future<String> _getListRepositoryFromBuilder(
-      _ListRepositoryBuilder builder) async {
+  Future<String> _getGeneratedCodesFromBuilder(
+      _RepositoryBuilder builder) async {
     final generatedMethodElements = <String>[];
     final buffer = StringBuffer();
     final classElement = builder.apiClass;
@@ -131,7 +128,7 @@ class OpenapiRepositoryGenerator
       if (shouldIgnore(
           methodName: methodName,
           ignoreEndpoints: builder.ignoreEndpoints,
-          listEndpoints: builder.listEndpoints)) {
+          allowedEndpoints: builder.allowedEndpoints)) {
         continue;
       }
 
@@ -169,7 +166,7 @@ class OpenapiRepositoryGenerator
               !(shouldIgnore(
                   methodName: listMethod.displayName,
                   ignoreEndpoints: builder.ignoreEndpoints,
-                  listEndpoints: builder.listEndpoints))) {
+                  allowedEndpoints: builder.allowedEndpoints))) {
             final listLoaderMethodModel = _ListMethodElementProcesser(
               methodElement: listMethod,
               defaultOffset: _defaultOffset,
@@ -202,7 +199,7 @@ class OpenapiRepositoryGenerator
               !(shouldIgnore(
                   methodName: readMethod.displayName,
                   ignoreEndpoints: builder.ignoreEndpoints,
-                  listEndpoints: builder.listEndpoints))) {
+                  allowedEndpoints: builder.allowedEndpoints))) {
             final listLoaderMethodModel = _DataMethodElementProcesser(
               methodElement: readMethod,
               defaultOffset: _defaultOffset,
@@ -553,7 +550,7 @@ class OpenapiRepositoryGenerator
   bool shouldIgnore({
     required String methodName,
     required List<String> ignoreEndpoints,
-    required List<String> listEndpoints,
+    required List<String> allowedEndpoints,
   }) {
     if (ignoreEndpoints.contains('*')) {
       return true;
@@ -561,8 +558,8 @@ class OpenapiRepositoryGenerator
       return true;
     }
 
-    if (!listEndpoints.contains('*')) {
-      if (!listEndpoints.contains(methodName)) {
+    if (!allowedEndpoints.contains('*')) {
+      if (!allowedEndpoints.contains(methodName)) {
         return true;
       }
 
@@ -593,7 +590,7 @@ class _ReturnModel {
 
 class _ReaderTypes {
   final ClassElement buildForElement;
-  final Iterable<_ListRepositoryBuilder> builderList;
+  final Iterable<_RepositoryBuilder> builderList;
   final int connectTimeout;
   final int receiveTimeout;
   final int sendTimeout;
@@ -636,7 +633,7 @@ class _ReaderTypes {
 
     final builderList = reader.peek('builderList')?.listValue ?? [];
     final builderData = builderList.map(
-      (e) => _ListRepositoryBuilder.fromDartObject(e),
+      (e) => _RepositoryBuilder.fromDartObject(e),
     );
 
     return _ReaderTypes._(
@@ -654,18 +651,18 @@ class _ReaderTypes {
   }
 }
 
-class _ListRepositoryBuilder {
+class _RepositoryBuilder {
   final ClassElement apiClass;
-  final List<String> listEndpoints;
+  final List<String> allowedEndpoints;
   final List<String> ignoreEndpoints;
 
-  const _ListRepositoryBuilder._(
+  const _RepositoryBuilder._(
     this.apiClass, {
     this.ignoreEndpoints = const [],
-    this.listEndpoints = const [],
+    this.allowedEndpoints = const [],
   });
 
-  factory _ListRepositoryBuilder.fromDartObject(DartObject e) {
+  factory _RepositoryBuilder.fromDartObject(DartObject e) {
     final type = e.getField('apiClass')?.toTypeValue();
     if (type == null) {
       throw FormatException('ApiClass field must be a type');
@@ -676,14 +673,14 @@ class _ListRepositoryBuilder {
       throw 'ApiClass field should be a Class Type';
     }
 
-    final listEndpoints = e.getField('listEndpoints')?.toListValue();
+    final allowedEndpoints = e.getField('allowedEndpoints')?.toListValue();
     final ignoreEndpoints = e.getField('ignoreEndpoints')?.toListValue();
 
     final parsedEndpoints = <String>[];
     final parsedIgnoreEndpoints = <String>[];
 
-    if (listEndpoints != null) {
-      for (final endpoint in listEndpoints) {
+    if (allowedEndpoints != null) {
+      for (final endpoint in allowedEndpoints) {
         final value = endpoint.toStringValue();
         if (value == null) continue;
         parsedEndpoints.add(value);
@@ -698,10 +695,10 @@ class _ListRepositoryBuilder {
       }
     }
 
-    return _ListRepositoryBuilder._(
+    return _RepositoryBuilder._(
       element,
       ignoreEndpoints: parsedIgnoreEndpoints,
-      listEndpoints: parsedEndpoints,
+      allowedEndpoints: parsedEndpoints,
     );
   }
 }
