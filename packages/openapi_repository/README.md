@@ -1,6 +1,6 @@
 # Openapi Repository Generator
 
-The aim of this generator is to generate list repositories, and freezed models for query params filters.
+The aim of this generator is to generate repositories, blocs and freezed models for query params filters for OpenApi module.
 
 ## Usage
 
