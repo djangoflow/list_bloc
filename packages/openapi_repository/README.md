@@ -1,6 +1,16 @@
 # Openapi Repository Generator
 
+## Abstract
+
 The aim of this generator is to generate repositories, blocs and freezed models for query params filters for OpenApi module.
+
+[openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator-cli) is a very powerful tool that allows us to generate client libraries(api calling methods) following Repository pattern, documentation, tests etc for `Dart` language from the OpenApi/Swagger spec file. A good can be this article on how to generate OpenApi client library from OpenApi/Swagger specification [Article Link](https://medium.com/@rtlsilva/generating-dart-rest-api-client-libraries-using-openapi-generator-9b3dc517e68c)
+
+But generated client library containing OpenApi endpoints is not very efficient to use with pagination or filtering data. Here [list_bloc](../list_bloc) comes into play. It utilizes the [Bloc](https://pub.dev/packages/bloc) library to create `DataCubit`, `ListCubit` state management solution. Which supports pagination and filtering data for the generated endpoints. And help us remove a lot boilerplate codes to support pagination and filtering.
+
+And our `openapi_repository` library takes that to even further. It is possible to provide those endpoints, it will automatically generate `DataCubit` and `ListCubit` which can be easily used to with widgets provided in [list_bloc](../list_bloc/) and [flutter_list_bloc](../flutter_list_bloc/)
+
+It will create generate Repository like this with relevant methods
 
 ## Usage
 
@@ -43,7 +53,112 @@ After adding annotation run `flutter pub run build_runner build --delete-conflic
 or
 `dart run build_runner build --delete-conflicting-outputs`
 
-This should generate Repository, DataBlocs, ListBlocs in the same directory as the `$ApiRepository` class. Example: [Example generated files](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
+This should generate Repository, DataBlocs, ListBlocs in the same directory as the `$ApiRepository` class.
+
+Generated `ApiRepository` class will look something like this
+
+```Dart
+class ApiRepository {
+  static ApiRepository get instance => _instance;
+  static final ApiRepository _instance = ApiRepository._internal();
+
+  ApiRepository._internal() {
+    _openapi.dio.options
+      ..baseUrl = 'https://petstore.swagger.io/v2'
+      ..connectTimeout = 3000
+      ..receiveTimeout = 5000
+      ..sendTimeout = 3000;
+    _openapi.dio.interceptors.add(Interceptor());
+  }
+
+  static const String liveBasePath = 'https://petstore.swagger.io/v2';
+
+  static final Openapi _openapi = Openapi(
+    basePathOverride: kReleaseMode ? liveBasePath : null,
+    interceptors: [],
+  );
+
+  Openapi get api => _openapi;
+  PetApi get pet => api.getPetApi();
+  StoreApi get store => api.getStoreApi();
+  UserApi get user => api.getUserApi();
+}
+```
+
+And Generated Repository from endpoints will look like something like this
+
+```Dart
+abstract class PetRepository {
+  static Future<Pet> read([
+    PetReadFilter? filter,
+  ]) async {
+    if (filter == null) {
+      throw Exception('Invalid filter');
+    }
+    final r = await ApiRepository.instance.pet.petRead(
+      petId: filter.petId,
+    );
+    if (r.data == null) {
+      throw Exception('Failed to load data!');
+    } else {
+      return r.data!;
+    }
+  }
+
+  Future<void> create({
+    required Pet body,
+  }) async {
+    ........
+}
+
+```
+
+And `ListBloc` and `DataBloc` with relevant methods extending the generated `Repository` like `PetRepository` will be generated as well.
+
+```Dart
+class PetDataBloc extends DataCubit<Pet, PetReadFilter> with PetRepository {
+  PetDataBloc(
+    Future<Pet> Function([
+      PetReadFilter? filter,
+    ])
+        loader,
+  ) : super(PetRepository.read);
+
+  @override
+  Future<void> create({
+    required Pet body,
+  }) async {
+    final r = await super.create(
+      body: body,
+    );
+
+    return r;
+  }
+  .........
+}
+
+```
+
+And we can directly use this piece of `PetDataBloc` with widgets from [flutter_list_bloc](../flutter_list_bloc/)
+
+Example:
+
+```Dart
+DataBlocBuilder<PetDataBloc, Pet, PetReadFilter>(
+  create: (context) => PetDataBloc(PetRepository.read)
+    ..load(
+      PetReadFilter(petId: widget.petId),
+    ),
+  emptyBuilder: (_, __) => const Center(
+    child: Text('No data'),
+  ),
+  loadingBuilder: (_, __) => const Center(
+    child: CircularProgressIndicator(),
+  ),
+  itemBuilder: (context, state) => .........
+```
+
+For full example: [Example generated files](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
 
 ### How this library works
 
@@ -124,9 +239,9 @@ The most important of the `generateForAnnotatedElement` method is the `Element` 
 
 To take a peek into the inner fields or parameters or property accessors, etc, we need to define a class which extends from `SimpleElementVisitor`. In this project, this is done at `model_visitor.dart` where 2 instances of `SimpleElementVisitors` are created.
 
-#### ClassPropertiesVisitor
+#### `_getGeneratedCodesFromBuilder`
 
-This class is created to perform the following steps
+This method is created to perform the following steps
 
 1. Iterate over all methods in a class.
 2. For every method in the class, check if the return type is `Future<T>` such that
