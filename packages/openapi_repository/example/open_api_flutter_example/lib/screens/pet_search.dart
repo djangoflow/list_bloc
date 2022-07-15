@@ -61,7 +61,7 @@ class _PetSearchScreenState extends State<PetSearchScreen> {
               child: const Text('Search by id'),
             ),
           ),
-          DataBlocBuilder<Pet, PetReadFilter>(
+          DataBlocBuilder<PetDataBloc, Pet, PetReadFilter>(
             cubit: bloc,
             emptyBuilder: (_, __) => const Center(
               child: Text('No data'),
