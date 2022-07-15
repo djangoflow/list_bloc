@@ -47,7 +47,7 @@ This should generate Repository, DataBlocs, ListBlocs in the same directory as t
 
 ### How this library works
 
-This library uses annotation(@OpenapiRepository) on a class. This annonated class will hold all the generated Repository, DataBlocs, ListBlocs. It searches for {methodPrefix}Read/List (where request api call method is also GET) and then finds relevant {methodPrefix}Update/PartialUpdate/Delete/{randomMethod sufix} and put them inside annotated class in Repository pattern. Based on the generated class from annotation it will generate DataBlocs(for {methodPrefix}Read) and ListBlocs(for {methodPrefix}List) and these Blocs will inherite other methods inside the generated class. These Blocs can be directly used with flutter_list_bloc or list_bloc widgets.
+This library uses annotation(`@OpenapiRepository`) on a class. This annonated class will hold all the generated `Repository, DataBlocs, ListBlocs`. It searches for `{methodPrefix}Read/List` (where request api call method is also `GET`) and then finds relevant `{methodPrefix}Update/PartialUpdate/Delete/{randomMethod sufix}` and put them inside annotated class in Repository pattern. Based on the generated class from annotation it will generate `DataBlocs`(for `{methodPrefix}Read`) and `ListBlocs`(for `{methodPrefix}List`) and these `Blocs` will inherite other methods inside the generated class. These Blocs can be directly used with [flutter_list_bloc](../flutter_list_bloc/) or [list_bloc](../list_bloc/) widgets.
 
 ![Flow](https://i.ibb.co/ydP1QKT/flow.png)
 
