@@ -16,10 +16,7 @@ It will create generate Repository like this with relevant methods
 
 Make sure you've generated `OpenApi` client library using OpenApi(Swagger) schema definitions and [openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator-cli). And make sure that each `operationId` in the OpenApi(Swagger) schema has operations(`create`, `update`, `partial_update`, `read`, `delete`, `list` etc) suffix which helps the library to detect methods. For each CRUD operations it also checks api call method. (read -> GET, list -> GET, create -> POST, update -> PUT, partial_update -> PATCH, delete -> DELETE)
 
-For example: `/user` [UserApi class from OpenApi Repo](example/openapi/lib/src/api/pet_api.dart) endpoint should have `operationId` for CRUD operation in this format.
-`pet_create`(POST), `pet_update`(PUT), `pet_partial_update`(PATCH), `pet_read`(GET), `pet_delete`(DELETE). All the api calls will be put inside the same `Repository` object when generated based on the `operationId` described format along with DataBlocs and ListBlocs.
-
-Then create a flutter/dart project. Make sure previously generated(using openapi-generator-cli) OpenApi module can be imported in the flutter/dart project. Then install these depdencies
+Then create a flutter/dart project. Make sure previously generated(using openapi-generator-cli) OpenApi client library can be imported in the flutter/dart project. Then install these depdencies
 
 For Flutter:
 
