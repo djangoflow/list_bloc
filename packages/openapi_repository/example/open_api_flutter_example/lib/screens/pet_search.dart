@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_list_bloc/flutter_list_bloc.dart';
-import 'package:list_bloc/list_bloc.dart';
 import 'package:open_api_example/data/api_repository/api_repository.dart';
 import 'package:openapi/openapi.dart';
 

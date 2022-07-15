@@ -1,7 +1,4 @@
 // ignore_for_file: depend_on_referenced_packages
-import 'dart:math';
-
-import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:collection/collection.dart';
 import 'package:analyzer/dart/element/type.dart';
