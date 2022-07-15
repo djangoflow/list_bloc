@@ -2,7 +2,7 @@
 
 ## Abstract
 
-The aim of this generator is to generate repositories, blocs and freezed models for query params filters for OpenApi module.
+The aim of this generator is to generate repositories, blocs and [freezed](https://pub.dev/packages/freezed) models for query params filters for OpenApi module.
 
 [openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator-cli) is a very powerful tool that allows us to generate client libraries(api calling methods) following Repository pattern, documentation, tests etc for `Dart` language from the OpenApi/Swagger spec file. A good can be this article on how to generate OpenApi client library from OpenApi/Swagger specification [Article Link](https://medium.com/@rtlsilva/generating-dart-rest-api-client-libraries-using-openapi-generator-9b3dc517e68c)
 
@@ -161,7 +161,7 @@ For full example: [Example generated files](example/open_api_flutter_example/lib
 
 This library uses annotation(`@OpenapiRepository`) on a class. This annonated class will hold all the generated `Repository, DataBlocs, ListBlocs`. It searches for `{methodPrefix}Read/List` (where request api call method is also `GET`) and then finds relevant `{methodPrefix}Update/PartialUpdate/Delete/{randomMethod sufix}` and put them inside annotated class in Repository pattern. Based on the generated class from annotation it will generate `DataBlocs`(for `{methodPrefix}Read`) and `ListBlocs`(for `{methodPrefix}List`) and these `Blocs` will inherite other methods inside the generated class. These Blocs can be directly used with [flutter_list_bloc](../flutter_list_bloc/) or [list_bloc](../list_bloc/) widgets.
 
-![Flow](https://i.ibb.co/ydP1QKT/flow.png)
+![Flow](https://i.ibb.co/CBjPJwy/doc.png)
 
 ### Annotation
 
