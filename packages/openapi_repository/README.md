@@ -4,12 +4,12 @@ The aim of this generator is to generate list repositories, and freezed models f
 
 ## Usage
 
-Make sure you've generated Client library using OpenApi(Swagger) schema definitions. And make sure that each `operationId` in the schema has operations(`create`, `update`, `partialUpdate`, `read`, `delete` etc) suffix which helps the library to detect methods.
+Make sure you've generated Client library using OpenApi(Swagger) schema definitions and [openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator-cli). And make sure that each `operationId` in the OpenApi(Swagger) schema has operations(`create`, `update`, `partial_update`, `read`, `delete`, `list` etc) suffix which helps the library to detect methods. For each CRUD operations it also checks api call method. (read -> GET, list -> GET, create -> POST, update -> PUT, partial_update -> PATCH, delete -> DELETE)
 
 For example: `/user` [UserApi class from OpenApi Repo](example/openapi/lib/src/api/pet_api.dart) endpoint should have `operationId` for CRUD operation in this format.
 `pet_create`(POST), `pet_update`(PUT), `pet_partial_update`(PATCH), `pet_read`(GET), `pet_delete`(DELETE). All the api calls will be put inside the same `Repository` object when generated based on the `operationId` described format along with DataBlocs and ListBlocs.
 
-Then create a flutter/dart project install these depdencies
+Then create a flutter/dart project. Make sure previously generated(using openapi-generator-cli) OpenApi module can be imported in the flutter/dart project. Then install these depdencies
 
 For Flutter:
 
@@ -37,11 +37,13 @@ dart pub add built_value_generator --dev
 
 Use `@OpenapiRepository` annotation on the class that will hold the generated files. Use annoation params to configure how the files should be generated. Example: [Annotation Usage](example/open_api_flutter_example/lib/data/api_repository/api_repository.dart)
 
-Here `$ApiRepository` class will holding the generated files in `part 'api_repository.openapi.dart'; part 'api_repository.freezed.dart'; part 'api_repository.g.dart';` directories.
+Here `$ApiRepository` class will holding the generated files in `part 'api_repository.openapi.dart'; part 'api_repository.freezed.dart'; part 'api_repository.g.dart';` directories. This generator will add files to `part 'api_repository.openapi.dart';` first.
 
 After adding annotation run `flutter pub run build_runner build --delete-conflicting-outputs`
 or
 `dart run build_runner build --delete-conflicting-outputs
+
+This should generate Repository, DataBlocs, ListBlocs in the same directory as the `$ApiRepository` class. Example: [Example generated files](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
 
 ### How this library works
 
