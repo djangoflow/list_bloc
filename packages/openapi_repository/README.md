@@ -41,7 +41,7 @@ Here `$ApiRepository` class will holding the generated files in `part 'api_repos
 
 After adding annotation run `flutter pub run build_runner build --delete-conflicting-outputs`
 or
-`dart run build_runner build --delete-conflicting-outputs
+`dart run build_runner build --delete-conflicting-outputs`
 
 This should generate Repository, DataBlocs, ListBlocs in the same directory as the `$ApiRepository` class. Example: [Example generated files](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
 
