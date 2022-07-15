@@ -34,6 +34,7 @@ class AccessorModel with _$AccessorModel {
       _$AccessorModelFromJson(map);
 }
 
+/// This model holds data for writing Filter classes
 @freezed
 class FreezedTemplateModel with _$FreezedTemplateModel {
   @JsonSerializable(explicitToJson: true)
@@ -147,6 +148,8 @@ class MethodModel with _$MethodModel {
       _$MethodModelFromJson(map);
 }
 
+/// Model for loader methods that will be written in the respective Repository
+/// which will be then used used with `DataCubit` or `ListCubit`
 @freezed
 class LoaderMethodModel with _$LoaderMethodModel {
   @JsonSerializable(explicitToJson: true)

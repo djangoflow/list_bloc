@@ -97,6 +97,7 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
+  /// Get generated codes from builder.
   Future<String> _getGeneratedCodesFromBuilder(
       _RepositoryBuilder builder) async {
     final generatedMethodElements = <String>[];
@@ -121,7 +122,7 @@ class OpenapiRepositoryGenerator
           namePrefix = '$namePrefix ${namePrefixList.elementAt(i)}'.camelCase;
         }
       }
-
+      // ignore if code is already generated for this method
       if (generatedMethodElements.contains(namePrefix)) {
         continue;
       }
@@ -139,7 +140,7 @@ class OpenapiRepositoryGenerator
           methodName.contains('Read') && methodName == '${namePrefix}Read';
       final isListMethod =
           methodName.contains('List') && methodName == '${namePrefix}List';
-
+      // if Read or List method is found, generate Repository, `DataCubit` and `ListCubit`.
       if ((isReadMethod || isListMethod) &&
           (apiMethodType != null && apiMethodType.contains('GET'))) {
         List<LoaderMethodModel> loaders = [];
@@ -227,6 +228,7 @@ class OpenapiRepositoryGenerator
     return buffer.toString();
   }
 
+  /// Get api call method type for the methodElement using `ASTNode`
   Future<String?> _visitAndGetMethodTypes(
       BuildStep buildStep, Element element) async {
     final visitor = NamedExpressionVisitor();
@@ -257,11 +259,11 @@ class OpenapiRepositoryGenerator
               ? typedefListCubitStateTemplate
               : typedefDataCubitStateTemplate,
         );
-
+        // write typedefs
         buffer
           ..writeln(typeDefs)
           ..writeln();
-
+        // writes filter classes
         buffer
           ..writeln(_buildLoaderFilterClass(
             name: loader.name,
@@ -435,6 +437,7 @@ class OpenapiRepositoryGenerator
     return '$repository\n$dataCubit\n$listCubit';
   }
 
+  /// Returns `MethodModel` for a `MethodElement` by validating
   Future<MethodModel?> _getMethodModel({
     required String operation,
     required MethodElement? method,
@@ -529,6 +532,7 @@ class OpenapiRepositoryGenerator
         .renderString(typedefModel.toJson());
   }
 
+  /// Returns generated code for the Filters
   String _buildLoaderFilterClass({
     required String name,
     required List<TypeModel> types,
@@ -547,6 +551,7 @@ class OpenapiRepositoryGenerator
     );
   }
 
+  /// if the method should be ignored, return true
   bool shouldIgnore({
     required String methodName,
     required List<String> ignoreEndpoints,
@@ -651,6 +656,8 @@ class _ReaderTypes {
   }
 }
 
+/// Parses and converts `RepositoryBuilder` to `_RepositoryBuilder`
+/// to make the data usable for the code generation
 class _RepositoryBuilder {
   final ClassElement apiClass;
   final List<String> allowedEndpoints;
@@ -752,6 +759,7 @@ abstract class _MethodElementProcessor {
         .toList();
   }
 
+  /// Returns `LoaderMethodModel` to be used as the loader method for the `DataCubit` and `ListCubit`
   LoaderMethodModel _getLoaderMethodModel(
       _ReturnModel returnModel, bool isList) {
     final methodParameters = _getMethodParameters();
