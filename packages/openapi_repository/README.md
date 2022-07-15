@@ -179,3 +179,8 @@ builders:
     build_to: source # Tells builder to generate file to the same path of the file where annotation was created and not to the default .dart_tool/build/generated/ path.
     applies_builders: ["source_gen|combining_builder"]
 ```
+
+To learn more about code generation using annotation:
+
+- https://developpaper.com/dart-generate-code-from-annotations/
+- https://www.raywenderlich.com/22180993-flutter-code-generation-getting-started
