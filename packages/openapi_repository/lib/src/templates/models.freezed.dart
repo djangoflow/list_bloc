@@ -3581,3 +3581,173 @@ abstract class _CubitTemplateModel implements CubitTemplateModel {
   _$$_CubitTemplateModelCopyWith<_$_CubitTemplateModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+BuiltListJsonConverterTemplateModel
+    _$BuiltListJsonConverterTemplateModelFromJson(Map<String, dynamic> json) {
+  return _BuiltListJsonConverterTemplateModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BuiltListJsonConverterTemplateModel {
+  String get converterName => throw _privateConstructorUsedError;
+  String get innerReturnType => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BuiltListJsonConverterTemplateModelCopyWith<
+          BuiltListJsonConverterTemplateModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BuiltListJsonConverterTemplateModelCopyWith<$Res> {
+  factory $BuiltListJsonConverterTemplateModelCopyWith(
+          BuiltListJsonConverterTemplateModel value,
+          $Res Function(BuiltListJsonConverterTemplateModel) then) =
+      _$BuiltListJsonConverterTemplateModelCopyWithImpl<$Res>;
+  $Res call({String converterName, String innerReturnType});
+}
+
+/// @nodoc
+class _$BuiltListJsonConverterTemplateModelCopyWithImpl<$Res>
+    implements $BuiltListJsonConverterTemplateModelCopyWith<$Res> {
+  _$BuiltListJsonConverterTemplateModelCopyWithImpl(this._value, this._then);
+
+  final BuiltListJsonConverterTemplateModel _value;
+  // ignore: unused_field
+  final $Res Function(BuiltListJsonConverterTemplateModel) _then;
+
+  @override
+  $Res call({
+    Object? converterName = freezed,
+    Object? innerReturnType = freezed,
+  }) {
+    return _then(_value.copyWith(
+      converterName: converterName == freezed
+          ? _value.converterName
+          : converterName // ignore: cast_nullable_to_non_nullable
+              as String,
+      innerReturnType: innerReturnType == freezed
+          ? _value.innerReturnType
+          : innerReturnType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_BuiltListJsonConverterTemplateModelCopyWith<$Res>
+    implements $BuiltListJsonConverterTemplateModelCopyWith<$Res> {
+  factory _$$_BuiltListJsonConverterTemplateModelCopyWith(
+          _$_BuiltListJsonConverterTemplateModel value,
+          $Res Function(_$_BuiltListJsonConverterTemplateModel) then) =
+      __$$_BuiltListJsonConverterTemplateModelCopyWithImpl<$Res>;
+  @override
+  $Res call({String converterName, String innerReturnType});
+}
+
+/// @nodoc
+class __$$_BuiltListJsonConverterTemplateModelCopyWithImpl<$Res>
+    extends _$BuiltListJsonConverterTemplateModelCopyWithImpl<$Res>
+    implements _$$_BuiltListJsonConverterTemplateModelCopyWith<$Res> {
+  __$$_BuiltListJsonConverterTemplateModelCopyWithImpl(
+      _$_BuiltListJsonConverterTemplateModel _value,
+      $Res Function(_$_BuiltListJsonConverterTemplateModel) _then)
+      : super(
+            _value, (v) => _then(v as _$_BuiltListJsonConverterTemplateModel));
+
+  @override
+  _$_BuiltListJsonConverterTemplateModel get _value =>
+      super._value as _$_BuiltListJsonConverterTemplateModel;
+
+  @override
+  $Res call({
+    Object? converterName = freezed,
+    Object? innerReturnType = freezed,
+  }) {
+    return _then(_$_BuiltListJsonConverterTemplateModel(
+      converterName: converterName == freezed
+          ? _value.converterName
+          : converterName // ignore: cast_nullable_to_non_nullable
+              as String,
+      innerReturnType: innerReturnType == freezed
+          ? _value.innerReturnType
+          : innerReturnType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_BuiltListJsonConverterTemplateModel
+    implements _BuiltListJsonConverterTemplateModel {
+  const _$_BuiltListJsonConverterTemplateModel(
+      {required this.converterName, required this.innerReturnType});
+
+  factory _$_BuiltListJsonConverterTemplateModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_BuiltListJsonConverterTemplateModelFromJson(json);
+
+  @override
+  final String converterName;
+  @override
+  final String innerReturnType;
+
+  @override
+  String toString() {
+    return 'BuiltListJsonConverterTemplateModel(converterName: $converterName, innerReturnType: $innerReturnType)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_BuiltListJsonConverterTemplateModel &&
+            const DeepCollectionEquality()
+                .equals(other.converterName, converterName) &&
+            const DeepCollectionEquality()
+                .equals(other.innerReturnType, innerReturnType));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(converterName),
+      const DeepCollectionEquality().hash(innerReturnType));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_BuiltListJsonConverterTemplateModelCopyWith<
+          _$_BuiltListJsonConverterTemplateModel>
+      get copyWith => __$$_BuiltListJsonConverterTemplateModelCopyWithImpl<
+          _$_BuiltListJsonConverterTemplateModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BuiltListJsonConverterTemplateModelToJson(this);
+  }
+}
+
+abstract class _BuiltListJsonConverterTemplateModel
+    implements BuiltListJsonConverterTemplateModel {
+  const factory _BuiltListJsonConverterTemplateModel(
+          {required final String converterName,
+          required final String innerReturnType}) =
+      _$_BuiltListJsonConverterTemplateModel;
+
+  factory _BuiltListJsonConverterTemplateModel.fromJson(
+          Map<String, dynamic> json) =
+      _$_BuiltListJsonConverterTemplateModel.fromJson;
+
+  @override
+  String get converterName => throw _privateConstructorUsedError;
+  @override
+  String get innerReturnType => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_BuiltListJsonConverterTemplateModelCopyWith<
+          _$_BuiltListJsonConverterTemplateModel>
+      get copyWith => throw _privateConstructorUsedError;
+}

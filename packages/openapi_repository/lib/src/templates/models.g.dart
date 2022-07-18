@@ -347,3 +347,18 @@ Map<String, dynamic> _$$_CubitTemplateModelToJson(
       'hasFilter': instance.hasFilter,
       'crudMethods': instance.crudMethods.map((e) => e.toJson()).toList(),
     };
+
+_$_BuiltListJsonConverterTemplateModel
+    _$$_BuiltListJsonConverterTemplateModelFromJson(
+            Map<String, dynamic> json) =>
+        _$_BuiltListJsonConverterTemplateModel(
+          converterName: json['converterName'] as String,
+          innerReturnType: json['innerReturnType'] as String,
+        );
+
+Map<String, dynamic> _$$_BuiltListJsonConverterTemplateModelToJson(
+        _$_BuiltListJsonConverterTemplateModel instance) =>
+    <String, dynamic>{
+      'converterName': instance.converterName,
+      'innerReturnType': instance.innerReturnType,
+    };

@@ -219,3 +219,16 @@ class CubitTemplateModel with _$CubitTemplateModel {
   factory CubitTemplateModel.fromJson(Map<String, dynamic> map) =>
       _$CubitTemplateModelFromJson(map);
 }
+
+@freezed
+class BuiltListJsonConverterTemplateModel
+    with _$BuiltListJsonConverterTemplateModel {
+  const factory BuiltListJsonConverterTemplateModel({
+    required String converterName,
+    required String innerReturnType,
+  }) = _BuiltListJsonConverterTemplateModel;
+
+  factory BuiltListJsonConverterTemplateModel.fromJson(
+          Map<String, dynamic> map) =>
+      _$BuiltListJsonConverterTemplateModelFromJson(map);
+}
