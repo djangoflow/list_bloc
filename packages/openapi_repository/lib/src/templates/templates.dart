@@ -163,3 +163,20 @@ class {{repositoryName}} {
   {{/accessors}}
 }
 ''';
+
+const buildListConverterTemplate = r'''
+class {{converterName}}Converter
+    implements JsonConverter<BuiltList<{{innerReturnType}}>, List<{{innerReturnType}}>> {
+  const BuiltListConverter();
+
+  @override
+  BuiltList<{{innerReturnType}}> fromJson(List<{{innerReturnType}}> json) {
+    return BuiltList<{{innerReturnType}}>(json);
+  }
+
+  @override
+  List<{{innerReturnType}}> toJson(BuiltList<{{innerReturnType}}> object) {
+    return object.toList();
+  }
+}
+''';
