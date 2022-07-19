@@ -6,7 +6,7 @@ class {{name}}Filter with _${{name}}Filter{{#isPaginated}} implements OffsetLimi
   {{#isPaginated}}
   static const kPageSize = 25;{{/isPaginated}}
   const {{name}}Filter._();
-
+  {{#annotations}}@{{annotation}}(){{/annotations}}
   {{#isPaginated}}@Implements<OffsetLimitFilter>(){{/isPaginated}}
   const factory {{name}}Filter({{^isTypesEmpty}}{ {{/isTypesEmpty}}
     {{#types}}
@@ -164,10 +164,9 @@ class {{repositoryName}} {
 }
 ''';
 
-const buildListConverterTemplate = r'''
-class {{converterName}}Converter
-    implements JsonConverter<BuiltList<{{innerReturnType}}>, List<{{innerReturnType}}>> {
-  const BuiltListConverter();
+const builtListConverterTemplate = r'''
+class {{converterName}} implements JsonConverter<BuiltList<{{innerReturnType}}>, List<{{innerReturnType}}>> {
+  const {{converterName}}();
 
   @override
   BuiltList<{{innerReturnType}}> fromJson(List<{{innerReturnType}}> json) {
