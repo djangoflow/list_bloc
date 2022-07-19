@@ -101,6 +101,7 @@ class OpenapiRepositoryGenerator
   Future<String> _getGeneratedCodesFromBuilder(
       _RepositoryBuilder builder) async {
     final generatedMethodElements = <String>[];
+    final generatedBuiltListConverters = <BuiltListJsonConverterModel>[];
     final buffer = StringBuffer();
     final classElement = builder.apiClass;
 
@@ -151,11 +152,17 @@ class OpenapiRepositoryGenerator
             defaultOffset: _defaultOffset,
             defaultPageSize: _defaultPageSize,
             ignoreParams: _ignoreParams,
-          )..getLoaderMethodModel();
+          );
           final dataLoaderMethodModel =
-              dataMethodElementProcessor.getLoaderMethodModel();
+              dataMethodElementProcessor.getLoaderMethodModel(
+            generatedConverters: generatedBuiltListConverters,
+          );
           if (dataLoaderMethodModel != null) {
             generatedMethodElements.add(namePrefix);
+            generatedBuiltListConverters.addAll(
+              dataLoaderMethodModel.builtListConverters
+                  .where((element) => element.shouldCreateConverter),
+            );
             loaders.add(dataLoaderMethodModel);
           }
 
@@ -173,10 +180,16 @@ class OpenapiRepositoryGenerator
               defaultOffset: _defaultOffset,
               defaultPageSize: _defaultPageSize,
               ignoreParams: _ignoreParams,
-            ).getLoaderMethodModel();
+            ).getLoaderMethodModel(
+              generatedConverters: generatedBuiltListConverters,
+            );
 
             if (listLoaderMethodModel != null) {
               generatedMethodElements.add(namePrefix);
+              generatedBuiltListConverters.addAll(
+                listLoaderMethodModel.builtListConverters
+                    .where((element) => element.shouldCreateConverter),
+              );
               loaders.add(listLoaderMethodModel);
             }
           }
@@ -186,10 +199,16 @@ class OpenapiRepositoryGenerator
             defaultOffset: _defaultOffset,
             defaultPageSize: _defaultPageSize,
             ignoreParams: _ignoreParams,
-          ).getLoaderMethodModel();
+          ).getLoaderMethodModel(
+            generatedConverters: generatedBuiltListConverters,
+          );
 
           if (listLoaderMethodModel != null) {
             generatedMethodElements.add(namePrefix);
+            generatedBuiltListConverters.addAll(
+              listLoaderMethodModel.builtListConverters
+                  .where((element) => element.shouldCreateConverter),
+            );
             loaders.add(listLoaderMethodModel);
           }
           final readMethod = methods.firstWhereOrNull((element) {
@@ -201,19 +220,26 @@ class OpenapiRepositoryGenerator
                   methodName: readMethod.displayName,
                   ignoreEndpoints: builder.ignoreEndpoints,
                   allowedEndpoints: builder.allowedEndpoints))) {
-            final listLoaderMethodModel = _DataMethodElementProcesser(
+            final dataLoaderMethodModel = _DataMethodElementProcesser(
               methodElement: readMethod,
               defaultOffset: _defaultOffset,
               defaultPageSize: _defaultPageSize,
               ignoreParams: _ignoreParams,
-            ).getLoaderMethodModel();
+            ).getLoaderMethodModel(
+              generatedConverters: generatedBuiltListConverters,
+            );
 
-            if (listLoaderMethodModel != null) {
+            if (dataLoaderMethodModel != null) {
               generatedMethodElements.add(namePrefix);
-              loaders.add(listLoaderMethodModel);
+              generatedBuiltListConverters.addAll(
+                dataLoaderMethodModel.builtListConverters
+                    .where((element) => element.shouldCreateConverter),
+              );
+              loaders.add(dataLoaderMethodModel);
             }
           }
         }
+
         buffer.write((await _processRepositoryData(
           loaders: loaders,
           methods: methods,
@@ -245,6 +271,7 @@ class OpenapiRepositoryGenerator
     required String prefix,
   }) async {
     final buffer = StringBuffer();
+
     if (loaders.isEmpty) {
       return '';
     } else {
@@ -264,11 +291,20 @@ class OpenapiRepositoryGenerator
           ..writeln(typeDefs)
           ..writeln();
         // writes filter classes
+        for (var element in loader.builtListConverters) {
+          if (element.shouldCreateConverter) {
+            final converter = _buildBuiltListConverter(
+              model: element,
+            );
+
+            buffer
+              ..writeln(converter)
+              ..writeln();
+          }
+        }
         buffer
           ..writeln(_buildLoaderFilterClass(
-            name: loader.name,
-            isPaginated: loader.isPaginated,
-            types: loader.types,
+            loaderMethod: loader,
           ))
           ..writeln();
       }
@@ -534,20 +570,35 @@ class OpenapiRepositoryGenerator
 
   /// Returns generated code for the Filters
   String _buildLoaderFilterClass({
-    required String name,
-    required List<TypeModel> types,
-    required bool isPaginated,
+    required LoaderMethodModel loaderMethod,
   }) {
     final filterTemplateModel = FreezedTemplateModel(
-      name: name,
-      isPaginated: isPaginated,
-      types: types,
-      isTypesEmpty: types.isEmpty,
+      name: loaderMethod.name,
+      isPaginated: loaderMethod.isPaginated,
+      types: loaderMethod.types,
+      isTypesEmpty: loaderMethod.types.isEmpty,
+      annotations: loaderMethod.builtListConverters
+          .map((e) => AnnotationModel(e.converterName))
+          .toList(),
     );
 
     return Template(freezedFilterTemplate, htmlEscapeValues: false)
         .renderString(
       filterTemplateModel.toJson(),
+    );
+  }
+
+  String _buildBuiltListConverter({
+    required BuiltListJsonConverterModel model,
+  }) {
+    final converterTemplateModel = BuiltListJsonConverterTemplateModel(
+      converterName: model.converterName,
+      innerReturnType: model.innerReturnType,
+    );
+
+    return Template(builtListConverterTemplate, htmlEscapeValues: false)
+        .renderString(
+      converterTemplateModel.toJson(),
     );
   }
 
@@ -761,39 +812,65 @@ abstract class _MethodElementProcessor {
 
   /// Returns `LoaderMethodModel` to be used as the loader method for the `DataCubit` and `ListCubit`
   LoaderMethodModel _getLoaderMethodModel(
-      _ReturnModel returnModel, bool isList) {
+    _ReturnModel returnModel,
+    bool isList, {
+    required List<BuiltListJsonConverterModel> generatedConverters,
+  }) {
     final methodParameters = _getMethodParameters();
 
     final types = _getTypesFromParams(methodParameters);
+    final builtListConverters = <BuiltListJsonConverterModel>[];
+    for (var element in types) {
+      if (element.type.contains('BuiltList')) {
+        final innerType = element.type.split('<')[1].split('>')[0];
+        final converterName = 'BuiltList${innerType}Converter';
+        final converter = BuiltListJsonConverterModel(
+          converterName: converterName,
+          innerReturnType: innerType,
+        );
+        if (generatedConverters.contains(converter) ||
+            builtListConverters.contains(converter)) {
+          builtListConverters.add(converter.copyWith(
+            shouldCreateConverter: false,
+          ));
+        } else {
+          builtListConverters.add(converter);
+        }
+      }
+    }
     final hasFilter = methodParameters.isNotEmpty;
     final hasRequiredParam = methodParameters.any(
       (element) => element.isRequired,
     );
 
     return LoaderMethodModel(
-        returnType: returnModel.type.getDisplayString(withNullability: false),
-        name: methodElement.displayName.pascalCase,
-        hasFilter: hasFilter,
-        isListLoader: isList,
-        isPaginated: methodParameters.any(
-          (element) => ['offset', 'limit'].contains(element.name),
-        ),
-        types: types,
-        filterParams: hasFilter && methodParameters.isNotEmpty
-            ? methodParameters.map((e) {
-                return ParamModel(
-                    '${e.name}: filter${hasRequiredParam ? '' : '?'}.${e.name}');
-              }).toList()
-            : [],
-        isInline: returnModel.isInline,
-        hasRequiredParam: methodParameters.any((element) => element.isRequired),
-        defaultOffset: defaultOffset,
-        defaultPageSize: defaultPageSize);
+      returnType: returnModel.type.getDisplayString(withNullability: false),
+      name: methodElement.displayName.pascalCase,
+      hasFilter: hasFilter,
+      isListLoader: isList,
+      isPaginated: methodParameters.any(
+        (element) => ['offset', 'limit'].contains(element.name),
+      ),
+      types: types,
+      filterParams: hasFilter && methodParameters.isNotEmpty
+          ? methodParameters.map((e) {
+              return ParamModel(
+                  '${e.name}: filter${hasRequiredParam ? '' : '?'}.${e.name}');
+            }).toList()
+          : [],
+      isInline: returnModel.isInline,
+      hasRequiredParam: methodParameters.any((element) => element.isRequired),
+      defaultOffset: defaultOffset,
+      defaultPageSize: defaultPageSize,
+      builtListConverters: builtListConverters,
+    );
   }
 
   _ReturnModel? getInnerReturnType(DartType type, bool isInline);
 
-  LoaderMethodModel? getLoaderMethodModel();
+  LoaderMethodModel? getLoaderMethodModel({
+    List<BuiltListJsonConverterModel> generatedConverters = const [],
+  });
 }
 
 class _ListMethodElementProcesser extends _MethodElementProcessor {
@@ -834,10 +911,16 @@ class _ListMethodElementProcesser extends _MethodElementProcessor {
   }
 
   @override
-  LoaderMethodModel? getLoaderMethodModel() {
+  LoaderMethodModel? getLoaderMethodModel({
+    List<BuiltListJsonConverterModel> generatedConverters = const [],
+  }) {
     final returnModel = getInnerReturnType(methodElement.returnType, false);
     if (returnModel != null) {
-      return _getLoaderMethodModel(returnModel, true);
+      return _getLoaderMethodModel(
+        returnModel,
+        true,
+        generatedConverters: generatedConverters,
+      );
     } else {
       return null;
     }
@@ -863,10 +946,16 @@ class _DataMethodElementProcesser extends _MethodElementProcessor {
   }
 
   @override
-  LoaderMethodModel? getLoaderMethodModel() {
+  LoaderMethodModel? getLoaderMethodModel({
+    List<BuiltListJsonConverterModel> generatedConverters = const [],
+  }) {
     final returnModel = getInnerReturnType(methodElement.returnType, false);
     if (returnModel != null) {
-      return _getLoaderMethodModel(returnModel, false);
+      return _getLoaderMethodModel(
+        returnModel,
+        false,
+        generatedConverters: generatedConverters,
+      );
     } else {
       return null;
     }

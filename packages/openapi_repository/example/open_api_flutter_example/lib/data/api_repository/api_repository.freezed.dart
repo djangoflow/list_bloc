@@ -14,6 +14,155 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+FindPetByStatusListFilter _$FindPetByStatusListFilterFromJson(
+    Map<String, dynamic> json) {
+  return _FindPetByStatusListFilter.fromJson(json);
+}
+
+/// @nodoc
+mixin _$FindPetByStatusListFilter {
+  BuiltList<String> get status => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FindPetByStatusListFilterCopyWith<FindPetByStatusListFilter> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FindPetByStatusListFilterCopyWith<$Res> {
+  factory $FindPetByStatusListFilterCopyWith(FindPetByStatusListFilter value,
+          $Res Function(FindPetByStatusListFilter) then) =
+      _$FindPetByStatusListFilterCopyWithImpl<$Res>;
+  $Res call({BuiltList<String> status});
+}
+
+/// @nodoc
+class _$FindPetByStatusListFilterCopyWithImpl<$Res>
+    implements $FindPetByStatusListFilterCopyWith<$Res> {
+  _$FindPetByStatusListFilterCopyWithImpl(this._value, this._then);
+
+  final FindPetByStatusListFilter _value;
+  // ignore: unused_field
+  final $Res Function(FindPetByStatusListFilter) _then;
+
+  @override
+  $Res call({
+    Object? status = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as BuiltList<String>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_FindPetByStatusListFilterCopyWith<$Res>
+    implements $FindPetByStatusListFilterCopyWith<$Res> {
+  factory _$$_FindPetByStatusListFilterCopyWith(
+          _$_FindPetByStatusListFilter value,
+          $Res Function(_$_FindPetByStatusListFilter) then) =
+      __$$_FindPetByStatusListFilterCopyWithImpl<$Res>;
+  @override
+  $Res call({BuiltList<String> status});
+}
+
+/// @nodoc
+class __$$_FindPetByStatusListFilterCopyWithImpl<$Res>
+    extends _$FindPetByStatusListFilterCopyWithImpl<$Res>
+    implements _$$_FindPetByStatusListFilterCopyWith<$Res> {
+  __$$_FindPetByStatusListFilterCopyWithImpl(
+      _$_FindPetByStatusListFilter _value,
+      $Res Function(_$_FindPetByStatusListFilter) _then)
+      : super(_value, (v) => _then(v as _$_FindPetByStatusListFilter));
+
+  @override
+  _$_FindPetByStatusListFilter get _value =>
+      super._value as _$_FindPetByStatusListFilter;
+
+  @override
+  $Res call({
+    Object? status = freezed,
+  }) {
+    return _then(_$_FindPetByStatusListFilter(
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as BuiltList<String>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+@BuiltListStringConverter()
+class _$_FindPetByStatusListFilter extends _FindPetByStatusListFilter
+    with DiagnosticableTreeMixin {
+  const _$_FindPetByStatusListFilter({required this.status}) : super._();
+
+  factory _$_FindPetByStatusListFilter.fromJson(Map<String, dynamic> json) =>
+      _$$_FindPetByStatusListFilterFromJson(json);
+
+  @override
+  final BuiltList<String> status;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FindPetByStatusListFilter(status: $status)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'FindPetByStatusListFilter'))
+      ..add(DiagnosticsProperty('status', status));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FindPetByStatusListFilter &&
+            const DeepCollectionEquality().equals(other.status, status));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(status));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_FindPetByStatusListFilterCopyWith<_$_FindPetByStatusListFilter>
+      get copyWith => __$$_FindPetByStatusListFilterCopyWithImpl<
+          _$_FindPetByStatusListFilter>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_FindPetByStatusListFilterToJson(this);
+  }
+}
+
+abstract class _FindPetByStatusListFilter extends FindPetByStatusListFilter {
+  const factory _FindPetByStatusListFilter(
+      {required final BuiltList<String> status}) = _$_FindPetByStatusListFilter;
+  const _FindPetByStatusListFilter._() : super._();
+
+  factory _FindPetByStatusListFilter.fromJson(Map<String, dynamic> json) =
+      _$_FindPetByStatusListFilter.fromJson;
+
+  @override
+  BuiltList<String> get status;
+  @override
+  @JsonKey(ignore: true)
+  _$$_FindPetByStatusListFilterCopyWith<_$_FindPetByStatusListFilter>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 PetReadFilter _$PetReadFilterFromJson(Map<String, dynamic> json) {
   return _PetReadFilter.fromJson(json);
 }
