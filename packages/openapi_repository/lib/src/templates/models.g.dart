@@ -58,6 +58,10 @@ _$_FreezedTemplateModel _$$_FreezedTemplateModelFromJson(
               ?.map((e) => TypeModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      annotations: (json['annotations'] as List<dynamic>?)
+              ?.map((e) => AnnotationModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       isTypesEmpty: json['isTypesEmpty'] as bool? ?? false,
     );
 
@@ -67,6 +71,7 @@ Map<String, dynamic> _$$_FreezedTemplateModelToJson(
       'name': instance.name,
       'isPaginated': instance.isPaginated,
       'types': instance.types.map((e) => e.toJson()).toList(),
+      'annotations': instance.annotations.map((e) => e.toJson()).toList(),
       'isTypesEmpty': instance.isTypesEmpty,
     };
 
@@ -184,6 +189,16 @@ Map<String, dynamic> _$$_ParamModelToJson(_$_ParamModel instance) =>
       'param': instance.param,
     };
 
+_$_AnnotationModel _$$_AnnotationModelFromJson(Map<String, dynamic> json) =>
+    _$_AnnotationModel(
+      json['annotation'] as String,
+    );
+
+Map<String, dynamic> _$$_AnnotationModelToJson(_$_AnnotationModel instance) =>
+    <String, dynamic>{
+      'annotation': instance.annotation,
+    };
+
 _$_ArgModelModel _$$_ArgModelModelFromJson(Map<String, dynamic> json) =>
     _$_ArgModelModel(
       json['argType'] as String,
@@ -244,6 +259,11 @@ _$_LoaderMethodModel _$$_LoaderMethodModelFromJson(Map<String, dynamic> json) =>
           .toList(),
       defaultOffset: json['defaultOffset'] as int,
       defaultPageSize: json['defaultPageSize'] as int,
+      builtListConverters: (json['builtListConverters'] as List<dynamic>?)
+              ?.map((e) => BuiltListJsonConverterModel.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          const <BuiltListJsonConverterModel>[],
       isInline: json['isInline'] as bool? ?? false,
     );
 
@@ -260,6 +280,8 @@ Map<String, dynamic> _$$_LoaderMethodModelToJson(
       'filterParams': instance.filterParams.map((e) => e.toJson()).toList(),
       'defaultOffset': instance.defaultOffset,
       'defaultPageSize': instance.defaultPageSize,
+      'builtListConverters':
+          instance.builtListConverters.map((e) => e.toJson()).toList(),
       'isInline': instance.isInline,
     };
 
@@ -346,6 +368,22 @@ Map<String, dynamic> _$$_CubitTemplateModelToJson(
       'returnType': instance.returnType,
       'hasFilter': instance.hasFilter,
       'crudMethods': instance.crudMethods.map((e) => e.toJson()).toList(),
+    };
+
+_$_BuiltListJsonConverterModel _$$_BuiltListJsonConverterModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_BuiltListJsonConverterModel(
+      converterName: json['converterName'] as String,
+      innerReturnType: json['innerReturnType'] as String,
+      shouldCreateConverter: json['shouldCreateConverter'] as bool? ?? true,
+    );
+
+Map<String, dynamic> _$$_BuiltListJsonConverterModelToJson(
+        _$_BuiltListJsonConverterModel instance) =>
+    <String, dynamic>{
+      'converterName': instance.converterName,
+      'innerReturnType': instance.innerReturnType,
+      'shouldCreateConverter': instance.shouldCreateConverter,
     };
 
 _$_BuiltListJsonConverterTemplateModel

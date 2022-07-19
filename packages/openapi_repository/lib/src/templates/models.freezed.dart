@@ -498,6 +498,7 @@ mixin _$FreezedTemplateModel {
   String get name => throw _privateConstructorUsedError;
   bool get isPaginated => throw _privateConstructorUsedError;
   List<TypeModel> get types => throw _privateConstructorUsedError;
+  List<AnnotationModel> get annotations => throw _privateConstructorUsedError;
   bool get isTypesEmpty => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -515,6 +516,7 @@ abstract class $FreezedTemplateModelCopyWith<$Res> {
       {String name,
       bool isPaginated,
       List<TypeModel> types,
+      List<AnnotationModel> annotations,
       bool isTypesEmpty});
 }
 
@@ -532,6 +534,7 @@ class _$FreezedTemplateModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? isPaginated = freezed,
     Object? types = freezed,
+    Object? annotations = freezed,
     Object? isTypesEmpty = freezed,
   }) {
     return _then(_value.copyWith(
@@ -547,6 +550,10 @@ class _$FreezedTemplateModelCopyWithImpl<$Res>
           ? _value.types
           : types // ignore: cast_nullable_to_non_nullable
               as List<TypeModel>,
+      annotations: annotations == freezed
+          ? _value.annotations
+          : annotations // ignore: cast_nullable_to_non_nullable
+              as List<AnnotationModel>,
       isTypesEmpty: isTypesEmpty == freezed
           ? _value.isTypesEmpty
           : isTypesEmpty // ignore: cast_nullable_to_non_nullable
@@ -566,6 +573,7 @@ abstract class _$$_FreezedTemplateModelCopyWith<$Res>
       {String name,
       bool isPaginated,
       List<TypeModel> types,
+      List<AnnotationModel> annotations,
       bool isTypesEmpty});
 }
 
@@ -585,6 +593,7 @@ class __$$_FreezedTemplateModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? isPaginated = freezed,
     Object? types = freezed,
+    Object? annotations = freezed,
     Object? isTypesEmpty = freezed,
   }) {
     return _then(_$_FreezedTemplateModel(
@@ -600,6 +609,10 @@ class __$$_FreezedTemplateModelCopyWithImpl<$Res>
           ? _value._types
           : types // ignore: cast_nullable_to_non_nullable
               as List<TypeModel>,
+      annotations: annotations == freezed
+          ? _value._annotations
+          : annotations // ignore: cast_nullable_to_non_nullable
+              as List<AnnotationModel>,
       isTypesEmpty: isTypesEmpty == freezed
           ? _value.isTypesEmpty
           : isTypesEmpty // ignore: cast_nullable_to_non_nullable
@@ -616,8 +629,10 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
       {required this.name,
       this.isPaginated = true,
       final List<TypeModel> types = const [],
+      final List<AnnotationModel> annotations = const [],
       this.isTypesEmpty = false})
-      : _types = types;
+      : _types = types,
+        _annotations = annotations;
 
   factory _$_FreezedTemplateModel.fromJson(Map<String, dynamic> json) =>
       _$$_FreezedTemplateModelFromJson(json);
@@ -635,13 +650,21 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
     return EqualUnmodifiableListView(_types);
   }
 
+  final List<AnnotationModel> _annotations;
+  @override
+  @JsonKey()
+  List<AnnotationModel> get annotations {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_annotations);
+  }
+
   @override
   @JsonKey()
   final bool isTypesEmpty;
 
   @override
   String toString() {
-    return 'FreezedTemplateModel(name: $name, isPaginated: $isPaginated, types: $types, isTypesEmpty: $isTypesEmpty)';
+    return 'FreezedTemplateModel(name: $name, isPaginated: $isPaginated, types: $types, annotations: $annotations, isTypesEmpty: $isTypesEmpty)';
   }
 
   @override
@@ -654,6 +677,8 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
                 .equals(other.isPaginated, isPaginated) &&
             const DeepCollectionEquality().equals(other._types, _types) &&
             const DeepCollectionEquality()
+                .equals(other._annotations, _annotations) &&
+            const DeepCollectionEquality()
                 .equals(other.isTypesEmpty, isTypesEmpty));
   }
 
@@ -664,6 +689,7 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(isPaginated),
       const DeepCollectionEquality().hash(_types),
+      const DeepCollectionEquality().hash(_annotations),
       const DeepCollectionEquality().hash(isTypesEmpty));
 
   @JsonKey(ignore: true)
@@ -683,6 +709,7 @@ abstract class _FreezedTemplateModel implements FreezedTemplateModel {
       {required final String name,
       final bool isPaginated,
       final List<TypeModel> types,
+      final List<AnnotationModel> annotations,
       final bool isTypesEmpty}) = _$_FreezedTemplateModel;
 
   factory _FreezedTemplateModel.fromJson(Map<String, dynamic> json) =
@@ -694,6 +721,8 @@ abstract class _FreezedTemplateModel implements FreezedTemplateModel {
   bool get isPaginated => throw _privateConstructorUsedError;
   @override
   List<TypeModel> get types => throw _privateConstructorUsedError;
+  @override
+  List<AnnotationModel> get annotations => throw _privateConstructorUsedError;
   @override
   bool get isTypesEmpty => throw _privateConstructorUsedError;
   @override
@@ -1892,6 +1921,139 @@ abstract class _ParamModel implements ParamModel {
       throw _privateConstructorUsedError;
 }
 
+AnnotationModel _$AnnotationModelFromJson(Map<String, dynamic> json) {
+  return _AnnotationModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AnnotationModel {
+  String get annotation => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AnnotationModelCopyWith<AnnotationModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AnnotationModelCopyWith<$Res> {
+  factory $AnnotationModelCopyWith(
+          AnnotationModel value, $Res Function(AnnotationModel) then) =
+      _$AnnotationModelCopyWithImpl<$Res>;
+  $Res call({String annotation});
+}
+
+/// @nodoc
+class _$AnnotationModelCopyWithImpl<$Res>
+    implements $AnnotationModelCopyWith<$Res> {
+  _$AnnotationModelCopyWithImpl(this._value, this._then);
+
+  final AnnotationModel _value;
+  // ignore: unused_field
+  final $Res Function(AnnotationModel) _then;
+
+  @override
+  $Res call({
+    Object? annotation = freezed,
+  }) {
+    return _then(_value.copyWith(
+      annotation: annotation == freezed
+          ? _value.annotation
+          : annotation // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_AnnotationModelCopyWith<$Res>
+    implements $AnnotationModelCopyWith<$Res> {
+  factory _$$_AnnotationModelCopyWith(
+          _$_AnnotationModel value, $Res Function(_$_AnnotationModel) then) =
+      __$$_AnnotationModelCopyWithImpl<$Res>;
+  @override
+  $Res call({String annotation});
+}
+
+/// @nodoc
+class __$$_AnnotationModelCopyWithImpl<$Res>
+    extends _$AnnotationModelCopyWithImpl<$Res>
+    implements _$$_AnnotationModelCopyWith<$Res> {
+  __$$_AnnotationModelCopyWithImpl(
+      _$_AnnotationModel _value, $Res Function(_$_AnnotationModel) _then)
+      : super(_value, (v) => _then(v as _$_AnnotationModel));
+
+  @override
+  _$_AnnotationModel get _value => super._value as _$_AnnotationModel;
+
+  @override
+  $Res call({
+    Object? annotation = freezed,
+  }) {
+    return _then(_$_AnnotationModel(
+      annotation == freezed
+          ? _value.annotation
+          : annotation // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_AnnotationModel implements _AnnotationModel {
+  const _$_AnnotationModel(this.annotation);
+
+  factory _$_AnnotationModel.fromJson(Map<String, dynamic> json) =>
+      _$$_AnnotationModelFromJson(json);
+
+  @override
+  final String annotation;
+
+  @override
+  String toString() {
+    return 'AnnotationModel(annotation: $annotation)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AnnotationModel &&
+            const DeepCollectionEquality()
+                .equals(other.annotation, annotation));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(annotation));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_AnnotationModelCopyWith<_$_AnnotationModel> get copyWith =>
+      __$$_AnnotationModelCopyWithImpl<_$_AnnotationModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AnnotationModelToJson(this);
+  }
+}
+
+abstract class _AnnotationModel implements AnnotationModel {
+  const factory _AnnotationModel(final String annotation) = _$_AnnotationModel;
+
+  factory _AnnotationModel.fromJson(Map<String, dynamic> json) =
+      _$_AnnotationModel.fromJson;
+
+  @override
+  String get annotation => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_AnnotationModelCopyWith<_$_AnnotationModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 ArgModel _$ArgModelFromJson(Map<String, dynamic> json) {
   return _ArgModelModel.fromJson(json);
 }
@@ -2398,6 +2560,8 @@ mixin _$LoaderMethodModel {
   List<ParamModel> get filterParams => throw _privateConstructorUsedError;
   int get defaultOffset => throw _privateConstructorUsedError;
   int get defaultPageSize => throw _privateConstructorUsedError;
+  List<BuiltListJsonConverterModel> get builtListConverters =>
+      throw _privateConstructorUsedError;
   bool get isInline => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -2422,6 +2586,7 @@ abstract class $LoaderMethodModelCopyWith<$Res> {
       List<ParamModel> filterParams,
       int defaultOffset,
       int defaultPageSize,
+      List<BuiltListJsonConverterModel> builtListConverters,
       bool isInline});
 }
 
@@ -2446,6 +2611,7 @@ class _$LoaderMethodModelCopyWithImpl<$Res>
     Object? filterParams = freezed,
     Object? defaultOffset = freezed,
     Object? defaultPageSize = freezed,
+    Object? builtListConverters = freezed,
     Object? isInline = freezed,
   }) {
     return _then(_value.copyWith(
@@ -2489,6 +2655,10 @@ class _$LoaderMethodModelCopyWithImpl<$Res>
           ? _value.defaultPageSize
           : defaultPageSize // ignore: cast_nullable_to_non_nullable
               as int,
+      builtListConverters: builtListConverters == freezed
+          ? _value.builtListConverters
+          : builtListConverters // ignore: cast_nullable_to_non_nullable
+              as List<BuiltListJsonConverterModel>,
       isInline: isInline == freezed
           ? _value.isInline
           : isInline // ignore: cast_nullable_to_non_nullable
@@ -2515,6 +2685,7 @@ abstract class _$$_LoaderMethodModelCopyWith<$Res>
       List<ParamModel> filterParams,
       int defaultOffset,
       int defaultPageSize,
+      List<BuiltListJsonConverterModel> builtListConverters,
       bool isInline});
 }
 
@@ -2541,6 +2712,7 @@ class __$$_LoaderMethodModelCopyWithImpl<$Res>
     Object? filterParams = freezed,
     Object? defaultOffset = freezed,
     Object? defaultPageSize = freezed,
+    Object? builtListConverters = freezed,
     Object? isInline = freezed,
   }) {
     return _then(_$_LoaderMethodModel(
@@ -2584,6 +2756,10 @@ class __$$_LoaderMethodModelCopyWithImpl<$Res>
           ? _value.defaultPageSize
           : defaultPageSize // ignore: cast_nullable_to_non_nullable
               as int,
+      builtListConverters: builtListConverters == freezed
+          ? _value._builtListConverters
+          : builtListConverters // ignore: cast_nullable_to_non_nullable
+              as List<BuiltListJsonConverterModel>,
       isInline: isInline == freezed
           ? _value.isInline
           : isInline // ignore: cast_nullable_to_non_nullable
@@ -2607,9 +2783,12 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
       required final List<ParamModel> filterParams,
       required this.defaultOffset,
       required this.defaultPageSize,
+      final List<BuiltListJsonConverterModel> builtListConverters =
+          const <BuiltListJsonConverterModel>[],
       this.isInline = false})
       : _types = types,
-        _filterParams = filterParams;
+        _filterParams = filterParams,
+        _builtListConverters = builtListConverters;
 
   factory _$_LoaderMethodModel.fromJson(Map<String, dynamic> json) =>
       _$$_LoaderMethodModelFromJson(json);
@@ -2644,13 +2823,21 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
   final int defaultOffset;
   @override
   final int defaultPageSize;
+  final List<BuiltListJsonConverterModel> _builtListConverters;
+  @override
+  @JsonKey()
+  List<BuiltListJsonConverterModel> get builtListConverters {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_builtListConverters);
+  }
+
   @override
   @JsonKey()
   final bool isInline;
 
   @override
   String toString() {
-    return 'LoaderMethodModel(returnType: $returnType, name: $name, hasFilter: $hasFilter, isListLoader: $isListLoader, isPaginated: $isPaginated, hasRequiredParam: $hasRequiredParam, types: $types, filterParams: $filterParams, defaultOffset: $defaultOffset, defaultPageSize: $defaultPageSize, isInline: $isInline)';
+    return 'LoaderMethodModel(returnType: $returnType, name: $name, hasFilter: $hasFilter, isListLoader: $isListLoader, isPaginated: $isPaginated, hasRequiredParam: $hasRequiredParam, types: $types, filterParams: $filterParams, defaultOffset: $defaultOffset, defaultPageSize: $defaultPageSize, builtListConverters: $builtListConverters, isInline: $isInline)';
   }
 
   @override
@@ -2675,6 +2862,8 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
                 .equals(other.defaultOffset, defaultOffset) &&
             const DeepCollectionEquality()
                 .equals(other.defaultPageSize, defaultPageSize) &&
+            const DeepCollectionEquality()
+                .equals(other._builtListConverters, _builtListConverters) &&
             const DeepCollectionEquality().equals(other.isInline, isInline));
   }
 
@@ -2692,6 +2881,7 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
       const DeepCollectionEquality().hash(_filterParams),
       const DeepCollectionEquality().hash(defaultOffset),
       const DeepCollectionEquality().hash(defaultPageSize),
+      const DeepCollectionEquality().hash(_builtListConverters),
       const DeepCollectionEquality().hash(isInline));
 
   @JsonKey(ignore: true)
@@ -2718,6 +2908,7 @@ abstract class _LoaderMethodModel implements LoaderMethodModel {
       required final List<ParamModel> filterParams,
       required final int defaultOffset,
       required final int defaultPageSize,
+      final List<BuiltListJsonConverterModel> builtListConverters,
       final bool isInline}) = _$_LoaderMethodModel;
 
   factory _LoaderMethodModel.fromJson(Map<String, dynamic> json) =
@@ -2743,6 +2934,9 @@ abstract class _LoaderMethodModel implements LoaderMethodModel {
   int get defaultOffset => throw _privateConstructorUsedError;
   @override
   int get defaultPageSize => throw _privateConstructorUsedError;
+  @override
+  List<BuiltListJsonConverterModel> get builtListConverters =>
+      throw _privateConstructorUsedError;
   @override
   bool get isInline => throw _privateConstructorUsedError;
   @override
@@ -3580,6 +3774,196 @@ abstract class _CubitTemplateModel implements CubitTemplateModel {
   @JsonKey(ignore: true)
   _$$_CubitTemplateModelCopyWith<_$_CubitTemplateModel> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+BuiltListJsonConverterModel _$BuiltListJsonConverterModelFromJson(
+    Map<String, dynamic> json) {
+  return _BuiltListJsonConverterModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BuiltListJsonConverterModel {
+  String get converterName => throw _privateConstructorUsedError;
+  String get innerReturnType => throw _privateConstructorUsedError;
+  bool get shouldCreateConverter => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BuiltListJsonConverterModelCopyWith<BuiltListJsonConverterModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BuiltListJsonConverterModelCopyWith<$Res> {
+  factory $BuiltListJsonConverterModelCopyWith(
+          BuiltListJsonConverterModel value,
+          $Res Function(BuiltListJsonConverterModel) then) =
+      _$BuiltListJsonConverterModelCopyWithImpl<$Res>;
+  $Res call(
+      {String converterName,
+      String innerReturnType,
+      bool shouldCreateConverter});
+}
+
+/// @nodoc
+class _$BuiltListJsonConverterModelCopyWithImpl<$Res>
+    implements $BuiltListJsonConverterModelCopyWith<$Res> {
+  _$BuiltListJsonConverterModelCopyWithImpl(this._value, this._then);
+
+  final BuiltListJsonConverterModel _value;
+  // ignore: unused_field
+  final $Res Function(BuiltListJsonConverterModel) _then;
+
+  @override
+  $Res call({
+    Object? converterName = freezed,
+    Object? innerReturnType = freezed,
+    Object? shouldCreateConverter = freezed,
+  }) {
+    return _then(_value.copyWith(
+      converterName: converterName == freezed
+          ? _value.converterName
+          : converterName // ignore: cast_nullable_to_non_nullable
+              as String,
+      innerReturnType: innerReturnType == freezed
+          ? _value.innerReturnType
+          : innerReturnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      shouldCreateConverter: shouldCreateConverter == freezed
+          ? _value.shouldCreateConverter
+          : shouldCreateConverter // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_BuiltListJsonConverterModelCopyWith<$Res>
+    implements $BuiltListJsonConverterModelCopyWith<$Res> {
+  factory _$$_BuiltListJsonConverterModelCopyWith(
+          _$_BuiltListJsonConverterModel value,
+          $Res Function(_$_BuiltListJsonConverterModel) then) =
+      __$$_BuiltListJsonConverterModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String converterName,
+      String innerReturnType,
+      bool shouldCreateConverter});
+}
+
+/// @nodoc
+class __$$_BuiltListJsonConverterModelCopyWithImpl<$Res>
+    extends _$BuiltListJsonConverterModelCopyWithImpl<$Res>
+    implements _$$_BuiltListJsonConverterModelCopyWith<$Res> {
+  __$$_BuiltListJsonConverterModelCopyWithImpl(
+      _$_BuiltListJsonConverterModel _value,
+      $Res Function(_$_BuiltListJsonConverterModel) _then)
+      : super(_value, (v) => _then(v as _$_BuiltListJsonConverterModel));
+
+  @override
+  _$_BuiltListJsonConverterModel get _value =>
+      super._value as _$_BuiltListJsonConverterModel;
+
+  @override
+  $Res call({
+    Object? converterName = freezed,
+    Object? innerReturnType = freezed,
+    Object? shouldCreateConverter = freezed,
+  }) {
+    return _then(_$_BuiltListJsonConverterModel(
+      converterName: converterName == freezed
+          ? _value.converterName
+          : converterName // ignore: cast_nullable_to_non_nullable
+              as String,
+      innerReturnType: innerReturnType == freezed
+          ? _value.innerReturnType
+          : innerReturnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      shouldCreateConverter: shouldCreateConverter == freezed
+          ? _value.shouldCreateConverter
+          : shouldCreateConverter // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_BuiltListJsonConverterModel implements _BuiltListJsonConverterModel {
+  const _$_BuiltListJsonConverterModel(
+      {required this.converterName,
+      required this.innerReturnType,
+      this.shouldCreateConverter = true});
+
+  factory _$_BuiltListJsonConverterModel.fromJson(Map<String, dynamic> json) =>
+      _$$_BuiltListJsonConverterModelFromJson(json);
+
+  @override
+  final String converterName;
+  @override
+  final String innerReturnType;
+  @override
+  @JsonKey()
+  final bool shouldCreateConverter;
+
+  @override
+  String toString() {
+    return 'BuiltListJsonConverterModel(converterName: $converterName, innerReturnType: $innerReturnType, shouldCreateConverter: $shouldCreateConverter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_BuiltListJsonConverterModel &&
+            const DeepCollectionEquality()
+                .equals(other.converterName, converterName) &&
+            const DeepCollectionEquality()
+                .equals(other.innerReturnType, innerReturnType) &&
+            const DeepCollectionEquality()
+                .equals(other.shouldCreateConverter, shouldCreateConverter));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(converterName),
+      const DeepCollectionEquality().hash(innerReturnType),
+      const DeepCollectionEquality().hash(shouldCreateConverter));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_BuiltListJsonConverterModelCopyWith<_$_BuiltListJsonConverterModel>
+      get copyWith => __$$_BuiltListJsonConverterModelCopyWithImpl<
+          _$_BuiltListJsonConverterModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BuiltListJsonConverterModelToJson(this);
+  }
+}
+
+abstract class _BuiltListJsonConverterModel
+    implements BuiltListJsonConverterModel {
+  const factory _BuiltListJsonConverterModel(
+      {required final String converterName,
+      required final String innerReturnType,
+      final bool shouldCreateConverter}) = _$_BuiltListJsonConverterModel;
+
+  factory _BuiltListJsonConverterModel.fromJson(Map<String, dynamic> json) =
+      _$_BuiltListJsonConverterModel.fromJson;
+
+  @override
+  String get converterName => throw _privateConstructorUsedError;
+  @override
+  String get innerReturnType => throw _privateConstructorUsedError;
+  @override
+  bool get shouldCreateConverter => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_BuiltListJsonConverterModelCopyWith<_$_BuiltListJsonConverterModel>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 BuiltListJsonConverterTemplateModel

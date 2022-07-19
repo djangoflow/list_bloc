@@ -42,6 +42,7 @@ class FreezedTemplateModel with _$FreezedTemplateModel {
     required String name,
     @Default(true) bool isPaginated,
     @Default([]) List<TypeModel> types,
+    @Default([]) List<AnnotationModel> annotations,
     @Default(false) bool isTypesEmpty,
   }) = _FreezedTemplateModel;
 
@@ -122,6 +123,14 @@ class ParamModel with _$ParamModel {
 }
 
 @freezed
+class AnnotationModel with _$AnnotationModel {
+  const factory AnnotationModel(String annotation) = _AnnotationModel;
+
+  factory AnnotationModel.fromJson(Map<String, dynamic> map) =>
+      _$AnnotationModelFromJson(map);
+}
+
+@freezed
 class ArgModel with _$ArgModel {
   const factory ArgModel(String argType, String argName, bool isNullableArg,
       bool isRequiredArg) = _ArgModelModel;
@@ -164,6 +173,8 @@ class LoaderMethodModel with _$LoaderMethodModel {
     required List<ParamModel> filterParams,
     required int defaultOffset,
     required int defaultPageSize,
+    @Default(<BuiltListJsonConverterModel>[])
+        List<BuiltListJsonConverterModel> builtListConverters,
     @Default(false) bool isInline,
   }) = _LoaderMethodModel;
 
@@ -218,6 +229,18 @@ class CubitTemplateModel with _$CubitTemplateModel {
 
   factory CubitTemplateModel.fromJson(Map<String, dynamic> map) =>
       _$CubitTemplateModelFromJson(map);
+}
+
+@freezed
+class BuiltListJsonConverterModel with _$BuiltListJsonConverterModel {
+  const factory BuiltListJsonConverterModel({
+    required String converterName,
+    required String innerReturnType,
+    @Default(true) bool shouldCreateConverter,
+  }) = _BuiltListJsonConverterModel;
+
+  factory BuiltListJsonConverterModel.fromJson(Map<String, dynamic> map) =>
+      _$BuiltListJsonConverterModelFromJson(map);
 }
 
 @freezed
