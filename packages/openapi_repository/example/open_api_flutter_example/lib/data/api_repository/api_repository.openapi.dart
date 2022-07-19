@@ -32,6 +32,70 @@ class ApiRepository {
   UserApi get user => api.getUserApi();
 }
 
+//Typdef for FindPetByStatusListState
+
+typedef FindPetByStatusListState = Data<List<Pet>, FindPetByStatusListFilter>;
+
+class BuiltListStringConverter
+    implements JsonConverter<BuiltList<String>, List<String>> {
+  const BuiltListStringConverter();
+
+  @override
+  BuiltList<String> fromJson(List<String> json) {
+    return BuiltList<String>(json);
+  }
+
+  @override
+  List<String> toJson(BuiltList<String> object) {
+    return object.toList();
+  }
+}
+
+//Filter for FindPetByStatusListFilter
+
+@freezed
+class FindPetByStatusListFilter with _$FindPetByStatusListFilter {
+  const FindPetByStatusListFilter._();
+  @BuiltListStringConverter()
+  const factory FindPetByStatusListFilter({
+    required BuiltList<String> status,
+  }) = _FindPetByStatusListFilter;
+
+  factory FindPetByStatusListFilter.fromJson(
+    Map<String, dynamic> map,
+  ) =>
+      _$FindPetByStatusListFilterFromJson(map);
+}
+
+// Repository for FindPetByStatusRepository
+
+abstract class FindPetByStatusRepository {
+  static Future<List<Pet>> list([
+    FindPetByStatusListFilter? filter,
+  ]) async {
+    if (filter == null) {
+      throw Exception('Invalid filter');
+    }
+    final r = await ApiRepository.instance.pet.findPetByStatusList(
+      status: filter.status,
+    );
+
+    return r.data?.asList() ?? [];
+  }
+}
+
+// ListCubit for FindPetByStatus
+
+class FindPetByStatusListBloc extends ListCubit<Pet, FindPetByStatusListFilter>
+    with FindPetByStatusRepository {
+  FindPetByStatusListBloc(
+    Future<List<Pet>> Function([
+      FindPetByStatusListFilter? filter,
+    ])
+        loader,
+  ) : super(FindPetByStatusRepository.list);
+}
+
 //Typdef for PetReadState
 
 typedef PetReadState = Data<Pet, PetReadFilter>;
