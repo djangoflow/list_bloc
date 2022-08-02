@@ -68,21 +68,21 @@ Class | Method | HTTP request | Description
 [*PetApi*](doc/PetApi.md) | [**findPetByTagList**](doc/PetApi.md#findpetbytaglist) | **GET** /pet/findByTags | Finds Pets by tags
 [*PetApi*](doc/PetApi.md) | [**imageCreate**](doc/PetApi.md#imagecreate) | **POST** /pet/{petId}/uploadImage | uploads an image
 [*PetApi*](doc/PetApi.md) | [**petCreate**](doc/PetApi.md#petcreate) | **POST** /pet | Add a new pet to the store
-[*PetApi*](doc/PetApi.md) | [**petDelete**](doc/PetApi.md#petdelete) | **DELETE** /pet/{petId} | Deletes a pet
-[*PetApi*](doc/PetApi.md) | [**petRead**](doc/PetApi.md#petread) | **GET** /pet/{petId} | Find pet by ID
+[*PetApi*](doc/PetApi.md) | [**petDestroy**](doc/PetApi.md#petdestroy) | **DELETE** /pet/{petId} | Deletes a pet
+[*PetApi*](doc/PetApi.md) | [**petRetrieve**](doc/PetApi.md#petretrieve) | **GET** /pet/{petId} | Find pet by ID
 [*PetApi*](doc/PetApi.md) | [**petUpdate**](doc/PetApi.md#petupdate) | **PUT** /pet | Update an existing pet
 [*PetApi*](doc/PetApi.md) | [**petWithFormUpdate**](doc/PetApi.md#petwithformupdate) | **POST** /pet/{petId} | Updates a pet in the store with form data
 [*StoreApi*](doc/StoreApi.md) | [**getInventory**](doc/StoreApi.md#getinventory) | **GET** /store/inventory | Returns pet inventories by status
 [*StoreApi*](doc/StoreApi.md) | [**orderCreate**](doc/StoreApi.md#ordercreate) | **POST** /store/order | Place an order for a pet
-[*StoreApi*](doc/StoreApi.md) | [**orderDelete**](doc/StoreApi.md#orderdelete) | **DELETE** /store/order/{orderId} | Delete purchase order by ID
-[*StoreApi*](doc/StoreApi.md) | [**orderRead**](doc/StoreApi.md#orderread) | **GET** /store/order/{orderId} | Find purchase order by ID
+[*StoreApi*](doc/StoreApi.md) | [**orderDestroy**](doc/StoreApi.md#orderdestroy) | **DELETE** /store/order/{orderId} | Delete purchase order by ID
+[*StoreApi*](doc/StoreApi.md) | [**orderRetrieve**](doc/StoreApi.md#orderretrieve) | **GET** /store/order/{orderId} | Find purchase order by ID
 [*UserApi*](doc/UserApi.md) | [**createUsersWithArrayInput**](doc/UserApi.md#createuserswitharrayinput) | **POST** /user/createWithArray | Creates list of users with given input array
 [*UserApi*](doc/UserApi.md) | [**createUsersWithListInput**](doc/UserApi.md#createuserswithlistinput) | **POST** /user/createWithList | Creates list of users with given input array
 [*UserApi*](doc/UserApi.md) | [**loginUser**](doc/UserApi.md#loginuser) | **GET** /user/login | Logs user into the system
 [*UserApi*](doc/UserApi.md) | [**logoutUser**](doc/UserApi.md#logoutuser) | **GET** /user/logout | Logs out current logged in user session
-[*UserApi*](doc/UserApi.md) | [**userByUsernameRead**](doc/UserApi.md#userbyusernameread) | **GET** /user/{username} | Get user by user name
+[*UserApi*](doc/UserApi.md) | [**userByUsernameRetrieve**](doc/UserApi.md#userbyusernameretrieve) | **GET** /user/{username} | Get user by user name
 [*UserApi*](doc/UserApi.md) | [**userCreate**](doc/UserApi.md#usercreate) | **POST** /user | Create user
-[*UserApi*](doc/UserApi.md) | [**userDelete**](doc/UserApi.md#userdelete) | **DELETE** /user/{username} | Delete user
+[*UserApi*](doc/UserApi.md) | [**userDestroy**](doc/UserApi.md#userdestroy) | **DELETE** /user/{username} | Delete user
 [*UserApi*](doc/UserApi.md) | [**userUpdate**](doc/UserApi.md#userupdate) | **PUT** /user/{username} | Updated user
 
 

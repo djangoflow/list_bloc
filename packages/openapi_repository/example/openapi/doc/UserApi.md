@@ -13,9 +13,9 @@ Method | HTTP request | Description
 [**createUsersWithListInput**](UserApi.md#createuserswithlistinput) | **POST** /user/createWithList | Creates list of users with given input array
 [**loginUser**](UserApi.md#loginuser) | **GET** /user/login | Logs user into the system
 [**logoutUser**](UserApi.md#logoutuser) | **GET** /user/logout | Logs out current logged in user session
-[**userByUsernameRead**](UserApi.md#userbyusernameread) | **GET** /user/{username} | Get user by user name
+[**userByUsernameRetrieve**](UserApi.md#userbyusernameretrieve) | **GET** /user/{username} | Get user by user name
 [**userCreate**](UserApi.md#usercreate) | **POST** /user | Create user
-[**userDelete**](UserApi.md#userdelete) | **DELETE** /user/{username} | Delete user
+[**userDestroy**](UserApi.md#userdestroy) | **DELETE** /user/{username} | Delete user
 [**userUpdate**](UserApi.md#userupdate) | **PUT** /user/{username} | Updated user
 
 
@@ -178,8 +178,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userByUsernameRead**
-> User userByUsernameRead(username)
+# **userByUsernameRetrieve**
+> User userByUsernameRetrieve(username)
 
 Get user by user name
 
@@ -191,10 +191,10 @@ final api = Openapi().getUserApi();
 final String username = username_example; // String | The name that needs to be fetched. Use user1 for testing. 
 
 try {
-    final response = api.userByUsernameRead(username);
+    final response = api.userByUsernameRetrieve(username);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling UserApi->userByUsernameRead: $e\n');
+    print('Exception when calling UserApi->userByUsernameRetrieve: $e\n');
 }
 ```
 
@@ -261,8 +261,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userDelete**
-> userDelete(username)
+# **userDestroy**
+> userDestroy(username)
 
 Delete user
 
@@ -276,9 +276,9 @@ final api = Openapi().getUserApi();
 final String username = username_example; // String | The name that needs to be deleted
 
 try {
-    api.userDelete(username);
+    api.userDestroy(username);
 } catch on DioError (e) {
-    print('Exception when calling UserApi->userDelete: $e\n');
+    print('Exception when calling UserApi->userDestroy: $e\n');
 }
 ```
 
