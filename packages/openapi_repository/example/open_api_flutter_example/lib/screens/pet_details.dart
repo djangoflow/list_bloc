@@ -28,13 +28,13 @@ class _PetDetailsScreenState extends State<PetDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<PetDataBloc>(
-      create: (context) => PetDataBloc(PetRepository.read)
-        ..load(PetReadFilter(petId: widget.petId)),
+      create: (context) => PetDataBloc(PetRepository.retrieve)
+        ..load(PetRetrieveFilter(petId: widget.petId)),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Pet Details'),
         ),
-        body: DataBlocBuilder<PetDataBloc, Pet, PetReadFilter>(
+        body: DataBlocBuilder<PetDataBloc, Pet, PetRetrieveFilter>(
           emptyBuilder: (_, __) => const Center(
             child: Text('No data'),
           ),
@@ -112,7 +112,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen> {
                                   });
                                   await context
                                       .read<PetDataBloc>()
-                                      .delete(petId: widget.petId);
+                                      .destroy(petId: widget.petId);
                                   scaffoldMessenger.showSnackBar(
                                     const SnackBar(
                                       content: Text('Deleted'),
