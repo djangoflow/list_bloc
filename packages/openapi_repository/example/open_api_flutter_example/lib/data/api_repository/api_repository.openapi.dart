@@ -88,12 +88,7 @@ abstract class FindPetByStatusRepository {
 
 class FindPetByStatusListBloc extends ListCubit<Pet, FindPetByStatusListFilter>
     with FindPetByStatusRepository {
-  FindPetByStatusListBloc(
-    Future<List<Pet>> Function([
-      FindPetByStatusListFilter? filter,
-    ])
-        loader,
-  ) : super(FindPetByStatusRepository.list);
+  FindPetByStatusListBloc() : super(FindPetByStatusRepository.list);
 }
 
 //Typdef for PetRetrieveState
@@ -171,12 +166,7 @@ abstract class PetRepository {
 // DataCubit for Pet
 
 class PetDataBloc extends DataCubit<Pet, PetRetrieveFilter> with PetRepository {
-  PetDataBloc(
-    Future<Pet> Function([
-      PetRetrieveFilter? filter,
-    ])
-        loader,
-  ) : super(PetRepository.retrieve);
+  PetDataBloc() : super(PetRepository.retrieve);
 
   @override
   Future<void> create({
@@ -280,12 +270,7 @@ abstract class OrderRepository {
 
 class OrderDataBloc extends DataCubit<Order, OrderRetrieveFilter>
     with OrderRepository {
-  OrderDataBloc(
-    Future<Order> Function([
-      OrderRetrieveFilter? filter,
-    ])
-        loader,
-  ) : super(OrderRepository.retrieve);
+  OrderDataBloc() : super(OrderRepository.retrieve);
 
   @override
   Future<Order?> create({
@@ -356,10 +341,5 @@ abstract class UserByUsernameRepository {
 class UserByUsernameDataBloc
     extends DataCubit<User, UserByUsernameRetrieveFilter>
     with UserByUsernameRepository {
-  UserByUsernameDataBloc(
-    Future<User> Function([
-      UserByUsernameRetrieveFilter? filter,
-    ])
-        loader,
-  ) : super(UserByUsernameRepository.retrieve);
+  UserByUsernameDataBloc() : super(UserByUsernameRepository.retrieve);
 }
