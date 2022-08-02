@@ -41,8 +41,8 @@ typedef {{name}}State = Data<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}
 const dataCubitTemplate = r'''
 // DataCubit for {{name}}
 
-class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}DataBloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}ReadFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter,]) loader,) : super({{name}}Repository.read);
+class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}RetrieveFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
+  {{name}}DataBloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}RetrieveFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter,]) loader,) : super({{name}}Repository.retrieve);
 
   {{#crudMethods}}
   @override
@@ -90,7 +90,7 @@ const repositoryTemplate = r'''
 abstract class {{repositoryName}}Repository {
   {{#hasDataLoader}}
   {{#dataLoader}}
-static Future<{{returnType}}> read({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}ReadFilter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
+static Future<{{returnType}}> retrieve({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}RetrieveFilter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
     {{#hasRequiredParam}}if (filter == null) {
       throw Exception('Invalid filter');
     }{{/hasRequiredParam}}
@@ -117,7 +117,7 @@ static Future<List<{{returnType}}>> list({{#additionalParams}}{{param}},{{/addit
       {{#filterParams}}{{param}},{{/filterParams}}
     );
 
-    return r.data?{{#isInline}}.results{{/isInline}}.asList() ?? [];
+    return r.data?{{#isInline}}.results{{#returnTypeNullabilitySuffix}}?{{/returnTypeNullabilitySuffix}}{{/isInline}}.asList() ?? [];
   }
   {{/listLoader}}
 {{/hasListLoader}}
