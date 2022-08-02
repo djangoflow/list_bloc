@@ -2551,6 +2551,7 @@ LoaderMethodModel _$LoaderMethodModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LoaderMethodModel {
   String get returnType => throw _privateConstructorUsedError;
+  String get nullabilitySuffix => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   bool get hasFilter => throw _privateConstructorUsedError;
   bool get isListLoader => throw _privateConstructorUsedError;
@@ -2577,6 +2578,7 @@ abstract class $LoaderMethodModelCopyWith<$Res> {
       _$LoaderMethodModelCopyWithImpl<$Res>;
   $Res call(
       {String returnType,
+      String nullabilitySuffix,
       String name,
       bool hasFilter,
       bool isListLoader,
@@ -2602,6 +2604,7 @@ class _$LoaderMethodModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? returnType = freezed,
+    Object? nullabilitySuffix = freezed,
     Object? name = freezed,
     Object? hasFilter = freezed,
     Object? isListLoader = freezed,
@@ -2618,6 +2621,10 @@ class _$LoaderMethodModelCopyWithImpl<$Res>
       returnType: returnType == freezed
           ? _value.returnType
           : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      nullabilitySuffix: nullabilitySuffix == freezed
+          ? _value.nullabilitySuffix
+          : nullabilitySuffix // ignore: cast_nullable_to_non_nullable
               as String,
       name: name == freezed
           ? _value.name
@@ -2676,6 +2683,7 @@ abstract class _$$_LoaderMethodModelCopyWith<$Res>
   @override
   $Res call(
       {String returnType,
+      String nullabilitySuffix,
       String name,
       bool hasFilter,
       bool isListLoader,
@@ -2703,6 +2711,7 @@ class __$$_LoaderMethodModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? returnType = freezed,
+    Object? nullabilitySuffix = freezed,
     Object? name = freezed,
     Object? hasFilter = freezed,
     Object? isListLoader = freezed,
@@ -2719,6 +2728,10 @@ class __$$_LoaderMethodModelCopyWithImpl<$Res>
       returnType: returnType == freezed
           ? _value.returnType
           : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      nullabilitySuffix: nullabilitySuffix == freezed
+          ? _value.nullabilitySuffix
+          : nullabilitySuffix // ignore: cast_nullable_to_non_nullable
               as String,
       name: name == freezed
           ? _value.name
@@ -2774,6 +2787,7 @@ class __$$_LoaderMethodModelCopyWithImpl<$Res>
 class _$_LoaderMethodModel implements _LoaderMethodModel {
   const _$_LoaderMethodModel(
       {required this.returnType,
+      required this.nullabilitySuffix,
       required this.name,
       required this.hasFilter,
       required this.isListLoader,
@@ -2795,6 +2809,8 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
 
   @override
   final String returnType;
+  @override
+  final String nullabilitySuffix;
   @override
   final String name;
   @override
@@ -2837,7 +2853,7 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
 
   @override
   String toString() {
-    return 'LoaderMethodModel(returnType: $returnType, name: $name, hasFilter: $hasFilter, isListLoader: $isListLoader, isPaginated: $isPaginated, hasRequiredParam: $hasRequiredParam, types: $types, filterParams: $filterParams, defaultOffset: $defaultOffset, defaultPageSize: $defaultPageSize, builtListConverters: $builtListConverters, isInline: $isInline)';
+    return 'LoaderMethodModel(returnType: $returnType, nullabilitySuffix: $nullabilitySuffix, name: $name, hasFilter: $hasFilter, isListLoader: $isListLoader, isPaginated: $isPaginated, hasRequiredParam: $hasRequiredParam, types: $types, filterParams: $filterParams, defaultOffset: $defaultOffset, defaultPageSize: $defaultPageSize, builtListConverters: $builtListConverters, isInline: $isInline)';
   }
 
   @override
@@ -2847,6 +2863,8 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
             other is _$_LoaderMethodModel &&
             const DeepCollectionEquality()
                 .equals(other.returnType, returnType) &&
+            const DeepCollectionEquality()
+                .equals(other.nullabilitySuffix, nullabilitySuffix) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.hasFilter, hasFilter) &&
             const DeepCollectionEquality()
@@ -2872,6 +2890,7 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(returnType),
+      const DeepCollectionEquality().hash(nullabilitySuffix),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(hasFilter),
       const DeepCollectionEquality().hash(isListLoader),
@@ -2899,6 +2918,7 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
 abstract class _LoaderMethodModel implements LoaderMethodModel {
   const factory _LoaderMethodModel(
       {required final String returnType,
+      required final String nullabilitySuffix,
       required final String name,
       required final bool hasFilter,
       required final bool isListLoader,
@@ -2916,6 +2936,8 @@ abstract class _LoaderMethodModel implements LoaderMethodModel {
 
   @override
   String get returnType => throw _privateConstructorUsedError;
+  @override
+  String get nullabilitySuffix => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
   @override
@@ -3271,6 +3293,7 @@ mixin _$LoaderTemplateModel {
   bool get isInline => throw _privateConstructorUsedError;
   String get methodName => throw _privateConstructorUsedError;
   String get returnType => throw _privateConstructorUsedError;
+  String get returnTypeNullabilitySuffix => throw _privateConstructorUsedError;
   bool get hasFilter => throw _privateConstructorUsedError;
   List<ParamModel> get additionalParams => throw _privateConstructorUsedError;
   List<ParamModel> get filterParams => throw _privateConstructorUsedError;
@@ -3292,6 +3315,7 @@ abstract class $LoaderTemplateModelCopyWith<$Res> {
       bool isInline,
       String methodName,
       String returnType,
+      String returnTypeNullabilitySuffix,
       bool hasFilter,
       List<ParamModel> additionalParams,
       List<ParamModel> filterParams});
@@ -3313,6 +3337,7 @@ class _$LoaderTemplateModelCopyWithImpl<$Res>
     Object? isInline = freezed,
     Object? methodName = freezed,
     Object? returnType = freezed,
+    Object? returnTypeNullabilitySuffix = freezed,
     Object? hasFilter = freezed,
     Object? additionalParams = freezed,
     Object? filterParams = freezed,
@@ -3337,6 +3362,10 @@ class _$LoaderTemplateModelCopyWithImpl<$Res>
       returnType: returnType == freezed
           ? _value.returnType
           : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnTypeNullabilitySuffix: returnTypeNullabilitySuffix == freezed
+          ? _value.returnTypeNullabilitySuffix
+          : returnTypeNullabilitySuffix // ignore: cast_nullable_to_non_nullable
               as String,
       hasFilter: hasFilter == freezed
           ? _value.hasFilter
@@ -3367,6 +3396,7 @@ abstract class _$$_LoaderTemplateModelCopyWith<$Res>
       bool isInline,
       String methodName,
       String returnType,
+      String returnTypeNullabilitySuffix,
       bool hasFilter,
       List<ParamModel> additionalParams,
       List<ParamModel> filterParams});
@@ -3390,6 +3420,7 @@ class __$$_LoaderTemplateModelCopyWithImpl<$Res>
     Object? isInline = freezed,
     Object? methodName = freezed,
     Object? returnType = freezed,
+    Object? returnTypeNullabilitySuffix = freezed,
     Object? hasFilter = freezed,
     Object? additionalParams = freezed,
     Object? filterParams = freezed,
@@ -3413,6 +3444,10 @@ class __$$_LoaderTemplateModelCopyWithImpl<$Res>
       returnType: returnType == freezed
           ? _value.returnType
           : returnType // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnTypeNullabilitySuffix: returnTypeNullabilitySuffix == freezed
+          ? _value.returnTypeNullabilitySuffix
+          : returnTypeNullabilitySuffix // ignore: cast_nullable_to_non_nullable
               as String,
       hasFilter: hasFilter == freezed
           ? _value.hasFilter
@@ -3440,6 +3475,7 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
       this.isInline = false,
       required this.methodName,
       required this.returnType,
+      required this.returnTypeNullabilitySuffix,
       this.hasFilter = false,
       final List<ParamModel> additionalParams = const [],
       final List<ParamModel> filterParams = const []})
@@ -3462,6 +3498,8 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
   @override
   final String returnType;
   @override
+  final String returnTypeNullabilitySuffix;
+  @override
   @JsonKey()
   final bool hasFilter;
   final List<ParamModel> _additionalParams;
@@ -3482,7 +3520,7 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
 
   @override
   String toString() {
-    return 'LoaderTemplateModel(api: $api, hasRequiredParam: $hasRequiredParam, isInline: $isInline, methodName: $methodName, returnType: $returnType, hasFilter: $hasFilter, additionalParams: $additionalParams, filterParams: $filterParams)';
+    return 'LoaderTemplateModel(api: $api, hasRequiredParam: $hasRequiredParam, isInline: $isInline, methodName: $methodName, returnType: $returnType, returnTypeNullabilitySuffix: $returnTypeNullabilitySuffix, hasFilter: $hasFilter, additionalParams: $additionalParams, filterParams: $filterParams)';
   }
 
   @override
@@ -3498,6 +3536,9 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
                 .equals(other.methodName, methodName) &&
             const DeepCollectionEquality()
                 .equals(other.returnType, returnType) &&
+            const DeepCollectionEquality().equals(
+                other.returnTypeNullabilitySuffix,
+                returnTypeNullabilitySuffix) &&
             const DeepCollectionEquality().equals(other.hasFilter, hasFilter) &&
             const DeepCollectionEquality()
                 .equals(other._additionalParams, _additionalParams) &&
@@ -3514,6 +3555,7 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
       const DeepCollectionEquality().hash(isInline),
       const DeepCollectionEquality().hash(methodName),
       const DeepCollectionEquality().hash(returnType),
+      const DeepCollectionEquality().hash(returnTypeNullabilitySuffix),
       const DeepCollectionEquality().hash(hasFilter),
       const DeepCollectionEquality().hash(_additionalParams),
       const DeepCollectionEquality().hash(_filterParams));
@@ -3537,6 +3579,7 @@ abstract class _LoaderTemplateModel implements LoaderTemplateModel {
       final bool isInline,
       required final String methodName,
       required final String returnType,
+      required final String returnTypeNullabilitySuffix,
       final bool hasFilter,
       final List<ParamModel> additionalParams,
       final List<ParamModel> filterParams}) = _$_LoaderTemplateModel;
@@ -3554,6 +3597,8 @@ abstract class _LoaderTemplateModel implements LoaderTemplateModel {
   String get methodName => throw _privateConstructorUsedError;
   @override
   String get returnType => throw _privateConstructorUsedError;
+  @override
+  String get returnTypeNullabilitySuffix => throw _privateConstructorUsedError;
   @override
   bool get hasFilter => throw _privateConstructorUsedError;
   @override

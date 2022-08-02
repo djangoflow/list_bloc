@@ -164,6 +164,7 @@ class LoaderMethodModel with _$LoaderMethodModel {
   @JsonSerializable(explicitToJson: true)
   const factory LoaderMethodModel({
     required String returnType,
+    required String nullabilitySuffix,
     required String name,
     required bool hasFilter,
     required bool isListLoader,
@@ -208,6 +209,7 @@ class LoaderTemplateModel with _$LoaderTemplateModel {
     @Default(false) bool isInline,
     required String methodName,
     required String returnType,
+    required String returnTypeNullabilitySuffix,
     @Default(false) bool hasFilter,
     @Default([]) List<ParamModel> additionalParams,
     @Default([]) List<ParamModel> filterParams,

@@ -246,6 +246,7 @@ Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
 _$_LoaderMethodModel _$$_LoaderMethodModelFromJson(Map<String, dynamic> json) =>
     _$_LoaderMethodModel(
       returnType: json['returnType'] as String,
+      nullabilitySuffix: json['nullabilitySuffix'] as String,
       name: json['name'] as String,
       hasFilter: json['hasFilter'] as bool,
       isListLoader: json['isListLoader'] as bool,
@@ -271,6 +272,7 @@ Map<String, dynamic> _$$_LoaderMethodModelToJson(
         _$_LoaderMethodModel instance) =>
     <String, dynamic>{
       'returnType': instance.returnType,
+      'nullabilitySuffix': instance.nullabilitySuffix,
       'name': instance.name,
       'hasFilter': instance.hasFilter,
       'isListLoader': instance.isListLoader,
@@ -325,6 +327,8 @@ _$_LoaderTemplateModel _$$_LoaderTemplateModelFromJson(
       isInline: json['isInline'] as bool? ?? false,
       methodName: json['methodName'] as String,
       returnType: json['returnType'] as String,
+      returnTypeNullabilitySuffix:
+          json['returnTypeNullabilitySuffix'] as String,
       hasFilter: json['hasFilter'] as bool? ?? false,
       additionalParams: (json['additionalParams'] as List<dynamic>?)
               ?.map((e) => ParamModel.fromJson(e as Map<String, dynamic>))
@@ -344,6 +348,7 @@ Map<String, dynamic> _$$_LoaderTemplateModelToJson(
       'isInline': instance.isInline,
       'methodName': instance.methodName,
       'returnType': instance.returnType,
+      'returnTypeNullabilitySuffix': instance.returnTypeNullabilitySuffix,
       'hasFilter': instance.hasFilter,
       'additionalParams':
           instance.additionalParams.map((e) => e.toJson()).toList(),
