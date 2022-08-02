@@ -49,7 +49,7 @@ class ContinuousListViewBlocBuilder<B extends ListCubit<T, F>, T,
         withRefreshIndicator: withRefreshIndicator,
         builder: (BuildContext context, Data<List<T>, F> state, int itemCount,
                 Widget Function(BuildContext, int) itemBuilder) =>
-            ContinuousScrollBuilder<T, F>(
+            ContinuousScrollBuilder<B, T, F>(
           cubit: cubit,
           controller: controller,
           builder: (context, controller) => builder != null
