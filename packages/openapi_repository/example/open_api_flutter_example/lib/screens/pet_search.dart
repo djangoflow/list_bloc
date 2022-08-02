@@ -17,7 +17,7 @@ class _PetSearchScreenState extends State<PetSearchScreen> {
   late PetDataBloc bloc;
   @override
   void initState() {
-    bloc = PetDataBloc(PetRepository.read);
+    bloc = PetDataBloc();
     textEditingController = TextEditingController(
       text: '1',
     );
@@ -51,7 +51,7 @@ class _PetSearchScreenState extends State<PetSearchScreen> {
               onPressed: () {
                 try {
                   final petId = int.parse(textEditingController.text);
-                  bloc.load(PetReadFilter(petId: petId));
+                  bloc.load(PetRetrieveFilter(petId: petId));
                 } catch (e) {
                   rethrow;
                 }
@@ -59,7 +59,7 @@ class _PetSearchScreenState extends State<PetSearchScreen> {
               child: const Text('Search by id'),
             ),
           ),
-          DataBlocBuilder<PetDataBloc, Pet, PetReadFilter>(
+          DataBlocBuilder<PetDataBloc, Pet, PetRetrieveFilter>(
             cubit: bloc,
             emptyBuilder: (_, __) => const Center(
               child: Text('No data'),

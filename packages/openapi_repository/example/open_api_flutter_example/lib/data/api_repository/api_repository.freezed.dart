@@ -163,36 +163,36 @@ abstract class _FindPetByStatusListFilter extends FindPetByStatusListFilter {
       get copyWith => throw _privateConstructorUsedError;
 }
 
-PetReadFilter _$PetReadFilterFromJson(Map<String, dynamic> json) {
-  return _PetReadFilter.fromJson(json);
+PetRetrieveFilter _$PetRetrieveFilterFromJson(Map<String, dynamic> json) {
+  return _PetRetrieveFilter.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PetReadFilter {
+mixin _$PetRetrieveFilter {
   int get petId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PetReadFilterCopyWith<PetReadFilter> get copyWith =>
+  $PetRetrieveFilterCopyWith<PetRetrieveFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PetReadFilterCopyWith<$Res> {
-  factory $PetReadFilterCopyWith(
-          PetReadFilter value, $Res Function(PetReadFilter) then) =
-      _$PetReadFilterCopyWithImpl<$Res>;
+abstract class $PetRetrieveFilterCopyWith<$Res> {
+  factory $PetRetrieveFilterCopyWith(
+          PetRetrieveFilter value, $Res Function(PetRetrieveFilter) then) =
+      _$PetRetrieveFilterCopyWithImpl<$Res>;
   $Res call({int petId});
 }
 
 /// @nodoc
-class _$PetReadFilterCopyWithImpl<$Res>
-    implements $PetReadFilterCopyWith<$Res> {
-  _$PetReadFilterCopyWithImpl(this._value, this._then);
+class _$PetRetrieveFilterCopyWithImpl<$Res>
+    implements $PetRetrieveFilterCopyWith<$Res> {
+  _$PetRetrieveFilterCopyWithImpl(this._value, this._then);
 
-  final PetReadFilter _value;
+  final PetRetrieveFilter _value;
   // ignore: unused_field
-  final $Res Function(PetReadFilter) _then;
+  final $Res Function(PetRetrieveFilter) _then;
 
   @override
   $Res call({
@@ -208,31 +208,31 @@ class _$PetReadFilterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_PetReadFilterCopyWith<$Res>
-    implements $PetReadFilterCopyWith<$Res> {
-  factory _$$_PetReadFilterCopyWith(
-          _$_PetReadFilter value, $Res Function(_$_PetReadFilter) then) =
-      __$$_PetReadFilterCopyWithImpl<$Res>;
+abstract class _$$_PetRetrieveFilterCopyWith<$Res>
+    implements $PetRetrieveFilterCopyWith<$Res> {
+  factory _$$_PetRetrieveFilterCopyWith(_$_PetRetrieveFilter value,
+          $Res Function(_$_PetRetrieveFilter) then) =
+      __$$_PetRetrieveFilterCopyWithImpl<$Res>;
   @override
   $Res call({int petId});
 }
 
 /// @nodoc
-class __$$_PetReadFilterCopyWithImpl<$Res>
-    extends _$PetReadFilterCopyWithImpl<$Res>
-    implements _$$_PetReadFilterCopyWith<$Res> {
-  __$$_PetReadFilterCopyWithImpl(
-      _$_PetReadFilter _value, $Res Function(_$_PetReadFilter) _then)
-      : super(_value, (v) => _then(v as _$_PetReadFilter));
+class __$$_PetRetrieveFilterCopyWithImpl<$Res>
+    extends _$PetRetrieveFilterCopyWithImpl<$Res>
+    implements _$$_PetRetrieveFilterCopyWith<$Res> {
+  __$$_PetRetrieveFilterCopyWithImpl(
+      _$_PetRetrieveFilter _value, $Res Function(_$_PetRetrieveFilter) _then)
+      : super(_value, (v) => _then(v as _$_PetRetrieveFilter));
 
   @override
-  _$_PetReadFilter get _value => super._value as _$_PetReadFilter;
+  _$_PetRetrieveFilter get _value => super._value as _$_PetRetrieveFilter;
 
   @override
   $Res call({
     Object? petId = freezed,
   }) {
-    return _then(_$_PetReadFilter(
+    return _then(_$_PetRetrieveFilter(
       petId: petId == freezed
           ? _value.petId
           : petId // ignore: cast_nullable_to_non_nullable
@@ -243,25 +243,26 @@ class __$$_PetReadFilterCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PetReadFilter extends _PetReadFilter with DiagnosticableTreeMixin {
-  const _$_PetReadFilter({required this.petId}) : super._();
+class _$_PetRetrieveFilter extends _PetRetrieveFilter
+    with DiagnosticableTreeMixin {
+  const _$_PetRetrieveFilter({required this.petId}) : super._();
 
-  factory _$_PetReadFilter.fromJson(Map<String, dynamic> json) =>
-      _$$_PetReadFilterFromJson(json);
+  factory _$_PetRetrieveFilter.fromJson(Map<String, dynamic> json) =>
+      _$$_PetRetrieveFilterFromJson(json);
 
   @override
   final int petId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PetReadFilter(petId: $petId)';
+    return 'PetRetrieveFilter(petId: $petId)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'PetReadFilter'))
+      ..add(DiagnosticsProperty('type', 'PetRetrieveFilter'))
       ..add(DiagnosticsProperty('petId', petId));
   }
 
@@ -269,7 +270,7 @@ class _$_PetReadFilter extends _PetReadFilter with DiagnosticableTreeMixin {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PetReadFilter &&
+            other is _$_PetRetrieveFilter &&
             const DeepCollectionEquality().equals(other.petId, petId));
   }
 
@@ -280,60 +281,62 @@ class _$_PetReadFilter extends _PetReadFilter with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  _$$_PetReadFilterCopyWith<_$_PetReadFilter> get copyWith =>
-      __$$_PetReadFilterCopyWithImpl<_$_PetReadFilter>(this, _$identity);
+  _$$_PetRetrieveFilterCopyWith<_$_PetRetrieveFilter> get copyWith =>
+      __$$_PetRetrieveFilterCopyWithImpl<_$_PetRetrieveFilter>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PetReadFilterToJson(this);
+    return _$$_PetRetrieveFilterToJson(this);
   }
 }
 
-abstract class _PetReadFilter extends PetReadFilter {
-  const factory _PetReadFilter({required final int petId}) = _$_PetReadFilter;
-  const _PetReadFilter._() : super._();
+abstract class _PetRetrieveFilter extends PetRetrieveFilter {
+  const factory _PetRetrieveFilter({required final int petId}) =
+      _$_PetRetrieveFilter;
+  const _PetRetrieveFilter._() : super._();
 
-  factory _PetReadFilter.fromJson(Map<String, dynamic> json) =
-      _$_PetReadFilter.fromJson;
+  factory _PetRetrieveFilter.fromJson(Map<String, dynamic> json) =
+      _$_PetRetrieveFilter.fromJson;
 
   @override
   int get petId;
   @override
   @JsonKey(ignore: true)
-  _$$_PetReadFilterCopyWith<_$_PetReadFilter> get copyWith =>
+  _$$_PetRetrieveFilterCopyWith<_$_PetRetrieveFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-OrderReadFilter _$OrderReadFilterFromJson(Map<String, dynamic> json) {
-  return _OrderReadFilter.fromJson(json);
+OrderRetrieveFilter _$OrderRetrieveFilterFromJson(Map<String, dynamic> json) {
+  return _OrderRetrieveFilter.fromJson(json);
 }
 
 /// @nodoc
-mixin _$OrderReadFilter {
+mixin _$OrderRetrieveFilter {
   int get orderId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $OrderReadFilterCopyWith<OrderReadFilter> get copyWith =>
+  $OrderRetrieveFilterCopyWith<OrderRetrieveFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OrderReadFilterCopyWith<$Res> {
-  factory $OrderReadFilterCopyWith(
-          OrderReadFilter value, $Res Function(OrderReadFilter) then) =
-      _$OrderReadFilterCopyWithImpl<$Res>;
+abstract class $OrderRetrieveFilterCopyWith<$Res> {
+  factory $OrderRetrieveFilterCopyWith(
+          OrderRetrieveFilter value, $Res Function(OrderRetrieveFilter) then) =
+      _$OrderRetrieveFilterCopyWithImpl<$Res>;
   $Res call({int orderId});
 }
 
 /// @nodoc
-class _$OrderReadFilterCopyWithImpl<$Res>
-    implements $OrderReadFilterCopyWith<$Res> {
-  _$OrderReadFilterCopyWithImpl(this._value, this._then);
+class _$OrderRetrieveFilterCopyWithImpl<$Res>
+    implements $OrderRetrieveFilterCopyWith<$Res> {
+  _$OrderRetrieveFilterCopyWithImpl(this._value, this._then);
 
-  final OrderReadFilter _value;
+  final OrderRetrieveFilter _value;
   // ignore: unused_field
-  final $Res Function(OrderReadFilter) _then;
+  final $Res Function(OrderRetrieveFilter) _then;
 
   @override
   $Res call({
@@ -349,31 +352,31 @@ class _$OrderReadFilterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_OrderReadFilterCopyWith<$Res>
-    implements $OrderReadFilterCopyWith<$Res> {
-  factory _$$_OrderReadFilterCopyWith(
-          _$_OrderReadFilter value, $Res Function(_$_OrderReadFilter) then) =
-      __$$_OrderReadFilterCopyWithImpl<$Res>;
+abstract class _$$_OrderRetrieveFilterCopyWith<$Res>
+    implements $OrderRetrieveFilterCopyWith<$Res> {
+  factory _$$_OrderRetrieveFilterCopyWith(_$_OrderRetrieveFilter value,
+          $Res Function(_$_OrderRetrieveFilter) then) =
+      __$$_OrderRetrieveFilterCopyWithImpl<$Res>;
   @override
   $Res call({int orderId});
 }
 
 /// @nodoc
-class __$$_OrderReadFilterCopyWithImpl<$Res>
-    extends _$OrderReadFilterCopyWithImpl<$Res>
-    implements _$$_OrderReadFilterCopyWith<$Res> {
-  __$$_OrderReadFilterCopyWithImpl(
-      _$_OrderReadFilter _value, $Res Function(_$_OrderReadFilter) _then)
-      : super(_value, (v) => _then(v as _$_OrderReadFilter));
+class __$$_OrderRetrieveFilterCopyWithImpl<$Res>
+    extends _$OrderRetrieveFilterCopyWithImpl<$Res>
+    implements _$$_OrderRetrieveFilterCopyWith<$Res> {
+  __$$_OrderRetrieveFilterCopyWithImpl(_$_OrderRetrieveFilter _value,
+      $Res Function(_$_OrderRetrieveFilter) _then)
+      : super(_value, (v) => _then(v as _$_OrderRetrieveFilter));
 
   @override
-  _$_OrderReadFilter get _value => super._value as _$_OrderReadFilter;
+  _$_OrderRetrieveFilter get _value => super._value as _$_OrderRetrieveFilter;
 
   @override
   $Res call({
     Object? orderId = freezed,
   }) {
-    return _then(_$_OrderReadFilter(
+    return _then(_$_OrderRetrieveFilter(
       orderId: orderId == freezed
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
@@ -384,25 +387,26 @@ class __$$_OrderReadFilterCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrderReadFilter extends _OrderReadFilter with DiagnosticableTreeMixin {
-  const _$_OrderReadFilter({required this.orderId}) : super._();
+class _$_OrderRetrieveFilter extends _OrderRetrieveFilter
+    with DiagnosticableTreeMixin {
+  const _$_OrderRetrieveFilter({required this.orderId}) : super._();
 
-  factory _$_OrderReadFilter.fromJson(Map<String, dynamic> json) =>
-      _$$_OrderReadFilterFromJson(json);
+  factory _$_OrderRetrieveFilter.fromJson(Map<String, dynamic> json) =>
+      _$$_OrderRetrieveFilterFromJson(json);
 
   @override
   final int orderId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'OrderReadFilter(orderId: $orderId)';
+    return 'OrderRetrieveFilter(orderId: $orderId)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'OrderReadFilter'))
+      ..add(DiagnosticsProperty('type', 'OrderRetrieveFilter'))
       ..add(DiagnosticsProperty('orderId', orderId));
   }
 
@@ -410,7 +414,7 @@ class _$_OrderReadFilter extends _OrderReadFilter with DiagnosticableTreeMixin {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderReadFilter &&
+            other is _$_OrderRetrieveFilter &&
             const DeepCollectionEquality().equals(other.orderId, orderId));
   }
 
@@ -421,62 +425,64 @@ class _$_OrderReadFilter extends _OrderReadFilter with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  _$$_OrderReadFilterCopyWith<_$_OrderReadFilter> get copyWith =>
-      __$$_OrderReadFilterCopyWithImpl<_$_OrderReadFilter>(this, _$identity);
+  _$$_OrderRetrieveFilterCopyWith<_$_OrderRetrieveFilter> get copyWith =>
+      __$$_OrderRetrieveFilterCopyWithImpl<_$_OrderRetrieveFilter>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderReadFilterToJson(this);
+    return _$$_OrderRetrieveFilterToJson(this);
   }
 }
 
-abstract class _OrderReadFilter extends OrderReadFilter {
-  const factory _OrderReadFilter({required final int orderId}) =
-      _$_OrderReadFilter;
-  const _OrderReadFilter._() : super._();
+abstract class _OrderRetrieveFilter extends OrderRetrieveFilter {
+  const factory _OrderRetrieveFilter({required final int orderId}) =
+      _$_OrderRetrieveFilter;
+  const _OrderRetrieveFilter._() : super._();
 
-  factory _OrderReadFilter.fromJson(Map<String, dynamic> json) =
-      _$_OrderReadFilter.fromJson;
+  factory _OrderRetrieveFilter.fromJson(Map<String, dynamic> json) =
+      _$_OrderRetrieveFilter.fromJson;
 
   @override
   int get orderId;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderReadFilterCopyWith<_$_OrderReadFilter> get copyWith =>
+  _$$_OrderRetrieveFilterCopyWith<_$_OrderRetrieveFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-UserByUsernameReadFilter _$UserByUsernameReadFilterFromJson(
+UserByUsernameRetrieveFilter _$UserByUsernameRetrieveFilterFromJson(
     Map<String, dynamic> json) {
-  return _UserByUsernameReadFilter.fromJson(json);
+  return _UserByUsernameRetrieveFilter.fromJson(json);
 }
 
 /// @nodoc
-mixin _$UserByUsernameReadFilter {
+mixin _$UserByUsernameRetrieveFilter {
   String get username => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserByUsernameReadFilterCopyWith<UserByUsernameReadFilter> get copyWith =>
-      throw _privateConstructorUsedError;
+  $UserByUsernameRetrieveFilterCopyWith<UserByUsernameRetrieveFilter>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserByUsernameReadFilterCopyWith<$Res> {
-  factory $UserByUsernameReadFilterCopyWith(UserByUsernameReadFilter value,
-          $Res Function(UserByUsernameReadFilter) then) =
-      _$UserByUsernameReadFilterCopyWithImpl<$Res>;
+abstract class $UserByUsernameRetrieveFilterCopyWith<$Res> {
+  factory $UserByUsernameRetrieveFilterCopyWith(
+          UserByUsernameRetrieveFilter value,
+          $Res Function(UserByUsernameRetrieveFilter) then) =
+      _$UserByUsernameRetrieveFilterCopyWithImpl<$Res>;
   $Res call({String username});
 }
 
 /// @nodoc
-class _$UserByUsernameReadFilterCopyWithImpl<$Res>
-    implements $UserByUsernameReadFilterCopyWith<$Res> {
-  _$UserByUsernameReadFilterCopyWithImpl(this._value, this._then);
+class _$UserByUsernameRetrieveFilterCopyWithImpl<$Res>
+    implements $UserByUsernameRetrieveFilterCopyWith<$Res> {
+  _$UserByUsernameRetrieveFilterCopyWithImpl(this._value, this._then);
 
-  final UserByUsernameReadFilter _value;
+  final UserByUsernameRetrieveFilter _value;
   // ignore: unused_field
-  final $Res Function(UserByUsernameReadFilter) _then;
+  final $Res Function(UserByUsernameRetrieveFilter) _then;
 
   @override
   $Res call({
@@ -492,33 +498,34 @@ class _$UserByUsernameReadFilterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_UserByUsernameReadFilterCopyWith<$Res>
-    implements $UserByUsernameReadFilterCopyWith<$Res> {
-  factory _$$_UserByUsernameReadFilterCopyWith(
-          _$_UserByUsernameReadFilter value,
-          $Res Function(_$_UserByUsernameReadFilter) then) =
-      __$$_UserByUsernameReadFilterCopyWithImpl<$Res>;
+abstract class _$$_UserByUsernameRetrieveFilterCopyWith<$Res>
+    implements $UserByUsernameRetrieveFilterCopyWith<$Res> {
+  factory _$$_UserByUsernameRetrieveFilterCopyWith(
+          _$_UserByUsernameRetrieveFilter value,
+          $Res Function(_$_UserByUsernameRetrieveFilter) then) =
+      __$$_UserByUsernameRetrieveFilterCopyWithImpl<$Res>;
   @override
   $Res call({String username});
 }
 
 /// @nodoc
-class __$$_UserByUsernameReadFilterCopyWithImpl<$Res>
-    extends _$UserByUsernameReadFilterCopyWithImpl<$Res>
-    implements _$$_UserByUsernameReadFilterCopyWith<$Res> {
-  __$$_UserByUsernameReadFilterCopyWithImpl(_$_UserByUsernameReadFilter _value,
-      $Res Function(_$_UserByUsernameReadFilter) _then)
-      : super(_value, (v) => _then(v as _$_UserByUsernameReadFilter));
+class __$$_UserByUsernameRetrieveFilterCopyWithImpl<$Res>
+    extends _$UserByUsernameRetrieveFilterCopyWithImpl<$Res>
+    implements _$$_UserByUsernameRetrieveFilterCopyWith<$Res> {
+  __$$_UserByUsernameRetrieveFilterCopyWithImpl(
+      _$_UserByUsernameRetrieveFilter _value,
+      $Res Function(_$_UserByUsernameRetrieveFilter) _then)
+      : super(_value, (v) => _then(v as _$_UserByUsernameRetrieveFilter));
 
   @override
-  _$_UserByUsernameReadFilter get _value =>
-      super._value as _$_UserByUsernameReadFilter;
+  _$_UserByUsernameRetrieveFilter get _value =>
+      super._value as _$_UserByUsernameRetrieveFilter;
 
   @override
   $Res call({
     Object? username = freezed,
   }) {
-    return _then(_$_UserByUsernameReadFilter(
+    return _then(_$_UserByUsernameRetrieveFilter(
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -529,26 +536,26 @@ class __$$_UserByUsernameReadFilterCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserByUsernameReadFilter extends _UserByUsernameReadFilter
+class _$_UserByUsernameRetrieveFilter extends _UserByUsernameRetrieveFilter
     with DiagnosticableTreeMixin {
-  const _$_UserByUsernameReadFilter({required this.username}) : super._();
+  const _$_UserByUsernameRetrieveFilter({required this.username}) : super._();
 
-  factory _$_UserByUsernameReadFilter.fromJson(Map<String, dynamic> json) =>
-      _$$_UserByUsernameReadFilterFromJson(json);
+  factory _$_UserByUsernameRetrieveFilter.fromJson(Map<String, dynamic> json) =>
+      _$$_UserByUsernameRetrieveFilterFromJson(json);
 
   @override
   final String username;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserByUsernameReadFilter(username: $username)';
+    return 'UserByUsernameRetrieveFilter(username: $username)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'UserByUsernameReadFilter'))
+      ..add(DiagnosticsProperty('type', 'UserByUsernameRetrieveFilter'))
       ..add(DiagnosticsProperty('username', username));
   }
 
@@ -556,7 +563,7 @@ class _$_UserByUsernameReadFilter extends _UserByUsernameReadFilter
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserByUsernameReadFilter &&
+            other is _$_UserByUsernameRetrieveFilter &&
             const DeepCollectionEquality().equals(other.username, username));
   }
 
@@ -567,28 +574,29 @@ class _$_UserByUsernameReadFilter extends _UserByUsernameReadFilter
 
   @JsonKey(ignore: true)
   @override
-  _$$_UserByUsernameReadFilterCopyWith<_$_UserByUsernameReadFilter>
-      get copyWith => __$$_UserByUsernameReadFilterCopyWithImpl<
-          _$_UserByUsernameReadFilter>(this, _$identity);
+  _$$_UserByUsernameRetrieveFilterCopyWith<_$_UserByUsernameRetrieveFilter>
+      get copyWith => __$$_UserByUsernameRetrieveFilterCopyWithImpl<
+          _$_UserByUsernameRetrieveFilter>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserByUsernameReadFilterToJson(this);
+    return _$$_UserByUsernameRetrieveFilterToJson(this);
   }
 }
 
-abstract class _UserByUsernameReadFilter extends UserByUsernameReadFilter {
-  const factory _UserByUsernameReadFilter({required final String username}) =
-      _$_UserByUsernameReadFilter;
-  const _UserByUsernameReadFilter._() : super._();
+abstract class _UserByUsernameRetrieveFilter
+    extends UserByUsernameRetrieveFilter {
+  const factory _UserByUsernameRetrieveFilter(
+      {required final String username}) = _$_UserByUsernameRetrieveFilter;
+  const _UserByUsernameRetrieveFilter._() : super._();
 
-  factory _UserByUsernameReadFilter.fromJson(Map<String, dynamic> json) =
-      _$_UserByUsernameReadFilter.fromJson;
+  factory _UserByUsernameRetrieveFilter.fromJson(Map<String, dynamic> json) =
+      _$_UserByUsernameRetrieveFilter.fromJson;
 
   @override
   String get username;
   @override
   @JsonKey(ignore: true)
-  _$$_UserByUsernameReadFilterCopyWith<_$_UserByUsernameReadFilter>
+  _$$_UserByUsernameRetrieveFilterCopyWith<_$_UserByUsernameRetrieveFilter>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -205,7 +205,7 @@ paths:
         - "pet"
       summary: "Find pet by ID"
       description: "Returns a single pet"
-      operationId: "pet_read"
+      operationId: "pet_retrieve"
       produces:
         - "application/json"
         - "application/xml"
@@ -267,7 +267,7 @@ paths:
         - "pet"
       summary: "Deletes a pet"
       description: ""
-      operationId: "pet_delete"
+      operationId: "pet_destroy"
       produces:
         - "application/json"
         - "application/xml"
@@ -325,7 +325,7 @@ paths:
       description:
         "For valid response try integer IDs with value >= 1 and <= 10.\
         \ Other values will generated exceptions"
-      operationId: "order_read"
+      operationId: "order_retrieve"
       produces:
         - "application/json"
         - "application/xml"
@@ -354,7 +354,7 @@ paths:
       description:
         "For valid response try integer IDs with positive integer value.\
         \ Negative or non-integer values will generate API errors"
-      operationId: "order_delete"
+      operationId: "order_destroy"
       produces:
         - "application/json"
         - "application/xml"
@@ -445,7 +445,7 @@ paths:
         - "user"
       summary: "Get user by user name"
       description: ""
-      operationId: "user_by_username_read"
+      operationId: "user_by_username_retrieve"
       produces:
         - "application/json"
         - "application/xml"
@@ -497,7 +497,7 @@ paths:
         - "user"
       summary: "Delete user"
       description: "This can only be done by the logged in user."
-      operationId: "user_delete"
+      operationId: "user_destroy"
       produces:
         - "application/json"
         - "application/xml"

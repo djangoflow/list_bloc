@@ -379,7 +379,7 @@ class PetApi {
   ///
   /// Returns a [Future]
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<void>> petDelete({ 
+  Future<Response<void>> petDestroy({ 
     required int petId,
     String? apiKey,
     CancelToken? cancelToken,
@@ -433,7 +433,7 @@ class PetApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Pet] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Pet>> petRead({ 
+  Future<Response<Pet>> petRetrieve({ 
     required int petId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,

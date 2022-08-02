@@ -13,8 +13,8 @@ Method | HTTP request | Description
 [**findPetByTagList**](PetApi.md#findpetbytaglist) | **GET** /pet/findByTags | Finds Pets by tags
 [**imageCreate**](PetApi.md#imagecreate) | **POST** /pet/{petId}/uploadImage | uploads an image
 [**petCreate**](PetApi.md#petcreate) | **POST** /pet | Add a new pet to the store
-[**petDelete**](PetApi.md#petdelete) | **DELETE** /pet/{petId} | Deletes a pet
-[**petRead**](PetApi.md#petread) | **GET** /pet/{petId} | Find pet by ID
+[**petDestroy**](PetApi.md#petdestroy) | **DELETE** /pet/{petId} | Deletes a pet
+[**petRetrieve**](PetApi.md#petretrieve) | **GET** /pet/{petId} | Find pet by ID
 [**petUpdate**](PetApi.md#petupdate) | **PUT** /pet | Update an existing pet
 [**petWithFormUpdate**](PetApi.md#petwithformupdate) | **POST** /pet/{petId} | Updates a pet in the store with form data
 
@@ -198,8 +198,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **petDelete**
-> petDelete(petId, apiKey)
+# **petDestroy**
+> petDestroy(petId, apiKey)
 
 Deletes a pet
 
@@ -214,9 +214,9 @@ final int petId = 789; // int | Pet id to delete
 final String apiKey = apiKey_example; // String | 
 
 try {
-    api.petDelete(petId, apiKey);
+    api.petDestroy(petId, apiKey);
 } catch on DioError (e) {
-    print('Exception when calling PetApi->petDelete: $e\n');
+    print('Exception when calling PetApi->petDestroy: $e\n');
 }
 ```
 
@@ -242,8 +242,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **petRead**
-> Pet petRead(petId)
+# **petRetrieve**
+> Pet petRetrieve(petId)
 
 Find pet by ID
 
@@ -261,10 +261,10 @@ final api = Openapi().getPetApi();
 final int petId = 789; // int | ID of pet to return
 
 try {
-    final response = api.petRead(petId);
+    final response = api.petRetrieve(petId);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling PetApi->petRead: $e\n');
+    print('Exception when calling PetApi->petRetrieve: $e\n');
 }
 ```
 

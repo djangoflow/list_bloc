@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:collection/collection.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/dart/constant/value.dart';
@@ -137,8 +138,8 @@ class OpenapiRepositoryGenerator
       final apiClass =
           classElement.displayName.titleCase.split(' ').first.camelCase;
 
-      final isReadMethod =
-          methodName.contains('Read') && methodName == '${namePrefix}Read';
+      final isReadMethod = methodName.contains('Retrieve') &&
+          methodName == '${namePrefix}Retrieve';
       final isListMethod =
           methodName.contains('List') && methodName == '${namePrefix}List';
       // if Read or List method is found, generate Repository, `DataCubit` and `ListCubit`.
@@ -212,7 +213,7 @@ class OpenapiRepositoryGenerator
             loaders.add(listLoaderMethodModel);
           }
           final readMethod = methods.firstWhereOrNull((element) {
-            return (element.displayName == '${namePrefix}Read' &&
+            return (element.displayName == '${namePrefix}Retrieve' &&
                 element.returnType.isDartAsyncFuture);
           });
           if (readMethod != null &&
@@ -341,6 +342,7 @@ class OpenapiRepositoryGenerator
         api: api,
         methodName: listLoaderModel.name.camelCase,
         returnType: listLoaderModel.returnType,
+        returnTypeNullabilitySuffix: listLoaderModel.nullabilitySuffix,
         hasFilter: listLoaderModel.hasFilter,
         filterParams: listLoaderModel.filterParams,
         hasRequiredParam: listLoaderModel.hasRequiredParam,
@@ -352,6 +354,7 @@ class OpenapiRepositoryGenerator
         api: api,
         methodName: dataLoaderModel.name.camelCase,
         returnType: dataLoaderModel.returnType,
+        returnTypeNullabilitySuffix: dataLoaderModel.nullabilitySuffix,
         hasFilter: dataLoaderModel.hasFilter,
         filterParams: dataLoaderModel.filterParams,
         hasRequiredParam: dataLoaderModel.hasRequiredParam,
@@ -369,7 +372,7 @@ class OpenapiRepositoryGenerator
       return element.displayName == '${namePrefix}Update';
     });
     final deleteMethod = methods.firstWhereOrNull((element) {
-      return element.displayName == '${namePrefix}Delete';
+      return element.displayName == '${namePrefix}Destroy';
     });
 
     final crudElements = [
@@ -394,7 +397,7 @@ class OpenapiRepositoryGenerator
       apiMethodType: 'PUT',
     );
     final deleteModel = await _getMethodModel(
-      operation: 'delete',
+      operation: 'destroy',
       method: deleteMethod,
       apiMethodType: 'DELETE',
     );
@@ -405,7 +408,7 @@ class OpenapiRepositoryGenerator
       deleteModel
     ].whereType<MethodModel>().toList();
     final prefixedMethods = methods.where((element) {
-      final blackListedSuffixs = ['Read', 'List'];
+      final blackListedSuffixs = ['Retrieve', 'List'];
       if (crudElements.contains(element)) {
         return false;
       } else {
@@ -640,8 +643,13 @@ class OpenapiRepositoryGenerator
 class _ReturnModel {
   final DartType type;
   final bool isInline;
+  final NullabilitySuffix? nullabilitySuffix;
 
-  const _ReturnModel(this.type, [this.isInline = false]);
+  const _ReturnModel(
+    this.type, [
+    this.isInline = false,
+    this.nullabilitySuffix = NullabilitySuffix.none,
+  ]);
 }
 
 class _ReaderTypes {
@@ -782,6 +790,22 @@ abstract class _MethodElementProcessor {
     return type;
   }
 
+  String _getNullabilitySuffix(NullabilitySuffix? nullabilitySuffix) {
+    if (nullabilitySuffix == null) {
+      return '';
+    }
+    switch (nullabilitySuffix) {
+      case NullabilitySuffix.none:
+        return '';
+      case NullabilitySuffix.question:
+        return '?';
+      case NullabilitySuffix.star:
+        return '*';
+      default:
+        return '';
+    }
+  }
+
   List<TypeModel> _getTypesFromParams(List<ParameterElement> methodParameters) {
     return methodParameters.map((parameter) {
       final isOffsetLimit = ['offset', 'limit'].contains(parameter.name);
@@ -845,6 +869,7 @@ abstract class _MethodElementProcessor {
 
     return LoaderMethodModel(
       returnType: returnModel.type.getDisplayString(withNullability: false),
+      nullabilitySuffix: _getNullabilitySuffix(returnModel.nullabilitySuffix),
       name: methodElement.displayName.pascalCase,
       hasFilter: hasFilter,
       isListLoader: isList,
@@ -882,14 +907,21 @@ class _ListMethodElementProcesser extends _MethodElementProcessor {
   });
 
   @override
-  _ReturnModel? getInnerReturnType(DartType type, bool isInline) {
+  _ReturnModel? getInnerReturnType(
+    DartType type,
+    bool isInline,
+  ) {
     const listChecker = TypeChecker.any([
       TypeChecker.fromRuntime(List),
       TypeChecker.fromRuntime(BuiltList),
     ]);
     final innerMostType = _getInnerMostType(type);
     if (listChecker.isExactlyType(type) && innerMostType != null) {
-      return _ReturnModel(innerMostType, isInline);
+      return _ReturnModel(
+        innerMostType,
+        isInline,
+        innerMostType.nullabilitySuffix,
+      );
     }
 
     if (type is! ParameterizedType) return null;
@@ -939,7 +971,11 @@ class _DataMethodElementProcesser extends _MethodElementProcessor {
   _ReturnModel? getInnerReturnType(DartType type, bool isInline) {
     final innerMostType = _getInnerMostType(type);
     if (innerMostType != null) {
-      return _ReturnModel(innerMostType, isInline);
+      return _ReturnModel(
+        innerMostType,
+        isInline,
+        innerMostType.nullabilitySuffix,
+      );
     }
 
     return null;

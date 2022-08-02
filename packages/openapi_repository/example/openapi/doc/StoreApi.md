@@ -11,8 +11,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getInventory**](StoreApi.md#getinventory) | **GET** /store/inventory | Returns pet inventories by status
 [**orderCreate**](StoreApi.md#ordercreate) | **POST** /store/order | Place an order for a pet
-[**orderDelete**](StoreApi.md#orderdelete) | **DELETE** /store/order/{orderId} | Delete purchase order by ID
-[**orderRead**](StoreApi.md#orderread) | **GET** /store/order/{orderId} | Find purchase order by ID
+[**orderDestroy**](StoreApi.md#orderdestroy) | **DELETE** /store/order/{orderId} | Delete purchase order by ID
+[**orderRetrieve**](StoreApi.md#orderretrieve) | **GET** /store/order/{orderId} | Find purchase order by ID
 
 
 # **getInventory**
@@ -99,8 +99,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **orderDelete**
-> orderDelete(orderId)
+# **orderDestroy**
+> orderDestroy(orderId)
 
 Delete purchase order by ID
 
@@ -114,9 +114,9 @@ final api = Openapi().getStoreApi();
 final int orderId = 789; // int | ID of the order that needs to be deleted
 
 try {
-    api.orderDelete(orderId);
+    api.orderDestroy(orderId);
 } catch on DioError (e) {
-    print('Exception when calling StoreApi->orderDelete: $e\n');
+    print('Exception when calling StoreApi->orderDestroy: $e\n');
 }
 ```
 
@@ -141,8 +141,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **orderRead**
-> Order orderRead(orderId)
+# **orderRetrieve**
+> Order orderRetrieve(orderId)
 
 Find purchase order by ID
 
@@ -156,10 +156,10 @@ final api = Openapi().getStoreApi();
 final int orderId = 789; // int | ID of pet that needs to be fetched
 
 try {
-    final response = api.orderRead(orderId);
+    final response = api.orderRetrieve(orderId);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling StoreApi->orderRead: $e\n');
+    print('Exception when calling StoreApi->orderRetrieve: $e\n');
 }
 ```
 

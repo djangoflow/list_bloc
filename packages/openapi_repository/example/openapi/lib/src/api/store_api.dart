@@ -204,7 +204,7 @@ class StoreApi {
   ///
   /// Returns a [Future]
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<void>> orderDelete({ 
+  Future<Response<void>> orderDestroy({ 
     required int orderId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -251,7 +251,7 @@ class StoreApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Order] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Order>> orderRead({ 
+  Future<Response<Order>> orderRetrieve({ 
     required int orderId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
