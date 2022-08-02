@@ -17,7 +17,7 @@ class _PetSearchScreenState extends State<PetSearchScreen> {
   late PetDataBloc bloc;
   @override
   void initState() {
-    bloc = PetDataBloc(PetRepository.retrieve);
+    bloc = PetDataBloc();
     textEditingController = TextEditingController(
       text: '1',
     );

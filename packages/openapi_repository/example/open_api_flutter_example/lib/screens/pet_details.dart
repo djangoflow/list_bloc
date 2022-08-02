@@ -28,8 +28,8 @@ class _PetDetailsScreenState extends State<PetDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<PetDataBloc>(
-      create: (context) => PetDataBloc(PetRepository.retrieve)
-        ..load(PetRetrieveFilter(petId: widget.petId)),
+      create: (context) =>
+          PetDataBloc()..load(PetRetrieveFilter(petId: widget.petId)),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Pet Details'),
