@@ -96,36 +96,36 @@ class FindPetByStatusListBloc extends ListCubit<Pet, FindPetByStatusListFilter>
   ) : super(FindPetByStatusRepository.list);
 }
 
-//Typdef for PetReadState
+//Typdef for PetRetrieveState
 
-typedef PetReadState = Data<Pet, PetReadFilter>;
+typedef PetRetrieveState = Data<Pet, PetRetrieveFilter>;
 
-//Filter for PetReadFilter
+//Filter for PetRetrieveFilter
 
 @freezed
-class PetReadFilter with _$PetReadFilter {
-  const PetReadFilter._();
+class PetRetrieveFilter with _$PetRetrieveFilter {
+  const PetRetrieveFilter._();
 
-  const factory PetReadFilter({
+  const factory PetRetrieveFilter({
     required int petId,
-  }) = _PetReadFilter;
+  }) = _PetRetrieveFilter;
 
-  factory PetReadFilter.fromJson(
+  factory PetRetrieveFilter.fromJson(
     Map<String, dynamic> map,
   ) =>
-      _$PetReadFilterFromJson(map);
+      _$PetRetrieveFilterFromJson(map);
 }
 
 // Repository for PetRepository
 
 abstract class PetRepository {
-  static Future<Pet> read([
-    PetReadFilter? filter,
+  static Future<Pet> retrieve([
+    PetRetrieveFilter? filter,
   ]) async {
     if (filter == null) {
       throw Exception('Invalid filter');
     }
-    final r = await ApiRepository.instance.pet.petRead(
+    final r = await ApiRepository.instance.pet.petRetrieve(
       petId: filter.petId,
     );
     if (r.data == null) {
@@ -155,11 +155,11 @@ abstract class PetRepository {
     return r.data;
   }
 
-  Future<void> delete({
+  Future<void> destroy({
     required int petId,
     String? apiKey,
   }) async {
-    final r = (await ApiRepository.instance.pet.petDelete(
+    final r = (await ApiRepository.instance.pet.petDestroy(
       petId: petId,
       apiKey: apiKey,
     ));
@@ -170,13 +170,13 @@ abstract class PetRepository {
 
 // DataCubit for Pet
 
-class PetDataBloc extends DataCubit<Pet, PetReadFilter> with PetRepository {
+class PetDataBloc extends DataCubit<Pet, PetRetrieveFilter> with PetRepository {
   PetDataBloc(
     Future<Pet> Function([
-      PetReadFilter? filter,
+      PetRetrieveFilter? filter,
     ])
         loader,
-  ) : super(PetRepository.read);
+  ) : super(PetRepository.retrieve);
 
   @override
   Future<void> create({
@@ -202,49 +202,50 @@ class PetDataBloc extends DataCubit<Pet, PetReadFilter> with PetRepository {
   }
 
   @override
-  Future<void> delete({
+  Future<void> destroy({
     required int petId,
     String? apiKey,
   }) async {
-    final r = await super.delete(
+    final r = await super.destroy(
       petId: petId,
       apiKey: apiKey,
     );
+    await super.load(state.filter);
 
     return r;
   }
 }
 
-//Typdef for OrderReadState
+//Typdef for OrderRetrieveState
 
-typedef OrderReadState = Data<Order, OrderReadFilter>;
+typedef OrderRetrieveState = Data<Order, OrderRetrieveFilter>;
 
-//Filter for OrderReadFilter
+//Filter for OrderRetrieveFilter
 
 @freezed
-class OrderReadFilter with _$OrderReadFilter {
-  const OrderReadFilter._();
+class OrderRetrieveFilter with _$OrderRetrieveFilter {
+  const OrderRetrieveFilter._();
 
-  const factory OrderReadFilter({
+  const factory OrderRetrieveFilter({
     required int orderId,
-  }) = _OrderReadFilter;
+  }) = _OrderRetrieveFilter;
 
-  factory OrderReadFilter.fromJson(
+  factory OrderRetrieveFilter.fromJson(
     Map<String, dynamic> map,
   ) =>
-      _$OrderReadFilterFromJson(map);
+      _$OrderRetrieveFilterFromJson(map);
 }
 
 // Repository for OrderRepository
 
 abstract class OrderRepository {
-  static Future<Order> read([
-    OrderReadFilter? filter,
+  static Future<Order> retrieve([
+    OrderRetrieveFilter? filter,
   ]) async {
     if (filter == null) {
       throw Exception('Invalid filter');
     }
-    final r = await ApiRepository.instance.store.orderRead(
+    final r = await ApiRepository.instance.store.orderRetrieve(
       orderId: filter.orderId,
     );
     if (r.data == null) {
@@ -264,10 +265,10 @@ abstract class OrderRepository {
     return r.data;
   }
 
-  Future<void> delete({
+  Future<void> destroy({
     required int orderId,
   }) async {
-    final r = (await ApiRepository.instance.store.orderDelete(
+    final r = (await ApiRepository.instance.store.orderDestroy(
       orderId: orderId,
     ));
 
@@ -277,14 +278,14 @@ abstract class OrderRepository {
 
 // DataCubit for Order
 
-class OrderDataBloc extends DataCubit<Order, OrderReadFilter>
+class OrderDataBloc extends DataCubit<Order, OrderRetrieveFilter>
     with OrderRepository {
   OrderDataBloc(
     Future<Order> Function([
-      OrderReadFilter? filter,
+      OrderRetrieveFilter? filter,
     ])
         loader,
-  ) : super(OrderRepository.read);
+  ) : super(OrderRepository.retrieve);
 
   @override
   Future<Order?> create({
@@ -298,47 +299,48 @@ class OrderDataBloc extends DataCubit<Order, OrderReadFilter>
   }
 
   @override
-  Future<void> delete({
+  Future<void> destroy({
     required int orderId,
   }) async {
-    final r = await super.delete(
+    final r = await super.destroy(
       orderId: orderId,
     );
+    await super.load(state.filter);
 
     return r;
   }
 }
 
-//Typdef for UserByUsernameReadState
+//Typdef for UserByUsernameRetrieveState
 
-typedef UserByUsernameReadState = Data<User, UserByUsernameReadFilter>;
+typedef UserByUsernameRetrieveState = Data<User, UserByUsernameRetrieveFilter>;
 
-//Filter for UserByUsernameReadFilter
+//Filter for UserByUsernameRetrieveFilter
 
 @freezed
-class UserByUsernameReadFilter with _$UserByUsernameReadFilter {
-  const UserByUsernameReadFilter._();
+class UserByUsernameRetrieveFilter with _$UserByUsernameRetrieveFilter {
+  const UserByUsernameRetrieveFilter._();
 
-  const factory UserByUsernameReadFilter({
+  const factory UserByUsernameRetrieveFilter({
     required String username,
-  }) = _UserByUsernameReadFilter;
+  }) = _UserByUsernameRetrieveFilter;
 
-  factory UserByUsernameReadFilter.fromJson(
+  factory UserByUsernameRetrieveFilter.fromJson(
     Map<String, dynamic> map,
   ) =>
-      _$UserByUsernameReadFilterFromJson(map);
+      _$UserByUsernameRetrieveFilterFromJson(map);
 }
 
 // Repository for UserByUsernameRepository
 
 abstract class UserByUsernameRepository {
-  static Future<User> read([
-    UserByUsernameReadFilter? filter,
+  static Future<User> retrieve([
+    UserByUsernameRetrieveFilter? filter,
   ]) async {
     if (filter == null) {
       throw Exception('Invalid filter');
     }
-    final r = await ApiRepository.instance.user.userByUsernameRead(
+    final r = await ApiRepository.instance.user.userByUsernameRetrieve(
       username: filter.username,
     );
     if (r.data == null) {
@@ -351,12 +353,13 @@ abstract class UserByUsernameRepository {
 
 // DataCubit for UserByUsername
 
-class UserByUsernameDataBloc extends DataCubit<User, UserByUsernameReadFilter>
+class UserByUsernameDataBloc
+    extends DataCubit<User, UserByUsernameRetrieveFilter>
     with UserByUsernameRepository {
   UserByUsernameDataBloc(
     Future<User> Function([
-      UserByUsernameReadFilter? filter,
+      UserByUsernameRetrieveFilter? filter,
     ])
         loader,
-  ) : super(UserByUsernameRepository.read);
+  ) : super(UserByUsernameRepository.retrieve);
 }
