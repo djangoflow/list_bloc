@@ -42,7 +42,7 @@ const dataCubitTemplate = r'''
 // DataCubit for {{name}}
 
 class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}RetrieveFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}DataBloc(Future<{{returnType}}> Function([ {{#hasFilter}}{{name}}RetrieveFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter,]) loader,) : super({{name}}Repository.retrieve);
+  {{name}}DataBloc() : super({{name}}Repository.retrieve);
 
   {{#crudMethods}}
   @override
@@ -65,7 +65,7 @@ const listCubitTemplate = r'''
 // ListCubit for {{name}}
 
 class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}ListBloc(Future<List<{{returnType}}>> Function([ {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}? filter,]) loader,) : super({{name}}Repository.list);
+  {{name}}ListBloc() : super({{name}}Repository.list);
 
   {{#crudMethods}}
   @override
