@@ -14,7 +14,7 @@ It will create generate Repository like this with relevant methods
 
 ## Usage
 
-Make sure you've generated `OpenApi` client library using OpenApi(Swagger) schema definitions and [openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator-cli). And make sure that each `operationId` in the OpenApi(Swagger) schema has operations(`create`, `update`, `partial_update`, `retrieve`, `delete`, `list` etc) suffix which helps the library to detect methods. For each CRUD operations it also checks api call method. (retrieve -> GET, list -> GET, create -> POST, update -> PUT, partial_update -> PATCH, delete -> DELETE)
+Make sure you've generated `OpenApi` client library using OpenApi(Swagger) schema definitions and [openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator-cli). And make sure that each `operationId` in the OpenApi(Swagger) schema has operations(`create`, `update`, `partial_update`, `retrieve`, `destroy`, `list` etc) suffix which helps the library to detect methods. For each CRUD operations it also checks api call method. (retrieve -> GET, list -> GET, create -> POST, update -> PUT, partial_update -> PATCH, destroy -> DELETE)
 
 Then create a flutter/dart project. Make sure previously generated(using openapi-generator-cli) OpenApi client library can be imported in the flutter/dart project. Then install these depdencies
 
@@ -159,7 +159,7 @@ For full example: [Example generated files](example/open_api_flutter_example/lib
 
 ### How this library works
 
-This library uses annotation(`@OpenapiRepository`) on a class. This annonated class will hold all the generated `Repository, DataBlocs, ListBlocs`. It searches for `{methodPrefix}Retrieve/List` (where request api call method is also `GET`) and then finds relevant `{methodPrefix}Update/PartialUpdate/Delete/{randomMethod sufix}` and put them inside annotated class in Repository pattern. Based on the generated class from annotation it will generate `DataBlocs`(for `{methodPrefix}Retrieve`) and `ListBlocs`(for `{methodPrefix}List`) and these `Blocs` will inherite other methods inside the generated class. These Blocs can be directly used with [flutter_list_bloc](../flutter_list_bloc/) or [list_bloc](../list_bloc/) widgets.
+This library uses annotation(`@OpenapiRepository`) on a class. This annonated class will hold all the generated `Repository, DataBlocs, ListBlocs`. It searches for `{methodPrefix}Retrieve/List` (where request api call method is also `GET`) and then finds relevant `{methodPrefix}Update/PartialUpdate/Destroy/{randomMethod sufix}` and put them inside annotated class in Repository pattern. Based on the generated class from annotation it will generate `DataBlocs`(for `{methodPrefix}Retrieve`) and `ListBlocs`(for `{methodPrefix}List`) and these `Blocs` will inherite other methods inside the generated class. These Blocs can be directly used with [flutter_list_bloc](../flutter_list_bloc/) or [list_bloc](../list_bloc/) widgets.
 
 ![Flow](https://i.ibb.co/CBjPJwy/doc.png)
 
