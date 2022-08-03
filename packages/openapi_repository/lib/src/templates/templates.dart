@@ -41,8 +41,8 @@ typedef {{name}}State = Data<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}
 const dataCubitTemplate = r'''
 // DataCubit for {{name}}
 
-class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}RetrieveFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}DataBloc() : super({{name}}Repository.retrieve);
+class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}{{filterSuffix}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
+  {{name}}DataBloc() : super({{name}}Repository.{{loaderMethodName}});
 
   {{#crudMethods}}
   @override
@@ -64,8 +64,8 @@ class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}R
 const listCubitTemplate = r'''
 // ListCubit for {{name}}
 
-class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}ListFilter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
-  {{name}}ListBloc() : super({{name}}Repository.list);
+class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}{{filterSuffix}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
+  {{name}}ListBloc() : super({{name}}Repository.{{loaderMethodName}});
 
   {{#crudMethods}}
   @override
@@ -90,7 +90,7 @@ const repositoryTemplate = r'''
 abstract class {{repositoryName}}Repository {
   {{#hasDataLoader}}
   {{#dataLoader}}
-static Future<{{returnType}}> retrieve({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}RetrieveFilter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
+static Future<{{returnType}}> {{dataLoaderMethodName}}({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}{{dataFilterSuffix}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
     {{#hasRequiredParam}}if (filter == null) {
       throw Exception('Invalid filter');
     }{{/hasRequiredParam}}
@@ -109,7 +109,7 @@ static Future<{{returnType}}> retrieve({{#additionalParams}}{{param}},{{/additio
   
   {{#hasListLoader}}
   {{#listLoader}}
-static Future<List<{{returnType}}>> list({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}ListFilter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
+static Future<List<{{returnType}}>> {{listLoaderMethodName}}({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}{{listFilterSuffix}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
     {{#hasRequiredParam}}if (filter == null) {
       throw Exception('Invalid filter');
     }{{/hasRequiredParam}}
