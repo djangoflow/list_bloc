@@ -57,6 +57,8 @@ class OpenapiRepositoryGenerator
       return true;
     }).toList();
 
+    final crudOperationConfig = parsedAnnotation.crudOperationConfig;
+    CrudConfigProvider.instance.crudOperationConfig = crudOperationConfig;
     final repositoryModel = RepositoryTemplateModel(
       repositoryName: element.name!.replaceFirst(r'$', ''),
       baseUrl: baseUrl != null ? "'$baseUrl'" : "'' // TODO: Add base url",
@@ -100,7 +102,10 @@ class OpenapiRepositoryGenerator
 
   /// Get generated codes from builder.
   Future<String> _getGeneratedCodesFromBuilder(
-      _RepositoryBuilder builder) async {
+    _RepositoryBuilder builder,
+  ) async {
+    final crudOperationConfig = CrudConfigProvider.instance.config;
+
     final generatedMethodElements = <String>[];
     final generatedBuiltListConverters = <BuiltListJsonConverterModel>[];
     final buffer = StringBuffer();
@@ -138,10 +143,13 @@ class OpenapiRepositoryGenerator
       final apiClass =
           classElement.displayName.titleCase.split(' ').first.camelCase;
 
-      final isReadMethod = methodName.contains('Retrieve') &&
-          methodName == '${namePrefix}Retrieve';
+      final isReadMethod = methodName
+              .contains(crudOperationConfig!.getOperationName) &&
+          methodName == '$namePrefix${crudOperationConfig.getOperationName}';
       final isListMethod =
-          methodName.contains('List') && methodName == '${namePrefix}List';
+          methodName.contains(crudOperationConfig.getListOperationName) &&
+              methodName ==
+                  '$namePrefix${crudOperationConfig.getListOperationName}';
       // if Read or List method is found, generate Repository, `DataCubit` and `ListCubit`.
       if ((isReadMethod || isListMethod) &&
           (apiMethodType != null && apiMethodType.contains('GET'))) {
@@ -168,7 +176,8 @@ class OpenapiRepositoryGenerator
           }
 
           final listMethod = methods.firstWhereOrNull((element) {
-            return (element.displayName == '${namePrefix}List' &&
+            return (element.displayName ==
+                    '$namePrefix${crudOperationConfig.getListOperationName}' &&
                 element.returnType.isDartAsyncFuture);
           });
           if (listMethod != null &&
@@ -213,7 +222,8 @@ class OpenapiRepositoryGenerator
             loaders.add(listLoaderMethodModel);
           }
           final readMethod = methods.firstWhereOrNull((element) {
-            return (element.displayName == '${namePrefix}Retrieve' &&
+            return (element.displayName ==
+                    '$namePrefix${crudOperationConfig.getOperationName}' &&
                 element.returnType.isDartAsyncFuture);
           });
           if (readMethod != null &&
@@ -362,17 +372,23 @@ class OpenapiRepositoryGenerator
       );
     }
 
+    final crudOperationConfig = CrudConfigProvider.instance.config;
+
     final createMethod = methods.firstWhereOrNull((element) {
-      return element.displayName == '${namePrefix}Create';
+      return element.displayName ==
+          '$namePrefix${crudOperationConfig!.postOperationName}';
     });
     final partialUpdateMethod = methods.firstWhereOrNull((element) {
-      return element.displayName == '${namePrefix}PartialUpdate';
+      return element.displayName ==
+          '$namePrefix${crudOperationConfig!.patchOperationName}';
     });
     final updateMethod = methods.firstWhereOrNull((element) {
-      return element.displayName == '${namePrefix}Update';
+      return element.displayName ==
+          '$namePrefix${crudOperationConfig!.putOperationName}';
     });
     final deleteMethod = methods.firstWhereOrNull((element) {
-      return element.displayName == '${namePrefix}Destroy';
+      return element.displayName ==
+          '$namePrefix${crudOperationConfig!.deleteOperationName}';
     });
 
     final crudElements = [
@@ -382,12 +398,12 @@ class OpenapiRepositoryGenerator
       deleteMethod,
     ];
     final createModel = await _getMethodModel(
-      operation: 'create',
+      operation: crudOperationConfig!.postOperationName.camelCase,
       method: createMethod,
       apiMethodType: 'POST',
     );
     final partialUpdateModel = await _getMethodModel(
-      operation: 'partialUpdate',
+      operation: crudOperationConfig.patchOperationName.camelCase,
       method: partialUpdateMethod,
       apiMethodType: 'PATCH',
     );
@@ -397,7 +413,7 @@ class OpenapiRepositoryGenerator
       apiMethodType: 'PUT',
     );
     final deleteModel = await _getMethodModel(
-      operation: 'destroy',
+      operation: crudOperationConfig.deleteOperationName.camelCase,
       method: deleteMethod,
       apiMethodType: 'DELETE',
     );
@@ -408,7 +424,10 @@ class OpenapiRepositoryGenerator
       deleteModel
     ].whereType<MethodModel>().toList();
     final prefixedMethods = methods.where((element) {
-      final blackListedSuffixs = ['Retrieve', 'List'];
+      final blackListedSuffixs = [
+        crudOperationConfig.getOperationName,
+        crudOperationConfig.getListOperationName,
+      ];
       if (crudElements.contains(element)) {
         return false;
       } else {
@@ -446,6 +465,11 @@ class OpenapiRepositoryGenerator
       hasListLoader: listLoaderForTemplate != null ? true : false,
       repositoryName: namePrefix.pascalCase,
       crudMethods: [...crudMethods, ...operationModels],
+      dataFilterSuffix: crudOperationConfig.getOperationName,
+      dataLoaderMethodName: crudOperationConfig.getOperationName.toLowerCase(),
+      listLoaderMethodName:
+          crudOperationConfig.getListOperationName.toLowerCase(),
+      listFilterSuffix: crudOperationConfig.getListOperationName,
     );
 
     final repository =
@@ -460,6 +484,9 @@ class OpenapiRepositoryGenerator
               returnType: dataLoaderForTemplate.returnType,
               hasFilter: dataLoaderForTemplate.hasFilter,
               crudMethods: [...crudMethods, ...operationModels],
+              filterSuffix: crudOperationConfig.getOperationName,
+              loaderMethodName:
+                  crudOperationConfig.getOperationName.toLowerCase(),
             ).toJson(),
           )
         : '';
@@ -470,6 +497,9 @@ class OpenapiRepositoryGenerator
               returnType: listLoaderForTemplate.returnType,
               hasFilter: listLoaderForTemplate.hasFilter,
               crudMethods: [...crudMethods, ...operationModels],
+              filterSuffix: crudOperationConfig.getListOperationName,
+              loaderMethodName:
+                  crudOperationConfig.getListOperationName.toLowerCase(),
             ).toJson(),
           )
         : '';
@@ -663,9 +693,11 @@ class _ReaderTypes {
   final DartType? dioInterceptor;
   final String? liveBasePath;
   final String? baseUrl;
+  final CrudOperationConfig crudOperationConfig;
 
   const _ReaderTypes._({
     required this.buildForElement,
+    required this.crudOperationConfig,
     this.builderList = const [],
     this.connectTimeout = 10000,
     this.receiveTimeout = 15000,
@@ -699,8 +731,16 @@ class _ReaderTypes {
     final builderData = builderList.map(
       (e) => _RepositoryBuilder.fromDartObject(e),
     );
+    final crudOperationConfigMap =
+        reader.peek('crudOperationConfig')?.objectValue;
+    if (crudOperationConfigMap == null) {
+      throw FormatException('crudOperationConfig can not be null');
+    }
+    final crudOperationNames =
+        CrudOperationConfig.fromDartObject(crudOperationConfigMap);
 
     return _ReaderTypes._(
+      crudOperationConfig: crudOperationNames,
       buildForElement: buildForElement,
       baseUrl: baseUrl,
       builderList: builderData,
@@ -766,6 +806,55 @@ class _RepositoryBuilder {
       ignoreEndpoints: parsedIgnoreEndpoints,
       allowedEndpoints: parsedEndpoints,
     );
+  }
+}
+
+class CrudOperationConfig {
+  final String getOperationName;
+  final String postOperationName;
+  final String putOperationName;
+  final String deleteOperationName;
+  final String patchOperationName;
+  final String getListOperationName;
+
+  const CrudOperationConfig._({
+    required this.deleteOperationName,
+    required this.getListOperationName,
+    required this.getOperationName,
+    required this.patchOperationName,
+    required this.postOperationName,
+    required this.putOperationName,
+  });
+
+  factory CrudOperationConfig.fromDartObject(DartObject e) {
+    final deleteOperationName =
+        e.getField('deleteOperationName')?.toStringValue();
+    final getListOperationName =
+        e.getField('getListOperationName')?.toStringValue();
+
+    final getOperationName = e.getField('getOperationName')?.toStringValue();
+    final patchOperationName =
+        e.getField('patchOperationName')?.toStringValue();
+    final postOperationName = e.getField('postOperationName')?.toStringValue();
+    final putOperationName = e.getField('putOperationName')?.toStringValue();
+
+    if (deleteOperationName != null &&
+        getListOperationName != null &&
+        getOperationName != null &&
+        putOperationName != null &&
+        patchOperationName != null &&
+        postOperationName != null) {
+      return CrudOperationConfig._(
+        deleteOperationName: deleteOperationName,
+        getListOperationName: getListOperationName,
+        getOperationName: getOperationName,
+        patchOperationName: patchOperationName,
+        postOperationName: postOperationName,
+        putOperationName: putOperationName,
+      );
+    } else {
+      throw FormatException('Invalid parameter for CrudOperationConfig');
+    }
   }
 }
 
@@ -1009,4 +1098,17 @@ class BuildStepProvider {
   BuildStep? get buildStep => _buildStep;
 
   BuildStep? _buildStep;
+}
+
+class CrudConfigProvider {
+  static CrudConfigProvider get instance => _instance;
+  static final CrudConfigProvider _instance = CrudConfigProvider._internal();
+
+  CrudConfigProvider._internal();
+
+  set crudOperationConfig(CrudOperationConfig? config) => _config = config;
+
+  CrudOperationConfig? get config => _config;
+
+  CrudOperationConfig? _config;
 }
