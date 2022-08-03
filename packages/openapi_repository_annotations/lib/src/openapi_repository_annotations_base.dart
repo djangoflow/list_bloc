@@ -30,6 +30,8 @@ class OpenapiRepository {
   /// base url
   final String? baseUrl;
 
+  final CrudOperationConfig? crudOperationConfig;
+
   const OpenapiRepository({
     required this.buildFor,
     this.builderList = const [],
@@ -41,6 +43,7 @@ class OpenapiRepository {
     this.dioInterceptor,
     this.liveBasePath,
     this.baseUrl,
+    this.crudOperationConfig = const CrudOperationConfig(),
   });
 }
 
@@ -60,5 +63,23 @@ class RepositoryBuilder {
     this.apiClass, {
     this.allowedEndpoints = const ['*'],
     this.ignoreEndpoints = const [],
+  });
+}
+
+class CrudOperationConfig {
+  final String? getOperationName;
+  final String? postOperationName;
+  final String? putOperationName;
+  final String? deleteOperationName;
+  final String? patchOperationName;
+  final String? getListOperationName;
+
+  const CrudOperationConfig({
+    this.getOperationName = "Retrieve",
+    this.postOperationName = "Create",
+    this.putOperationName = "Update",
+    this.deleteOperationName = "Destroy",
+    this.patchOperationName = "PartialUpdate",
+    this.getListOperationName = "List",
   });
 }
