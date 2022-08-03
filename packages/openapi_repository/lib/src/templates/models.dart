@@ -194,6 +194,10 @@ class LoaderRepositoryTemplateModel with _$LoaderRepositoryTemplateModel {
     required List<MethodModel> crudMethods,
     required String repositoryName,
     required String api,
+    required String dataLoaderMethodName,
+    required String listLoaderMethodName,
+    required String dataFilterSuffix,
+    required String listFilterSuffix,
   }) = _LoaderRepositoryTemplateModel;
 
   factory LoaderRepositoryTemplateModel.fromJson(Map<String, dynamic> map) =>
@@ -227,6 +231,8 @@ class CubitTemplateModel with _$CubitTemplateModel {
     required String returnType,
     @Default(false) bool hasFilter,
     required List<MethodModel> crudMethods,
+    required String filterSuffix,
+    required String loaderMethodName,
   }) = _CubitTemplateModel;
 
   factory CubitTemplateModel.fromJson(Map<String, dynamic> map) =>

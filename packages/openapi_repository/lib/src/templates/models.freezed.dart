@@ -2981,6 +2981,10 @@ mixin _$LoaderRepositoryTemplateModel {
   List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
   String get repositoryName => throw _privateConstructorUsedError;
   String get api => throw _privateConstructorUsedError;
+  String get dataLoaderMethodName => throw _privateConstructorUsedError;
+  String get listLoaderMethodName => throw _privateConstructorUsedError;
+  String get dataFilterSuffix => throw _privateConstructorUsedError;
+  String get listFilterSuffix => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -3001,7 +3005,11 @@ abstract class $LoaderRepositoryTemplateModelCopyWith<$Res> {
       bool hasListLoader,
       List<MethodModel> crudMethods,
       String repositoryName,
-      String api});
+      String api,
+      String dataLoaderMethodName,
+      String listLoaderMethodName,
+      String dataFilterSuffix,
+      String listFilterSuffix});
 
   $LoaderTemplateModelCopyWith<$Res>? get dataLoader;
   $LoaderTemplateModelCopyWith<$Res>? get listLoader;
@@ -3025,6 +3033,10 @@ class _$LoaderRepositoryTemplateModelCopyWithImpl<$Res>
     Object? crudMethods = freezed,
     Object? repositoryName = freezed,
     Object? api = freezed,
+    Object? dataLoaderMethodName = freezed,
+    Object? listLoaderMethodName = freezed,
+    Object? dataFilterSuffix = freezed,
+    Object? listFilterSuffix = freezed,
   }) {
     return _then(_value.copyWith(
       dataLoader: dataLoader == freezed
@@ -3054,6 +3066,22 @@ class _$LoaderRepositoryTemplateModelCopyWithImpl<$Res>
       api: api == freezed
           ? _value.api
           : api // ignore: cast_nullable_to_non_nullable
+              as String,
+      dataLoaderMethodName: dataLoaderMethodName == freezed
+          ? _value.dataLoaderMethodName
+          : dataLoaderMethodName // ignore: cast_nullable_to_non_nullable
+              as String,
+      listLoaderMethodName: listLoaderMethodName == freezed
+          ? _value.listLoaderMethodName
+          : listLoaderMethodName // ignore: cast_nullable_to_non_nullable
+              as String,
+      dataFilterSuffix: dataFilterSuffix == freezed
+          ? _value.dataFilterSuffix
+          : dataFilterSuffix // ignore: cast_nullable_to_non_nullable
+              as String,
+      listFilterSuffix: listFilterSuffix == freezed
+          ? _value.listFilterSuffix
+          : listFilterSuffix // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -3096,7 +3124,11 @@ abstract class _$$_LoaderRepositoryTemplateModelCopyWith<$Res>
       bool hasListLoader,
       List<MethodModel> crudMethods,
       String repositoryName,
-      String api});
+      String api,
+      String dataLoaderMethodName,
+      String listLoaderMethodName,
+      String dataFilterSuffix,
+      String listFilterSuffix});
 
   @override
   $LoaderTemplateModelCopyWith<$Res>? get dataLoader;
@@ -3126,6 +3158,10 @@ class __$$_LoaderRepositoryTemplateModelCopyWithImpl<$Res>
     Object? crudMethods = freezed,
     Object? repositoryName = freezed,
     Object? api = freezed,
+    Object? dataLoaderMethodName = freezed,
+    Object? listLoaderMethodName = freezed,
+    Object? dataFilterSuffix = freezed,
+    Object? listFilterSuffix = freezed,
   }) {
     return _then(_$_LoaderRepositoryTemplateModel(
       dataLoader: dataLoader == freezed
@@ -3156,6 +3192,22 @@ class __$$_LoaderRepositoryTemplateModelCopyWithImpl<$Res>
           ? _value.api
           : api // ignore: cast_nullable_to_non_nullable
               as String,
+      dataLoaderMethodName: dataLoaderMethodName == freezed
+          ? _value.dataLoaderMethodName
+          : dataLoaderMethodName // ignore: cast_nullable_to_non_nullable
+              as String,
+      listLoaderMethodName: listLoaderMethodName == freezed
+          ? _value.listLoaderMethodName
+          : listLoaderMethodName // ignore: cast_nullable_to_non_nullable
+              as String,
+      dataFilterSuffix: dataFilterSuffix == freezed
+          ? _value.dataFilterSuffix
+          : dataFilterSuffix // ignore: cast_nullable_to_non_nullable
+              as String,
+      listFilterSuffix: listFilterSuffix == freezed
+          ? _value.listFilterSuffix
+          : listFilterSuffix // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -3172,7 +3224,11 @@ class _$_LoaderRepositoryTemplateModel
       required this.hasListLoader,
       required final List<MethodModel> crudMethods,
       required this.repositoryName,
-      required this.api})
+      required this.api,
+      required this.dataLoaderMethodName,
+      required this.listLoaderMethodName,
+      required this.dataFilterSuffix,
+      required this.listFilterSuffix})
       : _crudMethods = crudMethods;
 
   factory _$_LoaderRepositoryTemplateModel.fromJson(
@@ -3198,10 +3254,18 @@ class _$_LoaderRepositoryTemplateModel
   final String repositoryName;
   @override
   final String api;
+  @override
+  final String dataLoaderMethodName;
+  @override
+  final String listLoaderMethodName;
+  @override
+  final String dataFilterSuffix;
+  @override
+  final String listFilterSuffix;
 
   @override
   String toString() {
-    return 'LoaderRepositoryTemplateModel(dataLoader: $dataLoader, listLoader: $listLoader, hasDataLoader: $hasDataLoader, hasListLoader: $hasListLoader, crudMethods: $crudMethods, repositoryName: $repositoryName, api: $api)';
+    return 'LoaderRepositoryTemplateModel(dataLoader: $dataLoader, listLoader: $listLoader, hasDataLoader: $hasDataLoader, hasListLoader: $hasListLoader, crudMethods: $crudMethods, repositoryName: $repositoryName, api: $api, dataLoaderMethodName: $dataLoaderMethodName, listLoaderMethodName: $listLoaderMethodName, dataFilterSuffix: $dataFilterSuffix, listFilterSuffix: $listFilterSuffix)';
   }
 
   @override
@@ -3221,7 +3285,15 @@ class _$_LoaderRepositoryTemplateModel
                 .equals(other._crudMethods, _crudMethods) &&
             const DeepCollectionEquality()
                 .equals(other.repositoryName, repositoryName) &&
-            const DeepCollectionEquality().equals(other.api, api));
+            const DeepCollectionEquality().equals(other.api, api) &&
+            const DeepCollectionEquality()
+                .equals(other.dataLoaderMethodName, dataLoaderMethodName) &&
+            const DeepCollectionEquality()
+                .equals(other.listLoaderMethodName, listLoaderMethodName) &&
+            const DeepCollectionEquality()
+                .equals(other.dataFilterSuffix, dataFilterSuffix) &&
+            const DeepCollectionEquality()
+                .equals(other.listFilterSuffix, listFilterSuffix));
   }
 
   @JsonKey(ignore: true)
@@ -3234,7 +3306,11 @@ class _$_LoaderRepositoryTemplateModel
       const DeepCollectionEquality().hash(hasListLoader),
       const DeepCollectionEquality().hash(_crudMethods),
       const DeepCollectionEquality().hash(repositoryName),
-      const DeepCollectionEquality().hash(api));
+      const DeepCollectionEquality().hash(api),
+      const DeepCollectionEquality().hash(dataLoaderMethodName),
+      const DeepCollectionEquality().hash(listLoaderMethodName),
+      const DeepCollectionEquality().hash(dataFilterSuffix),
+      const DeepCollectionEquality().hash(listFilterSuffix));
 
   @JsonKey(ignore: true)
   @override
@@ -3251,13 +3327,18 @@ class _$_LoaderRepositoryTemplateModel
 abstract class _LoaderRepositoryTemplateModel
     implements LoaderRepositoryTemplateModel {
   const factory _LoaderRepositoryTemplateModel(
-      {final LoaderTemplateModel? dataLoader,
-      final LoaderTemplateModel? listLoader,
-      required final bool hasDataLoader,
-      required final bool hasListLoader,
-      required final List<MethodModel> crudMethods,
-      required final String repositoryName,
-      required final String api}) = _$_LoaderRepositoryTemplateModel;
+          {final LoaderTemplateModel? dataLoader,
+          final LoaderTemplateModel? listLoader,
+          required final bool hasDataLoader,
+          required final bool hasListLoader,
+          required final List<MethodModel> crudMethods,
+          required final String repositoryName,
+          required final String api,
+          required final String dataLoaderMethodName,
+          required final String listLoaderMethodName,
+          required final String dataFilterSuffix,
+          required final String listFilterSuffix}) =
+      _$_LoaderRepositoryTemplateModel;
 
   factory _LoaderRepositoryTemplateModel.fromJson(Map<String, dynamic> json) =
       _$_LoaderRepositoryTemplateModel.fromJson;
@@ -3276,6 +3357,14 @@ abstract class _LoaderRepositoryTemplateModel
   String get repositoryName => throw _privateConstructorUsedError;
   @override
   String get api => throw _privateConstructorUsedError;
+  @override
+  String get dataLoaderMethodName => throw _privateConstructorUsedError;
+  @override
+  String get listLoaderMethodName => throw _privateConstructorUsedError;
+  @override
+  String get dataFilterSuffix => throw _privateConstructorUsedError;
+  @override
+  String get listFilterSuffix => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_LoaderRepositoryTemplateModelCopyWith<_$_LoaderRepositoryTemplateModel>
@@ -3621,6 +3710,8 @@ mixin _$CubitTemplateModel {
   String get returnType => throw _privateConstructorUsedError;
   bool get hasFilter => throw _privateConstructorUsedError;
   List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  String get filterSuffix => throw _privateConstructorUsedError;
+  String get loaderMethodName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -3637,7 +3728,9 @@ abstract class $CubitTemplateModelCopyWith<$Res> {
       {String name,
       String returnType,
       bool hasFilter,
-      List<MethodModel> crudMethods});
+      List<MethodModel> crudMethods,
+      String filterSuffix,
+      String loaderMethodName});
 }
 
 /// @nodoc
@@ -3655,6 +3748,8 @@ class _$CubitTemplateModelCopyWithImpl<$Res>
     Object? returnType = freezed,
     Object? hasFilter = freezed,
     Object? crudMethods = freezed,
+    Object? filterSuffix = freezed,
+    Object? loaderMethodName = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -3673,6 +3768,14 @@ class _$CubitTemplateModelCopyWithImpl<$Res>
           ? _value.crudMethods
           : crudMethods // ignore: cast_nullable_to_non_nullable
               as List<MethodModel>,
+      filterSuffix: filterSuffix == freezed
+          ? _value.filterSuffix
+          : filterSuffix // ignore: cast_nullable_to_non_nullable
+              as String,
+      loaderMethodName: loaderMethodName == freezed
+          ? _value.loaderMethodName
+          : loaderMethodName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -3688,7 +3791,9 @@ abstract class _$$_CubitTemplateModelCopyWith<$Res>
       {String name,
       String returnType,
       bool hasFilter,
-      List<MethodModel> crudMethods});
+      List<MethodModel> crudMethods,
+      String filterSuffix,
+      String loaderMethodName});
 }
 
 /// @nodoc
@@ -3708,6 +3813,8 @@ class __$$_CubitTemplateModelCopyWithImpl<$Res>
     Object? returnType = freezed,
     Object? hasFilter = freezed,
     Object? crudMethods = freezed,
+    Object? filterSuffix = freezed,
+    Object? loaderMethodName = freezed,
   }) {
     return _then(_$_CubitTemplateModel(
       name: name == freezed
@@ -3726,6 +3833,14 @@ class __$$_CubitTemplateModelCopyWithImpl<$Res>
           ? _value._crudMethods
           : crudMethods // ignore: cast_nullable_to_non_nullable
               as List<MethodModel>,
+      filterSuffix: filterSuffix == freezed
+          ? _value.filterSuffix
+          : filterSuffix // ignore: cast_nullable_to_non_nullable
+              as String,
+      loaderMethodName: loaderMethodName == freezed
+          ? _value.loaderMethodName
+          : loaderMethodName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -3738,7 +3853,9 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
       {required this.name,
       required this.returnType,
       this.hasFilter = false,
-      required final List<MethodModel> crudMethods})
+      required final List<MethodModel> crudMethods,
+      required this.filterSuffix,
+      required this.loaderMethodName})
       : _crudMethods = crudMethods;
 
   factory _$_CubitTemplateModel.fromJson(Map<String, dynamic> json) =>
@@ -3759,8 +3876,13 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
   }
 
   @override
+  final String filterSuffix;
+  @override
+  final String loaderMethodName;
+
+  @override
   String toString() {
-    return 'CubitTemplateModel(name: $name, returnType: $returnType, hasFilter: $hasFilter, crudMethods: $crudMethods)';
+    return 'CubitTemplateModel(name: $name, returnType: $returnType, hasFilter: $hasFilter, crudMethods: $crudMethods, filterSuffix: $filterSuffix, loaderMethodName: $loaderMethodName)';
   }
 
   @override
@@ -3773,7 +3895,11 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
                 .equals(other.returnType, returnType) &&
             const DeepCollectionEquality().equals(other.hasFilter, hasFilter) &&
             const DeepCollectionEquality()
-                .equals(other._crudMethods, _crudMethods));
+                .equals(other._crudMethods, _crudMethods) &&
+            const DeepCollectionEquality()
+                .equals(other.filterSuffix, filterSuffix) &&
+            const DeepCollectionEquality()
+                .equals(other.loaderMethodName, loaderMethodName));
   }
 
   @JsonKey(ignore: true)
@@ -3783,7 +3909,9 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(returnType),
       const DeepCollectionEquality().hash(hasFilter),
-      const DeepCollectionEquality().hash(_crudMethods));
+      const DeepCollectionEquality().hash(_crudMethods),
+      const DeepCollectionEquality().hash(filterSuffix),
+      const DeepCollectionEquality().hash(loaderMethodName));
 
   @JsonKey(ignore: true)
   @override
@@ -3802,7 +3930,9 @@ abstract class _CubitTemplateModel implements CubitTemplateModel {
       {required final String name,
       required final String returnType,
       final bool hasFilter,
-      required final List<MethodModel> crudMethods}) = _$_CubitTemplateModel;
+      required final List<MethodModel> crudMethods,
+      required final String filterSuffix,
+      required final String loaderMethodName}) = _$_CubitTemplateModel;
 
   factory _CubitTemplateModel.fromJson(Map<String, dynamic> json) =
       _$_CubitTemplateModel.fromJson;
@@ -3815,6 +3945,10 @@ abstract class _CubitTemplateModel implements CubitTemplateModel {
   bool get hasFilter => throw _privateConstructorUsedError;
   @override
   List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  @override
+  String get filterSuffix => throw _privateConstructorUsedError;
+  @override
+  String get loaderMethodName => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_CubitTemplateModelCopyWith<_$_CubitTemplateModel> get copyWith =>

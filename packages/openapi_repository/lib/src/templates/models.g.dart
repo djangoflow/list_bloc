@@ -305,6 +305,10 @@ _$_LoaderRepositoryTemplateModel _$$_LoaderRepositoryTemplateModelFromJson(
           .toList(),
       repositoryName: json['repositoryName'] as String,
       api: json['api'] as String,
+      dataLoaderMethodName: json['dataLoaderMethodName'] as String,
+      listLoaderMethodName: json['listLoaderMethodName'] as String,
+      dataFilterSuffix: json['dataFilterSuffix'] as String,
+      listFilterSuffix: json['listFilterSuffix'] as String,
     );
 
 Map<String, dynamic> _$$_LoaderRepositoryTemplateModelToJson(
@@ -317,6 +321,10 @@ Map<String, dynamic> _$$_LoaderRepositoryTemplateModelToJson(
       'crudMethods': instance.crudMethods.map((e) => e.toJson()).toList(),
       'repositoryName': instance.repositoryName,
       'api': instance.api,
+      'dataLoaderMethodName': instance.dataLoaderMethodName,
+      'listLoaderMethodName': instance.listLoaderMethodName,
+      'dataFilterSuffix': instance.dataFilterSuffix,
+      'listFilterSuffix': instance.listFilterSuffix,
     };
 
 _$_LoaderTemplateModel _$$_LoaderTemplateModelFromJson(
@@ -364,6 +372,8 @@ _$_CubitTemplateModel _$$_CubitTemplateModelFromJson(
       crudMethods: (json['crudMethods'] as List<dynamic>)
           .map((e) => MethodModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      filterSuffix: json['filterSuffix'] as String,
+      loaderMethodName: json['loaderMethodName'] as String,
     );
 
 Map<String, dynamic> _$$_CubitTemplateModelToJson(
@@ -373,6 +383,8 @@ Map<String, dynamic> _$$_CubitTemplateModelToJson(
       'returnType': instance.returnType,
       'hasFilter': instance.hasFilter,
       'crudMethods': instance.crudMethods.map((e) => e.toJson()).toList(),
+      'filterSuffix': instance.filterSuffix,
+      'loaderMethodName': instance.loaderMethodName,
     };
 
 _$_BuiltListJsonConverterModel _$$_BuiltListJsonConverterModelFromJson(
