@@ -228,6 +228,7 @@ _$_MethodModel _$$_MethodModelFromJson(Map<String, dynamic> json) =>
           .toList(),
       isEmptyArgs: json['isEmptyArgs'] as bool? ?? false,
       isList: json['isList'] as bool? ?? false,
+      shouldUseAsList: json['shouldUseAsList'] as bool? ?? false,
       shouldDataBlocReload: json['shouldDataBlocReload'] as bool? ?? true,
     );
 
@@ -240,6 +241,7 @@ Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
       'parameters': instance.parameters.map((e) => e.toJson()).toList(),
       'isEmptyArgs': instance.isEmptyArgs,
       'isList': instance.isList,
+      'shouldUseAsList': instance.shouldUseAsList,
       'shouldDataBlocReload': instance.shouldDataBlocReload,
     };
 
@@ -266,6 +268,7 @@ _$_LoaderMethodModel _$$_LoaderMethodModelFromJson(Map<String, dynamic> json) =>
               .toList() ??
           const <BuiltListJsonConverterModel>[],
       isInline: json['isInline'] as bool? ?? false,
+      shouldUseAsList: json['shouldUseAsList'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_LoaderMethodModelToJson(
@@ -285,6 +288,7 @@ Map<String, dynamic> _$$_LoaderMethodModelToJson(
       'builtListConverters':
           instance.builtListConverters.map((e) => e.toJson()).toList(),
       'isInline': instance.isInline,
+      'shouldUseAsList': instance.shouldUseAsList,
     };
 
 _$_LoaderRepositoryTemplateModel _$$_LoaderRepositoryTemplateModelFromJson(
@@ -333,6 +337,7 @@ _$_LoaderTemplateModel _$$_LoaderTemplateModelFromJson(
       api: json['api'] as String,
       hasRequiredParam: json['hasRequiredParam'] ?? false,
       isInline: json['isInline'] as bool? ?? false,
+      shouldUseAsList: json['shouldUseAsList'] as bool? ?? false,
       methodName: json['methodName'] as String,
       returnType: json['returnType'] as String,
       returnTypeNullabilitySuffix:
@@ -354,6 +359,7 @@ Map<String, dynamic> _$$_LoaderTemplateModelToJson(
       'api': instance.api,
       'hasRequiredParam': instance.hasRequiredParam,
       'isInline': instance.isInline,
+      'shouldUseAsList': instance.shouldUseAsList,
       'methodName': instance.methodName,
       'returnType': instance.returnType,
       'returnTypeNullabilitySuffix': instance.returnTypeNullabilitySuffix,

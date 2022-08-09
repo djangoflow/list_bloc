@@ -277,7 +277,9 @@ class _$_RepositoryTemplateModel implements _RepositoryTemplateModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RepositoryTemplateModelToJson(this);
+    return _$$_RepositoryTemplateModelToJson(
+      this,
+    );
   }
 }
 
@@ -296,21 +298,21 @@ abstract class _RepositoryTemplateModel implements RepositoryTemplateModel {
       _$_RepositoryTemplateModel.fromJson;
 
   @override
-  String get repositoryName => throw _privateConstructorUsedError;
+  String get repositoryName;
   @override
-  String get baseUrl => throw _privateConstructorUsedError;
+  String get baseUrl;
   @override
-  String get liveBasePath => throw _privateConstructorUsedError;
+  String get liveBasePath;
   @override
-  List<AccessorModel> get accessors => throw _privateConstructorUsedError;
+  List<AccessorModel> get accessors;
   @override
-  int get connectTimeout => throw _privateConstructorUsedError;
+  int get connectTimeout;
   @override
-  int get receiveTimeout => throw _privateConstructorUsedError;
+  int get receiveTimeout;
   @override
-  int get sendTimeout => throw _privateConstructorUsedError;
+  int get sendTimeout;
   @override
-  String? get dioInterceptor => throw _privateConstructorUsedError;
+  String? get dioInterceptor;
   @override
   @JsonKey(ignore: true)
   _$$_RepositoryTemplateModelCopyWith<_$_RepositoryTemplateModel>
@@ -464,7 +466,9 @@ class _$_AccessorModel implements _AccessorModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AccessorModelToJson(this);
+    return _$$_AccessorModelToJson(
+      this,
+    );
   }
 }
 
@@ -478,11 +482,11 @@ abstract class _AccessorModel implements AccessorModel {
       _$_AccessorModel.fromJson;
 
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get methodName => throw _privateConstructorUsedError;
+  String get methodName;
   @override
   @JsonKey(ignore: true)
   _$$_AccessorModelCopyWith<_$_AccessorModel> get copyWith =>
@@ -700,7 +704,9 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FreezedTemplateModelToJson(this);
+    return _$$_FreezedTemplateModelToJson(
+      this,
+    );
   }
 }
 
@@ -716,15 +722,15 @@ abstract class _FreezedTemplateModel implements FreezedTemplateModel {
       _$_FreezedTemplateModel.fromJson;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  bool get isPaginated => throw _privateConstructorUsedError;
+  bool get isPaginated;
   @override
-  List<TypeModel> get types => throw _privateConstructorUsedError;
+  List<TypeModel> get types;
   @override
-  List<AnnotationModel> get annotations => throw _privateConstructorUsedError;
+  List<AnnotationModel> get annotations;
   @override
-  bool get isTypesEmpty => throw _privateConstructorUsedError;
+  bool get isTypesEmpty;
   @override
   @JsonKey(ignore: true)
   _$$_FreezedTemplateModelCopyWith<_$_FreezedTemplateModel> get copyWith =>
@@ -920,7 +926,9 @@ class _$_TypeModel implements _TypeModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TypeModelToJson(this);
+    return _$$_TypeModelToJson(
+      this,
+    );
   }
 }
 
@@ -936,15 +944,15 @@ abstract class _TypeModel implements TypeModel {
       _$_TypeModel.fromJson;
 
   @override
-  bool get isRequired => throw _privateConstructorUsedError;
+  bool get isRequired;
   @override
-  bool get isNullable => throw _privateConstructorUsedError;
+  bool get isNullable;
   @override
-  String? get defaultValue => throw _privateConstructorUsedError;
+  String? get defaultValue;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
   @JsonKey(ignore: true)
   _$$_TypeModelCopyWith<_$_TypeModel> get copyWith =>
@@ -1099,7 +1107,9 @@ class _$_TypedefTemplateModel implements _TypedefTemplateModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TypedefTemplateModelToJson(this);
+    return _$$_TypedefTemplateModelToJson(
+      this,
+    );
   }
 }
 
@@ -1113,11 +1123,11 @@ abstract class _TypedefTemplateModel implements TypedefTemplateModel {
       _$_TypedefTemplateModel.fromJson;
 
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  bool get hasFilter => throw _privateConstructorUsedError;
+  bool get hasFilter;
   @override
   @JsonKey(ignore: true)
   _$$_TypedefTemplateModelCopyWith<_$_TypedefTemplateModel> get copyWith =>
@@ -1438,7 +1448,9 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ListRepositoryTemplateModelToJson(this);
+    return _$$_ListRepositoryTemplateModelToJson(
+      this,
+    );
   }
 }
 
@@ -1460,25 +1472,25 @@ abstract class _ListRepositoryTemplateModel
       _$_ListRepositoryTemplateModel.fromJson;
 
   @override
-  String get api => throw _privateConstructorUsedError;
+  String get api;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  dynamic get hasRequiredParam => throw _privateConstructorUsedError;
+  dynamic get hasRequiredParam;
   @override
-  bool get isInline => throw _privateConstructorUsedError;
+  bool get isInline;
   @override
-  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  List<MethodModel> get crudMethods;
   @override
-  String get methodName => throw _privateConstructorUsedError;
+  String get methodName;
   @override
-  String get returnType => throw _privateConstructorUsedError;
+  String get returnType;
   @override
-  bool get hasFilter => throw _privateConstructorUsedError;
+  bool get hasFilter;
   @override
-  List<ParamModel> get additionalParams => throw _privateConstructorUsedError;
+  List<ParamModel> get additionalParams;
   @override
-  List<ParamModel> get filterParams => throw _privateConstructorUsedError;
+  List<ParamModel> get filterParams;
   @override
   @JsonKey(ignore: true)
   _$$_ListRepositoryTemplateModelCopyWith<_$_ListRepositoryTemplateModel>
@@ -1751,7 +1763,9 @@ class _$_DataCubitTemplateModel implements _DataCubitTemplateModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DataCubitTemplateModelToJson(this);
+    return _$$_DataCubitTemplateModelToJson(
+      this,
+    );
   }
 }
 
@@ -1770,21 +1784,21 @@ abstract class _DataCubitTemplateModel implements DataCubitTemplateModel {
       _$_DataCubitTemplateModel.fromJson;
 
   @override
-  String get api => throw _privateConstructorUsedError;
+  String get api;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  dynamic get hasRequiredParam => throw _privateConstructorUsedError;
+  dynamic get hasRequiredParam;
   @override
-  bool get isInline => throw _privateConstructorUsedError;
+  bool get isInline;
   @override
-  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  List<MethodModel> get crudMethods;
   @override
-  String get methodName => throw _privateConstructorUsedError;
+  String get methodName;
   @override
-  String get returnType => throw _privateConstructorUsedError;
+  String get returnType;
   @override
-  List<ParamModel> get additionalParams => throw _privateConstructorUsedError;
+  List<ParamModel> get additionalParams;
   @override
   @JsonKey(ignore: true)
   _$$_DataCubitTemplateModelCopyWith<_$_DataCubitTemplateModel> get copyWith =>
@@ -1903,7 +1917,9 @@ class _$_ParamModel implements _ParamModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ParamModelToJson(this);
+    return _$$_ParamModelToJson(
+      this,
+    );
   }
 }
 
@@ -1914,7 +1930,7 @@ abstract class _ParamModel implements ParamModel {
       _$_ParamModel.fromJson;
 
   @override
-  String get param => throw _privateConstructorUsedError;
+  String get param;
   @override
   @JsonKey(ignore: true)
   _$$_ParamModelCopyWith<_$_ParamModel> get copyWith =>
@@ -2036,7 +2052,9 @@ class _$_AnnotationModel implements _AnnotationModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnnotationModelToJson(this);
+    return _$$_AnnotationModelToJson(
+      this,
+    );
   }
 }
 
@@ -2047,7 +2065,7 @@ abstract class _AnnotationModel implements AnnotationModel {
       _$_AnnotationModel.fromJson;
 
   @override
-  String get annotation => throw _privateConstructorUsedError;
+  String get annotation;
   @override
   @JsonKey(ignore: true)
   _$$_AnnotationModelCopyWith<_$_AnnotationModel> get copyWith =>
@@ -2216,7 +2234,9 @@ class _$_ArgModelModel implements _ArgModelModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ArgModelModelToJson(this);
+    return _$$_ArgModelModelToJson(
+      this,
+    );
   }
 }
 
@@ -2228,13 +2248,13 @@ abstract class _ArgModelModel implements ArgModel {
       _$_ArgModelModel.fromJson;
 
   @override
-  String get argType => throw _privateConstructorUsedError;
+  String get argType;
   @override
-  String get argName => throw _privateConstructorUsedError;
+  String get argName;
   @override
-  bool get isNullableArg => throw _privateConstructorUsedError;
+  bool get isNullableArg;
   @override
-  bool get isRequiredArg => throw _privateConstructorUsedError;
+  bool get isRequiredArg;
   @override
   @JsonKey(ignore: true)
   _$$_ArgModelModelCopyWith<_$_ArgModelModel> get copyWith =>
@@ -2254,6 +2274,7 @@ mixin _$MethodModel {
   List<ParamModel> get parameters => throw _privateConstructorUsedError;
   bool get isEmptyArgs => throw _privateConstructorUsedError;
   bool get isList => throw _privateConstructorUsedError;
+  bool get shouldUseAsList => throw _privateConstructorUsedError;
   bool get shouldDataBlocReload => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -2275,6 +2296,7 @@ abstract class $MethodModelCopyWith<$Res> {
       List<ParamModel> parameters,
       bool isEmptyArgs,
       bool isList,
+      bool shouldUseAsList,
       bool shouldDataBlocReload});
 }
 
@@ -2295,6 +2317,7 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
     Object? parameters = freezed,
     Object? isEmptyArgs = freezed,
     Object? isList = freezed,
+    Object? shouldUseAsList = freezed,
     Object? shouldDataBlocReload = freezed,
   }) {
     return _then(_value.copyWith(
@@ -2326,6 +2349,10 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
           ? _value.isList
           : isList // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldUseAsList: shouldUseAsList == freezed
+          ? _value.shouldUseAsList
+          : shouldUseAsList // ignore: cast_nullable_to_non_nullable
+              as bool,
       shouldDataBlocReload: shouldDataBlocReload == freezed
           ? _value.shouldDataBlocReload
           : shouldDataBlocReload // ignore: cast_nullable_to_non_nullable
@@ -2349,6 +2376,7 @@ abstract class _$$_MethodModelCopyWith<$Res>
       List<ParamModel> parameters,
       bool isEmptyArgs,
       bool isList,
+      bool shouldUseAsList,
       bool shouldDataBlocReload});
 }
 
@@ -2371,6 +2399,7 @@ class __$$_MethodModelCopyWithImpl<$Res> extends _$MethodModelCopyWithImpl<$Res>
     Object? parameters = freezed,
     Object? isEmptyArgs = freezed,
     Object? isList = freezed,
+    Object? shouldUseAsList = freezed,
     Object? shouldDataBlocReload = freezed,
   }) {
     return _then(_$_MethodModel(
@@ -2402,6 +2431,10 @@ class __$$_MethodModelCopyWithImpl<$Res> extends _$MethodModelCopyWithImpl<$Res>
           ? _value.isList
           : isList // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldUseAsList: shouldUseAsList == freezed
+          ? _value.shouldUseAsList
+          : shouldUseAsList // ignore: cast_nullable_to_non_nullable
+              as bool,
       shouldDataBlocReload: shouldDataBlocReload == freezed
           ? _value.shouldDataBlocReload
           : shouldDataBlocReload // ignore: cast_nullable_to_non_nullable
@@ -2422,6 +2455,7 @@ class _$_MethodModel implements _MethodModel {
       required final List<ParamModel> parameters,
       this.isEmptyArgs = false,
       this.isList = false,
+      this.shouldUseAsList = false,
       this.shouldDataBlocReload = true})
       : _arguments = arguments,
         _parameters = parameters;
@@ -2457,11 +2491,14 @@ class _$_MethodModel implements _MethodModel {
   final bool isList;
   @override
   @JsonKey()
+  final bool shouldUseAsList;
+  @override
+  @JsonKey()
   final bool shouldDataBlocReload;
 
   @override
   String toString() {
-    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters, isEmptyArgs: $isEmptyArgs, isList: $isList, shouldDataBlocReload: $shouldDataBlocReload)';
+    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters, isEmptyArgs: $isEmptyArgs, isList: $isList, shouldUseAsList: $shouldUseAsList, shouldDataBlocReload: $shouldDataBlocReload)';
   }
 
   @override
@@ -2481,6 +2518,8 @@ class _$_MethodModel implements _MethodModel {
                 .equals(other.isEmptyArgs, isEmptyArgs) &&
             const DeepCollectionEquality().equals(other.isList, isList) &&
             const DeepCollectionEquality()
+                .equals(other.shouldUseAsList, shouldUseAsList) &&
+            const DeepCollectionEquality()
                 .equals(other.shouldDataBlocReload, shouldDataBlocReload));
   }
 
@@ -2495,6 +2534,7 @@ class _$_MethodModel implements _MethodModel {
       const DeepCollectionEquality().hash(_parameters),
       const DeepCollectionEquality().hash(isEmptyArgs),
       const DeepCollectionEquality().hash(isList),
+      const DeepCollectionEquality().hash(shouldUseAsList),
       const DeepCollectionEquality().hash(shouldDataBlocReload));
 
   @JsonKey(ignore: true)
@@ -2504,7 +2544,9 @@ class _$_MethodModel implements _MethodModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MethodModelToJson(this);
+    return _$$_MethodModelToJson(
+      this,
+    );
   }
 }
 
@@ -2517,27 +2559,30 @@ abstract class _MethodModel implements MethodModel {
       required final List<ParamModel> parameters,
       final bool isEmptyArgs,
       final bool isList,
+      final bool shouldUseAsList,
       final bool shouldDataBlocReload}) = _$_MethodModel;
 
   factory _MethodModel.fromJson(Map<String, dynamic> json) =
       _$_MethodModel.fromJson;
 
   @override
-  String get returnType => throw _privateConstructorUsedError;
+  String get returnType;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get operation => throw _privateConstructorUsedError;
+  String get operation;
   @override
-  List<ArgModel> get arguments => throw _privateConstructorUsedError;
+  List<ArgModel> get arguments;
   @override
-  List<ParamModel> get parameters => throw _privateConstructorUsedError;
+  List<ParamModel> get parameters;
   @override
-  bool get isEmptyArgs => throw _privateConstructorUsedError;
+  bool get isEmptyArgs;
   @override
-  bool get isList => throw _privateConstructorUsedError;
+  bool get isList;
   @override
-  bool get shouldDataBlocReload => throw _privateConstructorUsedError;
+  bool get shouldUseAsList;
+  @override
+  bool get shouldDataBlocReload;
   @override
   @JsonKey(ignore: true)
   _$$_MethodModelCopyWith<_$_MethodModel> get copyWith =>
@@ -2564,6 +2609,7 @@ mixin _$LoaderMethodModel {
   List<BuiltListJsonConverterModel> get builtListConverters =>
       throw _privateConstructorUsedError;
   bool get isInline => throw _privateConstructorUsedError;
+  bool get shouldUseAsList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2589,7 +2635,8 @@ abstract class $LoaderMethodModelCopyWith<$Res> {
       int defaultOffset,
       int defaultPageSize,
       List<BuiltListJsonConverterModel> builtListConverters,
-      bool isInline});
+      bool isInline,
+      bool shouldUseAsList});
 }
 
 /// @nodoc
@@ -2616,6 +2663,7 @@ class _$LoaderMethodModelCopyWithImpl<$Res>
     Object? defaultPageSize = freezed,
     Object? builtListConverters = freezed,
     Object? isInline = freezed,
+    Object? shouldUseAsList = freezed,
   }) {
     return _then(_value.copyWith(
       returnType: returnType == freezed
@@ -2670,6 +2718,10 @@ class _$LoaderMethodModelCopyWithImpl<$Res>
           ? _value.isInline
           : isInline // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldUseAsList: shouldUseAsList == freezed
+          ? _value.shouldUseAsList
+          : shouldUseAsList // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2694,7 +2746,8 @@ abstract class _$$_LoaderMethodModelCopyWith<$Res>
       int defaultOffset,
       int defaultPageSize,
       List<BuiltListJsonConverterModel> builtListConverters,
-      bool isInline});
+      bool isInline,
+      bool shouldUseAsList});
 }
 
 /// @nodoc
@@ -2723,6 +2776,7 @@ class __$$_LoaderMethodModelCopyWithImpl<$Res>
     Object? defaultPageSize = freezed,
     Object? builtListConverters = freezed,
     Object? isInline = freezed,
+    Object? shouldUseAsList = freezed,
   }) {
     return _then(_$_LoaderMethodModel(
       returnType: returnType == freezed
@@ -2777,6 +2831,10 @@ class __$$_LoaderMethodModelCopyWithImpl<$Res>
           ? _value.isInline
           : isInline // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldUseAsList: shouldUseAsList == freezed
+          ? _value.shouldUseAsList
+          : shouldUseAsList // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2799,7 +2857,8 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
       required this.defaultPageSize,
       final List<BuiltListJsonConverterModel> builtListConverters =
           const <BuiltListJsonConverterModel>[],
-      this.isInline = false})
+      this.isInline = false,
+      this.shouldUseAsList = false})
       : _types = types,
         _filterParams = filterParams,
         _builtListConverters = builtListConverters;
@@ -2850,10 +2909,13 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
   @override
   @JsonKey()
   final bool isInline;
+  @override
+  @JsonKey()
+  final bool shouldUseAsList;
 
   @override
   String toString() {
-    return 'LoaderMethodModel(returnType: $returnType, nullabilitySuffix: $nullabilitySuffix, name: $name, hasFilter: $hasFilter, isListLoader: $isListLoader, isPaginated: $isPaginated, hasRequiredParam: $hasRequiredParam, types: $types, filterParams: $filterParams, defaultOffset: $defaultOffset, defaultPageSize: $defaultPageSize, builtListConverters: $builtListConverters, isInline: $isInline)';
+    return 'LoaderMethodModel(returnType: $returnType, nullabilitySuffix: $nullabilitySuffix, name: $name, hasFilter: $hasFilter, isListLoader: $isListLoader, isPaginated: $isPaginated, hasRequiredParam: $hasRequiredParam, types: $types, filterParams: $filterParams, defaultOffset: $defaultOffset, defaultPageSize: $defaultPageSize, builtListConverters: $builtListConverters, isInline: $isInline, shouldUseAsList: $shouldUseAsList)';
   }
 
   @override
@@ -2882,7 +2944,9 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
                 .equals(other.defaultPageSize, defaultPageSize) &&
             const DeepCollectionEquality()
                 .equals(other._builtListConverters, _builtListConverters) &&
-            const DeepCollectionEquality().equals(other.isInline, isInline));
+            const DeepCollectionEquality().equals(other.isInline, isInline) &&
+            const DeepCollectionEquality()
+                .equals(other.shouldUseAsList, shouldUseAsList));
   }
 
   @JsonKey(ignore: true)
@@ -2901,7 +2965,8 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
       const DeepCollectionEquality().hash(defaultOffset),
       const DeepCollectionEquality().hash(defaultPageSize),
       const DeepCollectionEquality().hash(_builtListConverters),
-      const DeepCollectionEquality().hash(isInline));
+      const DeepCollectionEquality().hash(isInline),
+      const DeepCollectionEquality().hash(shouldUseAsList));
 
   @JsonKey(ignore: true)
   @override
@@ -2911,7 +2976,9 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LoaderMethodModelToJson(this);
+    return _$$_LoaderMethodModelToJson(
+      this,
+    );
   }
 }
 
@@ -2929,38 +2996,40 @@ abstract class _LoaderMethodModel implements LoaderMethodModel {
       required final int defaultOffset,
       required final int defaultPageSize,
       final List<BuiltListJsonConverterModel> builtListConverters,
-      final bool isInline}) = _$_LoaderMethodModel;
+      final bool isInline,
+      final bool shouldUseAsList}) = _$_LoaderMethodModel;
 
   factory _LoaderMethodModel.fromJson(Map<String, dynamic> json) =
       _$_LoaderMethodModel.fromJson;
 
   @override
-  String get returnType => throw _privateConstructorUsedError;
+  String get returnType;
   @override
-  String get nullabilitySuffix => throw _privateConstructorUsedError;
+  String get nullabilitySuffix;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  bool get hasFilter => throw _privateConstructorUsedError;
+  bool get hasFilter;
   @override
-  bool get isListLoader => throw _privateConstructorUsedError;
+  bool get isListLoader;
   @override
-  bool get isPaginated => throw _privateConstructorUsedError;
+  bool get isPaginated;
   @override
-  bool get hasRequiredParam => throw _privateConstructorUsedError;
+  bool get hasRequiredParam;
   @override
-  List<TypeModel> get types => throw _privateConstructorUsedError;
+  List<TypeModel> get types;
   @override
-  List<ParamModel> get filterParams => throw _privateConstructorUsedError;
+  List<ParamModel> get filterParams;
   @override
-  int get defaultOffset => throw _privateConstructorUsedError;
+  int get defaultOffset;
   @override
-  int get defaultPageSize => throw _privateConstructorUsedError;
+  int get defaultPageSize;
   @override
-  List<BuiltListJsonConverterModel> get builtListConverters =>
-      throw _privateConstructorUsedError;
+  List<BuiltListJsonConverterModel> get builtListConverters;
   @override
-  bool get isInline => throw _privateConstructorUsedError;
+  bool get isInline;
+  @override
+  bool get shouldUseAsList;
   @override
   @JsonKey(ignore: true)
   _$$_LoaderMethodModelCopyWith<_$_LoaderMethodModel> get copyWith =>
@@ -3320,7 +3389,9 @@ class _$_LoaderRepositoryTemplateModel
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LoaderRepositoryTemplateModelToJson(this);
+    return _$$_LoaderRepositoryTemplateModelToJson(
+      this,
+    );
   }
 }
 
@@ -3344,27 +3415,27 @@ abstract class _LoaderRepositoryTemplateModel
       _$_LoaderRepositoryTemplateModel.fromJson;
 
   @override
-  LoaderTemplateModel? get dataLoader => throw _privateConstructorUsedError;
+  LoaderTemplateModel? get dataLoader;
   @override
-  LoaderTemplateModel? get listLoader => throw _privateConstructorUsedError;
+  LoaderTemplateModel? get listLoader;
   @override
-  bool get hasDataLoader => throw _privateConstructorUsedError;
+  bool get hasDataLoader;
   @override
-  bool get hasListLoader => throw _privateConstructorUsedError;
+  bool get hasListLoader;
   @override
-  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  List<MethodModel> get crudMethods;
   @override
-  String get repositoryName => throw _privateConstructorUsedError;
+  String get repositoryName;
   @override
-  String get api => throw _privateConstructorUsedError;
+  String get api;
   @override
-  String get dataLoaderMethodName => throw _privateConstructorUsedError;
+  String get dataLoaderMethodName;
   @override
-  String get listLoaderMethodName => throw _privateConstructorUsedError;
+  String get listLoaderMethodName;
   @override
-  String get dataFilterSuffix => throw _privateConstructorUsedError;
+  String get dataFilterSuffix;
   @override
-  String get listFilterSuffix => throw _privateConstructorUsedError;
+  String get listFilterSuffix;
   @override
   @JsonKey(ignore: true)
   _$$_LoaderRepositoryTemplateModelCopyWith<_$_LoaderRepositoryTemplateModel>
@@ -3380,6 +3451,7 @@ mixin _$LoaderTemplateModel {
   String get api => throw _privateConstructorUsedError;
   dynamic get hasRequiredParam => throw _privateConstructorUsedError;
   bool get isInline => throw _privateConstructorUsedError;
+  bool get shouldUseAsList => throw _privateConstructorUsedError;
   String get methodName => throw _privateConstructorUsedError;
   String get returnType => throw _privateConstructorUsedError;
   String get returnTypeNullabilitySuffix => throw _privateConstructorUsedError;
@@ -3402,6 +3474,7 @@ abstract class $LoaderTemplateModelCopyWith<$Res> {
       {String api,
       dynamic hasRequiredParam,
       bool isInline,
+      bool shouldUseAsList,
       String methodName,
       String returnType,
       String returnTypeNullabilitySuffix,
@@ -3424,6 +3497,7 @@ class _$LoaderTemplateModelCopyWithImpl<$Res>
     Object? api = freezed,
     Object? hasRequiredParam = freezed,
     Object? isInline = freezed,
+    Object? shouldUseAsList = freezed,
     Object? methodName = freezed,
     Object? returnType = freezed,
     Object? returnTypeNullabilitySuffix = freezed,
@@ -3443,6 +3517,10 @@ class _$LoaderTemplateModelCopyWithImpl<$Res>
       isInline: isInline == freezed
           ? _value.isInline
           : isInline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shouldUseAsList: shouldUseAsList == freezed
+          ? _value.shouldUseAsList
+          : shouldUseAsList // ignore: cast_nullable_to_non_nullable
               as bool,
       methodName: methodName == freezed
           ? _value.methodName
@@ -3483,6 +3561,7 @@ abstract class _$$_LoaderTemplateModelCopyWith<$Res>
       {String api,
       dynamic hasRequiredParam,
       bool isInline,
+      bool shouldUseAsList,
       String methodName,
       String returnType,
       String returnTypeNullabilitySuffix,
@@ -3507,6 +3586,7 @@ class __$$_LoaderTemplateModelCopyWithImpl<$Res>
     Object? api = freezed,
     Object? hasRequiredParam = freezed,
     Object? isInline = freezed,
+    Object? shouldUseAsList = freezed,
     Object? methodName = freezed,
     Object? returnType = freezed,
     Object? returnTypeNullabilitySuffix = freezed,
@@ -3525,6 +3605,10 @@ class __$$_LoaderTemplateModelCopyWithImpl<$Res>
       isInline: isInline == freezed
           ? _value.isInline
           : isInline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shouldUseAsList: shouldUseAsList == freezed
+          ? _value.shouldUseAsList
+          : shouldUseAsList // ignore: cast_nullable_to_non_nullable
               as bool,
       methodName: methodName == freezed
           ? _value.methodName
@@ -3562,6 +3646,7 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
       {required this.api,
       this.hasRequiredParam = false,
       this.isInline = false,
+      this.shouldUseAsList = false,
       required this.methodName,
       required this.returnType,
       required this.returnTypeNullabilitySuffix,
@@ -3582,6 +3667,9 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
   @override
   @JsonKey()
   final bool isInline;
+  @override
+  @JsonKey()
+  final bool shouldUseAsList;
   @override
   final String methodName;
   @override
@@ -3609,7 +3697,7 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
 
   @override
   String toString() {
-    return 'LoaderTemplateModel(api: $api, hasRequiredParam: $hasRequiredParam, isInline: $isInline, methodName: $methodName, returnType: $returnType, returnTypeNullabilitySuffix: $returnTypeNullabilitySuffix, hasFilter: $hasFilter, additionalParams: $additionalParams, filterParams: $filterParams)';
+    return 'LoaderTemplateModel(api: $api, hasRequiredParam: $hasRequiredParam, isInline: $isInline, shouldUseAsList: $shouldUseAsList, methodName: $methodName, returnType: $returnType, returnTypeNullabilitySuffix: $returnTypeNullabilitySuffix, hasFilter: $hasFilter, additionalParams: $additionalParams, filterParams: $filterParams)';
   }
 
   @override
@@ -3621,6 +3709,8 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
             const DeepCollectionEquality()
                 .equals(other.hasRequiredParam, hasRequiredParam) &&
             const DeepCollectionEquality().equals(other.isInline, isInline) &&
+            const DeepCollectionEquality()
+                .equals(other.shouldUseAsList, shouldUseAsList) &&
             const DeepCollectionEquality()
                 .equals(other.methodName, methodName) &&
             const DeepCollectionEquality()
@@ -3642,6 +3732,7 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
       const DeepCollectionEquality().hash(api),
       const DeepCollectionEquality().hash(hasRequiredParam),
       const DeepCollectionEquality().hash(isInline),
+      const DeepCollectionEquality().hash(shouldUseAsList),
       const DeepCollectionEquality().hash(methodName),
       const DeepCollectionEquality().hash(returnType),
       const DeepCollectionEquality().hash(returnTypeNullabilitySuffix),
@@ -3657,7 +3748,9 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LoaderTemplateModelToJson(this);
+    return _$$_LoaderTemplateModelToJson(
+      this,
+    );
   }
 }
 
@@ -3666,6 +3759,7 @@ abstract class _LoaderTemplateModel implements LoaderTemplateModel {
       {required final String api,
       final dynamic hasRequiredParam,
       final bool isInline,
+      final bool shouldUseAsList,
       required final String methodName,
       required final String returnType,
       required final String returnTypeNullabilitySuffix,
@@ -3677,23 +3771,25 @@ abstract class _LoaderTemplateModel implements LoaderTemplateModel {
       _$_LoaderTemplateModel.fromJson;
 
   @override
-  String get api => throw _privateConstructorUsedError;
+  String get api;
   @override
-  dynamic get hasRequiredParam => throw _privateConstructorUsedError;
+  dynamic get hasRequiredParam;
   @override
-  bool get isInline => throw _privateConstructorUsedError;
+  bool get isInline;
   @override
-  String get methodName => throw _privateConstructorUsedError;
+  bool get shouldUseAsList;
   @override
-  String get returnType => throw _privateConstructorUsedError;
+  String get methodName;
   @override
-  String get returnTypeNullabilitySuffix => throw _privateConstructorUsedError;
+  String get returnType;
   @override
-  bool get hasFilter => throw _privateConstructorUsedError;
+  String get returnTypeNullabilitySuffix;
   @override
-  List<ParamModel> get additionalParams => throw _privateConstructorUsedError;
+  bool get hasFilter;
   @override
-  List<ParamModel> get filterParams => throw _privateConstructorUsedError;
+  List<ParamModel> get additionalParams;
+  @override
+  List<ParamModel> get filterParams;
   @override
   @JsonKey(ignore: true)
   _$$_LoaderTemplateModelCopyWith<_$_LoaderTemplateModel> get copyWith =>
@@ -3921,7 +4017,9 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CubitTemplateModelToJson(this);
+    return _$$_CubitTemplateModelToJson(
+      this,
+    );
   }
 }
 
@@ -3938,17 +4036,17 @@ abstract class _CubitTemplateModel implements CubitTemplateModel {
       _$_CubitTemplateModel.fromJson;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get returnType => throw _privateConstructorUsedError;
+  String get returnType;
   @override
-  bool get hasFilter => throw _privateConstructorUsedError;
+  bool get hasFilter;
   @override
-  List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
+  List<MethodModel> get crudMethods;
   @override
-  String get filterSuffix => throw _privateConstructorUsedError;
+  String get filterSuffix;
   @override
-  String get loaderMethodName => throw _privateConstructorUsedError;
+  String get loaderMethodName;
   @override
   @JsonKey(ignore: true)
   _$$_CubitTemplateModelCopyWith<_$_CubitTemplateModel> get copyWith =>
@@ -4119,7 +4217,9 @@ class _$_BuiltListJsonConverterModel implements _BuiltListJsonConverterModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BuiltListJsonConverterModelToJson(this);
+    return _$$_BuiltListJsonConverterModelToJson(
+      this,
+    );
   }
 }
 
@@ -4134,11 +4234,11 @@ abstract class _BuiltListJsonConverterModel
       _$_BuiltListJsonConverterModel.fromJson;
 
   @override
-  String get converterName => throw _privateConstructorUsedError;
+  String get converterName;
   @override
-  String get innerReturnType => throw _privateConstructorUsedError;
+  String get innerReturnType;
   @override
-  bool get shouldCreateConverter => throw _privateConstructorUsedError;
+  bool get shouldCreateConverter;
   @override
   @JsonKey(ignore: true)
   _$$_BuiltListJsonConverterModelCopyWith<_$_BuiltListJsonConverterModel>
@@ -4289,7 +4389,9 @@ class _$_BuiltListJsonConverterTemplateModel
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BuiltListJsonConverterTemplateModelToJson(this);
+    return _$$_BuiltListJsonConverterTemplateModelToJson(
+      this,
+    );
   }
 }
 
@@ -4305,9 +4407,9 @@ abstract class _BuiltListJsonConverterTemplateModel
       _$_BuiltListJsonConverterTemplateModel.fromJson;
 
   @override
-  String get converterName => throw _privateConstructorUsedError;
+  String get converterName;
   @override
-  String get innerReturnType => throw _privateConstructorUsedError;
+  String get innerReturnType;
   @override
   @JsonKey(ignore: true)
   _$$_BuiltListJsonConverterTemplateModelCopyWith<

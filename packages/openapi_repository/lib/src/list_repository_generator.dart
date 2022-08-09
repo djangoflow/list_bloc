@@ -357,19 +357,20 @@ class OpenapiRepositoryGenerator
         filterParams: listLoaderModel.filterParams,
         hasRequiredParam: listLoaderModel.hasRequiredParam,
         isInline: listLoaderModel.isInline,
+        shouldUseAsList: listLoaderModel.shouldUseAsList,
       );
     }
     if (dataLoaderModel != null) {
       dataLoaderForTemplate = LoaderTemplateModel(
-        api: api,
-        methodName: dataLoaderModel.name.camelCase,
-        returnType: dataLoaderModel.returnType,
-        returnTypeNullabilitySuffix: dataLoaderModel.nullabilitySuffix,
-        hasFilter: dataLoaderModel.hasFilter,
-        filterParams: dataLoaderModel.filterParams,
-        hasRequiredParam: dataLoaderModel.hasRequiredParam,
-        isInline: dataLoaderModel.isInline,
-      );
+          api: api,
+          methodName: dataLoaderModel.name.camelCase,
+          returnType: dataLoaderModel.returnType,
+          returnTypeNullabilitySuffix: dataLoaderModel.nullabilitySuffix,
+          hasFilter: dataLoaderModel.hasFilter,
+          filterParams: dataLoaderModel.filterParams,
+          hasRequiredParam: dataLoaderModel.hasRequiredParam,
+          isInline: dataLoaderModel.isInline,
+          shouldUseAsList: dataLoaderModel.shouldUseAsList);
     }
 
     final crudOperationConfig = CrudConfigProvider.instance.config;
@@ -674,11 +675,12 @@ class _ReturnModel {
   final DartType type;
   final bool isInline;
   final NullabilitySuffix? nullabilitySuffix;
-
+  final bool isBuiltListType;
   const _ReturnModel(
     this.type, [
     this.isInline = false,
     this.nullabilitySuffix = NullabilitySuffix.none,
+    this.isBuiltListType = false,
   ]);
 }
 
@@ -973,6 +975,7 @@ abstract class _MethodElementProcessor {
             }).toList()
           : [],
       isInline: returnModel.isInline,
+      shouldUseAsList: returnModel.isBuiltListType,
       hasRequiredParam: methodParameters.any((element) => element.isRequired),
       defaultOffset: defaultOffset,
       defaultPageSize: defaultPageSize,
@@ -1006,10 +1009,14 @@ class _ListMethodElementProcesser extends _MethodElementProcessor {
     ]);
     final innerMostType = _getInnerMostType(type);
     if (listChecker.isExactlyType(type) && innerMostType != null) {
+      final isBuiltListType =
+          TypeChecker.any([TypeChecker.fromRuntime(BuiltList)])
+              .isExactlyType(type);
       return _ReturnModel(
         innerMostType,
         isInline,
         innerMostType.nullabilitySuffix,
+        isBuiltListType,
       );
     }
 

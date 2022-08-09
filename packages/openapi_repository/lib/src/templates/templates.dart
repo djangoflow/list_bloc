@@ -117,7 +117,7 @@ static Future<List<{{returnType}}>> {{listLoaderMethodName}}({{#additionalParams
       {{#filterParams}}{{param}},{{/filterParams}}
     );
 
-    return r.data?{{#isInline}}.results{{#returnTypeNullabilitySuffix}}?{{/returnTypeNullabilitySuffix}}{{/isInline}}.asList() ?? [];
+    return r.data?{{#isInline}}.results{{#returnTypeNullabilitySuffix}}?{{/returnTypeNullabilitySuffix}}{{/isInline}}{{#shouldUseAsList}}.asList(){{/shouldUseAsList}}{{^shouldUseAsList}}.toList(){{/shouldUseAsList}} ?? [];
   }
   {{/listLoader}}
 {{/hasListLoader}}

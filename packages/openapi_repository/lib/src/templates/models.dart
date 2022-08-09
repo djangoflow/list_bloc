@@ -150,6 +150,7 @@ class MethodModel with _$MethodModel {
     required List<ParamModel> parameters,
     @Default(false) bool isEmptyArgs,
     @Default(false) bool isList,
+    @Default(false) bool shouldUseAsList,
     @Default(true) bool shouldDataBlocReload,
   }) = _MethodModel;
 
@@ -177,6 +178,7 @@ class LoaderMethodModel with _$LoaderMethodModel {
     @Default(<BuiltListJsonConverterModel>[])
         List<BuiltListJsonConverterModel> builtListConverters,
     @Default(false) bool isInline,
+    @Default(false) bool shouldUseAsList,
   }) = _LoaderMethodModel;
 
   factory LoaderMethodModel.fromJson(Map<String, dynamic> map) =>
@@ -211,6 +213,7 @@ class LoaderTemplateModel with _$LoaderTemplateModel {
     required String api,
     @Default(false) hasRequiredParam,
     @Default(false) bool isInline,
+    @Default(false) bool shouldUseAsList,
     required String methodName,
     required String returnType,
     required String returnTypeNullabilitySuffix,
