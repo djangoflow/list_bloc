@@ -560,9 +560,12 @@ class OpenapiRepositoryGenerator
       String? type;
 
       bool isList = false;
+      bool shouldUseAsMap = false;
       if (listReturntype?.type != null) {
         isList = true;
-
+        if (listReturntype?.isBuiltListType == true) {
+          shouldUseAsMap = true;
+        }
         type =
             'List<${listReturntype!.type.getDisplayString(withNullability: false)}>';
       } else if (dataReturntype?.type != null) {
@@ -578,6 +581,7 @@ class OpenapiRepositoryGenerator
         parameters: parameters,
         isEmptyArgs: arguments.isEmpty,
         isList: isList,
+        shouldUseAsList: shouldUseAsMap,
         shouldDataBlocReload: !shouldNotReloadOperations.contains(
           operation.toLowerCase(),
         ),
