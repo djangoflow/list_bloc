@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
 
