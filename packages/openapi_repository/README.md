@@ -42,7 +42,7 @@ dart pub add build_runner --dev
 dart pub add built_value_generator --dev
 ```
 
-Use `@OpenapiRepository` annotation on the class that will hold the generated files. Use annoation params to configure how the files should be generated. Example: [Annotation Usage](example/open_api_flutter_example/lib/data/api_repository/api_repository.dart)
+Use `@OpenapiRepository` annotation on the class that will hold the generated files. Use annoation params to configure how the files should be generated. Example: [Annotation Usage](https://github.com/djangoflow/demo-flutter/blob/main/packages/demo/lib/data/api_repository/api_repository.dart)
 
 Here `$ApiRepository` class will holding the generated files in `part 'api_repository.openapi.dart'; part 'api_repository.freezed.dart'; part 'api_repository.g.dart';` directories. This generator will add files to `part 'api_repository.openapi.dart';` first.
 
@@ -155,7 +155,7 @@ DataBlocBuilder<PetDataBloc, Pet, PetRetrieveFilter>(
   itemBuilder: (context, state) => .........
 ```
 
-For full example: [Example generated files](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
+For full example: [Example generated files](https://github.com/djangoflow/demo-flutter/blob/main/packages/demo/lib/data/api_repository/api_repository.openapi.dart)
 
 ### How this library works
 
@@ -190,14 +190,14 @@ For the purpose of this project, we have created an annotation called `@OpenapiR
 - `String? baseUrl` : Includable `baseUrl` which will be used for default `baseUrl` for Dio configuration
 
 For example please follow this link:
-[Annotation Usage](example/open_api_flutter_example/lib/data/api_repository/api_repository.dart)
+[Annotation Usage](https://github.com/djangoflow/demo-flutter/blob/main/packages/demo/lib/data/api_repository/api_repository.dart)
 
 This will generate Filter, DataCubit, ListCubit, Repository classes with Dio configuration.
 
 Generated files will in `{fileName}.openapi.dart`.
 
 For generated example file please follow this link:
-[Generated Classes](example/open_api_flutter_example/lib/data/api_repository/api_repository.openapi.dart)
+[Generated Classes](https://github.com/djangoflow/demo-flutter/blob/main/packages/demo/lib/data/api_repository/api_repository.openapi.dart)
 
 ### Generator
 
