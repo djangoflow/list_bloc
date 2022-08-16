@@ -1104,11 +1104,7 @@ class BuildStepProvider {
 
   BuildStepProvider._internal();
 
-  set buildStep(BuildStep? buildStep) => _buildStep = buildStep;
-
-  BuildStep? get buildStep => _buildStep;
-
-  BuildStep? _buildStep;
+  BuildStep? buildStep;
 }
 
 class CrudConfigProvider {
