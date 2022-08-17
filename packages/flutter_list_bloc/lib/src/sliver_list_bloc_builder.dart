@@ -4,9 +4,10 @@ import 'package:list_bloc/list_bloc.dart';
 import 'list_bloc_builder.dart';
 import 'types.dart';
 
-class SliverListBlocBuilder<T, F> extends StatelessWidget {
-  final ListCubit<T, F> Function(BuildContext context)? create;
-  final ListCubit<T, F>? cubit;
+class SliverListBlocBuilder<B extends ListCubit<T, F>, T, F>
+    extends StatelessWidget {
+  final B Function(BuildContext context)? create;
+  final B? cubit;
   final ListItemBuilder<T, F> itemBuilder;
   final ListStateBuilder<T, F> emptyBuilder;
   final ListStateBuilder<T, F> loadingBuilder;
@@ -26,7 +27,7 @@ class SliverListBlocBuilder<T, F> extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => ListBlocBuilder<T, F>(
+  Widget build(BuildContext context) => ListBlocBuilder<B, T, F>(
         emptyBuilder: emptyBuilder,
         itemBuilder: itemBuilder,
         loadingBuilder: loadingBuilder,

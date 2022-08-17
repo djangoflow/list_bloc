@@ -4,9 +4,9 @@ import 'package:list_bloc/list_bloc.dart';
 
 import 'types.dart';
 
-class ListBlocBuilder<T, F> extends StatelessWidget {
-  final ListCubit<T, F> Function(BuildContext context)? create;
-  final ListCubit<T, F>? cubit;
+class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
+  final B Function(BuildContext context)? create;
+  final B? cubit;
   final ListItemBuilder<T, F> itemBuilder;
   final ListStateBuilder<T, F> emptyBuilder;
   final ListStateBuilder<T, F> loadingBuilder;
@@ -34,7 +34,7 @@ class ListBlocBuilder<T, F> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final child = BlocBuilder<ListCubit<T, F>, Data<List<T>, F>>(
+    final child = BlocBuilder<B, Data<List<T>, F>>(
       bloc: cubit,
       builder: (context, state) {
         final dataCount = (state.data?.length ?? 0);
@@ -70,7 +70,7 @@ class ListBlocBuilder<T, F> extends StatelessWidget {
                 child: child,
                 onRefresh: cubit != null
                     ? () => _refresh(cubit!)
-                    : () => _refresh(context.read<ListCubit<T, F>>()),
+                    : () => _refresh(context.read<B>()),
               )
             : child;
       },
@@ -78,7 +78,7 @@ class ListBlocBuilder<T, F> extends StatelessWidget {
     return create != null ? BlocProvider(create: create!, child: child) : child;
   }
 
-  Future<void> _refresh(ListCubit<T, F> cubit) async {
+  Future<void> _refresh(B cubit) async {
     final f = cubit.state.filter is OffsetLimitFilter
         ? (cubit.state.filter as OffsetLimitFilter).copyWithOffset(0)
         : null;
