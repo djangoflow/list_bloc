@@ -1,7 +1,7 @@
 name: list_bloc
 description: A BLoC library for loading data from an api end-point with filtering and pagination.
 version: 3.1.0
-homepage: https://github.com/apexlabs-ai/list_bloc/
+homepage: https://github.com/djangoflow/list_bloc/
 
 environment:
   sdk: '>=2.13.0 <3.0.0'
