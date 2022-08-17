@@ -2,11 +2,11 @@ import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_list_bloc/flutter_list_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
-class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
-    extends StatelessWidget {
+class ContinuousListViewBlocBuilder<B extends ListCubit<T, F>, T,
+    F extends OffsetLimitFilter> extends StatelessWidget {
   final Axis scrollDirection;
-  final ListCubit<T, F> Function(BuildContext context)? create;
-  final ListCubit<T, F>? cubit;
+  final B Function(BuildContext context)? create;
+  final B? cubit;
   final ListItemBuilder<T, F> itemBuilder;
   final ListStateBuilder<T, F> emptyBuilder;
   final ListStateBuilder<T, F> loadingBuilder;
@@ -38,7 +38,7 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
   });
 
   @override
-  Widget build(BuildContext context) => ListBlocBuilder<T, F>(
+  Widget build(BuildContext context) => ListBlocBuilder<B, T, F>(
         create: create,
         cubit: cubit,
         emptyBuilder: emptyBuilder,
@@ -49,7 +49,7 @@ class ContinuousListViewBlocBuilder<T, F extends OffsetLimitFilter>
         withRefreshIndicator: withRefreshIndicator,
         builder: (BuildContext context, Data<List<T>, F> state, int itemCount,
                 Widget Function(BuildContext, int) itemBuilder) =>
-            ContinuousScrollBuilder<T, F>(
+            ContinuousScrollBuilder<B, T, F>(
           cubit: cubit,
           controller: controller,
           builder: (context, controller) => builder != null

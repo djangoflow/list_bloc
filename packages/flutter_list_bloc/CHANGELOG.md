@@ -1,4 +1,23 @@
+## [4.0.0] - 25 Apr 2022
+
+#### Breaking change
+
+- This applies to all the builder widgets
+
+```Dart
+// FROM
+
+ListBlocBuilder<T, F> extends StatelessWidget ....
+
+// TO
+
+ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget ....
+```
+
+- Added new widget `DataBlocBuilder`
+
 ## [3.1.2] - 25 Apr 2022
+
 - added `builder` argument for further `ListView.builder` customisation
 
 ## [3.1.1] - 22 Apr 2022
