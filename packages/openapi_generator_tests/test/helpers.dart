@@ -1,6 +1,6 @@
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
-import 'package:openapi_repository/builder.dart';
+import 'package:openapi_repository/openapi_repository.dart';
 
 Future testGenerator({
   required String generatedFile,

@@ -7,7 +7,7 @@ targets:
 builders:
   generators:
     target: ":generators"
-    import: "package:openapi_repository/builder.dart"
+    import: "package:openapi_repository/openapi_repository.dart"
     builder_factories: ["generateListRepositoryBuilder"]
     build_extensions: { ".dart": [".g.dart"] }
     auto_apply: dependents
