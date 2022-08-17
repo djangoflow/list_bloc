@@ -15,11 +15,7 @@ dependencies:
       url: https://github.com/adar2378/list_bloc.git
       ref: master
       path: packages/openapi_repository_annotations
-  list_bloc:
-    git:
-      url: https://github.com/adar2378/list_bloc.git
-      ref: master
-      path: packages/list_bloc
+  list_bloc: ^3.1.0
   build: ^2.3.0
   built_collection: ^5.1.1
   built_value: ^8.3.2
