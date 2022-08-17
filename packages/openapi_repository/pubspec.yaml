@@ -1,5 +1,5 @@
 name: openapi_repository
-description: A starting point for Dart libraries or applications.
+description: This package generates ListBloc and DataBloc using openapi_repository_annotations.
 publish_to: none
 version: 1.0.0
 
