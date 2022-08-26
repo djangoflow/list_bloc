@@ -11,17 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  openapi_repository_annotations:
-    git:
-      url: "https://github.com/adar2378/list_bloc.git"
-      ref: master
-      path: packages/openapi_repository_annotations
-
-  openapi_repository:
-    git:
-      url: "https://github.com/adar2378/list_bloc.git"
-      ref: master
-      path: packages/openapi_repository
+  openapi_repository_annotations: ^1.0.0
+  openapi_repository: ^1.0.1
   list_bloc: ^3.1.0
   build: ^2.3.0
   built_collection: ^5.1.1
