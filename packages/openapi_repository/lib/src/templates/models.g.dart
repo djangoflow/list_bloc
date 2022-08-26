@@ -229,7 +229,6 @@ _$_MethodModel _$$_MethodModelFromJson(Map<String, dynamic> json) =>
       isEmptyArgs: json['isEmptyArgs'] as bool? ?? false,
       isList: json['isList'] as bool? ?? false,
       shouldUseAsList: json['shouldUseAsList'] as bool? ?? false,
-      shouldDataBlocReload: json['shouldDataBlocReload'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
@@ -242,7 +241,6 @@ Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
       'isEmptyArgs': instance.isEmptyArgs,
       'isList': instance.isList,
       'shouldUseAsList': instance.shouldUseAsList,
-      'shouldDataBlocReload': instance.shouldDataBlocReload,
     };
 
 _$_LoaderMethodModel _$$_LoaderMethodModelFromJson(Map<String, dynamic> json) =>
