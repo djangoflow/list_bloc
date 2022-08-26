@@ -151,7 +151,6 @@ class MethodModel with _$MethodModel {
     @Default(false) bool isEmptyArgs,
     @Default(false) bool isList,
     @Default(false) bool shouldUseAsList,
-    @Default(true) bool shouldDataBlocReload,
   }) = _MethodModel;
 
   factory MethodModel.fromJson(Map<String, dynamic> map) =>

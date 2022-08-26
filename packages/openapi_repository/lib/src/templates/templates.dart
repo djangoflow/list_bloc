@@ -52,7 +52,6 @@ class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}{
   ) async {
       final r = await super.{{operation}}({{#parameters}}{{param}},
       {{/parameters}});
-      {{#shouldDataBlocReload}}await super.load(state.filter); {{/shouldDataBlocReload}}
 
       return r;
   }
