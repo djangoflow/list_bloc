@@ -11,6 +11,7 @@ class ContinuousListViewBlocBuilder<B extends ListCubit<T, F>, T,
   final ListStateBuilder<T, F> emptyBuilder;
   final ListStateBuilder<T, F> loadingBuilder;
   final ListStateBuilder<T, F>? headerBuilder;
+  final ErrorStateBuilder<T, F> errorBuilder;
   final Function(BuildContext context, ScrollController controller,
       Widget Function(BuildContext, int) itemBuilder, int itemCount)? builder;
   final ScrollController? controller;
@@ -25,6 +26,7 @@ class ContinuousListViewBlocBuilder<B extends ListCubit<T, F>, T,
     required this.emptyBuilder,
     required this.itemBuilder,
     required this.loadingBuilder,
+    required this.errorBuilder,
     this.builder,
     this.controller,
     this.create,
@@ -44,6 +46,7 @@ class ContinuousListViewBlocBuilder<B extends ListCubit<T, F>, T,
         emptyBuilder: emptyBuilder,
         headerBuilder: headerBuilder,
         itemBuilder: itemBuilder,
+        errorBuilder: errorBuilder,
         loadingBuilder: loadingBuilder,
         loadingItemsCount: loadingItemsCount,
         withRefreshIndicator: withRefreshIndicator,
