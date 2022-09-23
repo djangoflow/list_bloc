@@ -13,7 +13,7 @@ class ListViewBlocBuilder<B extends ListCubit<T, F>, T, F>
   final ListStateBuilder<T, F> emptyBuilder;
   final ListStateBuilder<T, F> loadingBuilder;
   final ListStateBuilder<T, F>? headerBuilder;
-  final ErrorStateBuilder<T, F> errorBuilder;
+  final ErrorStateBuilder<T, F>? errorBuilder;
   final ScrollController? controller;
   final bool shrinkWrap;
   final bool withRefreshIndicator;
@@ -26,7 +26,7 @@ class ListViewBlocBuilder<B extends ListCubit<T, F>, T, F>
     required this.emptyBuilder,
     required this.itemBuilder,
     required this.loadingBuilder,
-    required this.errorBuilder,
+    this.errorBuilder,
     this.controller,
     this.create,
     this.headerBuilder,

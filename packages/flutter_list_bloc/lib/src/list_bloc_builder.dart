@@ -11,7 +11,7 @@ class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
   final ListStateBuilder<T, F> emptyBuilder;
   final ListStateBuilder<T, F> loadingBuilder;
   final ListStateBuilder<T, F>? headerBuilder;
-  final ErrorStateBuilder<T, F> errorBuilder;
+  final ErrorStateBuilder<T, F>? errorBuilder;
   final bool withRefreshIndicator;
   final Widget Function(
     BuildContext context,
@@ -27,7 +27,7 @@ class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
     required this.loadingBuilder,
     required this.emptyBuilder,
     required this.builder,
-    required this.errorBuilder,
+    this.errorBuilder,
     this.create,
     this.loadingItemsCount = 3,
     this.withRefreshIndicator = false,
@@ -60,6 +60,9 @@ class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
             // Build empty state
             if (state is Empty) {
               return emptyBuilder(context, state);
+            }
+            if (state is Error && errorBuilder != null) {
+              return errorBuilder!(context, state as Error<T, F>);
             }
             // Build trailing loading items
             if (state is Loading && index >= dataCount) {

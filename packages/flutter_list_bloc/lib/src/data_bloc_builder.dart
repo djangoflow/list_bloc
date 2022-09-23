@@ -10,7 +10,7 @@ class DataBlocBuilder<B extends DataCubit<T, F>, T, F> extends StatelessWidget {
   final DataItemBuilder<T, F> itemBuilder;
   final DataStateBuilder<T, F> emptyBuilder;
   final DataStateBuilder<T, F> loadingBuilder;
-  final ErrorStateBuilder<T, F> errorBuilder;
+  final ErrorStateBuilder<T, F>? errorBuilder;
   final bool withRefreshIndicator;
 
   final Widget Function(
@@ -25,7 +25,7 @@ class DataBlocBuilder<B extends DataCubit<T, F>, T, F> extends StatelessWidget {
     required this.loadingBuilder,
     required this.emptyBuilder,
     required this.builder,
-    required this.errorBuilder,
+    this.errorBuilder,
     this.create,
     this.withRefreshIndicator = false,
   });
@@ -40,8 +40,8 @@ class DataBlocBuilder<B extends DataCubit<T, F>, T, F> extends StatelessWidget {
             return loadingBuilder(context, state);
           } else if (state is Empty) {
             return emptyBuilder(context, state);
-          } else if (state is Error) {
-            return errorBuilder(context, state as Error<T, F>);
+          } else if (state is Error && errorBuilder != null) {
+            return errorBuilder!(context, state as Error<T, F>);
           } else {
             return itemBuilder(context, state);
           }
