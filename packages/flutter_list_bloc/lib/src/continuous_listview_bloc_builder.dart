@@ -11,7 +11,7 @@ class ContinuousListViewBlocBuilder<B extends ListCubit<T, F>, T,
   final ListStateBuilder<T, F> emptyBuilder;
   final ListStateBuilder<T, F> loadingBuilder;
   final ListStateBuilder<T, F>? headerBuilder;
-  final ErrorStateBuilder<T, F>? errorBuilder;
+  final ListErrorStateBuilder<T, F>? errorBuilder;
   final Function(BuildContext context, ScrollController controller,
       Widget Function(BuildContext, int) itemBuilder, int itemCount)? builder;
   final ScrollController? controller;

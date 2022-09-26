@@ -10,7 +10,7 @@ class DataBlocBuilder<B extends DataCubit<T, F>, T, F> extends StatelessWidget {
   final DataItemBuilder<T, F> itemBuilder;
   final DataStateBuilder<T, F> emptyBuilder;
   final DataStateBuilder<T, F> loadingBuilder;
-  final ErrorStateBuilder<T, F>? errorBuilder;
+  final DataErrorStateBuilder<T, F>? errorBuilder;
   final bool withRefreshIndicator;
 
   final Widget Function(

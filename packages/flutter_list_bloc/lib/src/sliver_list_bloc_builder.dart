@@ -12,7 +12,7 @@ class SliverListBlocBuilder<B extends ListCubit<T, F>, T, F>
   final ListStateBuilder<T, F> emptyBuilder;
   final ListStateBuilder<T, F> loadingBuilder;
   final ListStateBuilder<T, F>? headerBuilder;
-  final ErrorStateBuilder<T, F>? errorBuilder;
+  final ListErrorStateBuilder<T, F>? errorBuilder;
   final int loadingItemsCount;
   final bool withRefreshIndicator;
 
