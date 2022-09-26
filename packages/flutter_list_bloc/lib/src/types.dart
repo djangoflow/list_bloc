@@ -18,7 +18,12 @@ typedef Widget DataStateBuilder<T, F>(
   Data<T, F> state,
 );
 
-typedef Widget ErrorStateBuilder<T, F>(
+typedef Widget ListErrorStateBuilder<T, F>(
+  BuildContext context,
+  Error<List<T>, F> state,
+);
+
+typedef Widget DataErrorStateBuilder<T, F>(
   BuildContext context,
   Error<T, F> state,
 );
