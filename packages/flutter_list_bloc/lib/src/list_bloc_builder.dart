@@ -11,6 +11,10 @@ class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
   final ListStateBuilder<T, F> emptyBuilder;
   final ListStateBuilder<T, F> loadingBuilder;
   final ListStateBuilder<T, F>? headerBuilder;
+
+  // TODO: Currently it replaces any old states with empty state
+  // It can be enhaced in future to support if there was data state before empty state then to show it
+  // else show error state conditionally.
   final ListErrorStateBuilder<T, F>? errorBuilder;
   final bool withRefreshIndicator;
   final Widget Function(
