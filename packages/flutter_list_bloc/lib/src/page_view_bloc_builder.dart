@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_list_bloc/flutter_list_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
 class PageViewBlocBuilder<T, F> extends StatefulWidget {
   final PaginatedCubit<T, F>? cubit;
 
-  final Widget Function(BuildContext, Data<ListPage<T>, F> state)? headerBuilder;
-  final Widget Function(BuildContext, Data<ListPage<T>, F> state)? footerBuilder;
-  final Widget Function(BuildContext, Data<ListPage<T>, F> state) pageBuilder;
-  final Widget Function(BuildContext, Data<ListPage<T>, F> state) emptyBuilder;
-  final void Function(BuildContext, Data<ListPage<T>, F> state, int index)?
-      onPageChanged;
+  final PageStateBuilder<T, F>? headerBuilder;
+  final PageStateBuilder<T, F>? footerBuilder;
+  final PageStateBuilder<T, F> pageBuilder;
+  final PageStateBuilder<T, F> emptyBuilder;
+  final PageStateBuilder<T, F>? errorBuilder;
 
-  PageViewBlocBuilder(
-      {this.cubit,
-      this.headerBuilder,
-      this.footerBuilder,
-      required this.pageBuilder,
-      this.onPageChanged,
-      required this.emptyBuilder});
+  final OnPageChangedBuilder<T, F>? onPageChanged;
+
+  PageViewBlocBuilder({
+    this.cubit,
+    this.headerBuilder,
+    this.footerBuilder,
+    required this.pageBuilder,
+    this.onPageChanged,
+    required this.emptyBuilder,
+    this.errorBuilder,
+  });
 
   @override
   State<StatefulWidget> createState() => _PageViewBlocBuilderState<T, F>();
@@ -44,7 +48,11 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
 
           if (widget.headerBuilder != null)
             children.add(widget.headerBuilder!(context, state));
-
+          if (widget.errorBuilder != null && state is Error) {
+            children.add(Expanded(
+                child: widget.errorBuilder!(
+                    context, state as Error<ListPage<T>, F>)));
+          }
           if (state.data?.data?.isEmpty ?? true) {
             children.add(Expanded(child: widget.emptyBuilder(context, state)));
           } else {
