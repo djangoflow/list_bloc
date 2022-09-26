@@ -1,3 +1,7 @@
+## [4.0.1] - 26 Sep 2022
+
+- added optional `errorBuilder` to show error state.
+
 ## [4.0.0] - 25 Apr 2022
 
 #### Breaking change
