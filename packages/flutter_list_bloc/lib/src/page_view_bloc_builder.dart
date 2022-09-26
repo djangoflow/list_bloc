@@ -6,13 +6,13 @@ import 'package:list_bloc/list_bloc.dart';
 class PageViewBlocBuilder<T, F> extends StatefulWidget {
   final PaginatedCubit<T, F>? cubit;
 
-  final PageStateBuilder? headerBuilder;
-  final PageStateBuilder? footerBuilder;
-  final PageStateBuilder pageBuilder;
-  final PageStateBuilder emptyBuilder;
-  final PageStateBuilder? errorBuilder;
+  final PageStateBuilder<T, F>? headerBuilder;
+  final PageStateBuilder<T, F>? footerBuilder;
+  final PageStateBuilder<T, F> pageBuilder;
+  final PageStateBuilder<T, F> emptyBuilder;
+  final PageStateBuilder<T, F>? errorBuilder;
 
-  final OnPageChangedBuilder? onPageChanged;
+  final OnPageChangedBuilder<T, F>? onPageChanged;
 
   PageViewBlocBuilder({
     this.cubit,
