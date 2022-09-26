@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_list_bloc/flutter_list_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
 class PageViewBlocBuilder<T, F> extends StatefulWidget {
   final PaginatedCubit<T, F>? cubit;
 
-  final Widget Function(BuildContext, Data<ListPage<T>, F> state)?
-      headerBuilder;
-  final Widget Function(BuildContext, Data<ListPage<T>, F> state)?
-      footerBuilder;
-  final Widget Function(BuildContext, Data<ListPage<T>, F> state) pageBuilder;
-  final Widget Function(BuildContext, Data<ListPage<T>, F> state) emptyBuilder;
-  final Widget Function(BuildContext, Data<ListPage<T>, F> state)? errorBuilder;
+  final PageStateBuilder? headerBuilder;
+  final PageStateBuilder? footerBuilder;
+  final PageStateBuilder pageBuilder;
+  final PageStateBuilder emptyBuilder;
+  final PageStateBuilder? errorBuilder;
 
-  final void Function(BuildContext, Data<ListPage<T>, F> state, int index)?
-      onPageChanged;
+  final OnPageChangedBuilder? onPageChanged;
 
   PageViewBlocBuilder({
     this.cubit,
