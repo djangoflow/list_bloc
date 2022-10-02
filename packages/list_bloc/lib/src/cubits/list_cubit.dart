@@ -20,5 +20,50 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
       rethrow;
     }
   }
-// TODO(alexis): implement remove, add, replace etc
+
+  void add(T element) {
+    final data = <T>[...state.data ?? [], element];
+    emit(state.copyWith(data: data));
+  }
+
+  void remove(T element) {
+    final data = <T>[...state.data ?? []]..remove(element);
+    emit(
+      data.isEmpty
+          ? Data.empty(filter: state.filter)
+          : Data(data: data, filter: state.filter),
+    );
+  }
+
+  void removeWhere(bool Function(T) test) {
+    final data = <T>[...state.data ?? []]..removeWhere(test);
+    emit(
+      data.isEmpty
+          ? Data.empty(filter: state.filter)
+          : Data(data: data, filter: state.filter),
+    );
+  }
+
+  void _replaceFromIndexWith(int? replaceableIndex, T replaceWith) {
+    if (replaceableIndex != null && replaceableIndex >= 0) {
+      final data = <T>[...state.data ?? []]..[replaceableIndex] = replaceWith;
+      emit(Data(data: data, filter: state.filter));
+    }
+  }
+
+  void replace({
+    required T replaceWhat,
+    required T replaceWith,
+  }) {
+    final replaceableIndex = state.data?.indexOf(replaceWhat);
+    _replaceFromIndexWith(replaceableIndex, replaceWith);
+  }
+
+  void replaceWhere({
+    required bool Function(T) replaceWhere,
+    required T replaceWith,
+  }) {
+    final replaceableIndex = state.data?.indexWhere(replaceWhere);
+    _replaceFromIndexWith(replaceableIndex, replaceWith);
+  }
 }
