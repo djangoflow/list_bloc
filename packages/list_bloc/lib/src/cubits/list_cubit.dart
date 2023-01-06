@@ -25,34 +25,31 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
 
   Future<void> remove(int index, [F? filter]) async {
     final f = filter ?? state.filter;
-
-    emit(Data.loading(data: state.data, filter: f));
     try {
       final data = [...state.data ?? []];
-      data.removeAt(index);
-      emit(
-        data.isEmpty
-            ? Data.empty(filter: f)
-            : Data(data: data, filter: state.filter),
-      );
+      if (data.isEmpty) {
+        emit(Data.empty(filter: f));
+      } else {
+        data.removeAt(index);
+        emit(Data(data: data, filter: f));
+      }
     } on Exception catch (e) {
       emit(Data.error(data: state.data, filter: state.filter, error: e));
       rethrow;
     }
   }
 
-  Future<void> insert(int index, [F? filter]) async {
+  Future<void> insert(int index, T item, [F? filter]) async {
     final f = filter ?? state.filter;
 
     emit(Data.loading(data: state.data, filter: f));
     try {
-      final items = await loader(f);
       final data = [...state.data ?? []];
-      data.insertAll(index, items);
+      data.insert(index, item);
       emit(
         data.isEmpty
             ? Data.empty(filter: f)
-            : Data(data: data, filter: state.filter),
+            : Data(data: data, filter: f),
       );
     } on Exception catch (e) {
       emit(Data.error(data: state.data, filter: state.filter, error: e));
@@ -60,22 +57,21 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
     }
   }
 
-  Future<void> replace([F? filter]) async {
+  Future<void> replace(int index, T updatedItem, [F? filter]) async {
     final f = filter ?? state.filter;
 
     emit(Data.loading(data: state.data, filter: f));
     try {
-      final data = await loader(f);
-      emit(
-        data.isEmpty
-            ? Data.empty(filter: f)
-            : Data(data: data, filter: state.filter),
-      );
+      final data = [...state.data ?? []];
+      if (data.isEmpty) {
+        emit(Data.empty(filter: f));
+      } else {
+        data[index] = updatedItem;
+        emit(Data(data: data, filter: f));
+      }
     } on Exception catch (e) {
       emit(Data.error(data: state.data, filter: state.filter, error: e));
       rethrow;
     }
   }
-
-
 }
