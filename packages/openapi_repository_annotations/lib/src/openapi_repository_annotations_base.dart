@@ -6,6 +6,8 @@ class OpenapiRepository {
   /// List of `RepositoryBuilder` to allow/ignore certain methods
   final List<RepositoryBuilder> builderList;
 
+  final List<BlocMixin> blocMixins;
+
   /// connection connect timeout in milliseconds
   final int connectTimeout;
 
@@ -44,6 +46,7 @@ class OpenapiRepository {
     this.liveBasePath,
     this.baseUrl,
     this.crudOperationConfig = const CrudOperationConfig(),
+    this.blocMixins = const [],
   });
 }
 
@@ -82,4 +85,11 @@ class CrudOperationConfig {
     this.patchOperationName = "PartialUpdate",
     this.getListOperationName = "List",
   });
+}
+
+class BlocMixin {
+  // Mixin types that needs to be used with ListBloc/DataBloc
+  final Type mixin;
+
+  const BlocMixin(this.mixin);
 }
