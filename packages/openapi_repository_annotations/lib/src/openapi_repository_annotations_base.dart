@@ -6,6 +6,7 @@ class OpenapiRepository {
   /// List of `RepositoryBuilder` to allow/ignore certain methods
   final List<RepositoryBuilder> builderList;
 
+  /// List of `BlocMixin` to allow adding `mixin` on ListBloc/DataBloc
   final List<BlocMixin> blocMixins;
 
   /// connection connect timeout in milliseconds
