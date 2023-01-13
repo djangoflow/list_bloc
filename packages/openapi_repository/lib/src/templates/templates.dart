@@ -41,7 +41,7 @@ typedef {{name}}State = Data<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}
 const dataCubitTemplate = r'''
 // DataCubit for {{name}}
 
-class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}{{filterSuffix}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
+class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}{{filterSuffix}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {{#hasBlocMixins}}, {{blocMixins}} {{/hasBlocMixins}}{
   {{name}}DataBloc() : super({{name}}Repository.{{loaderMethodName}});
 
   {{#crudMethods}}
@@ -63,7 +63,7 @@ class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}{
 const listCubitTemplate = r'''
 // ListCubit for {{name}}
 
-class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}{{filterSuffix}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {
+class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}{{filterSuffix}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {{#hasBlocMixins}}, {{blocMixins}} {{/hasBlocMixins}}{
   {{name}}ListBloc() : super({{name}}Repository.{{loaderMethodName}});
 
   {{#crudMethods}}
@@ -142,7 +142,7 @@ class {{repositoryName}} {
 
   {{repositoryName}}._internal() {
     _openapi.dio.options
-      ..baseUrl = {{{baseUrl}}}
+      ..baseUrl = sandboxBasePath
       ..connectTimeout = {{connectTimeout}}
       ..receiveTimeout = {{receiveTimeout}}
       ..sendTimeout = {{sendTimeout}};
@@ -150,6 +150,11 @@ class {{repositoryName}} {
   }
 
   static const String liveBasePath = {{{liveBasePath}}};
+  static const String sandboxBasePath = {{{baseUrl}}};
+
+  void updateBaseUrl(String baseUrl) {
+    _openapi.dio.options.baseUrl = baseUrl;
+  }
 
   static final Openapi _openapi = Openapi(
     basePathOverride: kReleaseMode ? liveBasePath : null,

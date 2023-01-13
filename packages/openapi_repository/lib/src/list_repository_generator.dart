@@ -49,6 +49,7 @@ class OpenapiRepositoryGenerator
     final receiveTimeout = parsedAnnotation.receiveTimeout;
     final sendTimeout = parsedAnnotation.sendTimeout;
     final dioInterceptor = parsedAnnotation.dioInterceptor;
+    final blocMixins = parsedAnnotation.blocMixinsList;
 
     final methods = parsedAnnotation.buildForElement.methods.where((element) {
       if (element.returnType.isVoid) return false;
@@ -92,7 +93,7 @@ class OpenapiRepositoryGenerator
 
     // Write list blocs, filter, repository
     for (final builder in parsedAnnotation.builderList) {
-      final output = await _getGeneratedCodesFromBuilder(builder);
+      final output = await _getGeneratedCodesFromBuilder(builder, blocMixins);
       if (output.isEmpty) continue;
       buffer.writeln(output);
     }
@@ -103,6 +104,7 @@ class OpenapiRepositoryGenerator
   /// Get generated codes from builder.
   Future<String> _getGeneratedCodesFromBuilder(
     _RepositoryBuilder builder,
+    Iterable<_BlocMixin> blocMixins,
   ) async {
     final crudOperationConfig = CrudConfigProvider.instance.config;
 
@@ -250,12 +252,16 @@ class OpenapiRepositoryGenerator
             }
           }
         }
+        final blocMixinsNames = blocMixins
+            .map((e) => e.mixinClass.displayName)
+            .toList(growable: false);
 
         buffer.write((await _processRepositoryData(
           loaders: loaders,
           methods: methods,
           api: apiClass,
           prefix: namePrefix,
+          blocMixinsString: blocMixinsNames.join(", "),
         )));
       } else {
         continue;
@@ -280,6 +286,7 @@ class OpenapiRepositoryGenerator
     required List<MethodElement> methods,
     required String api,
     required String prefix,
+    String blocMixinsString = '',
   }) async {
     final buffer = StringBuffer();
 
@@ -326,6 +333,7 @@ class OpenapiRepositoryGenerator
           loaders: loaders,
           methods: methods,
           namePrefix: prefix,
+          blocMixinsString: blocMixinsString,
         )))
         ..writeln();
 
@@ -338,6 +346,7 @@ class OpenapiRepositoryGenerator
     required String namePrefix,
     required List<LoaderMethodModel> loaders,
     required Iterable<MethodElement> methods,
+    required String blocMixinsString,
   }) async {
     LoaderTemplateModel? listLoaderForTemplate;
     LoaderTemplateModel? dataLoaderForTemplate;
@@ -488,6 +497,8 @@ class OpenapiRepositoryGenerator
               filterSuffix: crudOperationConfig.getOperationName,
               loaderMethodName:
                   crudOperationConfig.getOperationName.toLowerCase(),
+              blocMixins: blocMixinsString,
+              hasBlocMixins: blocMixinsString.isNotEmpty,
             ).toJson(),
           )
         : '';
@@ -501,6 +512,8 @@ class OpenapiRepositoryGenerator
               filterSuffix: crudOperationConfig.getListOperationName,
               loaderMethodName:
                   crudOperationConfig.getListOperationName.toLowerCase(),
+              blocMixins: blocMixinsString,
+              hasBlocMixins: blocMixinsString.isNotEmpty,
             ).toJson(),
           )
         : '';
@@ -687,6 +700,7 @@ class _ReturnModel {
 class _ReaderTypes {
   final ClassElement buildForElement;
   final Iterable<_RepositoryBuilder> builderList;
+  final Iterable<_BlocMixin> blocMixinsList;
   final int connectTimeout;
   final int receiveTimeout;
   final int sendTimeout;
@@ -701,6 +715,7 @@ class _ReaderTypes {
     required this.buildForElement,
     required this.crudOperationConfig,
     this.builderList = const [],
+    this.blocMixinsList = const [],
     this.connectTimeout = 10000,
     this.receiveTimeout = 15000,
     this.sendTimeout = 15000,
@@ -729,6 +744,9 @@ class _ReaderTypes {
     final sendTimeout = reader.peek('sendTimeout')?.intValue ?? 0;
     final dioInterceptor = reader.peek('dioInterceptor')?.typeValue;
 
+    final blocMixins = reader.peek('blocMixins')?.listValue ?? [];
+    final blocMixinsData = blocMixins.map((e) => _BlocMixin.fromDartObject(e));
+
     final builderList = reader.peek('builderList')?.listValue ?? [];
     final builderData = builderList.map(
       (e) => _RepositoryBuilder.fromDartObject(e),
@@ -746,6 +764,7 @@ class _ReaderTypes {
       buildForElement: buildForElement,
       baseUrl: baseUrl,
       builderList: builderData,
+      blocMixinsList: blocMixinsData,
       liveBasePath: liveBasePath,
       defaultOffset: defaultOffset,
       defaultPageSize: defaultPageSize,
@@ -808,6 +827,26 @@ class _RepositoryBuilder {
       ignoreEndpoints: parsedIgnoreEndpoints,
       allowedEndpoints: parsedEndpoints,
     );
+  }
+}
+
+class _BlocMixin {
+  final MixinElement mixinClass;
+
+  const _BlocMixin._(this.mixinClass);
+
+  factory _BlocMixin.fromDartObject(DartObject e) {
+    final type = e.getField('mixin')?.toTypeValue();
+    if (type == null) {
+      throw FormatException('Mixin field must be a type');
+    }
+
+    final element = type.element;
+    if (element is! MixinElement) {
+      throw 'mixin field should be a Mixin Type';
+    }
+
+    return _BlocMixin._(element);
   }
 }
 

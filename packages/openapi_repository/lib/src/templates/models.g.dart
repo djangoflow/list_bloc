@@ -378,6 +378,8 @@ _$_CubitTemplateModel _$$_CubitTemplateModelFromJson(
           .toList(),
       filterSuffix: json['filterSuffix'] as String,
       loaderMethodName: json['loaderMethodName'] as String,
+      blocMixins: json['blocMixins'] as String?,
+      hasBlocMixins: json['hasBlocMixins'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_CubitTemplateModelToJson(
@@ -389,6 +391,8 @@ Map<String, dynamic> _$$_CubitTemplateModelToJson(
       'crudMethods': instance.crudMethods.map((e) => e.toJson()).toList(),
       'filterSuffix': instance.filterSuffix,
       'loaderMethodName': instance.loaderMethodName,
+      'blocMixins': instance.blocMixins,
+      'hasBlocMixins': instance.hasBlocMixins,
     };
 
 _$_BuiltListJsonConverterModel _$$_BuiltListJsonConverterModelFromJson(
