@@ -3785,6 +3785,8 @@ mixin _$CubitTemplateModel {
   List<MethodModel> get crudMethods => throw _privateConstructorUsedError;
   String get filterSuffix => throw _privateConstructorUsedError;
   String get loaderMethodName => throw _privateConstructorUsedError;
+  String? get blocMixins => throw _privateConstructorUsedError;
+  bool get hasBlocMixins => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -3803,7 +3805,9 @@ abstract class $CubitTemplateModelCopyWith<$Res> {
       bool hasFilter,
       List<MethodModel> crudMethods,
       String filterSuffix,
-      String loaderMethodName});
+      String loaderMethodName,
+      String? blocMixins,
+      bool hasBlocMixins});
 }
 
 /// @nodoc
@@ -3823,6 +3827,8 @@ class _$CubitTemplateModelCopyWithImpl<$Res>
     Object? crudMethods = freezed,
     Object? filterSuffix = freezed,
     Object? loaderMethodName = freezed,
+    Object? blocMixins = freezed,
+    Object? hasBlocMixins = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -3849,6 +3855,14 @@ class _$CubitTemplateModelCopyWithImpl<$Res>
           ? _value.loaderMethodName
           : loaderMethodName // ignore: cast_nullable_to_non_nullable
               as String,
+      blocMixins: blocMixins == freezed
+          ? _value.blocMixins
+          : blocMixins // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hasBlocMixins: hasBlocMixins == freezed
+          ? _value.hasBlocMixins
+          : hasBlocMixins // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -3866,7 +3880,9 @@ abstract class _$$_CubitTemplateModelCopyWith<$Res>
       bool hasFilter,
       List<MethodModel> crudMethods,
       String filterSuffix,
-      String loaderMethodName});
+      String loaderMethodName,
+      String? blocMixins,
+      bool hasBlocMixins});
 }
 
 /// @nodoc
@@ -3888,6 +3904,8 @@ class __$$_CubitTemplateModelCopyWithImpl<$Res>
     Object? crudMethods = freezed,
     Object? filterSuffix = freezed,
     Object? loaderMethodName = freezed,
+    Object? blocMixins = freezed,
+    Object? hasBlocMixins = freezed,
   }) {
     return _then(_$_CubitTemplateModel(
       name: name == freezed
@@ -3914,6 +3932,14 @@ class __$$_CubitTemplateModelCopyWithImpl<$Res>
           ? _value.loaderMethodName
           : loaderMethodName // ignore: cast_nullable_to_non_nullable
               as String,
+      blocMixins: blocMixins == freezed
+          ? _value.blocMixins
+          : blocMixins // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hasBlocMixins: hasBlocMixins == freezed
+          ? _value.hasBlocMixins
+          : hasBlocMixins // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -3928,7 +3954,9 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
       this.hasFilter = false,
       required final List<MethodModel> crudMethods,
       required this.filterSuffix,
-      required this.loaderMethodName})
+      required this.loaderMethodName,
+      this.blocMixins,
+      this.hasBlocMixins = false})
       : _crudMethods = crudMethods;
 
   factory _$_CubitTemplateModel.fromJson(Map<String, dynamic> json) =>
@@ -3952,10 +3980,15 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
   final String filterSuffix;
   @override
   final String loaderMethodName;
+  @override
+  final String? blocMixins;
+  @override
+  @JsonKey()
+  final bool hasBlocMixins;
 
   @override
   String toString() {
-    return 'CubitTemplateModel(name: $name, returnType: $returnType, hasFilter: $hasFilter, crudMethods: $crudMethods, filterSuffix: $filterSuffix, loaderMethodName: $loaderMethodName)';
+    return 'CubitTemplateModel(name: $name, returnType: $returnType, hasFilter: $hasFilter, crudMethods: $crudMethods, filterSuffix: $filterSuffix, loaderMethodName: $loaderMethodName, blocMixins: $blocMixins, hasBlocMixins: $hasBlocMixins)';
   }
 
   @override
@@ -3972,7 +4005,11 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
             const DeepCollectionEquality()
                 .equals(other.filterSuffix, filterSuffix) &&
             const DeepCollectionEquality()
-                .equals(other.loaderMethodName, loaderMethodName));
+                .equals(other.loaderMethodName, loaderMethodName) &&
+            const DeepCollectionEquality()
+                .equals(other.blocMixins, blocMixins) &&
+            const DeepCollectionEquality()
+                .equals(other.hasBlocMixins, hasBlocMixins));
   }
 
   @JsonKey(ignore: true)
@@ -3984,7 +4021,9 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
       const DeepCollectionEquality().hash(hasFilter),
       const DeepCollectionEquality().hash(_crudMethods),
       const DeepCollectionEquality().hash(filterSuffix),
-      const DeepCollectionEquality().hash(loaderMethodName));
+      const DeepCollectionEquality().hash(loaderMethodName),
+      const DeepCollectionEquality().hash(blocMixins),
+      const DeepCollectionEquality().hash(hasBlocMixins));
 
   @JsonKey(ignore: true)
   @override
@@ -4007,7 +4046,9 @@ abstract class _CubitTemplateModel implements CubitTemplateModel {
       final bool hasFilter,
       required final List<MethodModel> crudMethods,
       required final String filterSuffix,
-      required final String loaderMethodName}) = _$_CubitTemplateModel;
+      required final String loaderMethodName,
+      final String? blocMixins,
+      final bool hasBlocMixins}) = _$_CubitTemplateModel;
 
   factory _CubitTemplateModel.fromJson(Map<String, dynamic> json) =
       _$_CubitTemplateModel.fromJson;
@@ -4024,6 +4065,10 @@ abstract class _CubitTemplateModel implements CubitTemplateModel {
   String get filterSuffix;
   @override
   String get loaderMethodName;
+  @override
+  String? get blocMixins;
+  @override
+  bool get hasBlocMixins;
   @override
   @JsonKey(ignore: true)
   _$$_CubitTemplateModelCopyWith<_$_CubitTemplateModel> get copyWith =>

@@ -235,6 +235,8 @@ class CubitTemplateModel with _$CubitTemplateModel {
     required List<MethodModel> crudMethods,
     required String filterSuffix,
     required String loaderMethodName,
+    String? blocMixins,
+    @Default(false) bool hasBlocMixins,
   }) = _CubitTemplateModel;
 
   factory CubitTemplateModel.fromJson(Map<String, dynamic> map) =>
