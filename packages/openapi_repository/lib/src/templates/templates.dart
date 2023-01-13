@@ -142,7 +142,7 @@ class {{repositoryName}} {
 
   {{repositoryName}}._internal() {
     _openapi.dio.options
-      ..baseUrl = {{{baseUrl}}}
+      ..baseUrl = sandboxBasePath
       ..connectTimeout = {{connectTimeout}}
       ..receiveTimeout = {{receiveTimeout}}
       ..sendTimeout = {{sendTimeout}};
@@ -150,6 +150,11 @@ class {{repositoryName}} {
   }
 
   static const String liveBasePath = {{{liveBasePath}}};
+  static const String sandboxBasePath = {{{baseUrl}}};
+
+  void updateBaseUrl(String baseUrl) {
+    _openapi.dio.options.baseUrl = baseUrl;
+  }
 
   static final Openapi _openapi = Openapi(
     basePathOverride: kReleaseMode ? liveBasePath : null,
