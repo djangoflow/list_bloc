@@ -1,3 +1,7 @@
+## [2.0.0] - 16 March 2023
+
+- Support providing and generating `mixin` with ListBloc/DataBloc.
+
 ## [1.1.0] - 13 Jan 2023
 
 - Support providing and generating `mixin` with ListBloc/DataBloc.
