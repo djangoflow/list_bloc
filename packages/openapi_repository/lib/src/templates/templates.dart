@@ -143,9 +143,9 @@ class {{repositoryName}} {
   {{repositoryName}}._internal() {
     _openapi.dio.options
       ..baseUrl = sandboxBasePath
-      ..connectTimeout = {{connectTimeout}}
-      ..receiveTimeout = {{receiveTimeout}}
-      ..sendTimeout = {{sendTimeout}};
+      ..connectTimeout = const Duration(milliseconds: {{connectTimeout}})
+      ..receiveTimeout = const Duration(milliseconds: {{receiveTimeout}})
+      ..sendTimeout = const Duration(milliseconds: {{sendTimeout}});
     {{#dioInterceptor}}_openapi.dio.interceptors.add({{dioInterceptor}}());{{/dioInterceptor}}
   }
 
