@@ -1,3 +1,7 @@
+## [4.1.0] - 24 Mar 2023
+
+- added optional `loadMoreScrollThreshold`, the threshold in pixels from the bottom of the list when the next page should be loaded. If not provided `10` will be used
+
 ## [4.0.1] - 26 Sep 2022
 
 - added optional `errorBuilder` to show error state.
