@@ -8,11 +8,13 @@ class ContinuousScrollBuilder<B extends ListCubit<T, F>, T,
   final Widget Function(BuildContext context, ScrollController controller)
       builder;
   final ScrollController? controller;
+  final double? loadMoreThreshold;
 
   const ContinuousScrollBuilder({
     required this.builder,
     this.cubit,
     this.controller,
+    this.loadMoreThreshold,
   });
 
   @override
@@ -44,7 +46,8 @@ class _ContinuousScrollBuilderState<B extends ListCubit<T, F>, T,
   }
 
   void _scrollListener() {
-    if (_scrollController.position.extentAfter < 10) {
+    if (_scrollController.position.extentAfter <
+        (widget.loadMoreThreshold ?? 10)) {
       final offset = _cubit.state.data?.length ?? 0;
       var filter = _cubit.state.filter;
       print(filter);
