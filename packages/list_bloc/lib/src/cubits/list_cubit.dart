@@ -22,16 +22,41 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
   }
 
   void add(T item) {
-    final data = <T>[...state.data ?? [], item];
-    emit(state.copyWith(data: data));
+    final data = state.data;
+    emit(
+      Data.loading(
+        data: data,
+        filter: state.filter,
+      ),
+    );
+
+    final newData = <T>[...data ?? [], item];
+    emit(
+      Data(
+        data: newData,
+        filter: state.filter,
+      ),
+    );
   }
 
   void remove(T item) {
-    final data = <T>[...state.data ?? []]..remove(item);
-    if (data.isEmpty) {
-      emit(Data.empty(filter: state.filter,),);
+    final data = state.data;
+    emit(
+      Data.loading(
+        data: data,
+        filter: state.filter,
+      ),
+    );
+
+    final newData = <T>[...data ?? []]..remove(item);
+    if (newData.isEmpty) {
+      emit(
+        Data.empty(
+          filter: state.filter,
+        ),
+      );
     } else {
-      emit(state.copyWith(data: data));
+      emit(state.copyWith(data: newData));
     }
   }
 
@@ -39,13 +64,24 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
     required T oldItem,
     required T newItem,
   }) {
-    final data = <T>[...state.data ?? []];
+    emit(
+      Data.loading(
+        data: state.data,
+        filter: state.filter,
+      ),
+    );
 
+    final data = <T>[...state.data ?? []];
     final index = data.indexOf(oldItem);
     if (index != -1) {
       data.removeAt(index);
       data.insert(index, newItem);
-      emit(state.copyWith(data: data));
+      emit(
+        Data(
+          data: data,
+          filter: state.filter,
+        ),
+      );
     }
   }
 }
