@@ -69,14 +69,14 @@ void main() {
         Data<List<Item>, ItemType>(
           data: [
             Item(type: ItemType.fruit, value: 'Apple'),
-            Item(type: ItemType.vegetable, value: 'Potato')
+            Item(type: ItemType.vegetable, value: 'Potato'),
           ],
           filter: ItemType.vegetable,
         ),
         Data<List<Item>, ItemType>.loading(
           data: [
             Item(type: ItemType.fruit, value: 'Apple'),
-            Item(type: ItemType.vegetable, value: 'Potato')
+            Item(type: ItemType.vegetable, value: 'Potato'),
           ],
           filter: ItemType.vegetable,
         ),
@@ -125,6 +125,138 @@ void main() {
           data: [Item(type: ItemType.vegetable, value: 'Potato')],
           filter: ItemType.fruit,
           error: error,
+        ),
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'is able to add an item correctly',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.fruit);
+        cubit.add(Item(type: ItemType.vegetable, value: 'Carrot'));
+      },
+      expect: () => [
+        Data<List<Item>, ItemType>.loading(
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [
+            Item(type: ItemType.fruit, value: 'Apple'),
+            Item(type: ItemType.vegetable, value: 'Carrot'),
+          ],
+          filter: ItemType.fruit,
+        ),
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'is able to remove an item by index correctly',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.fruit);
+        cubit.add(Item(type: ItemType.vegetable, value: 'Carrot'));
+        cubit.removeAt(1);
+      },
+      expect: () => [
+        Data<List<Item>, ItemType>.loading(
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [
+            Item(type: ItemType.fruit, value: 'Apple'),
+            Item(type: ItemType.vegetable, value: 'Carrot'),
+          ],
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'is able to remove an item by value correctly',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.fruit);
+        cubit.add(Item(type: ItemType.vegetable, value: 'Carrot'));
+        cubit.remove(Item(type: ItemType.vegetable, value: 'Carrot'));
+      },
+      expect: () => [
+        Data<List<Item>, ItemType>.loading(
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [
+            Item(type: ItemType.fruit, value: 'Apple'),
+            Item(type: ItemType.vegetable, value: 'Carrot'),
+          ],
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'is able to replace an item by index correctly',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.fruit);
+        cubit.replaceAt(0, Item(type: ItemType.fruit, value: 'Orange'));
+      },
+      expect: () => [
+        Data<List<Item>, ItemType>.loading(
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Orange')],
+          filter: ItemType.fruit,
+        ),
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'is able to replace an item by value correctly',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.fruit);
+        cubit.replace(
+          Item(type: ItemType.fruit, value: 'Apple'),
+          Item(type: ItemType.fruit, value: 'Orange'),
+        );
+      },
+      expect: () => [
+        Data<List<Item>, ItemType>.loading(
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Orange')],
+          filter: ItemType.fruit,
         ),
       ],
     );
