@@ -1,8 +1,7 @@
 import 'package:list_bloc/list_bloc.dart';
 
 class ListCubit<T, F> extends DataCubit<List<T>, F> {
-  ListCubit(Future<List<T>> Function([F?]) loader, [Data<List<T>, F>? state])
-      : super(loader, state);
+  ListCubit(Future<List<T>> Function([F?]) loader, [Data<List<T>, F>? state]) : super(loader, state);
 
   Future<void> reload([F? filter]) => super.load(filter);
 
@@ -20,5 +19,58 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
       rethrow;
     }
   }
-// TODO(alexis): implement remove, add, replace etc
+
+  void add(T item) {
+    try {
+      final newData = <T>[...state.data ?? [], item];
+      emit(Data(data: newData, filter: state.filter));
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
+
+  void removeAt(int index) {
+    try {
+      final newData = List<T>.from(state.data ?? [])..removeAt(index);
+      emit(Data(data: newData, filter: state.filter));
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
+
+  void remove(T item) {
+    try {
+      final newData = List<T>.from(state.data ?? [])..remove(item);
+      emit(Data(data: newData, filter: state.filter));
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
+
+  void replaceAt(int index, T newItem) {
+    try {
+      final newData = List<T>.from(state.data ?? [])..[index] = newItem;
+      emit(Data(data: newData, filter: state.filter));
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
+
+  void replace(T oldItem, T newItem) {
+    try {
+      final newData = List<T>.from(state.data ?? []);
+      int index = newData.indexOf(oldItem);
+      if (index != -1) {
+        newData[index] = newItem;
+      }
+      emit(Data(data: newData, filter: state.filter));
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
 }
