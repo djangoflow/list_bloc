@@ -33,7 +33,7 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
   void removeAt(int index) {
     try {
       final newData = List<T>.from(state.data ?? [])..removeAt(index);
-      emit(Data(data: newData, filter: state.filter));
+      emit(newData.isEmpty ? Data.empty(filter: state.filter) : Data(data: newData, filter: state.filter));
     } catch (e) {
       emit(Data.error(data: state.data, filter: state.filter, error: e));
       rethrow;
@@ -43,7 +43,7 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
   void remove(T item) {
     try {
       final newData = List<T>.from(state.data ?? [])..remove(item);
-      emit(Data(data: newData, filter: state.filter));
+      emit(newData.isEmpty ? Data.empty(filter: state.filter) : Data(data: newData, filter: state.filter));
     } catch (e) {
       emit(Data.error(data: state.data, filter: state.filter, error: e));
       rethrow;
