@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
-import 'item.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class Item {
+  final String title;
+
+  Item({required this.title});
+
+  @override
+  String toString() {
+    return title;
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +29,7 @@ class MyApp extends StatelessWidget {
       ),
       home: BlocProvider(
         create: (context) {
-          final listCubit = ListCubit<Item, void>(([_]) async {
+          final listCubit = ListCubit<Item, Object>(([_]) async {
             await Future.delayed(const Duration(seconds: 2));
             return [
               Item(title: 'Item 1'),
@@ -30,7 +40,7 @@ class MyApp extends StatelessWidget {
           listCubit.load();
           return listCubit;
         },
-        child: const MyHomePage(title: 'ListCubit example'),
+        child: const MyHomePage(title: 'List Cubit example'),
       ),
     );
   }
@@ -50,17 +60,17 @@ class MyHomePageState extends State<MyHomePage> {
 
   void _addItem() {
     context
-        .read<ListCubit<Item, void>>()
+        .read<ListCubit<Item, Object>>()
         .add(Item(title: _textEditingController.text.isNotEmpty ? _textEditingController.text : 'default'));
     _textEditingController.clear();
   }
 
   void _removeItem(Item item) {
-    context.read<ListCubit<Item, void>>().remove(item);
+    context.read<ListCubit<Item, Object>>().remove(item);
   }
 
   void _replaceItem(Item oldItem, String newItemTitle) {
-    context.read<ListCubit<Item, void>>().replace(oldItem, Item(title: newItemTitle));
+    context.read<ListCubit<Item, Object>>().replace(oldItem, Item(title: newItemTitle));
   }
 
   @override
@@ -86,7 +96,7 @@ class MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-            child: BlocBuilder<ListCubit<Item, void>, Data<List<Item>, void>>(
+            child: BlocBuilder<ListCubit<Item, Object>, Data<List<Item>, Object>>(
               builder: (context, state) {
                 if (state is Loading) {
                   return const Center(child: CircularProgressIndicator());
@@ -97,9 +107,9 @@ class MyHomePageState extends State<MyHomePage> {
                 }
 
                 return ListView.builder(
-                  itemCount: context.watch<ListCubit<Item, void>>().state.data?.length ?? 0,
+                  itemCount: context.watch<ListCubit<Item, Object>>().state.data?.length ?? 0,
                   itemBuilder: (context, index) {
-                    Item item = context.watch<ListCubit<Item, void>>().state.data![index];
+                    Item item = context.watch<ListCubit<Item, Object>>().state.data![index];
                     return ListTile(
                       title: Text(item.title),
                       trailing: Row(
