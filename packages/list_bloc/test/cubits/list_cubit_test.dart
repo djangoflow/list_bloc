@@ -185,6 +185,16 @@ void main() {
     );
 
     blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'throws an error when providing a wrong index (out of range or negative)',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.fruit);
+        cubit.removeAt(2);
+      },
+      errors: () => [isA<RangeError>()],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
       'is able to remove an item by value correctly',
       build: () => cubit,
       act: (cubit) async {
@@ -209,6 +219,27 @@ void main() {
         ),
         Data<List<Item>, ItemType>(
           data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'emits Empty state when removing the only item in the list',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.fruit);
+        cubit.remove(Item(type: ItemType.fruit, value: 'Apple'));
+      },
+      expect: () => [
+        Data<List<Item>, ItemType>.loading(
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>.empty(
           filter: ItemType.fruit,
         ),
       ],
