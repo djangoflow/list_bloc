@@ -3,8 +3,9 @@ import 'package:list_bloc/list_bloc.dart';
 class ListCubit<T, F> extends DataCubit<List<T>, F> {
   ListCubit(Future<List<T>> Function([F?]) loader, [Data<List<T>, F>? state]) : super(loader, state);
 
-  void _emitUpdatedState(List<T> newData) {
-    emit(newData.isEmpty ? Data.empty(filter: state.filter) : Data(data: newData, filter: state.filter));
+  void _emitUpdatedState(List<T> newData, [F? filter]) {
+    final f = filter ?? state.filter;
+    emit(newData.isEmpty ? Data.empty(filter: f) : Data(data: newData, filter: f));
   }
 
   void _emitErrorState(Object error) {
@@ -19,7 +20,7 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
     emit(Data.loading(data: state.data, filter: f));
     try {
       final data = <T>[...state.data ?? [], ...await loader(f)];
-      _emitUpdatedState(data);
+      _emitUpdatedState(data, f);
     } catch (e) {
       _emitErrorState(e);
       rethrow;
