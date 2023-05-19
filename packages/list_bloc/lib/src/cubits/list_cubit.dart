@@ -21,4 +21,50 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
     }
   }
 // TODO(alexis): implement remove, add, replace etc
+
+  Future<void> remove(T item) async {
+    try {
+      final data = <T>[...state.data ?? []];
+      if (data.isNotEmpty) {
+        data.remove(item);
+        emit(
+          Data(data: data, filter: state.filter),
+        );
+      } else {
+        emit(Data.empty(filter: state.filter));
+      }
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
+
+  Future<void> add(T item) async {
+    try {
+      final data = <T>[...state.data ?? []];
+      data.add(item);
+      emit(Data(filter: state.filter, data: data));
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
+
+  Future<void> replace({required T item, required T newItem}) async {
+    try {
+      final data = <T>[...state.data ?? []];
+      if (data.isNotEmpty) {
+        final index = data.indexOf(item);
+        data[index] = newItem;
+        emit(
+          Data(data: data, filter: state.filter),
+        );
+      } else {
+        emit(Data.empty(filter: state.filter));
+      }
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
 }

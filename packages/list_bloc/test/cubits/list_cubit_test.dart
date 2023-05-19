@@ -128,5 +128,78 @@ void main() {
         ),
       ],
     );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'is able to remove data',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.fruit);
+        final item = Item(type: ItemType.fruit, value: 'Apple');
+        await cubit.remove(item);
+      },
+      expect: () => [
+        Data<List<Item>, ItemType>.loading(
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [],
+          filter: ItemType.fruit,
+        ),
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'is able to add new data',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.vegetable);
+        final item = Item(type: ItemType.fruit, value: 'Apple');
+        await cubit.add(item);
+      },
+      expect: () => [
+        Data<List<Item>, ItemType>.loading(
+          filter: ItemType.vegetable,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.vegetable, value: 'Potato')],
+          filter: ItemType.vegetable,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [
+            Item(type: ItemType.vegetable, value: 'Potato'),
+            Item(type: ItemType.fruit, value: 'Apple')
+          ],
+          filter: ItemType.vegetable,
+        ),
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'is able to replace data',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.vegetable);
+        final newItem = Item(type: ItemType.fruit, value: 'Apple');
+        final item = Item(type: ItemType.vegetable, value: 'Potato');
+        await cubit.replace(item: item, newItem: newItem);
+      },
+      expect: () => [
+        Data<List<Item>, ItemType>.loading(
+          filter: ItemType.vegetable,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.vegetable, value: 'Potato')],
+          filter: ItemType.vegetable,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.vegetable,
+        ),
+      ],
+    );
   });
 }
