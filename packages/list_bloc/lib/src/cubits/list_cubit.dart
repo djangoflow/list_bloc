@@ -22,13 +22,15 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
   }
 // TODO(alexis): implement remove, add, replace etc
 
-  Future<void> remove(T item) async {
+  void remove(T item) {
     try {
       final data = <T>[...state.data ?? []];
       if (data.isNotEmpty) {
         data.remove(item);
         emit(
-          Data(data: data, filter: state.filter),
+          data.isEmpty
+              ? Data.empty(filter: state.filter)
+              : Data(data: data, filter: state.filter),
         );
       } else {
         emit(Data.empty(filter: state.filter));
@@ -39,7 +41,7 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
     }
   }
 
-  Future<void> add(T item) async {
+  void add(T item) {
     try {
       final data = <T>[...state.data ?? []];
       data.add(item);
@@ -50,7 +52,7 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
     }
   }
 
-  Future<void> replace({required T item, required T newItem}) async {
+  void replace({required T item, required T newItem}) {
     try {
       final data = <T>[...state.data ?? []];
       if (data.isNotEmpty) {

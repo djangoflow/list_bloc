@@ -130,12 +130,12 @@ void main() {
     );
 
     blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
-      'is able to remove data',
+      'is able to remove data and data is empty',
       build: () => cubit,
       act: (cubit) async {
         await cubit.load(ItemType.fruit);
         final item = Item(type: ItemType.fruit, value: 'Apple');
-        await cubit.remove(item);
+        cubit.remove(item);
       },
       expect: () => [
         Data<List<Item>, ItemType>.loading(
@@ -145,9 +145,41 @@ void main() {
           data: [Item(type: ItemType.fruit, value: 'Apple')],
           filter: ItemType.fruit,
         ),
-        Data<List<Item>, ItemType>(
-          data: [],
+        Data<List<Item>, ItemType>.empty(filter: ItemType.fruit)
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'is able to remove data ',
+      build: () => cubit,
+      act: (cubit) async {
+        await cubit.load(ItemType.fruit);
+        await cubit.append(ItemType.vegetable);
+        final item = Item(type: ItemType.fruit, value: 'Apple');
+        cubit.remove(item);
+      },
+      expect: () => [
+        Data<List<Item>, ItemType>.loading(
           filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.fruit,
+        ),
+        Data<List<Item>, ItemType>.loading(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+          filter: ItemType.vegetable,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [
+            Item(type: ItemType.fruit, value: 'Apple'),
+            Item(type: ItemType.vegetable, value: 'Potato')
+          ],
+          filter: ItemType.vegetable,
+        ),
+        Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.vegetable, value: 'Potato')],
+          filter: ItemType.vegetable,
         ),
       ],
     );
@@ -158,7 +190,7 @@ void main() {
       act: (cubit) async {
         await cubit.load(ItemType.vegetable);
         final item = Item(type: ItemType.fruit, value: 'Apple');
-        await cubit.add(item);
+        cubit.add(item);
       },
       expect: () => [
         Data<List<Item>, ItemType>.loading(
@@ -185,7 +217,7 @@ void main() {
         await cubit.load(ItemType.vegetable);
         final newItem = Item(type: ItemType.fruit, value: 'Apple');
         final item = Item(type: ItemType.vegetable, value: 'Potato');
-        await cubit.replace(item: item, newItem: newItem);
+        cubit.replace(item: item, newItem: newItem);
       },
       expect: () => [
         Data<List<Item>, ItemType>.loading(
