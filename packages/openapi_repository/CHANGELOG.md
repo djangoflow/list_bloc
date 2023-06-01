@@ -1,3 +1,7 @@
+## [2.0.1] - 1 June 2023
+
+- Fixed using `buildFor` to replace hardcoded `Openapi` class.
+
 ## [2.0.0] - 16 March 2023
 
 - Support providing and generating `mixin` with ListBloc/DataBloc.
