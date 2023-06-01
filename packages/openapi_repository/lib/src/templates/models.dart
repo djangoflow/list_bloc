@@ -9,6 +9,7 @@ class RepositoryTemplateModel with _$RepositoryTemplateModel {
   @JsonSerializable(explicitToJson: true)
   const factory RepositoryTemplateModel({
     required String repositoryName,
+    required String buildForClass,
     required String baseUrl,
     required String liveBasePath,
     @Default([]) List<AccessorModel> accessors,

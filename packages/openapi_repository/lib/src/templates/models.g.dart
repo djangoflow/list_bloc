@@ -10,6 +10,7 @@ _$_RepositoryTemplateModel _$$_RepositoryTemplateModelFromJson(
         Map<String, dynamic> json) =>
     _$_RepositoryTemplateModel(
       repositoryName: json['repositoryName'] as String,
+      buildForClass: json['buildForClass'] as String,
       baseUrl: json['baseUrl'] as String,
       liveBasePath: json['liveBasePath'] as String,
       accessors: (json['accessors'] as List<dynamic>?)
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$_RepositoryTemplateModelToJson(
         _$_RepositoryTemplateModel instance) =>
     <String, dynamic>{
       'repositoryName': instance.repositoryName,
+      'buildForClass': instance.buildForClass,
       'baseUrl': instance.baseUrl,
       'liveBasePath': instance.liveBasePath,
       'accessors': instance.accessors.map((e) => e.toJson()).toList(),

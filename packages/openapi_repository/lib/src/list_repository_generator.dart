@@ -57,11 +57,12 @@ class OpenapiRepositoryGenerator
       if (element.isStatic) return false;
       return true;
     }).toList();
-
+    final buildForClassName = parsedAnnotation.buildForElement.name;
     final crudOperationConfig = parsedAnnotation.crudOperationConfig;
     CrudConfigProvider.instance.crudOperationConfig = crudOperationConfig;
     final repositoryModel = RepositoryTemplateModel(
       repositoryName: element.name!.replaceFirst(r'$', ''),
+      buildForClass: buildForClassName,
       baseUrl: baseUrl != null ? "'$baseUrl'" : "'' // TODO: Add base url",
       liveBasePath: liveBasePath != null
           ? "'$liveBasePath'"

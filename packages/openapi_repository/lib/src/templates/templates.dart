@@ -156,12 +156,12 @@ class {{repositoryName}} {
     _openapi.dio.options.baseUrl = baseUrl;
   }
 
-  static final Openapi _openapi = Openapi(
+  static final {{buildForClass}} _openapi = {{buildForClass}}(
     basePathOverride: kReleaseMode ? liveBasePath : null,
     interceptors: [],
   );
 
-  Openapi get api => _openapi;
+  {{buildForClass}} get api => _openapi;
   {{#accessors}}
   {{type}} get {{name}} => api.{{methodName}}();
   {{/accessors}}
