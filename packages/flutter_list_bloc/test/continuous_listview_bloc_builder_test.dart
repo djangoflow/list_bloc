@@ -130,5 +130,104 @@ void main() {
         expect(find.text('No items found.'), findsNothing);
       },
     );
+
+    testWidgets(
+      'should load more items when scrolling to the end of the list',
+      (WidgetTester tester) async {
+        // Emit initial data state
+        listCubit.emit(
+          Data<List<Item>, OffsetLimitFilter>(
+            data: [
+              Item(type: ItemType.fruit, value: 'Apple'),
+              Item(type: ItemType.vegetable, value: 'Potato')
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: continuousListViewBlocBuilder,
+            ),
+          ),
+        );
+
+        // Verify initial list items
+        expect(find.text('Apple'), findsOneWidget);
+        expect(find.text('Potato'), findsOneWidget);
+        expect(find.text('No items found.'), findsNothing);
+
+        // Scroll to the end of the list
+        await tester.drag(find.byType(ListView), Offset(0, 500));
+
+        // Emit updated data state
+        listCubit.emit(
+          Data<List<Item>, OffsetLimitFilter>(
+            data: [
+              ...listCubit.state.data!,
+              Item(type: ItemType.fruit, value: 'Orange'),
+              Item(type: ItemType.vegetable, value: 'Spinach'),
+            ],
+          ),
+        );
+
+        await tester.pumpAndSettle();
+
+        // Verify updated list items
+        expect(find.text('Apple'), findsOneWidget);
+        expect(find.text('Potato'), findsOneWidget);
+        expect(find.text('Orange'), findsOneWidget);
+        expect(find.text('Spinach'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'should reload items when the reload method is called',
+      (WidgetTester tester) async {
+        // Emit initial data state
+        listCubit.emit(
+          Data<List<Item>, OffsetLimitFilter>(
+            data: [
+              Item(type: ItemType.fruit, value: 'Apple'),
+              Item(type: ItemType.vegetable, value: 'Potato'),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: continuousListViewBlocBuilder,
+            ),
+          ),
+        );
+
+        // Verify initial list items
+        expect(find.text('Apple'), findsOneWidget);
+        expect(find.text('Potato'), findsOneWidget);
+        expect(find.text('No items found.'), findsNothing);
+
+        // Call the reload method
+        await listCubit.reload();
+
+        // Emit updated data state after reloading
+        listCubit.emit(
+          Data<List<Item>, OffsetLimitFilter>(
+            data: [
+              Item(type: ItemType.fruit, value: 'Orange'),
+              Item(type: ItemType.vegetable, value: 'Spinach'),
+            ],
+          ),
+        );
+
+        await tester.pumpAndSettle();
+
+        // Verify reloaded list items
+        expect(find.text('Apple'), findsNothing);
+        expect(find.text('Potato'), findsNothing);
+        expect(find.text('Orange'), findsOneWidget);
+        expect(find.text('Spinach'), findsOneWidget);
+      },
+    );
   });
 }
