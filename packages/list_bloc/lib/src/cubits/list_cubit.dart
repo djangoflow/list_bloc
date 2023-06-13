@@ -20,5 +20,57 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
       rethrow;
     }
   }
-// TODO(alexis): implement remove, add, replace etc
+
+  Future<void> remove(T item) async {
+    emit(Data.loading(data: state.data, filter: state.filter));
+    try {
+      final data = state.data;
+      if (data == null) return;
+
+      final updatedData = List<T>.from(data)..remove(item);
+
+      if (updatedData.isEmpty) {
+        emit(Data.empty(filter: state.filter));
+      } else {
+        emit(Data(data: updatedData, filter: state.filter));
+      }
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
+
+  Future<void> add(T item) async {
+    emit(Data.loading(data: state.data, filter: state.filter));
+    try {
+      final data = state.data;
+      if (data == null) return;
+
+      final updatedData = List<T>.from(data)..add(item);
+
+      emit(Data(data: updatedData, filter: state.filter));
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
+
+  Future<void> replace(T oldItem, T newItem) async {
+    emit(Data.loading(data: state.data, filter: state.filter));
+    try {
+      final data = state.data;
+      if (data == null) return;
+
+      final index = data.indexOf(oldItem);
+      if (index == -1) return;
+
+      final updatedData = List<T>.from(data)
+        ..replaceRange(index, index + 1, [newItem]);
+
+      emit(Data(data: updatedData, filter: state.filter));
+    } catch (e) {
+      emit(Data.error(data: state.data, filter: state.filter, error: e));
+      rethrow;
+    }
+  }
 }
