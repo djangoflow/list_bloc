@@ -134,23 +134,52 @@ void main() {
     testWidgets(
       'should load more items when scrolling to the end of the list',
       (WidgetTester tester) async {
-        // Emit initial data state
-        listCubit.emit(
-          Data<List<Item>, OffsetLimitFilter>(
-            data: [
+        Future<List<Item>> loaderFunction([OffsetLimitFilter? filter]) async {
+          if (filter?.offset == 0) {
+            final items = [
               Item(type: ItemType.fruit, value: 'Apple'),
-              Item(type: ItemType.vegetable, value: 'Potato')
-            ],
-          ),
-        );
+              Item(type: ItemType.vegetable, value: 'Potato'),
+            ];
+            return items;
+          } else if (filter?.offset == 2) {
+            final items = [
+              Item(type: ItemType.fruit, value: 'Orange'),
+              Item(type: ItemType.vegetable, value: 'Spinach'),
+            ];
+            return items;
+          }
+
+          return [];
+        }
+
+        listCubit = ListCubit<Item, OffsetLimitFilter>(loaderFunction);
+        listCubit.load(OffsetItemFilter(0, 10));
 
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: continuousListViewBlocBuilder,
+              body: ContinuousListViewBlocBuilder<
+                  ListCubit<Item, OffsetLimitFilter>, Item, OffsetLimitFilter>(
+                cubit: listCubit,
+                emptyBuilder: (context, state) {
+                  return Text('No items found.');
+                },
+                itemBuilder: (context, state, index, item) {
+                  return ListTile(
+                    title: Text(item.value),
+                  );
+                },
+                loadingBuilder: (context, state) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
             ),
           ),
         );
+
+        await tester.pumpAndSettle();
 
         // Verify initial list items
         expect(find.text('Apple'), findsOneWidget);
@@ -159,23 +188,10 @@ void main() {
 
         // Scroll to the end of the list
         await tester.drag(find.byType(ListView), Offset(0, 500));
-
-        // Emit updated data state
-        listCubit.emit(
-          Data<List<Item>, OffsetLimitFilter>(
-            data: [
-              ...listCubit.state.data!,
-              Item(type: ItemType.fruit, value: 'Orange'),
-              Item(type: ItemType.vegetable, value: 'Spinach'),
-            ],
-          ),
-        );
-
+        listCubit.load(OffsetItemFilter(2, 20));
         await tester.pumpAndSettle();
 
-        // Verify updated list items
-        expect(find.text('Apple'), findsOneWidget);
-        expect(find.text('Potato'), findsOneWidget);
+        // Verify additional list items loaded
         expect(find.text('Orange'), findsOneWidget);
         expect(find.text('Spinach'), findsOneWidget);
       },
