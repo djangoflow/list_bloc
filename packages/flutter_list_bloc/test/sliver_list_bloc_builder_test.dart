@@ -35,6 +35,8 @@ void main() {
       );
     });
 
+    tearDown(() => listCubit.close());
+
     testWidgets(
       'should display empty state when no items are available',
       (WidgetTester tester) async {

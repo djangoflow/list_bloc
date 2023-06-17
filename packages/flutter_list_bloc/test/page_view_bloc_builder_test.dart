@@ -40,6 +40,8 @@ void main() {
       );
     });
 
+    tearDown(() => paginatedCubit.close());
+
     testWidgets(
       'should display empty state when no items are available',
       (WidgetTester tester) async {

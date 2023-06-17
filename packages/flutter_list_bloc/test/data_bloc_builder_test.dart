@@ -41,6 +41,8 @@ void main() {
       );
     });
 
+    tearDown(() => dataCubit.close());
+
     testWidgets(
       'should display empty state when there is no data',
       (WidgetTester tester) async {
