@@ -1,4 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:collection/collection.dart';
@@ -52,8 +51,8 @@ class OpenapiRepositoryGenerator
     final blocMixins = parsedAnnotation.blocMixinsList;
 
     final methods = parsedAnnotation.buildForElement.methods.where((element) {
-      if (element.returnType.isVoid) return false;
-      if (element.returnType.isDynamic) return false;
+      if (element.returnType is VoidType) return false;
+      if (element.returnType is DynamicType) return false;
       if (element.isStatic) return false;
       return true;
     }).toList();
@@ -915,7 +914,9 @@ abstract class _MethodElementProcessor {
   DartType? _getInnerMostType(DartType type) {
     if (type is ParameterizedType && type.typeArguments.isNotEmpty) {
       final typeArgs = type.typeArguments;
-      return typeArgs.first.isVoid ? null : _getInnerMostType(typeArgs.first);
+      return typeArgs.first is VoidType
+          ? null
+          : _getInnerMostType(typeArgs.first);
     }
 
     return type;
@@ -1073,7 +1074,7 @@ class _ListMethodElementProcesser extends _MethodElementProcessor {
       final results = inlineVisitor.fields;
       return getInnerReturnType(results.first.type, true);
     }
-    if (args.first.isVoid) return null;
+    if (args.first is VoidType) return null;
 
     return getInnerReturnType(args.first, false);
   }
