@@ -90,7 +90,7 @@ class ApiRepository {
 And Generated Repository from endpoints will look like something like this
 
 ```Dart
-abstract class PetRepository {
+mixin PetRepository {
   static Future<Pet> retrieve([
     PetRetrieveFilter? filter,
   ]) async {
@@ -115,10 +115,10 @@ abstract class PetRepository {
 
 ```
 
-And `ListBloc` and `DataBloc` with relevant methods extending the generated `Repository` like `PetRepository` will be generated as well.
+And `ListBloc` and `DataBloc` with relevant methods extending the generated `RepositoryMixin` like `PetRepositoryMixin` will be generated as well.
 
 ```Dart
-class PetDataBloc extends DataCubit<Pet, PetRetrieveFilter> with PetRepository {
+class PetDataBloc extends DataCubit<Pet, PetRetrieveFilter> with PetRepositoryMixin {
   PetDataBloc(
     Future<Pet> Function([
       PetRetrieveFilter? filter,
