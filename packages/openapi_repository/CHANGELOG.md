@@ -1,3 +1,9 @@
+## [3.0.0] - 20 June 2023
+
+- Updated dependencies
+- Added compatibility with Dart 3
+- Changed class to mixin for repository. Previously it used to generate `{repositoryName}Repository`, now it generates`{repositoryName}RepositoryMixin`
+
 ## [2.0.1] - 1 June 2023
 
 - Fixed using `buildFor` to replace hardcoded `Openapi` class.
