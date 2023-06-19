@@ -483,8 +483,8 @@ class OpenapiRepositoryGenerator
       listFilterSuffix: crudOperationConfig.getListOperationName,
     );
 
-    final repository =
-        Template(repositoryTemplate, htmlEscapeValues: false).renderString(
+    final repositoryMixin =
+        Template(repositoryMixinTemplate, htmlEscapeValues: false).renderString(
       loaderTemplateModel.toJson(),
     );
 
@@ -518,7 +518,7 @@ class OpenapiRepositoryGenerator
             ).toJson(),
           )
         : '';
-    return '$repository\n$dataCubit\n$listCubit';
+    return '$repositoryMixin\n$dataCubit\n$listCubit';
   }
 
   /// Returns `MethodModel` for a `MethodElement` by validating

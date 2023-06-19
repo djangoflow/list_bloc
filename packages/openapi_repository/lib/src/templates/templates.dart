@@ -41,8 +41,8 @@ typedef {{name}}State = Data<{{type}}, {{#hasFilter}}{{name}}Filter{{/hasFilter}
 const dataCubitTemplate = r'''
 // DataCubit for {{name}}
 
-class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}{{filterSuffix}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {{#hasBlocMixins}}, {{blocMixins}} {{/hasBlocMixins}}{
-  {{name}}DataBloc() : super({{name}}Repository.{{loaderMethodName}});
+class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}{{filterSuffix}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}RepositoryMixin {{#hasBlocMixins}}, {{blocMixins}} {{/hasBlocMixins}}{
+  {{name}}DataBloc() : super({{name}}RepositoryMixin.{{loaderMethodName}});
 
   {{#crudMethods}}
   @override
@@ -63,8 +63,8 @@ class {{name}}DataBloc extends DataCubit<{{returnType}}, {{#hasFilter}}{{name}}{
 const listCubitTemplate = r'''
 // ListCubit for {{name}}
 
-class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}{{filterSuffix}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}Repository {{#hasBlocMixins}}, {{blocMixins}} {{/hasBlocMixins}}{
-  {{name}}ListBloc() : super({{name}}Repository.{{loaderMethodName}});
+class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}{{filterSuffix}}Filter{{/hasFilter}}{{^hasFilter}}Object{{/hasFilter}}> with {{name}}RepositoryMixin {{#hasBlocMixins}}, {{blocMixins}} {{/hasBlocMixins}}{
+  {{name}}ListBloc() : super({{name}}RepositoryMixin.{{loaderMethodName}});
 
   {{#crudMethods}}
   @override
@@ -83,10 +83,10 @@ class {{name}}ListBloc extends ListCubit<{{returnType}}, {{#hasFilter}}{{name}}{
 }
 ''';
 
-const repositoryTemplate = r'''
-// Repository for {{repositoryName}}Repository
+const repositoryMixinTemplate = r'''
+// RepositoryMixin for {{repositoryName}}RepositoryMixin
 
-abstract class {{repositoryName}}Repository {
+mixin {{repositoryName}}RepositoryMixin {
   {{#hasDataLoader}}
   {{#dataLoader}}
 static Future<{{returnType}}> {{dataLoaderMethodName}}({{#additionalParams}}{{param}},{{/additionalParams}}[{{#hasFilter}}{{repositoryName}}{{dataFilterSuffix}}Filter? filter{{/hasFilter}}{{^hasFilter}}Object? _{{/hasFilter}},])  async {
