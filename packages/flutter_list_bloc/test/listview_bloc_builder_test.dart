@@ -36,94 +36,102 @@ void main() {
       );
     });
 
+    group('Empty State', () {
+      testWidgets(
+        'should display empty state when no items are available',
+        (WidgetTester tester) async {
+          listCubit.emit(Data.empty());
+
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: listViewBlocBuilder,
+              ),
+            ),
+          );
+
+          expect(find.text('No items found.'), findsOneWidget);
+          expect(find.text('Failed to fetch data.'), findsNothing);
+          expect(find.byType(CircularProgressIndicator), findsNothing);
+          expect(find.byType(ListTile), findsNothing);
+        },
+      );
+    });
+
+    group('Error State', () {
+      testWidgets(
+        'should display error builder when an error occurs',
+        (WidgetTester tester) async {
+          listCubit.emit(Data.error());
+
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: listViewBlocBuilder,
+              ),
+            ),
+          );
+
+          expect(find.text('Failed to fetch data.'), findsOneWidget);
+          expect(find.text('No items found.'), findsNothing);
+          expect(find.byType(CircularProgressIndicator), findsNothing);
+          expect(find.byType(ListTile), findsNothing);
+        },
+      );
+    });
+
+    group('Loading State', () {
+      testWidgets(
+        'should display loading indicator while data is being fetched',
+        (WidgetTester tester) async {
+          listCubit.emit(Data.loading());
+
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: listViewBlocBuilder,
+              ),
+            ),
+          );
+
+          expect(find.byType(CircularProgressIndicator), findsWidgets);
+          expect(find.text('No items found.'), findsNothing);
+          expect(find.text('Failed to fetch data.'), findsNothing);
+          expect(find.byType(ListTile), findsNothing);
+        },
+      );
+    });
+
+    group('Data State', () {
+      testWidgets(
+        'should display list items when data is available',
+        (WidgetTester tester) async {
+          listCubit.emit(
+            Data<List<Item>, ItemType>(
+              data: [
+                Item(type: ItemType.fruit, value: 'Apple'),
+                Item(type: ItemType.vegetable, value: 'Potato')
+              ],
+            ),
+          );
+
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: listViewBlocBuilder,
+              ),
+            ),
+          );
+
+          expect(find.text('Apple'), findsOneWidget);
+          expect(find.text('Potato'), findsOneWidget);
+          expect(find.text('No items found.'), findsNothing);
+          expect(find.text('Failed to fetch data.'), findsNothing);
+          expect(find.byType(CircularProgressIndicator), findsNothing);
+        },
+      );
+    });
+
     tearDown(() => listCubit.close());
-
-    testWidgets(
-      'should display empty state when no items are available',
-      (WidgetTester tester) async {
-        listCubit.emit(Data.empty());
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: listViewBlocBuilder,
-            ),
-          ),
-        );
-
-        expect(find.text('No items found.'), findsOneWidget);
-        expect(find.text('Failed to fetch data.'), findsNothing);
-        expect(find.byType(CircularProgressIndicator), findsNothing);
-        expect(find.byType(ListTile), findsNothing);
-      },
-    );
-
-    testWidgets(
-      'should display error builder when an error occurs',
-      (WidgetTester tester) async {
-        listCubit.emit(Data.error());
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: listViewBlocBuilder,
-            ),
-          ),
-        );
-
-        expect(find.text('Failed to fetch data.'), findsOneWidget);
-        expect(find.text('No items found.'), findsNothing);
-        expect(find.byType(CircularProgressIndicator), findsNothing);
-        expect(find.byType(ListTile), findsNothing);
-      },
-    );
-
-    testWidgets(
-      'should display loading indicator while data is being fetched',
-      (WidgetTester tester) async {
-        listCubit.emit(Data.loading());
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: listViewBlocBuilder,
-            ),
-          ),
-        );
-
-        expect(find.byType(CircularProgressIndicator), findsWidgets);
-        expect(find.text('No items found.'), findsNothing);
-        expect(find.text('Failed to fetch data.'), findsNothing);
-        expect(find.byType(ListTile), findsNothing);
-      },
-    );
-
-    testWidgets(
-      'should display list items when data is available',
-      (WidgetTester tester) async {
-        listCubit.emit(
-          Data<List<Item>, ItemType>(
-            data: [
-              Item(type: ItemType.fruit, value: 'Apple'),
-              Item(type: ItemType.vegetable, value: 'Potato')
-            ],
-          ),
-        );
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: listViewBlocBuilder,
-            ),
-          ),
-        );
-
-        expect(find.text('Apple'), findsOneWidget);
-        expect(find.text('Potato'), findsOneWidget);
-        expect(find.text('No items found.'), findsNothing);
-        expect(find.text('Failed to fetch data.'), findsNothing);
-        expect(find.byType(CircularProgressIndicator), findsNothing);
-      },
-    );
   });
 }

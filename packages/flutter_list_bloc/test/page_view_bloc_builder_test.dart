@@ -40,76 +40,82 @@ void main() {
       );
     });
 
+    group('Empty State', () {
+      testWidgets(
+        'should display empty state when no items are available',
+        (WidgetTester tester) async {
+          paginatedCubit.emit(Data.empty());
+
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: pageViewBlocBuilder,
+              ),
+            ),
+          );
+
+          expect(find.text('No items found.'), findsOneWidget);
+          expect(find.text('Failed to fetch data.'), findsNothing);
+          expect(find.byType(ListTile), findsNothing);
+        },
+      );
+    });
+
+    group('Error State', () {
+      testWidgets(
+        'should display error builder when an error occurs',
+        (WidgetTester tester) async {
+          paginatedCubit.emit(Data.error());
+
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: pageViewBlocBuilder,
+              ),
+            ),
+          );
+
+          expect(find.text('Failed to fetch data.'), findsOneWidget);
+          expect(find.text('No items found.'), findsOneWidget);
+          expect(find.byType(ListTile), findsNothing);
+        },
+      );
+    });
+
+    group('Data State', () {
+      testWidgets(
+        'should display list items when data is available',
+        (WidgetTester tester) async {
+          paginatedCubit.emit(
+            Data<ListPage<Item>, ItemType>(
+              data: ListPage<Item>(
+                number: 0,
+                size: 2,
+                count: 50,
+                data: [
+                  Item(type: ItemType.fruit, value: 'Apple'),
+                  Item(type: ItemType.vegetable, value: 'Potato'),
+                ],
+              ),
+            ),
+          );
+
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: pageViewBlocBuilder,
+              ),
+            ),
+          );
+
+          expect(find.text('Apple'), findsOneWidget);
+          expect(find.text('Potato'), findsOneWidget);
+          expect(find.text('No items found.'), findsNothing);
+          expect(find.text('Failed to fetch data.'), findsNothing);
+        },
+      );
+    });
+
     tearDown(() => paginatedCubit.close());
-
-    testWidgets(
-      'should display empty state when no items are available',
-      (WidgetTester tester) async {
-        paginatedCubit.emit(Data.empty());
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: pageViewBlocBuilder,
-            ),
-          ),
-        );
-
-        expect(find.text('No items found.'), findsOneWidget);
-        expect(find.text('Failed to fetch data.'), findsNothing);
-        expect(find.byType(ListTile), findsNothing);
-      },
-    );
-
-    testWidgets(
-      'should display error builder when an error occurs',
-      (WidgetTester tester) async {
-        paginatedCubit.emit(Data.error());
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: pageViewBlocBuilder,
-            ),
-          ),
-        );
-
-        expect(find.text('Failed to fetch data.'), findsOneWidget);
-        expect(find.text('No items found.'), findsOneWidget);
-        expect(find.byType(ListTile), findsNothing);
-      },
-    );
-
-    testWidgets(
-      'should display list items when data is available',
-      (WidgetTester tester) async {
-        paginatedCubit.emit(
-          Data<ListPage<Item>, ItemType>(
-            data: ListPage<Item>(
-              number: 0,
-              size: 2,
-              count: 50,
-              data: [
-                Item(type: ItemType.fruit, value: 'Apple'),
-                Item(type: ItemType.vegetable, value: 'Potato'),
-              ],
-            ),
-          ),
-        );
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: pageViewBlocBuilder,
-            ),
-          ),
-        );
-
-        expect(find.text('Apple'), findsOneWidget);
-        expect(find.text('Potato'), findsOneWidget);
-        expect(find.text('No items found.'), findsNothing);
-        expect(find.text('Failed to fetch data.'), findsNothing);
-      },
-    );
   });
 }
