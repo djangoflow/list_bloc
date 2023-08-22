@@ -1,3 +1,7 @@
+## 1.2.2
+
+ - **REFACTOR**: fix dart sdk constraints upper bound. ([a02a905d](https://github.com/djangoflow/list_bloc/commit/a02a905d22afb449492cd7830cf19173e5e4057a))
+
 ## 1.2.1
 
  - **REFACTOR**: update dart sdk constraints. ([43f7b54e](https://github.com/djangoflow/list_bloc/commit/43f7b54ea5e1e5cde5981683c00005222c3ad86e))

@@ -15,6 +15,34 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`openapi_repository_annotations` - `v1.2.2`](#openapi_repository_annotations---v122)
+ - [`openapi_repository` - `v3.1.2`](#openapi_repository---v312)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `openapi_repository` - `v3.1.2`
+
+---
+
+#### `openapi_repository_annotations` - `v1.2.2`
+
+ - **REFACTOR**: fix dart sdk constraints upper bound. ([a02a905d](https://github.com/djangoflow/list_bloc/commit/a02a905d22afb449492cd7830cf19173e5e4057a))
+
+
+## 2023-08-23
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`openapi_repository` - `v3.1.1`](#openapi_repository---v311)
  - [`openapi_repository_annotations` - `v1.2.1`](#openapi_repository_annotations---v121)
 

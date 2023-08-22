@@ -1,3 +1,7 @@
+## 3.1.2
+
+ - Update a dependency to the latest release.
+
 ## 3.1.1
 
  - **REFACTOR**: update dart sdk constraints. ([43f7b54e](https://github.com/djangoflow/list_bloc/commit/43f7b54ea5e1e5cde5981683c00005222c3ad86e))

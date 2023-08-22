@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  openapi_repository_annotations: ^1.2.1
-  openapi_repository: ^3.1.1
+  openapi_repository_annotations: ^1.2.2
+  openapi_repository: ^3.1.2
   list_bloc: ^3.1.0
   build: ^2.3.0
   built_collection: ^5.1.1
