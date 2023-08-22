@@ -1,7 +1,6 @@
 name: openapi_generator_tests
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
 publish_to: none
 
 environment:
@@ -17,7 +16,7 @@ dependencies:
   build: ^2.3.0
   built_collection: ^5.1.1
   built_value: ^8.3.2
-  dio: ^4.0.6
+  dio: ^5.2.1+1
   mustache_template: ^2.0.0
   path: ^1.8.0
   recase: ^4.0.0
