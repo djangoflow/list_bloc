@@ -1,4 +1,45 @@
 name: list_bloc
+repository: https://github.com/djangoflow/list_bloc
 
 packages:
   - packages/*
+
+command:
+  version:
+    linkToCommits: true
+    workspaceChangelog: true
+    branch: main
+    updateGitTagRefs: true
+    
+  bootstrap:
+    runPubGetInParallel: false
+    hooks:
+      post: melos run generate:dart
+
+scripts:
+  flutter:upgrade:
+    description: |
+      Upgrades all packages (Flutter).
+    run: flutter pub upgrade
+    exec:
+      concurrency: 1
+    packageFilters:
+      ignore: 
+        - "*example*"
+      
+      
+  format:
+    run: |
+      dart format .
+    description: |
+      Formats the code of all packages (Dart).
+  generate:dart:
+    run: dart run build_runner build --delete-conflicting-outputs
+    exec:
+      concurrency: 1
+      failFast: true
+    description: Generate build_runner files
+    packageFilters:
+      dependsOn: 'build_runner'
+      ignore:
+        - "*/example/*"
