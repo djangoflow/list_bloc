@@ -1,3 +1,7 @@
+## 3.0.1
+
+ - **REFACTOR**(openapi_repository): remove models. ([7d034221](https://github.com/djangoflow/list_bloc/commit/7d03422142c761c23e42cb62343b8987acf712b0))
+
 ## [3.0.0] - 20 June 2023
 
 - Updated dependencies

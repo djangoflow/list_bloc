@@ -1,6 +1,6 @@
 name: _openapi_repository_internal_models
 description: This package provides neccessary models to openapi_repository package.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/djangoflow/list_bloc/tree/master/packages/_openapi_repository_internal_models
 
 environment:
