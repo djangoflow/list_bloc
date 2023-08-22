@@ -1,3 +1,4 @@
+import 'package:_openapi_repository_internal_models/_openapi_repository_internal_models.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:collection/collection.dart';
@@ -6,7 +7,6 @@ import 'package:analyzer/dart/constant/value.dart';
 import 'package:build/build.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:mustache_template/mustache.dart';
-import 'package:openapi_repository/src/templates/models.dart';
 import 'package:openapi_repository/src/templates/templates.dart';
 import 'package:recase/recase.dart';
 
