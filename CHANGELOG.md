@@ -15,6 +15,37 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`_openapi_repository_internal_models` - `v0.0.3`](#_openapi_repository_internal_models---v003)
+ - [`openapi_repository` - `v3.1.0`](#openapi_repository---v310)
+ - [`openapi_repository_annotations` - `v1.2.0`](#openapi_repository_annotations---v120)
+
+---
+
+#### `_openapi_repository_internal_models` - `v0.0.3`
+
+ - **FEAT**: remove dioInterceptor field. ([593f9368](https://github.com/djangoflow/list_bloc/commit/593f9368f1927ad6803f0d147992feff3e582151))
+
+#### `openapi_repository` - `v3.1.0`
+
+ - **FEAT**: remove dioInterceptor field. ([593f9368](https://github.com/djangoflow/list_bloc/commit/593f9368f1927ad6803f0d147992feff3e582151))
+
+#### `openapi_repository_annotations` - `v1.2.0`
+
+ - **FEAT**: remove dioInterceptor field. ([593f9368](https://github.com/djangoflow/list_bloc/commit/593f9368f1927ad6803f0d147992feff3e582151))
+
+
+## 2023-08-23
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`_openapi_repository_internal_models` - `v0.0.2`](#_openapi_repository_internal_models---v002)
  - [`openapi_repository` - `v3.0.1`](#openapi_repository---v301)
 

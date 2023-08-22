@@ -1,3 +1,7 @@
+## 0.0.3
+
+ - **FEAT**: remove dioInterceptor field. ([593f9368](https://github.com/djangoflow/list_bloc/commit/593f9368f1927ad6803f0d147992feff3e582151))
+
 ## 0.0.2
 
  - **FEAT**: add _openapi_repository_internal_models package. ([5d4bd7f3](https://github.com/djangoflow/list_bloc/commit/5d4bd7f37533a16663905ca0bb6e625de7ff54e1))

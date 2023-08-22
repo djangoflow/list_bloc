@@ -1,3 +1,7 @@
+## 3.1.0
+
+ - **FEAT**: remove dioInterceptor field. ([593f9368](https://github.com/djangoflow/list_bloc/commit/593f9368f1927ad6803f0d147992feff3e582151))
+
 ## 3.0.1
 
  - **REFACTOR**(openapi_repository): remove models. ([7d034221](https://github.com/djangoflow/list_bloc/commit/7d03422142c761c23e42cb62343b8987acf712b0))
