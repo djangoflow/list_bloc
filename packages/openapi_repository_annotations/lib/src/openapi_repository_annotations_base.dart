@@ -24,9 +24,6 @@ class OpenapiRepository {
   /// default page size value for paginated blocs
   final int defaultPageSize;
 
-  /// custom dio interceptor
-  final Type? dioInterceptor;
-
   /// live/production base path(url) which will override `baseUrl` in release mode
   final String? liveBasePath;
 
@@ -43,7 +40,6 @@ class OpenapiRepository {
     this.sendTimeout = 15000,
     this.defaultOffset = 0,
     this.defaultPageSize = 100,
-    this.dioInterceptor,
     this.liveBasePath,
     this.baseUrl,
     this.crudOperationConfig = const CrudOperationConfig(),

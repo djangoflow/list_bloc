@@ -29,7 +29,6 @@ mixin _$RepositoryTemplateModel {
   int get connectTimeout => throw _privateConstructorUsedError;
   int get receiveTimeout => throw _privateConstructorUsedError;
   int get sendTimeout => throw _privateConstructorUsedError;
-  String? get dioInterceptor => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,8 +50,7 @@ abstract class $RepositoryTemplateModelCopyWith<$Res> {
       List<AccessorModel> accessors,
       int connectTimeout,
       int receiveTimeout,
-      int sendTimeout,
-      String? dioInterceptor});
+      int sendTimeout});
 }
 
 /// @nodoc
@@ -77,7 +75,6 @@ class _$RepositoryTemplateModelCopyWithImpl<$Res,
     Object? connectTimeout = null,
     Object? receiveTimeout = null,
     Object? sendTimeout = null,
-    Object? dioInterceptor = freezed,
   }) {
     return _then(_value.copyWith(
       repositoryName: null == repositoryName
@@ -112,10 +109,6 @@ class _$RepositoryTemplateModelCopyWithImpl<$Res,
           ? _value.sendTimeout
           : sendTimeout // ignore: cast_nullable_to_non_nullable
               as int,
-      dioInterceptor: freezed == dioInterceptor
-          ? _value.dioInterceptor
-          : dioInterceptor // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -136,8 +129,7 @@ abstract class _$$_RepositoryTemplateModelCopyWith<$Res>
       List<AccessorModel> accessors,
       int connectTimeout,
       int receiveTimeout,
-      int sendTimeout,
-      String? dioInterceptor});
+      int sendTimeout});
 }
 
 /// @nodoc
@@ -160,7 +152,6 @@ class __$$_RepositoryTemplateModelCopyWithImpl<$Res>
     Object? connectTimeout = null,
     Object? receiveTimeout = null,
     Object? sendTimeout = null,
-    Object? dioInterceptor = freezed,
   }) {
     return _then(_$_RepositoryTemplateModel(
       repositoryName: null == repositoryName
@@ -195,10 +186,6 @@ class __$$_RepositoryTemplateModelCopyWithImpl<$Res>
           ? _value.sendTimeout
           : sendTimeout // ignore: cast_nullable_to_non_nullable
               as int,
-      dioInterceptor: freezed == dioInterceptor
-          ? _value.dioInterceptor
-          : dioInterceptor // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -215,8 +202,7 @@ class _$_RepositoryTemplateModel implements _RepositoryTemplateModel {
       final List<AccessorModel> accessors = const [],
       required this.connectTimeout,
       required this.receiveTimeout,
-      required this.sendTimeout,
-      this.dioInterceptor})
+      required this.sendTimeout})
       : _accessors = accessors;
 
   factory _$_RepositoryTemplateModel.fromJson(Map<String, dynamic> json) =>
@@ -245,12 +231,10 @@ class _$_RepositoryTemplateModel implements _RepositoryTemplateModel {
   final int receiveTimeout;
   @override
   final int sendTimeout;
-  @override
-  final String? dioInterceptor;
 
   @override
   String toString() {
-    return 'RepositoryTemplateModel(repositoryName: $repositoryName, buildForClass: $buildForClass, baseUrl: $baseUrl, liveBasePath: $liveBasePath, accessors: $accessors, connectTimeout: $connectTimeout, receiveTimeout: $receiveTimeout, sendTimeout: $sendTimeout, dioInterceptor: $dioInterceptor)';
+    return 'RepositoryTemplateModel(repositoryName: $repositoryName, buildForClass: $buildForClass, baseUrl: $baseUrl, liveBasePath: $liveBasePath, accessors: $accessors, connectTimeout: $connectTimeout, receiveTimeout: $receiveTimeout, sendTimeout: $sendTimeout)';
   }
 
   @override
@@ -272,9 +256,7 @@ class _$_RepositoryTemplateModel implements _RepositoryTemplateModel {
             (identical(other.receiveTimeout, receiveTimeout) ||
                 other.receiveTimeout == receiveTimeout) &&
             (identical(other.sendTimeout, sendTimeout) ||
-                other.sendTimeout == sendTimeout) &&
-            (identical(other.dioInterceptor, dioInterceptor) ||
-                other.dioInterceptor == dioInterceptor));
+                other.sendTimeout == sendTimeout));
   }
 
   @JsonKey(ignore: true)
@@ -288,8 +270,7 @@ class _$_RepositoryTemplateModel implements _RepositoryTemplateModel {
       const DeepCollectionEquality().hash(_accessors),
       connectTimeout,
       receiveTimeout,
-      sendTimeout,
-      dioInterceptor);
+      sendTimeout);
 
   @JsonKey(ignore: true)
   @override
@@ -316,8 +297,7 @@ abstract class _RepositoryTemplateModel implements RepositoryTemplateModel {
       final List<AccessorModel> accessors,
       required final int connectTimeout,
       required final int receiveTimeout,
-      required final int sendTimeout,
-      final String? dioInterceptor}) = _$_RepositoryTemplateModel;
+      required final int sendTimeout}) = _$_RepositoryTemplateModel;
 
   factory _RepositoryTemplateModel.fromJson(Map<String, dynamic> json) =
       _$_RepositoryTemplateModel.fromJson;
@@ -338,8 +318,6 @@ abstract class _RepositoryTemplateModel implements RepositoryTemplateModel {
   int get receiveTimeout;
   @override
   int get sendTimeout;
-  @override
-  String? get dioInterceptor;
   @override
   @JsonKey(ignore: true)
   _$$_RepositoryTemplateModelCopyWith<_$_RepositoryTemplateModel>

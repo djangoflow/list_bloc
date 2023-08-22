@@ -191,7 +191,6 @@ For the purpose of this project, we have created an annotation called `@OpenapiR
 - `int sendTimeout` : timeout to send/upload data to the server. Default: 15000
 - `int defaultOffset` : Default offset for paginated APIs. Default: 0
 - `int defaultPageSize` : Default pagesize/limit for paginated APIs. Default: 100
-- `Type? dioInterceptor` : Includable `DioInterceptor`
 - `String? liveBasePath` : Includable `baseUrl` for liveMode(kReleaseMode) which will override the default `baseUrl` in liveMode.
 - `String? baseUrl` : Includable `baseUrl` which will be used for default `baseUrl` for Dio configuration
 

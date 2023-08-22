@@ -14,7 +14,6 @@ class RepositoryTemplateModel with _$RepositoryTemplateModel {
     required int connectTimeout,
     required int receiveTimeout,
     required int sendTimeout,
-    String? dioInterceptor,
   }) = _RepositoryTemplateModel;
 
   factory RepositoryTemplateModel.fromJson(Map<String, dynamic> map) =>

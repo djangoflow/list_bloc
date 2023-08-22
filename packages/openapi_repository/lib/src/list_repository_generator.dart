@@ -47,7 +47,6 @@ class OpenapiRepositoryGenerator
     final connectTimeout = parsedAnnotation.connectTimeout;
     final receiveTimeout = parsedAnnotation.receiveTimeout;
     final sendTimeout = parsedAnnotation.sendTimeout;
-    final dioInterceptor = parsedAnnotation.dioInterceptor;
     final blocMixins = parsedAnnotation.blocMixinsList;
 
     final methods = parsedAnnotation.buildForElement.methods.where((element) {
@@ -69,9 +68,6 @@ class OpenapiRepositoryGenerator
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
       sendTimeout: sendTimeout,
-      dioInterceptor: dioInterceptor?.getDisplayString(
-        withNullability: false,
-      ),
       accessors: methods.map((e) {
         final type = e.returnType.getDisplayString(withNullability: false);
         final methodName = e.name;
@@ -706,7 +702,6 @@ class _ReaderTypes {
   final int sendTimeout;
   final int defaultOffset;
   final int defaultPageSize;
-  final DartType? dioInterceptor;
   final String? liveBasePath;
   final String? baseUrl;
   final CrudOperationConfig crudOperationConfig;
@@ -721,7 +716,6 @@ class _ReaderTypes {
     this.sendTimeout = 15000,
     this.defaultOffset = 0,
     this.defaultPageSize = 100,
-    this.dioInterceptor,
     this.liveBasePath,
     this.baseUrl,
   });
@@ -742,7 +736,6 @@ class _ReaderTypes {
     final connectTimeout = reader.peek('connectTimeout')?.intValue ?? 0;
     final receiveTimeout = reader.peek('receiveTimeout')?.intValue ?? 0;
     final sendTimeout = reader.peek('sendTimeout')?.intValue ?? 0;
-    final dioInterceptor = reader.peek('dioInterceptor')?.typeValue;
 
     final blocMixins = reader.peek('blocMixins')?.listValue ?? [];
     final blocMixinsData = blocMixins.map((e) => _BlocMixin.fromDartObject(e));
@@ -771,7 +764,6 @@ class _ReaderTypes {
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
       sendTimeout: sendTimeout,
-      dioInterceptor: dioInterceptor,
     );
   }
 }

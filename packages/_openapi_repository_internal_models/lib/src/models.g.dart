@@ -20,7 +20,6 @@ _$_RepositoryTemplateModel _$$_RepositoryTemplateModelFromJson(
       connectTimeout: json['connectTimeout'] as int,
       receiveTimeout: json['receiveTimeout'] as int,
       sendTimeout: json['sendTimeout'] as int,
-      dioInterceptor: json['dioInterceptor'] as String?,
     );
 
 Map<String, dynamic> _$$_RepositoryTemplateModelToJson(
@@ -34,7 +33,6 @@ Map<String, dynamic> _$$_RepositoryTemplateModelToJson(
       'connectTimeout': instance.connectTimeout,
       'receiveTimeout': instance.receiveTimeout,
       'sendTimeout': instance.sendTimeout,
-      'dioInterceptor': instance.dioInterceptor,
     };
 
 _$_AccessorModel _$$_AccessorModelFromJson(Map<String, dynamic> json) =>
