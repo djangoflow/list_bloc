@@ -10,3 +10,4 @@ doc/api/
 
 .DS_Store
 .idea/
+**/pubspec_overrides.yaml
