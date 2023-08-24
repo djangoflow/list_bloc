@@ -1,6 +1,6 @@
 name: openapi_repository
 description: This package generates ListBloc and DataBloc using openapi_repository_annotations.
-version: 3.1.2
+version: 3.2.0
 homepage: https://github.com/djangoflow/list_bloc/
 
 environment:
