@@ -1,3 +1,8 @@
+## 3.3.0
+
+ - **REVERT**(openapi_repository): use 5.x.x analyzer. ([5fab225c](https://github.com/djangoflow/list_bloc/commit/5fab225c65802eb370eed6076069cf1bd2cb106f))
+ - **FEAT**(openapi_repository): expose interceptors getter in ApiRepository's template. ([67ac2069](https://github.com/djangoflow/list_bloc/commit/67ac206953ab88107cac01f9133ef9a225b7ef5d))
+
 ## 3.2.1
 
  - Update a dependency to the latest release.
