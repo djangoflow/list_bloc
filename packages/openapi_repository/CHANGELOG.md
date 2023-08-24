@@ -1,3 +1,7 @@
+## 3.2.1
+
+ - Update a dependency to the latest release.
+
 ## 3.2.0
 
  - updated analyzer dependency and other dependencies
