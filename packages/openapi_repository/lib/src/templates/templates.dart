@@ -155,6 +155,8 @@ class {{repositoryName}} {
     _openapi.dio.options.baseUrl = baseUrl;
   }
 
+  Interceptors get interceptors => _openapi.dio.interceptors;
+
   static final {{buildForClass}} _openapi = {{buildForClass}}(
     basePathOverride: kReleaseMode ? liveBasePath : null,
     interceptors: [],
