@@ -4,21 +4,14 @@ version: 0.0.3
 homepage: https://github.com/djangoflow/list_bloc/tree/master/packages/_openapi_repository_internal_models
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   flutter_lints: ^2.0.0
   build_runner: ^2.4.6
   freezed: ^2.4.2
   json_serializable: ^6.7.1
-
-flutter:
