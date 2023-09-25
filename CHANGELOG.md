@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-09-25
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`openapi_repository` - `v3.4.0`](#openapi_repository---v340)
+
+---
+
+#### `openapi_repository` - `v3.4.0`
+
+ - **REFACTOR**: remove flutter sdk dependencies. ([94b26ba6](https://github.com/djangoflow/list_bloc/commit/94b26ba64bab30d2a4a65dbac0cc38a7ebdacdcc))
+
+
 ## 2023-08-24
 
 ### Changes

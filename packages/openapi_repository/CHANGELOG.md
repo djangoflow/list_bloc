@@ -1,3 +1,7 @@
+## 3.4.0
+
+ - **REFACTOR**: remove flutter sdk dependencies. ([94b26ba6](https://github.com/djangoflow/list_bloc/commit/94b26ba64bab30d2a4a65dbac0cc38a7ebdacdcc))
+
 ## 3.3.0
 
  - **REVERT**(openapi_repository): use 5.x.x analyzer. ([5fab225c](https://github.com/djangoflow/list_bloc/commit/5fab225c65802eb370eed6076069cf1bd2cb106f))
