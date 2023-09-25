@@ -3,6 +3,77 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-08-24
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`openapi_repository` - `v3.3.0`](#openapi_repository---v330)
+
+---
+
+#### `openapi_repository` - `v3.3.0`
+
+ - **REVERT**(openapi_repository): use 5.x.x analyzer. ([5fab225c](https://github.com/djangoflow/list_bloc/commit/5fab225c65802eb370eed6076069cf1bd2cb106f))
+ - **FEAT**(openapi_repository): expose interceptors getter in ApiRepository's template. ([67ac2069](https://github.com/djangoflow/list_bloc/commit/67ac206953ab88107cac01f9133ef9a225b7ef5d))
+
+
+## 2023-08-24
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`openapi_repository_annotations` - `v1.2.3`](#openapi_repository_annotations---v123)
+ - [`openapi_repository` - `v3.2.1`](#openapi_repository---v321)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `openapi_repository` - `v3.2.1`
+
+---
+
+#### `openapi_repository_annotations` - `v1.2.3`
+
+ - update dependencies to latest
+
+
+## 2023-08-24
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`openapi_repository` - `v3.2.0`](#openapi_repository---v320)
+
+---
+
+#### `openapi_repository` - `v3.2.0`
+
+ - updated analyzer dependency and other dependencies
+
+
 ## 2023-08-23
 
 ### Changes
