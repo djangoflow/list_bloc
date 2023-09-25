@@ -15,6 +15,34 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`_openapi_repository_internal_models` - `v0.0.3+1`](#_openapi_repository_internal_models---v0031)
+ - [`openapi_repository` - `v3.4.1`](#openapi_repository---v341)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `openapi_repository` - `v3.4.1`
+
+---
+
+#### `_openapi_repository_internal_models` - `v0.0.3+1`
+
+ - **REFACTOR**: remove flutter sdk dependencies. ([94b26ba6](https://github.com/djangoflow/list_bloc/commit/94b26ba64bab30d2a4a65dbac0cc38a7ebdacdcc))
+
+
+## 2023-09-25
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`openapi_repository` - `v3.4.0`](#openapi_repository---v340)
 
 ---

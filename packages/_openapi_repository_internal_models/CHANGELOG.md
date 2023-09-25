@@ -1,3 +1,7 @@
+## 0.0.3+1
+
+ - **REFACTOR**: remove flutter sdk dependencies. ([94b26ba6](https://github.com/djangoflow/list_bloc/commit/94b26ba64bab30d2a4a65dbac0cc38a7ebdacdcc))
+
 ## 0.0.3
 
  - **FEAT**: remove dioInterceptor field. ([593f9368](https://github.com/djangoflow/list_bloc/commit/593f9368f1927ad6803f0d147992feff3e582151))

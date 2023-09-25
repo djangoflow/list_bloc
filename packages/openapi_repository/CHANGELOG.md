@@ -1,3 +1,7 @@
+## 3.4.1
+
+ - Update a dependency to the latest release.
+
 ## 3.4.0
 
  - **REFACTOR**: remove flutter sdk dependencies. ([94b26ba6](https://github.com/djangoflow/list_bloc/commit/94b26ba64bab30d2a4a65dbac0cc38a7ebdacdcc))
