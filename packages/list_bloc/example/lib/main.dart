@@ -47,9 +47,7 @@ class _ListBlocPage extends StatelessWidget {
         title: const Text('ListBloc example'),
         actions: [
           IconButton(
-            onPressed: () => context.read<_ItemCubit>()
-              ..clear()
-              ..load(),
+            onPressed: () => context.read<_ItemCubit>().reload(),
             icon: const Icon(Icons.refresh),
           ),
         ],
