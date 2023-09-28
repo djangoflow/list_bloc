@@ -207,7 +207,7 @@ void main() {
       );
     });
 
-    group('add locally tests', () {
+    group('addLocally tests', () {
       blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
         'add item to list',
         build: () => cubit,
@@ -242,6 +242,42 @@ void main() {
             true,
           ),
         ],
+      );
+    });
+
+    group('replaceLocally tests', () {
+      blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+        'item is replaced',
+        build: () => cubit,
+        seed: () => Data<List<Item>, ItemType>(
+          data: [Item(type: ItemType.fruit, value: 'Apple')],
+        ),
+        act: (bloc) => bloc.replaceLocally(
+          (oldItem) => oldItem.value == 'Apple',
+          Item(type: ItemType.fruit, value: 'Banana'),
+        ),
+        expect: () => [
+          isA<Data<List<Item>, ItemType>>().having(
+            (state) => state.data?.where((e) => e.value == 'Banana').isNotEmpty,
+            'Contains replaced element',
+            true,
+          ),
+        ],
+      );
+
+      blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+        'does not emit if item is not present in list',
+        build: () => cubit,
+        seed: () => Data<List<Item>, ItemType>(
+          data: [
+            Item(type: ItemType.fruit, value: 'Apple'),
+          ],
+        ),
+        act: (bloc) => bloc.replaceLocally(
+          (oldItem) => oldItem.value == 'Potato',
+          Item(type: ItemType.fruit, value: 'Banana'),
+        ),
+        expect: () => [],
       );
     });
   });

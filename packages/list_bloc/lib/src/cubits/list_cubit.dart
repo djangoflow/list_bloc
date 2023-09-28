@@ -38,6 +38,19 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
     }
   }
 
+  void replaceLocally(
+    bool Function(T oldItem) indexWhere,
+    T item,
+  ) {
+    final data = [...(state.data ?? <T>[])];
+    final index = data.indexWhere(indexWhere);
+
+    if (index != -1) {
+      data[index] = item;
+      _emitUpdatedData(data);
+    }
+  }
+
   void _emitUpdatedData(List<T> updatedList) {
     if (updatedList.isEmpty) {
       emit(Empty(filter: state.filter, data: updatedList));
@@ -47,6 +60,4 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
       emit(state.copyWith(data: updatedList));
     }
   }
-
-// TODO(alexis): implement remove, add, replace etc
 }
