@@ -20,5 +20,21 @@ class ListCubit<T, F> extends DataCubit<List<T>, F> {
       rethrow;
     }
   }
+
+  void removeLocally(T item) {
+    final data = state.data ?? [];
+    final index = data.indexOf(item);
+
+    if (index != -1) {
+      final updatedList = [...data];
+      updatedList.removeAt(index);
+      if (updatedList.isEmpty) {
+        emit(Empty(filter: state.filter, data: updatedList));
+      } else {
+        emit(state.copyWith(data: updatedList));
+      }
+    }
+  }
+
 // TODO(alexis): implement remove, add, replace etc
 }

@@ -128,5 +128,81 @@ void main() {
         ),
       ],
     );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'is able to remove item locally when item is present',
+      build: () => cubit,
+      seed: () => Data<List<Item>, ItemType>(
+        data: [
+          Item(type: ItemType.fruit, value: 'Apple'),
+          Item(type: ItemType.vegetable, value: 'Potato'),
+        ],
+      ),
+      act: (bloc) => bloc.removeLocally(
+        Item(type: ItemType.fruit, value: 'Apple'),
+      ),
+      expect: () => [
+        isA<Data<List<Item>, ItemType>>().having(
+          (state) => state.data?.where((e) => e.value == 'Apple').isEmpty,
+          'Does not contain removed element',
+          true,
+        ),
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'emits empty state when list is empty after removeLocally',
+      build: () => cubit,
+      seed: () => Data<List<Item>, ItemType>(
+        data: [Item(type: ItemType.fruit, value: 'Apple')],
+      ),
+      act: (bloc) => bloc.removeLocally(
+        Item(type: ItemType.fruit, value: 'Apple'),
+      ),
+      expect: () => [
+        isA<Empty<List<Item>, ItemType>>().having(
+          (state) => state.data,
+          'is an empty list',
+          [],
+        ),
+      ],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'does not emit if item is not present in list',
+      build: () => cubit,
+      seed: () => Data<List<Item>, ItemType>(
+        data: [
+          Item(type: ItemType.fruit, value: 'Apple'),
+        ],
+      ),
+      act: (bloc) => bloc.removeLocally(
+        Item(type: ItemType.vegetable, value: 'Potato'),
+      ),
+      expect: () => [],
+    );
+
+    blocTest<ListCubit<Item, ItemType>, Data<List<Item>, ItemType>>(
+      'emits type of original state when list is not empty after removeLocally',
+      build: () => cubit,
+      seed: () => Loading<List<Item>, ItemType>(
+        data: [
+          Item(type: ItemType.fruit, value: 'Apple'),
+          Item(type: ItemType.vegetable, value: 'Potato'),
+        ],
+      ),
+      act: (bloc) => bloc.removeLocally(
+        Item(type: ItemType.fruit, value: 'Apple'),
+      ),
+      expect: () => [
+        isA<Loading<List<Item>, ItemType>>().having(
+          (state) => state.data,
+          'is a list with one element',
+          [
+            Item(type: ItemType.vegetable, value: 'Potato'),
+          ],
+        ),
+      ],
+    );
   });
 }
