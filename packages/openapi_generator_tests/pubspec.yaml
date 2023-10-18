@@ -11,8 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   openapi_repository_annotations: ^1.2.3
-  openapi_repository: ^3.4.1
-  list_bloc: ^3.1.0
+  openapi_repository: ^3.4.2
+  list_bloc: ^3.1.1
   build: ^2.3.0
   built_collection: ^5.1.1
   built_value: ^8.3.2

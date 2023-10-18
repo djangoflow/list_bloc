@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-10-18
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`list_bloc` - `v3.1.1`](#list_bloc---v311)
+ - [`openapi_repository` - `v3.4.2`](#openapi_repository---v342)
+ - [`flutter_list_bloc` - `v4.1.1`](#flutter_list_bloc---v411)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `flutter_list_bloc` - `v4.1.1`
+
+---
+
+#### `list_bloc` - `v3.1.1`
+
+ - **REFACTOR**: added replaceLocally function. ([144dfa8f](https://github.com/djangoflow/list_bloc/commit/144dfa8f58b3e6e24870c1a5dd95b7857541cddb))
+ - **REFACTOR**: AddLocally function. ([6fda4b62](https://github.com/djangoflow/list_bloc/commit/6fda4b62692d90cf9bfc66ac73067865c4d7c0f5))
+ - **REFACTOR**: Added removeLocally function. ([02febba4](https://github.com/djangoflow/list_bloc/commit/02febba441d6fadce8945afe2708958d96800ff9))
+
+#### `openapi_repository` - `v3.4.2`
+
+ - **REFACTOR**: remove not needed dependencies. ([91f3a9bc](https://github.com/djangoflow/list_bloc/commit/91f3a9bcd999aa7da2cfc1b5edc9c61aaf370d20))
+
+
 ## 2023-09-25
 
 ### Changes

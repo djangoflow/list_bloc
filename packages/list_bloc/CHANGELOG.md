@@ -1,3 +1,9 @@
+## 3.1.1
+
+ - **REFACTOR**: added replaceLocally function. ([144dfa8f](https://github.com/djangoflow/list_bloc/commit/144dfa8f58b3e6e24870c1a5dd95b7857541cddb))
+ - **REFACTOR**: AddLocally function. ([6fda4b62](https://github.com/djangoflow/list_bloc/commit/6fda4b62692d90cf9bfc66ac73067865c4d7c0f5))
+ - **REFACTOR**: Added removeLocally function. ([02febba4](https://github.com/djangoflow/list_bloc/commit/02febba441d6fadce8945afe2708958d96800ff9))
+
 ## [3.1.0] - 21 Apr 2022
 * Dependencies upgrades
 

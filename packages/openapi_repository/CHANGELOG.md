@@ -1,3 +1,7 @@
+## 3.4.2
+
+ - **REFACTOR**: remove not needed dependencies. ([91f3a9bc](https://github.com/djangoflow/list_bloc/commit/91f3a9bcd999aa7da2cfc1b5edc9c61aaf370d20))
+
 ## 3.4.1
 
  - Update a dependency to the latest release.
