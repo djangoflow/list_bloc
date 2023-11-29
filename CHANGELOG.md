@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-11-29
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`flutter_list_bloc` - `v4.1.2`](#flutter_list_bloc---v412)
+
+---
+
+#### `flutter_list_bloc` - `v4.1.2`
+
+ - **FIX**: empty state determination. ([baca05e2](https://github.com/djangoflow/list_bloc/commit/baca05e218fdbbdcdd083974e71d7addde2a9dd0))
+
+
 ## 2023-10-18
 
 ### Changes
