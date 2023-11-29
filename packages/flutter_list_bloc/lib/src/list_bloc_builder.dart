@@ -61,16 +61,17 @@ class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
               }
               index -= 1;
             }
-            // Build empty state
-            if (state is Empty) {
-              return emptyBuilder(context, state);
-            }
+
             if (state is Error && errorBuilder != null) {
               return errorBuilder!(context, state as Error<List<T>, F>);
             }
             // Build trailing loading items
             if (state is Loading && index >= dataCount) {
               return loadingBuilder(context, state);
+            }
+            // Build empty state
+            if (state is Empty || state.data == null) {
+              return emptyBuilder(context, state);
             }
             return itemBuilder(context, state, index, state.data![index]!);
           },
