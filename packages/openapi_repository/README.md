@@ -56,6 +56,7 @@ The generator uses the `@OpenapiRepository` annotation to identify classes for c
 
 - [Annotation Usage Example](https://github.com/djangoflow/demo-flutter/blob/main/packages/demo/lib/data/api_repository/api_repository.dart)
 - [Generated Files Example](https://github.com/djangoflow/demo-flutter/blob/main/packages/demo/lib/data/api_repository/api_repository.openapi.dart)
+- [In-depth Explanation](./CODE_EXPLANATION.md)
 
 ## Generator Mechanics
 
