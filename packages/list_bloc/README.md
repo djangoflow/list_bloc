@@ -1,77 +1,98 @@
-A BLoC library for loading data from an api end-point with filtering and pagination.
+# list_bloc
 
-The idea for this library is to convert the data loaded from an API into a BLoC to
-avoid boilerplate, but at the same time keeping things very simple and generic.
+## Overview
 
-The base classes are `DataCubt<T,F>` where `T` is the type of the data element and
-`F` is a class for thr API filtering. It is implemented via `freezed` union of 
-`Data`, `Empty`, `Loading`, `Error`.
+This Flutter package is a comprehensive BLoC library designed for loading, managing, and displaying data with support for filtering and pagination. It simplifies handling various data states like loading, empty, error, and loaded, using the `freezed` package.
 
-Then, `ListCubit<T,F>` extends `DataCubit<List<T>,F` to provide a shorthand for
-loading list of items.
+## Key Components
 
-Further, `ContinousListBloc<T,F>` extends `ListCubit<T,F>` to facilitate implementing
-continuous lists. It requires `OffsetLimitFilter` to be implemented by `F` to be able
-to load extra data in the end of the list.
+- `DataCubit<T, F>`: Manages the state of data with generic types for data (`T`) and filters (`F`).
+- `ListCubit<T, F>`: Specialized for handling lists of data, extending `DataCubit`.
+- `PaginatedCubit<T, F>`: Tailored for paginated data handling, extending `DataCubit`.
+- `ContinousListBloc<T, F>`: Extends `ListCubit` for continuous list implementation, requiring `OffsetLimitFilter` in the filter class.
 
-Finally, `PaginatedCubit<T,F>` extends `DataCubit<ListPage<T,F>` to provide pagination
-and switching between bates.
+## Installation
 
-If you have an API instance that does not use filtering, you can replace the filter
-class with Object.
+Add this package to your Flutter project by including it in your `pubspec.yaml` file:
 
-All blocs are expecting to be initialized with a variant of `Future<T> loader([F? filter])`
-to get the data from the api and each is slightly different.
-
-The filters can extend Object or any other class however `freezed` is quite
-useful for this as this allows re-building filters based on existing ones quite
-easily.
-
+```yaml
+dependencies:
+  list_bloc: ^latest_version
+```
 
 ## Usage
 
-A simple usage example:
+### Basic Usage of `DataCubit`
 
+```dart
+final dataCubit = DataCubit<YourDataType, YourFilterType>(yourDataLoaderFunction);
+
+// Load data
+dataCubit.load();
+
+// Clear data
+dataCubit.clear();
 ```
-import 'packages:list_bloc.dart';
 
-// Can be as complex as the API supports
+### Using `ListCubit` for List Management
+
+```dart
+final listCubit = ListCubit<YourListItemType, YourFilterType>(yourListLoaderFunction);
+
+// Reload the entire list
+listCubit.reload();
+
+// Append more items to the existing list
+listCubit.append();
+
+// Add or remove items locally
+listCubit.addLocally(yourItem);
+listCubit.removeLocally(yourItem);
+```
+
+### Working with `PaginatedCubit`
+
+```dart
+final paginatedCubit = PaginatedCubit<YourPaginatedItemType, YourFilterType>(yourPaginatedLoaderFunction);
+
+// Usage is similar to DataCubit, but tailored for paginated data.
+```
+
+### Advanced Usage Example
+
+```dart
+import 'package:list_bloc.dart';
+
 class ItemFilter {
-    enum fruits, vegetables;
+  enum Type { fruits, vegetables }
 }
+
 class Item {
-    int type;
-    int value;
+  int type;
+  int value;
 }
 
 typedef FruitBloc = ListBloc<Item, ItemFilter>;
 typedef FruitState = Data<List<Item>, ItemFilter>;
 
-Future List<Item> loader([ItemFilter? filter]) async => api.....
+Future<List<Item>> loader([ItemFilter? filter]) async => api.....
 
-main() {
-    final bloc = FruitBloc(loader);
+void main() {
+  final bloc = FruitBloc(loader);
 
-    bloc.load(ItemFilter.fruits);
-...
-    BlocBuilder<FruitBloc, FruitState>(
-        bloc: bloc,
-        builder: (context, state) {
-            for(var item in state.data) {
-                    ...
-            }
-        } 
+  bloc.load(ItemFilter.Type.fruits);
+
+  BlocBuilder<FruitBloc, FruitState>(
+    bloc: bloc,
+    builder: (context, state) {
+      for (var item in state.data) {
+        // Handle your data
+      }
+    },
+  );
 }
-
-
 ```
 
-TODO:
-[ ] `PaginatedBloc` example
-[ ] `ListPage` class explanation
+## Features and Bugs
 
-## Features and bugs
-
-Please file feature requests and bugs at the [issue tracker][tracker].
-
-[tracker]: https://github.com/apexlabs-ai/list_bloc/issues
+We welcome your feedback and contributions to this package. Please file feature requests and bugs at the [issue tracker](https://github.com/djangoflow/list_bloc/issues).
