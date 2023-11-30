@@ -21,7 +21,6 @@ flutter pub add flutter_list_bloc
 flutter pub add dio
 flutter pub add openapi_repository --dev
 flutter pub add build_runner --dev
-flutter pub add built_value_generator --dev
 ```
 
 ### For Dart Projects
@@ -33,7 +32,6 @@ dart pub add flutter_list_bloc
 dart pub add dio
 dart pub add openapi_repository --dev
 dart pub add build_runner --dev
-dart pub add built_value_generator --dev
 ```
 
 ## Usage
