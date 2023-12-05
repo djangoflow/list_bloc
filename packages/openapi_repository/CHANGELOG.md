@@ -1,3 +1,8 @@
+## 3.4.3
+
+ - **REFACTOR**: add ignoreParams. ([4c0262a2](https://github.com/djangoflow/list_bloc/commit/4c0262a249c7361e8740b5102ef8d0a41403e2a1))
+ - **REFACTOR**: update README. ([9bcd6cf2](https://github.com/djangoflow/list_bloc/commit/9bcd6cf2ba17ebf2d982c7b686933d0b2c0323b4))
+
 ## 3.4.2
 
  - **REFACTOR**: remove not needed dependencies. ([91f3a9bc](https://github.com/djangoflow/list_bloc/commit/91f3a9bcd999aa7da2cfc1b5edc9c61aaf370d20))

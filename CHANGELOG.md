@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-12-06
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`openapi_repository` - `v3.4.3`](#openapi_repository---v343)
+ - [`openapi_repository_annotations` - `v1.2.4`](#openapi_repository_annotations---v124)
+
+---
+
+#### `openapi_repository` - `v3.4.3`
+
+ - **REFACTOR**: add ignoreParams. ([4c0262a2](https://github.com/djangoflow/list_bloc/commit/4c0262a249c7361e8740b5102ef8d0a41403e2a1))
+ - **REFACTOR**: update README. ([9bcd6cf2](https://github.com/djangoflow/list_bloc/commit/9bcd6cf2ba17ebf2d982c7b686933d0b2c0323b4))
+
+#### `openapi_repository_annotations` - `v1.2.4`
+
+ - **REFACTOR**: add ignoreParams. ([4c0262a2](https://github.com/djangoflow/list_bloc/commit/4c0262a249c7361e8740b5102ef8d0a41403e2a1))
+
+
 ## 2023-11-29
 
 ### Changes

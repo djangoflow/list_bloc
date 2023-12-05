@@ -1,3 +1,7 @@
+## 1.2.4
+
+ - **REFACTOR**: add ignoreParams. ([4c0262a2](https://github.com/djangoflow/list_bloc/commit/4c0262a249c7361e8740b5102ef8d0a41403e2a1))
+
 ## 1.2.3
 
  - update dependencies to latest
