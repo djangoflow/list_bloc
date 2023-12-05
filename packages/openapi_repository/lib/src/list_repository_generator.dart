@@ -20,14 +20,14 @@ class OpenapiRepositoryGenerator
   int _defaultPageSize = 100;
   int _defaultOffset = 0;
 
-  static const _ignoreParams = [
-    'cancelToken',
-    'headers',
-    'extra',
-    'validateStatus',
-    'onSendProgress',
-    'onReceiveProgress',
-  ];
+  // static const _ignoreParams = [
+  //   'cancelToken',
+  //   'headers',
+  //   'extra',
+  //   'validateStatus',
+  //   'onSendProgress',
+  //   'onReceiveProgress',
+  // ];
 
   @override
   generateForAnnotatedElement(
@@ -48,6 +48,7 @@ class OpenapiRepositoryGenerator
     final receiveTimeout = parsedAnnotation.receiveTimeout;
     final sendTimeout = parsedAnnotation.sendTimeout;
     final blocMixins = parsedAnnotation.blocMixinsList;
+    final ignoreParams = parsedAnnotation.ignoreParams.whereType<String>();
 
     final methods = parsedAnnotation.buildForElement.methods.where((element) {
       if (element.returnType is VoidType) return false;
@@ -57,6 +58,7 @@ class OpenapiRepositoryGenerator
     }).toList();
     final buildForClassName = parsedAnnotation.buildForElement.name;
     final crudOperationConfig = parsedAnnotation.crudOperationConfig;
+
     CrudConfigProvider.instance.crudOperationConfig = crudOperationConfig;
     final repositoryModel = RepositoryTemplateModel(
       repositoryName: element.name!.replaceFirst(r'$', ''),
@@ -89,7 +91,8 @@ class OpenapiRepositoryGenerator
 
     // Write list blocs, filter, repository
     for (final builder in parsedAnnotation.builderList) {
-      final output = await _getGeneratedCodesFromBuilder(builder, blocMixins);
+      final output = await _getGeneratedCodesFromBuilder(
+          builder, blocMixins, ignoreParams);
       if (output.isEmpty) continue;
       buffer.writeln(output);
     }
@@ -101,8 +104,10 @@ class OpenapiRepositoryGenerator
   Future<String> _getGeneratedCodesFromBuilder(
     _RepositoryBuilder builder,
     Iterable<_BlocMixin> blocMixins,
+    Iterable<String> ignoreParams,
   ) async {
     final crudOperationConfig = CrudConfigProvider.instance.config;
+    final ignoreParamsList = ignoreParams.toList(growable: false);
 
     final generatedMethodElements = <String>[];
     final generatedBuiltListConverters = <BuiltListJsonConverterModel>[];
@@ -158,7 +163,7 @@ class OpenapiRepositoryGenerator
             methodElement: methodElementCopy,
             defaultOffset: _defaultOffset,
             defaultPageSize: _defaultPageSize,
-            ignoreParams: _ignoreParams,
+            ignoreParams: ignoreParamsList,
           );
           final dataLoaderMethodModel =
               dataMethodElementProcessor.getLoaderMethodModel(
@@ -187,7 +192,7 @@ class OpenapiRepositoryGenerator
               methodElement: listMethod,
               defaultOffset: _defaultOffset,
               defaultPageSize: _defaultPageSize,
-              ignoreParams: _ignoreParams,
+              ignoreParams: ignoreParamsList,
             ).getLoaderMethodModel(
               generatedConverters: generatedBuiltListConverters,
             );
@@ -206,7 +211,7 @@ class OpenapiRepositoryGenerator
             methodElement: methodElement,
             defaultOffset: _defaultOffset,
             defaultPageSize: _defaultPageSize,
-            ignoreParams: _ignoreParams,
+            ignoreParams: ignoreParamsList,
           ).getLoaderMethodModel(
             generatedConverters: generatedBuiltListConverters,
           );
@@ -233,7 +238,7 @@ class OpenapiRepositoryGenerator
               methodElement: readMethod,
               defaultOffset: _defaultOffset,
               defaultPageSize: _defaultPageSize,
-              ignoreParams: _ignoreParams,
+              ignoreParams: ignoreParamsList,
             ).getLoaderMethodModel(
               generatedConverters: generatedBuiltListConverters,
             );
@@ -258,6 +263,7 @@ class OpenapiRepositoryGenerator
           api: apiClass,
           prefix: namePrefix,
           blocMixinsString: blocMixinsNames.join(", "),
+          ignoreParams: ignoreParamsList,
         )));
       } else {
         continue;
@@ -283,6 +289,7 @@ class OpenapiRepositoryGenerator
     required String api,
     required String prefix,
     String blocMixinsString = '',
+    required List<String> ignoreParams,
   }) async {
     final buffer = StringBuffer();
 
@@ -330,6 +337,7 @@ class OpenapiRepositoryGenerator
           methods: methods,
           namePrefix: prefix,
           blocMixinsString: blocMixinsString,
+          ingoreParams: ignoreParams,
         )))
         ..writeln();
 
@@ -343,6 +351,7 @@ class OpenapiRepositoryGenerator
     required List<LoaderMethodModel> loaders,
     required Iterable<MethodElement> methods,
     required String blocMixinsString,
+    required List<String> ingoreParams,
   }) async {
     LoaderTemplateModel? listLoaderForTemplate;
     LoaderTemplateModel? dataLoaderForTemplate;
@@ -407,21 +416,25 @@ class OpenapiRepositoryGenerator
       operation: crudOperationConfig!.postOperationName.camelCase,
       method: createMethod,
       apiMethodType: 'POST',
+      ignoreParams: ingoreParams,
     );
     final partialUpdateModel = await _getMethodModel(
       operation: crudOperationConfig.patchOperationName.camelCase,
       method: partialUpdateMethod,
       apiMethodType: 'PATCH',
+      ignoreParams: ingoreParams,
     );
     final updateModel = await _getMethodModel(
       operation: 'updateObject',
       method: updateMethod,
       apiMethodType: 'PUT',
+      ignoreParams: ingoreParams,
     );
     final deleteModel = await _getMethodModel(
       operation: crudOperationConfig.deleteOperationName.camelCase,
       method: deleteMethod,
       apiMethodType: 'DELETE',
+      ignoreParams: ingoreParams,
     );
     final crudMethods = [
       createModel,
@@ -456,6 +469,7 @@ class OpenapiRepositoryGenerator
         operation: operationName,
         method: e,
         isCrud: false,
+        ignoreParams: ingoreParams,
       );
 
       if (methodModel != null) {
@@ -522,6 +536,7 @@ class OpenapiRepositoryGenerator
     required MethodElement? method,
     String? apiMethodType,
     bool? isCrud = true,
+    required List<String> ignoreParams,
   }) async {
     if (method == null) return null;
     final elementApiMethodType = await _visitAndGetMethodTypes(
@@ -532,7 +547,7 @@ class OpenapiRepositoryGenerator
             apiMethodType != null &&
             elementApiMethodType.contains(apiMethodType))) {
       final params = method.parameters.where((element) {
-        return !_ignoreParams.contains(element.displayName);
+        return !ignoreParams.contains(element.displayName);
       });
 
       final arguments = params.map((e) {
@@ -551,14 +566,14 @@ class OpenapiRepositoryGenerator
         methodElement: method,
         defaultOffset: _defaultOffset,
         defaultPageSize: _defaultPageSize,
-        ignoreParams: _ignoreParams,
+        ignoreParams: ignoreParams,
       );
 
       final listProcessor = _ListMethodElementProcesser(
         methodElement: method,
         defaultOffset: _defaultOffset,
         defaultPageSize: _defaultPageSize,
-        ignoreParams: _ignoreParams,
+        ignoreParams: ignoreParams,
       );
 
       final dataReturntype =
@@ -705,6 +720,7 @@ class _ReaderTypes {
   final String? liveBasePath;
   final String? baseUrl;
   final CrudOperationConfig crudOperationConfig;
+  final Iterable<String?> ignoreParams;
 
   const _ReaderTypes._({
     required this.buildForElement,
@@ -718,6 +734,7 @@ class _ReaderTypes {
     this.defaultPageSize = 100,
     this.liveBasePath,
     this.baseUrl,
+    required this.ignoreParams,
   });
 
   factory _ReaderTypes.fromReader(ConstantReader reader) {
@@ -749,6 +766,11 @@ class _ReaderTypes {
     if (crudOperationConfigMap == null) {
       throw FormatException('crudOperationConfig can not be null');
     }
+    final ingoreParamDartObjectList =
+        reader.peek('ignoreParams')?.listValue ?? [];
+    final ignoreParams =
+        ingoreParamDartObjectList.map((e) => e.toStringValue());
+
     final crudOperationNames =
         CrudOperationConfig.fromDartObject(crudOperationConfigMap);
 
@@ -764,6 +786,7 @@ class _ReaderTypes {
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
       sendTimeout: sendTimeout,
+      ignoreParams: ignoreParams,
     );
   }
 }

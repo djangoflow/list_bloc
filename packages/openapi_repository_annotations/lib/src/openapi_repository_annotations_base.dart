@@ -32,6 +32,9 @@ class OpenapiRepository {
 
   final CrudOperationConfig? crudOperationConfig;
 
+  /// Parameters to ignore while generating code for Filters
+  final List<String> ignoreParams;
+
   const OpenapiRepository({
     required this.buildFor,
     this.builderList = const [],
@@ -44,6 +47,7 @@ class OpenapiRepository {
     this.baseUrl,
     this.crudOperationConfig = const CrudOperationConfig(),
     this.blocMixins = const [],
+    this.ignoreParams = defaultIgnoreParams,
   });
 }
 
@@ -90,3 +94,12 @@ class BlocMixin {
 
   const BlocMixin(this.mixin);
 }
+
+const defaultIgnoreParams = [
+  'cancelToken',
+  'headers',
+  'extra',
+  'validateStatus',
+  'onSendProgress',
+  'onReceiveProgress',
+];
