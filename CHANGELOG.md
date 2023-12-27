@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-12-27
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`list_bloc` - `v3.1.2`](#list_bloc---v312)
+ - [`flutter_list_bloc` - `v4.1.3`](#flutter_list_bloc---v413)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `flutter_list_bloc` - `v4.1.3`
+
+---
+
+#### `list_bloc` - `v3.1.2`
+
+ - **REFACTOR**: allow passing filter with update method. ([e2d1e081](https://github.com/djangoflow/list_bloc/commit/e2d1e0815464609fb125f02ea762e1f3286f9fa8))
+
+
 ## 2023-12-06
 
 ### Changes

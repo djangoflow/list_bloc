@@ -1,3 +1,7 @@
+## 4.1.3
+
+ - Update a dependency to the latest release.
+
 ## 4.1.2
 
  - **FIX**: empty state determination. ([baca05e2](https://github.com/djangoflow/list_bloc/commit/baca05e218fdbbdcdd083974e71d7addde2a9dd0))

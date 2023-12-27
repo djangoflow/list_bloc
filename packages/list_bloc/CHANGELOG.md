@@ -1,3 +1,7 @@
+## 3.1.2
+
+ - **REFACTOR**: allow passing filter with update method. ([e2d1e081](https://github.com/djangoflow/list_bloc/commit/e2d1e0815464609fb125f02ea762e1f3286f9fa8))
+
 ## 3.1.1
 
  - **REFACTOR**: added replaceLocally function. ([144dfa8f](https://github.com/djangoflow/list_bloc/commit/144dfa8f58b3e6e24870c1a5dd95b7857541cddb))
