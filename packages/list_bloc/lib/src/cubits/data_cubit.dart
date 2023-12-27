@@ -9,7 +9,8 @@ class DataCubit<T, F> extends Cubit<Data<T, F>> {
 
   void clear() => emit(Data.empty());
 
-  void update(T data) => emit(Data(data: data, filter: state.filter));
+  void update(T data, {F? filter}) =>
+      emit(Data(data: data, filter: filter ?? state.filter));
 
   Future<void> load([F? filter]) async {
     final f = filter ?? state.filter;
