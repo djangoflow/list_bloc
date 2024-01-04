@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-01-05
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`openapi_repository` - `v3.4.4`](#openapi_repository---v344)
+
+---
+
+#### `openapi_repository` - `v3.4.4`
+
+ - **FIX**: do not show linter warning for generated files. ([e254e3a4](https://github.com/djangoflow/list_bloc/commit/e254e3a4db6d9f29a6dd10831dd6e8f8cda25887))
+
+
 ## 2023-12-27
 
 ### Changes

@@ -1,3 +1,7 @@
+## 3.4.4
+
+ - **FIX**: do not show linter warning for generated files. ([e254e3a4](https://github.com/djangoflow/list_bloc/commit/e254e3a4db6d9f29a6dd10831dd6e8f8cda25887))
+
 ## 3.4.3
 
  - **REFACTOR**: add ignoreParams. ([4c0262a2](https://github.com/djangoflow/list_bloc/commit/4c0262a249c7361e8740b5102ef8d0a41403e2a1))
