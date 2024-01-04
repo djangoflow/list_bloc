@@ -136,6 +136,7 @@ static Future<List<{{returnType}}>> {{listLoaderMethodName}}({{#additionalParams
 ''';
 
 const apiRepositoryTemplate = r'''
+// ignore_for_file: sort_constructors_first, sort_unnamed_constructors_first
 class {{repositoryName}} {
   static {{repositoryName}} get instance => _instance;
   static final {{repositoryName}} _instance = {{repositoryName}}._internal();
