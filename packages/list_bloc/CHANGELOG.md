@@ -1,3 +1,7 @@
+## 3.1.3
+
+ - **REFACTOR**: re-generated files. ([171bbbc7](https://github.com/djangoflow/list_bloc/commit/171bbbc7cba6542f3a1f2bafa564bcbf820135a8))
+
 ## 3.1.2
 
  - **REFACTOR**: allow passing filter with update method. ([e2d1e081](https://github.com/djangoflow/list_bloc/commit/e2d1e0815464609fb125f02ea762e1f3286f9fa8))

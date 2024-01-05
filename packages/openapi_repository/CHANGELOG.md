@@ -1,3 +1,8 @@
+## 3.4.5
+
+ - **REFACTOR**: update analyzer. ([d0b47a59](https://github.com/djangoflow/list_bloc/commit/d0b47a59c1e20c1cc680005e4960391b2686c7c7))
+ - **REFACTOR**: move linter ignore in header. ([ec1aa601](https://github.com/djangoflow/list_bloc/commit/ec1aa601452e275252bf6c8a171714ea5041522d))
+
 ## 3.4.4
 
  - **FIX**: do not show linter warning for generated files. ([e254e3a4](https://github.com/djangoflow/list_bloc/commit/e254e3a4db6d9f29a6dd10831dd6e8f8cda25887))

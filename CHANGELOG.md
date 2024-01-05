@@ -15,6 +15,45 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`_openapi_repository_internal_models` - `v0.0.3+2`](#_openapi_repository_internal_models---v0032)
+ - [`list_bloc` - `v3.1.3`](#list_bloc---v313)
+ - [`openapi_repository` - `v3.4.5`](#openapi_repository---v345)
+ - [`flutter_list_bloc` - `v4.1.4`](#flutter_list_bloc---v414)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `flutter_list_bloc` - `v4.1.4`
+
+---
+
+#### `_openapi_repository_internal_models` - `v0.0.3+2`
+
+ - **REFACTOR**: re-generated files. ([171bbbc7](https://github.com/djangoflow/list_bloc/commit/171bbbc7cba6542f3a1f2bafa564bcbf820135a8))
+
+#### `list_bloc` - `v3.1.3`
+
+ - **REFACTOR**: re-generated files. ([171bbbc7](https://github.com/djangoflow/list_bloc/commit/171bbbc7cba6542f3a1f2bafa564bcbf820135a8))
+
+#### `openapi_repository` - `v3.4.5`
+
+ - **REFACTOR**: update analyzer. ([d0b47a59](https://github.com/djangoflow/list_bloc/commit/d0b47a59c1e20c1cc680005e4960391b2686c7c7))
+ - **REFACTOR**: move linter ignore in header. ([ec1aa601](https://github.com/djangoflow/list_bloc/commit/ec1aa601452e275252bf6c8a171714ea5041522d))
+
+
+## 2024-01-05
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`openapi_repository` - `v3.4.4`](#openapi_repository---v344)
 
 ---
