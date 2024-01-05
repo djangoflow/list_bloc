@@ -114,11 +114,12 @@ class _$RepositoryTemplateModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RepositoryTemplateModelCopyWith<$Res>
+abstract class _$$RepositoryTemplateModelImplCopyWith<$Res>
     implements $RepositoryTemplateModelCopyWith<$Res> {
-  factory _$$_RepositoryTemplateModelCopyWith(_$_RepositoryTemplateModel value,
-          $Res Function(_$_RepositoryTemplateModel) then) =
-      __$$_RepositoryTemplateModelCopyWithImpl<$Res>;
+  factory _$$RepositoryTemplateModelImplCopyWith(
+          _$RepositoryTemplateModelImpl value,
+          $Res Function(_$RepositoryTemplateModelImpl) then) =
+      __$$RepositoryTemplateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -133,12 +134,13 @@ abstract class _$$_RepositoryTemplateModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RepositoryTemplateModelCopyWithImpl<$Res>
+class __$$RepositoryTemplateModelImplCopyWithImpl<$Res>
     extends _$RepositoryTemplateModelCopyWithImpl<$Res,
-        _$_RepositoryTemplateModel>
-    implements _$$_RepositoryTemplateModelCopyWith<$Res> {
-  __$$_RepositoryTemplateModelCopyWithImpl(_$_RepositoryTemplateModel _value,
-      $Res Function(_$_RepositoryTemplateModel) _then)
+        _$RepositoryTemplateModelImpl>
+    implements _$$RepositoryTemplateModelImplCopyWith<$Res> {
+  __$$RepositoryTemplateModelImplCopyWithImpl(
+      _$RepositoryTemplateModelImpl _value,
+      $Res Function(_$RepositoryTemplateModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -153,7 +155,7 @@ class __$$_RepositoryTemplateModelCopyWithImpl<$Res>
     Object? receiveTimeout = null,
     Object? sendTimeout = null,
   }) {
-    return _then(_$_RepositoryTemplateModel(
+    return _then(_$RepositoryTemplateModelImpl(
       repositoryName: null == repositoryName
           ? _value.repositoryName
           : repositoryName // ignore: cast_nullable_to_non_nullable
@@ -193,8 +195,8 @@ class __$$_RepositoryTemplateModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_RepositoryTemplateModel implements _RepositoryTemplateModel {
-  const _$_RepositoryTemplateModel(
+class _$RepositoryTemplateModelImpl implements _RepositoryTemplateModel {
+  const _$RepositoryTemplateModelImpl(
       {required this.repositoryName,
       required this.buildForClass,
       required this.baseUrl,
@@ -205,8 +207,8 @@ class _$_RepositoryTemplateModel implements _RepositoryTemplateModel {
       required this.sendTimeout})
       : _accessors = accessors;
 
-  factory _$_RepositoryTemplateModel.fromJson(Map<String, dynamic> json) =>
-      _$$_RepositoryTemplateModelFromJson(json);
+  factory _$RepositoryTemplateModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RepositoryTemplateModelImplFromJson(json);
 
   @override
   final String repositoryName;
@@ -241,7 +243,7 @@ class _$_RepositoryTemplateModel implements _RepositoryTemplateModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RepositoryTemplateModel &&
+            other is _$RepositoryTemplateModelImpl &&
             (identical(other.repositoryName, repositoryName) ||
                 other.repositoryName == repositoryName) &&
             (identical(other.buildForClass, buildForClass) ||
@@ -275,14 +277,13 @@ class _$_RepositoryTemplateModel implements _RepositoryTemplateModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RepositoryTemplateModelCopyWith<_$_RepositoryTemplateModel>
-      get copyWith =>
-          __$$_RepositoryTemplateModelCopyWithImpl<_$_RepositoryTemplateModel>(
-              this, _$identity);
+  _$$RepositoryTemplateModelImplCopyWith<_$RepositoryTemplateModelImpl>
+      get copyWith => __$$RepositoryTemplateModelImplCopyWithImpl<
+          _$RepositoryTemplateModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RepositoryTemplateModelToJson(
+    return _$$RepositoryTemplateModelImplToJson(
       this,
     );
   }
@@ -297,10 +298,10 @@ abstract class _RepositoryTemplateModel implements RepositoryTemplateModel {
       final List<AccessorModel> accessors,
       required final int connectTimeout,
       required final int receiveTimeout,
-      required final int sendTimeout}) = _$_RepositoryTemplateModel;
+      required final int sendTimeout}) = _$RepositoryTemplateModelImpl;
 
   factory _RepositoryTemplateModel.fromJson(Map<String, dynamic> json) =
-      _$_RepositoryTemplateModel.fromJson;
+      _$RepositoryTemplateModelImpl.fromJson;
 
   @override
   String get repositoryName;
@@ -320,7 +321,7 @@ abstract class _RepositoryTemplateModel implements RepositoryTemplateModel {
   int get sendTimeout;
   @override
   @JsonKey(ignore: true)
-  _$$_RepositoryTemplateModelCopyWith<_$_RepositoryTemplateModel>
+  _$$RepositoryTemplateModelImplCopyWith<_$RepositoryTemplateModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -384,22 +385,22 @@ class _$AccessorModelCopyWithImpl<$Res, $Val extends AccessorModel>
 }
 
 /// @nodoc
-abstract class _$$_AccessorModelCopyWith<$Res>
+abstract class _$$AccessorModelImplCopyWith<$Res>
     implements $AccessorModelCopyWith<$Res> {
-  factory _$$_AccessorModelCopyWith(
-          _$_AccessorModel value, $Res Function(_$_AccessorModel) then) =
-      __$$_AccessorModelCopyWithImpl<$Res>;
+  factory _$$AccessorModelImplCopyWith(
+          _$AccessorModelImpl value, $Res Function(_$AccessorModelImpl) then) =
+      __$$AccessorModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String type, String name, String methodName});
 }
 
 /// @nodoc
-class __$$_AccessorModelCopyWithImpl<$Res>
-    extends _$AccessorModelCopyWithImpl<$Res, _$_AccessorModel>
-    implements _$$_AccessorModelCopyWith<$Res> {
-  __$$_AccessorModelCopyWithImpl(
-      _$_AccessorModel _value, $Res Function(_$_AccessorModel) _then)
+class __$$AccessorModelImplCopyWithImpl<$Res>
+    extends _$AccessorModelCopyWithImpl<$Res, _$AccessorModelImpl>
+    implements _$$AccessorModelImplCopyWith<$Res> {
+  __$$AccessorModelImplCopyWithImpl(
+      _$AccessorModelImpl _value, $Res Function(_$AccessorModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -409,7 +410,7 @@ class __$$_AccessorModelCopyWithImpl<$Res>
     Object? name = null,
     Object? methodName = null,
   }) {
-    return _then(_$_AccessorModel(
+    return _then(_$AccessorModelImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -428,12 +429,12 @@ class __$$_AccessorModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AccessorModel implements _AccessorModel {
-  const _$_AccessorModel(
+class _$AccessorModelImpl implements _AccessorModel {
+  const _$AccessorModelImpl(
       {required this.type, required this.name, required this.methodName});
 
-  factory _$_AccessorModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AccessorModelFromJson(json);
+  factory _$AccessorModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccessorModelImplFromJson(json);
 
   @override
   final String type;
@@ -451,7 +452,7 @@ class _$_AccessorModel implements _AccessorModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AccessorModel &&
+            other is _$AccessorModelImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.methodName, methodName) ||
@@ -465,12 +466,12 @@ class _$_AccessorModel implements _AccessorModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccessorModelCopyWith<_$_AccessorModel> get copyWith =>
-      __$$_AccessorModelCopyWithImpl<_$_AccessorModel>(this, _$identity);
+  _$$AccessorModelImplCopyWith<_$AccessorModelImpl> get copyWith =>
+      __$$AccessorModelImplCopyWithImpl<_$AccessorModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AccessorModelToJson(
+    return _$$AccessorModelImplToJson(
       this,
     );
   }
@@ -480,10 +481,10 @@ abstract class _AccessorModel implements AccessorModel {
   const factory _AccessorModel(
       {required final String type,
       required final String name,
-      required final String methodName}) = _$_AccessorModel;
+      required final String methodName}) = _$AccessorModelImpl;
 
   factory _AccessorModel.fromJson(Map<String, dynamic> json) =
-      _$_AccessorModel.fromJson;
+      _$AccessorModelImpl.fromJson;
 
   @override
   String get type;
@@ -493,7 +494,7 @@ abstract class _AccessorModel implements AccessorModel {
   String get methodName;
   @override
   @JsonKey(ignore: true)
-  _$$_AccessorModelCopyWith<_$_AccessorModel> get copyWith =>
+  _$$AccessorModelImplCopyWith<_$AccessorModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -575,11 +576,11 @@ class _$FreezedTemplateModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FreezedTemplateModelCopyWith<$Res>
+abstract class _$$FreezedTemplateModelImplCopyWith<$Res>
     implements $FreezedTemplateModelCopyWith<$Res> {
-  factory _$$_FreezedTemplateModelCopyWith(_$_FreezedTemplateModel value,
-          $Res Function(_$_FreezedTemplateModel) then) =
-      __$$_FreezedTemplateModelCopyWithImpl<$Res>;
+  factory _$$FreezedTemplateModelImplCopyWith(_$FreezedTemplateModelImpl value,
+          $Res Function(_$FreezedTemplateModelImpl) then) =
+      __$$FreezedTemplateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -591,11 +592,11 @@ abstract class _$$_FreezedTemplateModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FreezedTemplateModelCopyWithImpl<$Res>
-    extends _$FreezedTemplateModelCopyWithImpl<$Res, _$_FreezedTemplateModel>
-    implements _$$_FreezedTemplateModelCopyWith<$Res> {
-  __$$_FreezedTemplateModelCopyWithImpl(_$_FreezedTemplateModel _value,
-      $Res Function(_$_FreezedTemplateModel) _then)
+class __$$FreezedTemplateModelImplCopyWithImpl<$Res>
+    extends _$FreezedTemplateModelCopyWithImpl<$Res, _$FreezedTemplateModelImpl>
+    implements _$$FreezedTemplateModelImplCopyWith<$Res> {
+  __$$FreezedTemplateModelImplCopyWithImpl(_$FreezedTemplateModelImpl _value,
+      $Res Function(_$FreezedTemplateModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -607,7 +608,7 @@ class __$$_FreezedTemplateModelCopyWithImpl<$Res>
     Object? annotations = null,
     Object? isTypesEmpty = null,
   }) {
-    return _then(_$_FreezedTemplateModel(
+    return _then(_$FreezedTemplateModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -635,8 +636,8 @@ class __$$_FreezedTemplateModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_FreezedTemplateModel implements _FreezedTemplateModel {
-  const _$_FreezedTemplateModel(
+class _$FreezedTemplateModelImpl implements _FreezedTemplateModel {
+  const _$FreezedTemplateModelImpl(
       {required this.name,
       this.isPaginated = true,
       final List<TypeModel> types = const [],
@@ -645,8 +646,8 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
       : _types = types,
         _annotations = annotations;
 
-  factory _$_FreezedTemplateModel.fromJson(Map<String, dynamic> json) =>
-      _$$_FreezedTemplateModelFromJson(json);
+  factory _$FreezedTemplateModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FreezedTemplateModelImplFromJson(json);
 
   @override
   final String name;
@@ -684,7 +685,7 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FreezedTemplateModel &&
+            other is _$FreezedTemplateModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.isPaginated, isPaginated) ||
                 other.isPaginated == isPaginated) &&
@@ -708,13 +709,14 @@ class _$_FreezedTemplateModel implements _FreezedTemplateModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FreezedTemplateModelCopyWith<_$_FreezedTemplateModel> get copyWith =>
-      __$$_FreezedTemplateModelCopyWithImpl<_$_FreezedTemplateModel>(
-          this, _$identity);
+  _$$FreezedTemplateModelImplCopyWith<_$FreezedTemplateModelImpl>
+      get copyWith =>
+          __$$FreezedTemplateModelImplCopyWithImpl<_$FreezedTemplateModelImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FreezedTemplateModelToJson(
+    return _$$FreezedTemplateModelImplToJson(
       this,
     );
   }
@@ -726,10 +728,10 @@ abstract class _FreezedTemplateModel implements FreezedTemplateModel {
       final bool isPaginated,
       final List<TypeModel> types,
       final List<AnnotationModel> annotations,
-      final bool isTypesEmpty}) = _$_FreezedTemplateModel;
+      final bool isTypesEmpty}) = _$FreezedTemplateModelImpl;
 
   factory _FreezedTemplateModel.fromJson(Map<String, dynamic> json) =
-      _$_FreezedTemplateModel.fromJson;
+      _$FreezedTemplateModelImpl.fromJson;
 
   @override
   String get name;
@@ -743,8 +745,8 @@ abstract class _FreezedTemplateModel implements FreezedTemplateModel {
   bool get isTypesEmpty;
   @override
   @JsonKey(ignore: true)
-  _$$_FreezedTemplateModelCopyWith<_$_FreezedTemplateModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FreezedTemplateModelImplCopyWith<_$FreezedTemplateModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 TypeModel _$TypeModelFromJson(Map<String, dynamic> json) {
@@ -823,10 +825,11 @@ class _$TypeModelCopyWithImpl<$Res, $Val extends TypeModel>
 }
 
 /// @nodoc
-abstract class _$$_TypeModelCopyWith<$Res> implements $TypeModelCopyWith<$Res> {
-  factory _$$_TypeModelCopyWith(
-          _$_TypeModel value, $Res Function(_$_TypeModel) then) =
-      __$$_TypeModelCopyWithImpl<$Res>;
+abstract class _$$TypeModelImplCopyWith<$Res>
+    implements $TypeModelCopyWith<$Res> {
+  factory _$$TypeModelImplCopyWith(
+          _$TypeModelImpl value, $Res Function(_$TypeModelImpl) then) =
+      __$$TypeModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -838,11 +841,11 @@ abstract class _$$_TypeModelCopyWith<$Res> implements $TypeModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TypeModelCopyWithImpl<$Res>
-    extends _$TypeModelCopyWithImpl<$Res, _$_TypeModel>
-    implements _$$_TypeModelCopyWith<$Res> {
-  __$$_TypeModelCopyWithImpl(
-      _$_TypeModel _value, $Res Function(_$_TypeModel) _then)
+class __$$TypeModelImplCopyWithImpl<$Res>
+    extends _$TypeModelCopyWithImpl<$Res, _$TypeModelImpl>
+    implements _$$TypeModelImplCopyWith<$Res> {
+  __$$TypeModelImplCopyWithImpl(
+      _$TypeModelImpl _value, $Res Function(_$TypeModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -854,7 +857,7 @@ class __$$_TypeModelCopyWithImpl<$Res>
     Object? type = null,
     Object? name = null,
   }) {
-    return _then(_$_TypeModel(
+    return _then(_$TypeModelImpl(
       isRequired: null == isRequired
           ? _value.isRequired
           : isRequired // ignore: cast_nullable_to_non_nullable
@@ -881,16 +884,16 @@ class __$$_TypeModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TypeModel implements _TypeModel {
-  const _$_TypeModel(
+class _$TypeModelImpl implements _TypeModel {
+  const _$TypeModelImpl(
       {required this.isRequired,
       required this.isNullable,
       this.defaultValue,
       required this.type,
       required this.name});
 
-  factory _$_TypeModel.fromJson(Map<String, dynamic> json) =>
-      _$$_TypeModelFromJson(json);
+  factory _$TypeModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TypeModelImplFromJson(json);
 
   @override
   final bool isRequired;
@@ -912,7 +915,7 @@ class _$_TypeModel implements _TypeModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TypeModel &&
+            other is _$TypeModelImpl &&
             (identical(other.isRequired, isRequired) ||
                 other.isRequired == isRequired) &&
             (identical(other.isNullable, isNullable) ||
@@ -931,12 +934,12 @@ class _$_TypeModel implements _TypeModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TypeModelCopyWith<_$_TypeModel> get copyWith =>
-      __$$_TypeModelCopyWithImpl<_$_TypeModel>(this, _$identity);
+  _$$TypeModelImplCopyWith<_$TypeModelImpl> get copyWith =>
+      __$$TypeModelImplCopyWithImpl<_$TypeModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TypeModelToJson(
+    return _$$TypeModelImplToJson(
       this,
     );
   }
@@ -948,10 +951,10 @@ abstract class _TypeModel implements TypeModel {
       required final bool isNullable,
       final String? defaultValue,
       required final String type,
-      required final String name}) = _$_TypeModel;
+      required final String name}) = _$TypeModelImpl;
 
   factory _TypeModel.fromJson(Map<String, dynamic> json) =
-      _$_TypeModel.fromJson;
+      _$TypeModelImpl.fromJson;
 
   @override
   bool get isRequired;
@@ -965,7 +968,7 @@ abstract class _TypeModel implements TypeModel {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_TypeModelCopyWith<_$_TypeModel> get copyWith =>
+  _$$TypeModelImplCopyWith<_$TypeModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1030,22 +1033,22 @@ class _$TypedefTemplateModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TypedefTemplateModelCopyWith<$Res>
+abstract class _$$TypedefTemplateModelImplCopyWith<$Res>
     implements $TypedefTemplateModelCopyWith<$Res> {
-  factory _$$_TypedefTemplateModelCopyWith(_$_TypedefTemplateModel value,
-          $Res Function(_$_TypedefTemplateModel) then) =
-      __$$_TypedefTemplateModelCopyWithImpl<$Res>;
+  factory _$$TypedefTemplateModelImplCopyWith(_$TypedefTemplateModelImpl value,
+          $Res Function(_$TypedefTemplateModelImpl) then) =
+      __$$TypedefTemplateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String type, String name, bool hasFilter});
 }
 
 /// @nodoc
-class __$$_TypedefTemplateModelCopyWithImpl<$Res>
-    extends _$TypedefTemplateModelCopyWithImpl<$Res, _$_TypedefTemplateModel>
-    implements _$$_TypedefTemplateModelCopyWith<$Res> {
-  __$$_TypedefTemplateModelCopyWithImpl(_$_TypedefTemplateModel _value,
-      $Res Function(_$_TypedefTemplateModel) _then)
+class __$$TypedefTemplateModelImplCopyWithImpl<$Res>
+    extends _$TypedefTemplateModelCopyWithImpl<$Res, _$TypedefTemplateModelImpl>
+    implements _$$TypedefTemplateModelImplCopyWith<$Res> {
+  __$$TypedefTemplateModelImplCopyWithImpl(_$TypedefTemplateModelImpl _value,
+      $Res Function(_$TypedefTemplateModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1055,7 +1058,7 @@ class __$$_TypedefTemplateModelCopyWithImpl<$Res>
     Object? name = null,
     Object? hasFilter = null,
   }) {
-    return _then(_$_TypedefTemplateModel(
+    return _then(_$TypedefTemplateModelImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -1074,12 +1077,12 @@ class __$$_TypedefTemplateModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TypedefTemplateModel implements _TypedefTemplateModel {
-  const _$_TypedefTemplateModel(
+class _$TypedefTemplateModelImpl implements _TypedefTemplateModel {
+  const _$TypedefTemplateModelImpl(
       {required this.type, required this.name, this.hasFilter = false});
 
-  factory _$_TypedefTemplateModel.fromJson(Map<String, dynamic> json) =>
-      _$$_TypedefTemplateModelFromJson(json);
+  factory _$TypedefTemplateModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TypedefTemplateModelImplFromJson(json);
 
   @override
   final String type;
@@ -1098,7 +1101,7 @@ class _$_TypedefTemplateModel implements _TypedefTemplateModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TypedefTemplateModel &&
+            other is _$TypedefTemplateModelImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.hasFilter, hasFilter) ||
@@ -1112,13 +1115,14 @@ class _$_TypedefTemplateModel implements _TypedefTemplateModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TypedefTemplateModelCopyWith<_$_TypedefTemplateModel> get copyWith =>
-      __$$_TypedefTemplateModelCopyWithImpl<_$_TypedefTemplateModel>(
-          this, _$identity);
+  _$$TypedefTemplateModelImplCopyWith<_$TypedefTemplateModelImpl>
+      get copyWith =>
+          __$$TypedefTemplateModelImplCopyWithImpl<_$TypedefTemplateModelImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TypedefTemplateModelToJson(
+    return _$$TypedefTemplateModelImplToJson(
       this,
     );
   }
@@ -1128,10 +1132,10 @@ abstract class _TypedefTemplateModel implements TypedefTemplateModel {
   const factory _TypedefTemplateModel(
       {required final String type,
       required final String name,
-      final bool hasFilter}) = _$_TypedefTemplateModel;
+      final bool hasFilter}) = _$TypedefTemplateModelImpl;
 
   factory _TypedefTemplateModel.fromJson(Map<String, dynamic> json) =
-      _$_TypedefTemplateModel.fromJson;
+      _$TypedefTemplateModelImpl.fromJson;
 
   @override
   String get type;
@@ -1141,8 +1145,8 @@ abstract class _TypedefTemplateModel implements TypedefTemplateModel {
   bool get hasFilter;
   @override
   @JsonKey(ignore: true)
-  _$$_TypedefTemplateModelCopyWith<_$_TypedefTemplateModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TypedefTemplateModelImplCopyWith<_$TypedefTemplateModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ListRepositoryTemplateModel _$ListRepositoryTemplateModelFromJson(
@@ -1261,12 +1265,12 @@ class _$ListRepositoryTemplateModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ListRepositoryTemplateModelCopyWith<$Res>
+abstract class _$$ListRepositoryTemplateModelImplCopyWith<$Res>
     implements $ListRepositoryTemplateModelCopyWith<$Res> {
-  factory _$$_ListRepositoryTemplateModelCopyWith(
-          _$_ListRepositoryTemplateModel value,
-          $Res Function(_$_ListRepositoryTemplateModel) then) =
-      __$$_ListRepositoryTemplateModelCopyWithImpl<$Res>;
+  factory _$$ListRepositoryTemplateModelImplCopyWith(
+          _$ListRepositoryTemplateModelImpl value,
+          $Res Function(_$ListRepositoryTemplateModelImpl) then) =
+      __$$ListRepositoryTemplateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1283,13 +1287,13 @@ abstract class _$$_ListRepositoryTemplateModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ListRepositoryTemplateModelCopyWithImpl<$Res>
+class __$$ListRepositoryTemplateModelImplCopyWithImpl<$Res>
     extends _$ListRepositoryTemplateModelCopyWithImpl<$Res,
-        _$_ListRepositoryTemplateModel>
-    implements _$$_ListRepositoryTemplateModelCopyWith<$Res> {
-  __$$_ListRepositoryTemplateModelCopyWithImpl(
-      _$_ListRepositoryTemplateModel _value,
-      $Res Function(_$_ListRepositoryTemplateModel) _then)
+        _$ListRepositoryTemplateModelImpl>
+    implements _$$ListRepositoryTemplateModelImplCopyWith<$Res> {
+  __$$ListRepositoryTemplateModelImplCopyWithImpl(
+      _$ListRepositoryTemplateModelImpl _value,
+      $Res Function(_$ListRepositoryTemplateModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1306,7 +1310,7 @@ class __$$_ListRepositoryTemplateModelCopyWithImpl<$Res>
     Object? additionalParams = null,
     Object? filterParams = null,
   }) {
-    return _then(_$_ListRepositoryTemplateModel(
+    return _then(_$ListRepositoryTemplateModelImpl(
       api: null == api
           ? _value.api
           : api // ignore: cast_nullable_to_non_nullable
@@ -1353,8 +1357,9 @@ class __$$_ListRepositoryTemplateModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
-  const _$_ListRepositoryTemplateModel(
+class _$ListRepositoryTemplateModelImpl
+    implements _ListRepositoryTemplateModel {
+  const _$ListRepositoryTemplateModelImpl(
       {required this.api,
       required this.name,
       this.hasRequiredParam = false,
@@ -1369,8 +1374,9 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
         _additionalParams = additionalParams,
         _filterParams = filterParams;
 
-  factory _$_ListRepositoryTemplateModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ListRepositoryTemplateModelFromJson(json);
+  factory _$ListRepositoryTemplateModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ListRepositoryTemplateModelImplFromJson(json);
 
   @override
   final String api;
@@ -1425,7 +1431,7 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ListRepositoryTemplateModel &&
+            other is _$ListRepositoryTemplateModelImpl &&
             (identical(other.api, api) || other.api == api) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
@@ -1464,13 +1470,13 @@ class _$_ListRepositoryTemplateModel implements _ListRepositoryTemplateModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ListRepositoryTemplateModelCopyWith<_$_ListRepositoryTemplateModel>
-      get copyWith => __$$_ListRepositoryTemplateModelCopyWithImpl<
-          _$_ListRepositoryTemplateModel>(this, _$identity);
+  _$$ListRepositoryTemplateModelImplCopyWith<_$ListRepositoryTemplateModelImpl>
+      get copyWith => __$$ListRepositoryTemplateModelImplCopyWithImpl<
+          _$ListRepositoryTemplateModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ListRepositoryTemplateModelToJson(
+    return _$$ListRepositoryTemplateModelImplToJson(
       this,
     );
   }
@@ -1488,10 +1494,10 @@ abstract class _ListRepositoryTemplateModel
       required final String returnType,
       final bool hasFilter,
       final List<ParamModel> additionalParams,
-      final List<ParamModel> filterParams}) = _$_ListRepositoryTemplateModel;
+      final List<ParamModel> filterParams}) = _$ListRepositoryTemplateModelImpl;
 
   factory _ListRepositoryTemplateModel.fromJson(Map<String, dynamic> json) =
-      _$_ListRepositoryTemplateModel.fromJson;
+      _$ListRepositoryTemplateModelImpl.fromJson;
 
   @override
   String get api;
@@ -1515,7 +1521,7 @@ abstract class _ListRepositoryTemplateModel
   List<ParamModel> get filterParams;
   @override
   @JsonKey(ignore: true)
-  _$$_ListRepositoryTemplateModelCopyWith<_$_ListRepositoryTemplateModel>
+  _$$ListRepositoryTemplateModelImplCopyWith<_$ListRepositoryTemplateModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1619,11 +1625,12 @@ class _$DataCubitTemplateModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_DataCubitTemplateModelCopyWith<$Res>
+abstract class _$$DataCubitTemplateModelImplCopyWith<$Res>
     implements $DataCubitTemplateModelCopyWith<$Res> {
-  factory _$$_DataCubitTemplateModelCopyWith(_$_DataCubitTemplateModel value,
-          $Res Function(_$_DataCubitTemplateModel) then) =
-      __$$_DataCubitTemplateModelCopyWithImpl<$Res>;
+  factory _$$DataCubitTemplateModelImplCopyWith(
+          _$DataCubitTemplateModelImpl value,
+          $Res Function(_$DataCubitTemplateModelImpl) then) =
+      __$$DataCubitTemplateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1638,12 +1645,13 @@ abstract class _$$_DataCubitTemplateModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DataCubitTemplateModelCopyWithImpl<$Res>
+class __$$DataCubitTemplateModelImplCopyWithImpl<$Res>
     extends _$DataCubitTemplateModelCopyWithImpl<$Res,
-        _$_DataCubitTemplateModel>
-    implements _$$_DataCubitTemplateModelCopyWith<$Res> {
-  __$$_DataCubitTemplateModelCopyWithImpl(_$_DataCubitTemplateModel _value,
-      $Res Function(_$_DataCubitTemplateModel) _then)
+        _$DataCubitTemplateModelImpl>
+    implements _$$DataCubitTemplateModelImplCopyWith<$Res> {
+  __$$DataCubitTemplateModelImplCopyWithImpl(
+      _$DataCubitTemplateModelImpl _value,
+      $Res Function(_$DataCubitTemplateModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1658,7 +1666,7 @@ class __$$_DataCubitTemplateModelCopyWithImpl<$Res>
     Object? returnType = null,
     Object? additionalParams = null,
   }) {
-    return _then(_$_DataCubitTemplateModel(
+    return _then(_$DataCubitTemplateModelImpl(
       api: null == api
           ? _value.api
           : api // ignore: cast_nullable_to_non_nullable
@@ -1697,8 +1705,8 @@ class __$$_DataCubitTemplateModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_DataCubitTemplateModel implements _DataCubitTemplateModel {
-  const _$_DataCubitTemplateModel(
+class _$DataCubitTemplateModelImpl implements _DataCubitTemplateModel {
+  const _$DataCubitTemplateModelImpl(
       {required this.api,
       required this.name,
       this.hasRequiredParam = false,
@@ -1710,8 +1718,8 @@ class _$_DataCubitTemplateModel implements _DataCubitTemplateModel {
       : _crudMethods = crudMethods,
         _additionalParams = additionalParams;
 
-  factory _$_DataCubitTemplateModel.fromJson(Map<String, dynamic> json) =>
-      _$$_DataCubitTemplateModelFromJson(json);
+  factory _$DataCubitTemplateModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataCubitTemplateModelImplFromJson(json);
 
   @override
   final String api;
@@ -1754,7 +1762,7 @@ class _$_DataCubitTemplateModel implements _DataCubitTemplateModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DataCubitTemplateModel &&
+            other is _$DataCubitTemplateModelImpl &&
             (identical(other.api, api) || other.api == api) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
@@ -1787,13 +1795,13 @@ class _$_DataCubitTemplateModel implements _DataCubitTemplateModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DataCubitTemplateModelCopyWith<_$_DataCubitTemplateModel> get copyWith =>
-      __$$_DataCubitTemplateModelCopyWithImpl<_$_DataCubitTemplateModel>(
-          this, _$identity);
+  _$$DataCubitTemplateModelImplCopyWith<_$DataCubitTemplateModelImpl>
+      get copyWith => __$$DataCubitTemplateModelImplCopyWithImpl<
+          _$DataCubitTemplateModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DataCubitTemplateModelToJson(
+    return _$$DataCubitTemplateModelImplToJson(
       this,
     );
   }
@@ -1808,10 +1816,10 @@ abstract class _DataCubitTemplateModel implements DataCubitTemplateModel {
       required final List<MethodModel> crudMethods,
       required final String methodName,
       required final String returnType,
-      final List<ParamModel> additionalParams}) = _$_DataCubitTemplateModel;
+      final List<ParamModel> additionalParams}) = _$DataCubitTemplateModelImpl;
 
   factory _DataCubitTemplateModel.fromJson(Map<String, dynamic> json) =
-      _$_DataCubitTemplateModel.fromJson;
+      _$DataCubitTemplateModelImpl.fromJson;
 
   @override
   String get api;
@@ -1831,8 +1839,8 @@ abstract class _DataCubitTemplateModel implements DataCubitTemplateModel {
   List<ParamModel> get additionalParams;
   @override
   @JsonKey(ignore: true)
-  _$$_DataCubitTemplateModelCopyWith<_$_DataCubitTemplateModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DataCubitTemplateModelImplCopyWith<_$DataCubitTemplateModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ParamModel _$ParamModelFromJson(Map<String, dynamic> json) {
@@ -1883,22 +1891,22 @@ class _$ParamModelCopyWithImpl<$Res, $Val extends ParamModel>
 }
 
 /// @nodoc
-abstract class _$$_ParamModelCopyWith<$Res>
+abstract class _$$ParamModelImplCopyWith<$Res>
     implements $ParamModelCopyWith<$Res> {
-  factory _$$_ParamModelCopyWith(
-          _$_ParamModel value, $Res Function(_$_ParamModel) then) =
-      __$$_ParamModelCopyWithImpl<$Res>;
+  factory _$$ParamModelImplCopyWith(
+          _$ParamModelImpl value, $Res Function(_$ParamModelImpl) then) =
+      __$$ParamModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String param});
 }
 
 /// @nodoc
-class __$$_ParamModelCopyWithImpl<$Res>
-    extends _$ParamModelCopyWithImpl<$Res, _$_ParamModel>
-    implements _$$_ParamModelCopyWith<$Res> {
-  __$$_ParamModelCopyWithImpl(
-      _$_ParamModel _value, $Res Function(_$_ParamModel) _then)
+class __$$ParamModelImplCopyWithImpl<$Res>
+    extends _$ParamModelCopyWithImpl<$Res, _$ParamModelImpl>
+    implements _$$ParamModelImplCopyWith<$Res> {
+  __$$ParamModelImplCopyWithImpl(
+      _$ParamModelImpl _value, $Res Function(_$ParamModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1906,7 +1914,7 @@ class __$$_ParamModelCopyWithImpl<$Res>
   $Res call({
     Object? param = null,
   }) {
-    return _then(_$_ParamModel(
+    return _then(_$ParamModelImpl(
       null == param
           ? _value.param
           : param // ignore: cast_nullable_to_non_nullable
@@ -1917,11 +1925,11 @@ class __$$_ParamModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ParamModel implements _ParamModel {
-  const _$_ParamModel(this.param);
+class _$ParamModelImpl implements _ParamModel {
+  const _$ParamModelImpl(this.param);
 
-  factory _$_ParamModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ParamModelFromJson(json);
+  factory _$ParamModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ParamModelImplFromJson(json);
 
   @override
   final String param;
@@ -1935,7 +1943,7 @@ class _$_ParamModel implements _ParamModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ParamModel &&
+            other is _$ParamModelImpl &&
             (identical(other.param, param) || other.param == param));
   }
 
@@ -1946,28 +1954,28 @@ class _$_ParamModel implements _ParamModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ParamModelCopyWith<_$_ParamModel> get copyWith =>
-      __$$_ParamModelCopyWithImpl<_$_ParamModel>(this, _$identity);
+  _$$ParamModelImplCopyWith<_$ParamModelImpl> get copyWith =>
+      __$$ParamModelImplCopyWithImpl<_$ParamModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ParamModelToJson(
+    return _$$ParamModelImplToJson(
       this,
     );
   }
 }
 
 abstract class _ParamModel implements ParamModel {
-  const factory _ParamModel(final String param) = _$_ParamModel;
+  const factory _ParamModel(final String param) = _$ParamModelImpl;
 
   factory _ParamModel.fromJson(Map<String, dynamic> json) =
-      _$_ParamModel.fromJson;
+      _$ParamModelImpl.fromJson;
 
   @override
   String get param;
   @override
   @JsonKey(ignore: true)
-  _$$_ParamModelCopyWith<_$_ParamModel> get copyWith =>
+  _$$ParamModelImplCopyWith<_$ParamModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2019,22 +2027,22 @@ class _$AnnotationModelCopyWithImpl<$Res, $Val extends AnnotationModel>
 }
 
 /// @nodoc
-abstract class _$$_AnnotationModelCopyWith<$Res>
+abstract class _$$AnnotationModelImplCopyWith<$Res>
     implements $AnnotationModelCopyWith<$Res> {
-  factory _$$_AnnotationModelCopyWith(
-          _$_AnnotationModel value, $Res Function(_$_AnnotationModel) then) =
-      __$$_AnnotationModelCopyWithImpl<$Res>;
+  factory _$$AnnotationModelImplCopyWith(_$AnnotationModelImpl value,
+          $Res Function(_$AnnotationModelImpl) then) =
+      __$$AnnotationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String annotation});
 }
 
 /// @nodoc
-class __$$_AnnotationModelCopyWithImpl<$Res>
-    extends _$AnnotationModelCopyWithImpl<$Res, _$_AnnotationModel>
-    implements _$$_AnnotationModelCopyWith<$Res> {
-  __$$_AnnotationModelCopyWithImpl(
-      _$_AnnotationModel _value, $Res Function(_$_AnnotationModel) _then)
+class __$$AnnotationModelImplCopyWithImpl<$Res>
+    extends _$AnnotationModelCopyWithImpl<$Res, _$AnnotationModelImpl>
+    implements _$$AnnotationModelImplCopyWith<$Res> {
+  __$$AnnotationModelImplCopyWithImpl(
+      _$AnnotationModelImpl _value, $Res Function(_$AnnotationModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2042,7 +2050,7 @@ class __$$_AnnotationModelCopyWithImpl<$Res>
   $Res call({
     Object? annotation = null,
   }) {
-    return _then(_$_AnnotationModel(
+    return _then(_$AnnotationModelImpl(
       null == annotation
           ? _value.annotation
           : annotation // ignore: cast_nullable_to_non_nullable
@@ -2053,11 +2061,11 @@ class __$$_AnnotationModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AnnotationModel implements _AnnotationModel {
-  const _$_AnnotationModel(this.annotation);
+class _$AnnotationModelImpl implements _AnnotationModel {
+  const _$AnnotationModelImpl(this.annotation);
 
-  factory _$_AnnotationModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AnnotationModelFromJson(json);
+  factory _$AnnotationModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AnnotationModelImplFromJson(json);
 
   @override
   final String annotation;
@@ -2071,7 +2079,7 @@ class _$_AnnotationModel implements _AnnotationModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnotationModel &&
+            other is _$AnnotationModelImpl &&
             (identical(other.annotation, annotation) ||
                 other.annotation == annotation));
   }
@@ -2083,28 +2091,30 @@ class _$_AnnotationModel implements _AnnotationModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnotationModelCopyWith<_$_AnnotationModel> get copyWith =>
-      __$$_AnnotationModelCopyWithImpl<_$_AnnotationModel>(this, _$identity);
+  _$$AnnotationModelImplCopyWith<_$AnnotationModelImpl> get copyWith =>
+      __$$AnnotationModelImplCopyWithImpl<_$AnnotationModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnnotationModelToJson(
+    return _$$AnnotationModelImplToJson(
       this,
     );
   }
 }
 
 abstract class _AnnotationModel implements AnnotationModel {
-  const factory _AnnotationModel(final String annotation) = _$_AnnotationModel;
+  const factory _AnnotationModel(final String annotation) =
+      _$AnnotationModelImpl;
 
   factory _AnnotationModel.fromJson(Map<String, dynamic> json) =
-      _$_AnnotationModel.fromJson;
+      _$AnnotationModelImpl.fromJson;
 
   @override
   String get annotation;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnotationModelCopyWith<_$_AnnotationModel> get copyWith =>
+  _$$AnnotationModelImplCopyWith<_$AnnotationModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2174,11 +2184,11 @@ class _$ArgModelCopyWithImpl<$Res, $Val extends ArgModel>
 }
 
 /// @nodoc
-abstract class _$$_ArgModelModelCopyWith<$Res>
+abstract class _$$ArgModelModelImplCopyWith<$Res>
     implements $ArgModelCopyWith<$Res> {
-  factory _$$_ArgModelModelCopyWith(
-          _$_ArgModelModel value, $Res Function(_$_ArgModelModel) then) =
-      __$$_ArgModelModelCopyWithImpl<$Res>;
+  factory _$$ArgModelModelImplCopyWith(
+          _$ArgModelModelImpl value, $Res Function(_$ArgModelModelImpl) then) =
+      __$$ArgModelModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2186,11 +2196,11 @@ abstract class _$$_ArgModelModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ArgModelModelCopyWithImpl<$Res>
-    extends _$ArgModelCopyWithImpl<$Res, _$_ArgModelModel>
-    implements _$$_ArgModelModelCopyWith<$Res> {
-  __$$_ArgModelModelCopyWithImpl(
-      _$_ArgModelModel _value, $Res Function(_$_ArgModelModel) _then)
+class __$$ArgModelModelImplCopyWithImpl<$Res>
+    extends _$ArgModelCopyWithImpl<$Res, _$ArgModelModelImpl>
+    implements _$$ArgModelModelImplCopyWith<$Res> {
+  __$$ArgModelModelImplCopyWithImpl(
+      _$ArgModelModelImpl _value, $Res Function(_$ArgModelModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2201,7 +2211,7 @@ class __$$_ArgModelModelCopyWithImpl<$Res>
     Object? isNullableArg = null,
     Object? isRequiredArg = null,
   }) {
-    return _then(_$_ArgModelModel(
+    return _then(_$ArgModelModelImpl(
       null == argType
           ? _value.argType
           : argType // ignore: cast_nullable_to_non_nullable
@@ -2224,12 +2234,12 @@ class __$$_ArgModelModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ArgModelModel implements _ArgModelModel {
-  const _$_ArgModelModel(
+class _$ArgModelModelImpl implements _ArgModelModel {
+  const _$ArgModelModelImpl(
       this.argType, this.argName, this.isNullableArg, this.isRequiredArg);
 
-  factory _$_ArgModelModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ArgModelModelFromJson(json);
+  factory _$ArgModelModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ArgModelModelImplFromJson(json);
 
   @override
   final String argType;
@@ -2249,7 +2259,7 @@ class _$_ArgModelModel implements _ArgModelModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ArgModelModel &&
+            other is _$ArgModelModelImpl &&
             (identical(other.argType, argType) || other.argType == argType) &&
             (identical(other.argName, argName) || other.argName == argName) &&
             (identical(other.isNullableArg, isNullableArg) ||
@@ -2266,12 +2276,12 @@ class _$_ArgModelModel implements _ArgModelModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ArgModelModelCopyWith<_$_ArgModelModel> get copyWith =>
-      __$$_ArgModelModelCopyWithImpl<_$_ArgModelModel>(this, _$identity);
+  _$$ArgModelModelImplCopyWith<_$ArgModelModelImpl> get copyWith =>
+      __$$ArgModelModelImplCopyWithImpl<_$ArgModelModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ArgModelModelToJson(
+    return _$$ArgModelModelImplToJson(
       this,
     );
   }
@@ -2279,10 +2289,10 @@ class _$_ArgModelModel implements _ArgModelModel {
 
 abstract class _ArgModelModel implements ArgModel {
   const factory _ArgModelModel(final String argType, final String argName,
-      final bool isNullableArg, final bool isRequiredArg) = _$_ArgModelModel;
+      final bool isNullableArg, final bool isRequiredArg) = _$ArgModelModelImpl;
 
   factory _ArgModelModel.fromJson(Map<String, dynamic> json) =
-      _$_ArgModelModel.fromJson;
+      _$ArgModelModelImpl.fromJson;
 
   @override
   String get argType;
@@ -2294,7 +2304,7 @@ abstract class _ArgModelModel implements ArgModel {
   bool get isRequiredArg;
   @override
   @JsonKey(ignore: true)
-  _$$_ArgModelModelCopyWith<_$_ArgModelModel> get copyWith =>
+  _$$ArgModelModelImplCopyWith<_$ArgModelModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2396,11 +2406,11 @@ class _$MethodModelCopyWithImpl<$Res, $Val extends MethodModel>
 }
 
 /// @nodoc
-abstract class _$$_MethodModelCopyWith<$Res>
+abstract class _$$MethodModelImplCopyWith<$Res>
     implements $MethodModelCopyWith<$Res> {
-  factory _$$_MethodModelCopyWith(
-          _$_MethodModel value, $Res Function(_$_MethodModel) then) =
-      __$$_MethodModelCopyWithImpl<$Res>;
+  factory _$$MethodModelImplCopyWith(
+          _$MethodModelImpl value, $Res Function(_$MethodModelImpl) then) =
+      __$$MethodModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2415,11 +2425,11 @@ abstract class _$$_MethodModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MethodModelCopyWithImpl<$Res>
-    extends _$MethodModelCopyWithImpl<$Res, _$_MethodModel>
-    implements _$$_MethodModelCopyWith<$Res> {
-  __$$_MethodModelCopyWithImpl(
-      _$_MethodModel _value, $Res Function(_$_MethodModel) _then)
+class __$$MethodModelImplCopyWithImpl<$Res>
+    extends _$MethodModelCopyWithImpl<$Res, _$MethodModelImpl>
+    implements _$$MethodModelImplCopyWith<$Res> {
+  __$$MethodModelImplCopyWithImpl(
+      _$MethodModelImpl _value, $Res Function(_$MethodModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2434,7 +2444,7 @@ class __$$_MethodModelCopyWithImpl<$Res>
     Object? isList = null,
     Object? shouldUseAsList = null,
   }) {
-    return _then(_$_MethodModel(
+    return _then(_$MethodModelImpl(
       returnType: null == returnType
           ? _value.returnType
           : returnType // ignore: cast_nullable_to_non_nullable
@@ -2474,8 +2484,8 @@ class __$$_MethodModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_MethodModel implements _MethodModel {
-  const _$_MethodModel(
+class _$MethodModelImpl implements _MethodModel {
+  const _$MethodModelImpl(
       {required this.returnType,
       required this.name,
       required this.operation,
@@ -2487,8 +2497,8 @@ class _$_MethodModel implements _MethodModel {
       : _arguments = arguments,
         _parameters = parameters;
 
-  factory _$_MethodModel.fromJson(Map<String, dynamic> json) =>
-      _$$_MethodModelFromJson(json);
+  factory _$MethodModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MethodModelImplFromJson(json);
 
   @override
   final String returnType;
@@ -2531,7 +2541,7 @@ class _$_MethodModel implements _MethodModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MethodModel &&
+            other is _$MethodModelImpl &&
             (identical(other.returnType, returnType) ||
                 other.returnType == returnType) &&
             (identical(other.name, name) || other.name == name) &&
@@ -2564,12 +2574,12 @@ class _$_MethodModel implements _MethodModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MethodModelCopyWith<_$_MethodModel> get copyWith =>
-      __$$_MethodModelCopyWithImpl<_$_MethodModel>(this, _$identity);
+  _$$MethodModelImplCopyWith<_$MethodModelImpl> get copyWith =>
+      __$$MethodModelImplCopyWithImpl<_$MethodModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MethodModelToJson(
+    return _$$MethodModelImplToJson(
       this,
     );
   }
@@ -2584,10 +2594,10 @@ abstract class _MethodModel implements MethodModel {
       required final List<ParamModel> parameters,
       final bool isEmptyArgs,
       final bool isList,
-      final bool shouldUseAsList}) = _$_MethodModel;
+      final bool shouldUseAsList}) = _$MethodModelImpl;
 
   factory _MethodModel.fromJson(Map<String, dynamic> json) =
-      _$_MethodModel.fromJson;
+      _$MethodModelImpl.fromJson;
 
   @override
   String get returnType;
@@ -2607,7 +2617,7 @@ abstract class _MethodModel implements MethodModel {
   bool get shouldUseAsList;
   @override
   @JsonKey(ignore: true)
-  _$$_MethodModelCopyWith<_$_MethodModel> get copyWith =>
+  _$$MethodModelImplCopyWith<_$MethodModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2752,11 +2762,11 @@ class _$LoaderMethodModelCopyWithImpl<$Res, $Val extends LoaderMethodModel>
 }
 
 /// @nodoc
-abstract class _$$_LoaderMethodModelCopyWith<$Res>
+abstract class _$$LoaderMethodModelImplCopyWith<$Res>
     implements $LoaderMethodModelCopyWith<$Res> {
-  factory _$$_LoaderMethodModelCopyWith(_$_LoaderMethodModel value,
-          $Res Function(_$_LoaderMethodModel) then) =
-      __$$_LoaderMethodModelCopyWithImpl<$Res>;
+  factory _$$LoaderMethodModelImplCopyWith(_$LoaderMethodModelImpl value,
+          $Res Function(_$LoaderMethodModelImpl) then) =
+      __$$LoaderMethodModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2777,11 +2787,11 @@ abstract class _$$_LoaderMethodModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoaderMethodModelCopyWithImpl<$Res>
-    extends _$LoaderMethodModelCopyWithImpl<$Res, _$_LoaderMethodModel>
-    implements _$$_LoaderMethodModelCopyWith<$Res> {
-  __$$_LoaderMethodModelCopyWithImpl(
-      _$_LoaderMethodModel _value, $Res Function(_$_LoaderMethodModel) _then)
+class __$$LoaderMethodModelImplCopyWithImpl<$Res>
+    extends _$LoaderMethodModelCopyWithImpl<$Res, _$LoaderMethodModelImpl>
+    implements _$$LoaderMethodModelImplCopyWith<$Res> {
+  __$$LoaderMethodModelImplCopyWithImpl(_$LoaderMethodModelImpl _value,
+      $Res Function(_$LoaderMethodModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2802,7 +2812,7 @@ class __$$_LoaderMethodModelCopyWithImpl<$Res>
     Object? isInline = null,
     Object? shouldUseAsList = null,
   }) {
-    return _then(_$_LoaderMethodModel(
+    return _then(_$LoaderMethodModelImpl(
       returnType: null == returnType
           ? _value.returnType
           : returnType // ignore: cast_nullable_to_non_nullable
@@ -2866,8 +2876,8 @@ class __$$_LoaderMethodModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_LoaderMethodModel implements _LoaderMethodModel {
-  const _$_LoaderMethodModel(
+class _$LoaderMethodModelImpl implements _LoaderMethodModel {
+  const _$LoaderMethodModelImpl(
       {required this.returnType,
       required this.nullabilitySuffix,
       required this.name,
@@ -2887,8 +2897,8 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
         _filterParams = filterParams,
         _builtListConverters = builtListConverters;
 
-  factory _$_LoaderMethodModel.fromJson(Map<String, dynamic> json) =>
-      _$$_LoaderMethodModelFromJson(json);
+  factory _$LoaderMethodModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LoaderMethodModelImplFromJson(json);
 
   @override
   final String returnType;
@@ -2950,7 +2960,7 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoaderMethodModel &&
+            other is _$LoaderMethodModelImpl &&
             (identical(other.returnType, returnType) ||
                 other.returnType == returnType) &&
             (identical(other.nullabilitySuffix, nullabilitySuffix) ||
@@ -3001,13 +3011,13 @@ class _$_LoaderMethodModel implements _LoaderMethodModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoaderMethodModelCopyWith<_$_LoaderMethodModel> get copyWith =>
-      __$$_LoaderMethodModelCopyWithImpl<_$_LoaderMethodModel>(
+  _$$LoaderMethodModelImplCopyWith<_$LoaderMethodModelImpl> get copyWith =>
+      __$$LoaderMethodModelImplCopyWithImpl<_$LoaderMethodModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LoaderMethodModelToJson(
+    return _$$LoaderMethodModelImplToJson(
       this,
     );
   }
@@ -3028,10 +3038,10 @@ abstract class _LoaderMethodModel implements LoaderMethodModel {
       required final int defaultPageSize,
       final List<BuiltListJsonConverterModel> builtListConverters,
       final bool isInline,
-      final bool shouldUseAsList}) = _$_LoaderMethodModel;
+      final bool shouldUseAsList}) = _$LoaderMethodModelImpl;
 
   factory _LoaderMethodModel.fromJson(Map<String, dynamic> json) =
-      _$_LoaderMethodModel.fromJson;
+      _$LoaderMethodModelImpl.fromJson;
 
   @override
   String get returnType;
@@ -3063,7 +3073,7 @@ abstract class _LoaderMethodModel implements LoaderMethodModel {
   bool get shouldUseAsList;
   @override
   @JsonKey(ignore: true)
-  _$$_LoaderMethodModelCopyWith<_$_LoaderMethodModel> get copyWith =>
+  _$$LoaderMethodModelImplCopyWith<_$LoaderMethodModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3217,12 +3227,12 @@ class _$LoaderRepositoryTemplateModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_LoaderRepositoryTemplateModelCopyWith<$Res>
+abstract class _$$LoaderRepositoryTemplateModelImplCopyWith<$Res>
     implements $LoaderRepositoryTemplateModelCopyWith<$Res> {
-  factory _$$_LoaderRepositoryTemplateModelCopyWith(
-          _$_LoaderRepositoryTemplateModel value,
-          $Res Function(_$_LoaderRepositoryTemplateModel) then) =
-      __$$_LoaderRepositoryTemplateModelCopyWithImpl<$Res>;
+  factory _$$LoaderRepositoryTemplateModelImplCopyWith(
+          _$LoaderRepositoryTemplateModelImpl value,
+          $Res Function(_$LoaderRepositoryTemplateModelImpl) then) =
+      __$$LoaderRepositoryTemplateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -3245,13 +3255,13 @@ abstract class _$$_LoaderRepositoryTemplateModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoaderRepositoryTemplateModelCopyWithImpl<$Res>
+class __$$LoaderRepositoryTemplateModelImplCopyWithImpl<$Res>
     extends _$LoaderRepositoryTemplateModelCopyWithImpl<$Res,
-        _$_LoaderRepositoryTemplateModel>
-    implements _$$_LoaderRepositoryTemplateModelCopyWith<$Res> {
-  __$$_LoaderRepositoryTemplateModelCopyWithImpl(
-      _$_LoaderRepositoryTemplateModel _value,
-      $Res Function(_$_LoaderRepositoryTemplateModel) _then)
+        _$LoaderRepositoryTemplateModelImpl>
+    implements _$$LoaderRepositoryTemplateModelImplCopyWith<$Res> {
+  __$$LoaderRepositoryTemplateModelImplCopyWithImpl(
+      _$LoaderRepositoryTemplateModelImpl _value,
+      $Res Function(_$LoaderRepositoryTemplateModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3269,7 +3279,7 @@ class __$$_LoaderRepositoryTemplateModelCopyWithImpl<$Res>
     Object? dataFilterSuffix = null,
     Object? listFilterSuffix = null,
   }) {
-    return _then(_$_LoaderRepositoryTemplateModel(
+    return _then(_$LoaderRepositoryTemplateModelImpl(
       dataLoader: freezed == dataLoader
           ? _value.dataLoader
           : dataLoader // ignore: cast_nullable_to_non_nullable
@@ -3321,9 +3331,9 @@ class __$$_LoaderRepositoryTemplateModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_LoaderRepositoryTemplateModel
+class _$LoaderRepositoryTemplateModelImpl
     implements _LoaderRepositoryTemplateModel {
-  const _$_LoaderRepositoryTemplateModel(
+  const _$LoaderRepositoryTemplateModelImpl(
       {this.dataLoader,
       this.listLoader,
       required this.hasDataLoader,
@@ -3337,9 +3347,9 @@ class _$_LoaderRepositoryTemplateModel
       required this.listFilterSuffix})
       : _crudMethods = crudMethods;
 
-  factory _$_LoaderRepositoryTemplateModel.fromJson(
+  factory _$LoaderRepositoryTemplateModelImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_LoaderRepositoryTemplateModelFromJson(json);
+      _$$LoaderRepositoryTemplateModelImplFromJson(json);
 
   @override
   final LoaderTemplateModel? dataLoader;
@@ -3379,7 +3389,7 @@ class _$_LoaderRepositoryTemplateModel
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoaderRepositoryTemplateModel &&
+            other is _$LoaderRepositoryTemplateModelImpl &&
             (identical(other.dataLoader, dataLoader) ||
                 other.dataLoader == dataLoader) &&
             (identical(other.listLoader, listLoader) ||
@@ -3422,13 +3432,14 @@ class _$_LoaderRepositoryTemplateModel
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoaderRepositoryTemplateModelCopyWith<_$_LoaderRepositoryTemplateModel>
-      get copyWith => __$$_LoaderRepositoryTemplateModelCopyWithImpl<
-          _$_LoaderRepositoryTemplateModel>(this, _$identity);
+  _$$LoaderRepositoryTemplateModelImplCopyWith<
+          _$LoaderRepositoryTemplateModelImpl>
+      get copyWith => __$$LoaderRepositoryTemplateModelImplCopyWithImpl<
+          _$LoaderRepositoryTemplateModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LoaderRepositoryTemplateModelToJson(
+    return _$$LoaderRepositoryTemplateModelImplToJson(
       this,
     );
   }
@@ -3448,10 +3459,10 @@ abstract class _LoaderRepositoryTemplateModel
           required final String listLoaderMethodName,
           required final String dataFilterSuffix,
           required final String listFilterSuffix}) =
-      _$_LoaderRepositoryTemplateModel;
+      _$LoaderRepositoryTemplateModelImpl;
 
   factory _LoaderRepositoryTemplateModel.fromJson(Map<String, dynamic> json) =
-      _$_LoaderRepositoryTemplateModel.fromJson;
+      _$LoaderRepositoryTemplateModelImpl.fromJson;
 
   @override
   LoaderTemplateModel? get dataLoader;
@@ -3477,7 +3488,8 @@ abstract class _LoaderRepositoryTemplateModel
   String get listFilterSuffix;
   @override
   @JsonKey(ignore: true)
-  _$$_LoaderRepositoryTemplateModelCopyWith<_$_LoaderRepositoryTemplateModel>
+  _$$LoaderRepositoryTemplateModelImplCopyWith<
+          _$LoaderRepositoryTemplateModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -3593,11 +3605,11 @@ class _$LoaderTemplateModelCopyWithImpl<$Res, $Val extends LoaderTemplateModel>
 }
 
 /// @nodoc
-abstract class _$$_LoaderTemplateModelCopyWith<$Res>
+abstract class _$$LoaderTemplateModelImplCopyWith<$Res>
     implements $LoaderTemplateModelCopyWith<$Res> {
-  factory _$$_LoaderTemplateModelCopyWith(_$_LoaderTemplateModel value,
-          $Res Function(_$_LoaderTemplateModel) then) =
-      __$$_LoaderTemplateModelCopyWithImpl<$Res>;
+  factory _$$LoaderTemplateModelImplCopyWith(_$LoaderTemplateModelImpl value,
+          $Res Function(_$LoaderTemplateModelImpl) then) =
+      __$$LoaderTemplateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -3614,11 +3626,11 @@ abstract class _$$_LoaderTemplateModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoaderTemplateModelCopyWithImpl<$Res>
-    extends _$LoaderTemplateModelCopyWithImpl<$Res, _$_LoaderTemplateModel>
-    implements _$$_LoaderTemplateModelCopyWith<$Res> {
-  __$$_LoaderTemplateModelCopyWithImpl(_$_LoaderTemplateModel _value,
-      $Res Function(_$_LoaderTemplateModel) _then)
+class __$$LoaderTemplateModelImplCopyWithImpl<$Res>
+    extends _$LoaderTemplateModelCopyWithImpl<$Res, _$LoaderTemplateModelImpl>
+    implements _$$LoaderTemplateModelImplCopyWith<$Res> {
+  __$$LoaderTemplateModelImplCopyWithImpl(_$LoaderTemplateModelImpl _value,
+      $Res Function(_$LoaderTemplateModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3635,7 +3647,7 @@ class __$$_LoaderTemplateModelCopyWithImpl<$Res>
     Object? additionalParams = null,
     Object? filterParams = null,
   }) {
-    return _then(_$_LoaderTemplateModel(
+    return _then(_$LoaderTemplateModelImpl(
       api: null == api
           ? _value.api
           : api // ignore: cast_nullable_to_non_nullable
@@ -3682,8 +3694,8 @@ class __$$_LoaderTemplateModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_LoaderTemplateModel implements _LoaderTemplateModel {
-  const _$_LoaderTemplateModel(
+class _$LoaderTemplateModelImpl implements _LoaderTemplateModel {
+  const _$LoaderTemplateModelImpl(
       {required this.api,
       this.hasRequiredParam = false,
       this.isInline = false,
@@ -3697,8 +3709,8 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
       : _additionalParams = additionalParams,
         _filterParams = filterParams;
 
-  factory _$_LoaderTemplateModel.fromJson(Map<String, dynamic> json) =>
-      _$$_LoaderTemplateModelFromJson(json);
+  factory _$LoaderTemplateModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LoaderTemplateModelImplFromJson(json);
 
   @override
   final String api;
@@ -3748,7 +3760,7 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoaderTemplateModel &&
+            other is _$LoaderTemplateModelImpl &&
             (identical(other.api, api) || other.api == api) &&
             const DeepCollectionEquality()
                 .equals(other.hasRequiredParam, hasRequiredParam) &&
@@ -3790,13 +3802,13 @@ class _$_LoaderTemplateModel implements _LoaderTemplateModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoaderTemplateModelCopyWith<_$_LoaderTemplateModel> get copyWith =>
-      __$$_LoaderTemplateModelCopyWithImpl<_$_LoaderTemplateModel>(
+  _$$LoaderTemplateModelImplCopyWith<_$LoaderTemplateModelImpl> get copyWith =>
+      __$$LoaderTemplateModelImplCopyWithImpl<_$LoaderTemplateModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LoaderTemplateModelToJson(
+    return _$$LoaderTemplateModelImplToJson(
       this,
     );
   }
@@ -3813,10 +3825,10 @@ abstract class _LoaderTemplateModel implements LoaderTemplateModel {
       required final String returnTypeNullabilitySuffix,
       final bool hasFilter,
       final List<ParamModel> additionalParams,
-      final List<ParamModel> filterParams}) = _$_LoaderTemplateModel;
+      final List<ParamModel> filterParams}) = _$LoaderTemplateModelImpl;
 
   factory _LoaderTemplateModel.fromJson(Map<String, dynamic> json) =
-      _$_LoaderTemplateModel.fromJson;
+      _$LoaderTemplateModelImpl.fromJson;
 
   @override
   String get api;
@@ -3840,7 +3852,7 @@ abstract class _LoaderTemplateModel implements LoaderTemplateModel {
   List<ParamModel> get filterParams;
   @override
   @JsonKey(ignore: true)
-  _$$_LoaderTemplateModelCopyWith<_$_LoaderTemplateModel> get copyWith =>
+  _$$LoaderTemplateModelImplCopyWith<_$LoaderTemplateModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3942,11 +3954,11 @@ class _$CubitTemplateModelCopyWithImpl<$Res, $Val extends CubitTemplateModel>
 }
 
 /// @nodoc
-abstract class _$$_CubitTemplateModelCopyWith<$Res>
+abstract class _$$CubitTemplateModelImplCopyWith<$Res>
     implements $CubitTemplateModelCopyWith<$Res> {
-  factory _$$_CubitTemplateModelCopyWith(_$_CubitTemplateModel value,
-          $Res Function(_$_CubitTemplateModel) then) =
-      __$$_CubitTemplateModelCopyWithImpl<$Res>;
+  factory _$$CubitTemplateModelImplCopyWith(_$CubitTemplateModelImpl value,
+          $Res Function(_$CubitTemplateModelImpl) then) =
+      __$$CubitTemplateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -3961,11 +3973,11 @@ abstract class _$$_CubitTemplateModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CubitTemplateModelCopyWithImpl<$Res>
-    extends _$CubitTemplateModelCopyWithImpl<$Res, _$_CubitTemplateModel>
-    implements _$$_CubitTemplateModelCopyWith<$Res> {
-  __$$_CubitTemplateModelCopyWithImpl(
-      _$_CubitTemplateModel _value, $Res Function(_$_CubitTemplateModel) _then)
+class __$$CubitTemplateModelImplCopyWithImpl<$Res>
+    extends _$CubitTemplateModelCopyWithImpl<$Res, _$CubitTemplateModelImpl>
+    implements _$$CubitTemplateModelImplCopyWith<$Res> {
+  __$$CubitTemplateModelImplCopyWithImpl(_$CubitTemplateModelImpl _value,
+      $Res Function(_$CubitTemplateModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3980,7 +3992,7 @@ class __$$_CubitTemplateModelCopyWithImpl<$Res>
     Object? blocMixins = freezed,
     Object? hasBlocMixins = null,
   }) {
-    return _then(_$_CubitTemplateModel(
+    return _then(_$CubitTemplateModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -4020,8 +4032,8 @@ class __$$_CubitTemplateModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_CubitTemplateModel implements _CubitTemplateModel {
-  const _$_CubitTemplateModel(
+class _$CubitTemplateModelImpl implements _CubitTemplateModel {
+  const _$CubitTemplateModelImpl(
       {required this.name,
       required this.returnType,
       this.hasFilter = false,
@@ -4032,8 +4044,8 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
       this.hasBlocMixins = false})
       : _crudMethods = crudMethods;
 
-  factory _$_CubitTemplateModel.fromJson(Map<String, dynamic> json) =>
-      _$$_CubitTemplateModelFromJson(json);
+  factory _$CubitTemplateModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CubitTemplateModelImplFromJson(json);
 
   @override
   final String name;
@@ -4069,7 +4081,7 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CubitTemplateModel &&
+            other is _$CubitTemplateModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.returnType, returnType) ||
                 other.returnType == returnType) &&
@@ -4103,13 +4115,13 @@ class _$_CubitTemplateModel implements _CubitTemplateModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CubitTemplateModelCopyWith<_$_CubitTemplateModel> get copyWith =>
-      __$$_CubitTemplateModelCopyWithImpl<_$_CubitTemplateModel>(
+  _$$CubitTemplateModelImplCopyWith<_$CubitTemplateModelImpl> get copyWith =>
+      __$$CubitTemplateModelImplCopyWithImpl<_$CubitTemplateModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CubitTemplateModelToJson(
+    return _$$CubitTemplateModelImplToJson(
       this,
     );
   }
@@ -4124,10 +4136,10 @@ abstract class _CubitTemplateModel implements CubitTemplateModel {
       required final String filterSuffix,
       required final String loaderMethodName,
       final String? blocMixins,
-      final bool hasBlocMixins}) = _$_CubitTemplateModel;
+      final bool hasBlocMixins}) = _$CubitTemplateModelImpl;
 
   factory _CubitTemplateModel.fromJson(Map<String, dynamic> json) =
-      _$_CubitTemplateModel.fromJson;
+      _$CubitTemplateModelImpl.fromJson;
 
   @override
   String get name;
@@ -4147,7 +4159,7 @@ abstract class _CubitTemplateModel implements CubitTemplateModel {
   bool get hasBlocMixins;
   @override
   @JsonKey(ignore: true)
-  _$$_CubitTemplateModelCopyWith<_$_CubitTemplateModel> get copyWith =>
+  _$$CubitTemplateModelImplCopyWith<_$CubitTemplateModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -4218,12 +4230,12 @@ class _$BuiltListJsonConverterModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_BuiltListJsonConverterModelCopyWith<$Res>
+abstract class _$$BuiltListJsonConverterModelImplCopyWith<$Res>
     implements $BuiltListJsonConverterModelCopyWith<$Res> {
-  factory _$$_BuiltListJsonConverterModelCopyWith(
-          _$_BuiltListJsonConverterModel value,
-          $Res Function(_$_BuiltListJsonConverterModel) then) =
-      __$$_BuiltListJsonConverterModelCopyWithImpl<$Res>;
+  factory _$$BuiltListJsonConverterModelImplCopyWith(
+          _$BuiltListJsonConverterModelImpl value,
+          $Res Function(_$BuiltListJsonConverterModelImpl) then) =
+      __$$BuiltListJsonConverterModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -4233,13 +4245,13 @@ abstract class _$$_BuiltListJsonConverterModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BuiltListJsonConverterModelCopyWithImpl<$Res>
+class __$$BuiltListJsonConverterModelImplCopyWithImpl<$Res>
     extends _$BuiltListJsonConverterModelCopyWithImpl<$Res,
-        _$_BuiltListJsonConverterModel>
-    implements _$$_BuiltListJsonConverterModelCopyWith<$Res> {
-  __$$_BuiltListJsonConverterModelCopyWithImpl(
-      _$_BuiltListJsonConverterModel _value,
-      $Res Function(_$_BuiltListJsonConverterModel) _then)
+        _$BuiltListJsonConverterModelImpl>
+    implements _$$BuiltListJsonConverterModelImplCopyWith<$Res> {
+  __$$BuiltListJsonConverterModelImplCopyWithImpl(
+      _$BuiltListJsonConverterModelImpl _value,
+      $Res Function(_$BuiltListJsonConverterModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -4249,7 +4261,7 @@ class __$$_BuiltListJsonConverterModelCopyWithImpl<$Res>
     Object? innerReturnType = null,
     Object? shouldCreateConverter = null,
   }) {
-    return _then(_$_BuiltListJsonConverterModel(
+    return _then(_$BuiltListJsonConverterModelImpl(
       converterName: null == converterName
           ? _value.converterName
           : converterName // ignore: cast_nullable_to_non_nullable
@@ -4268,14 +4280,16 @@ class __$$_BuiltListJsonConverterModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BuiltListJsonConverterModel implements _BuiltListJsonConverterModel {
-  const _$_BuiltListJsonConverterModel(
+class _$BuiltListJsonConverterModelImpl
+    implements _BuiltListJsonConverterModel {
+  const _$BuiltListJsonConverterModelImpl(
       {required this.converterName,
       required this.innerReturnType,
       this.shouldCreateConverter = true});
 
-  factory _$_BuiltListJsonConverterModel.fromJson(Map<String, dynamic> json) =>
-      _$$_BuiltListJsonConverterModelFromJson(json);
+  factory _$BuiltListJsonConverterModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BuiltListJsonConverterModelImplFromJson(json);
 
   @override
   final String converterName;
@@ -4294,7 +4308,7 @@ class _$_BuiltListJsonConverterModel implements _BuiltListJsonConverterModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BuiltListJsonConverterModel &&
+            other is _$BuiltListJsonConverterModelImpl &&
             (identical(other.converterName, converterName) ||
                 other.converterName == converterName) &&
             (identical(other.innerReturnType, innerReturnType) ||
@@ -4311,13 +4325,13 @@ class _$_BuiltListJsonConverterModel implements _BuiltListJsonConverterModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BuiltListJsonConverterModelCopyWith<_$_BuiltListJsonConverterModel>
-      get copyWith => __$$_BuiltListJsonConverterModelCopyWithImpl<
-          _$_BuiltListJsonConverterModel>(this, _$identity);
+  _$$BuiltListJsonConverterModelImplCopyWith<_$BuiltListJsonConverterModelImpl>
+      get copyWith => __$$BuiltListJsonConverterModelImplCopyWithImpl<
+          _$BuiltListJsonConverterModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BuiltListJsonConverterModelToJson(
+    return _$$BuiltListJsonConverterModelImplToJson(
       this,
     );
   }
@@ -4328,10 +4342,10 @@ abstract class _BuiltListJsonConverterModel
   const factory _BuiltListJsonConverterModel(
       {required final String converterName,
       required final String innerReturnType,
-      final bool shouldCreateConverter}) = _$_BuiltListJsonConverterModel;
+      final bool shouldCreateConverter}) = _$BuiltListJsonConverterModelImpl;
 
   factory _BuiltListJsonConverterModel.fromJson(Map<String, dynamic> json) =
-      _$_BuiltListJsonConverterModel.fromJson;
+      _$BuiltListJsonConverterModelImpl.fromJson;
 
   @override
   String get converterName;
@@ -4341,7 +4355,7 @@ abstract class _BuiltListJsonConverterModel
   bool get shouldCreateConverter;
   @override
   @JsonKey(ignore: true)
-  _$$_BuiltListJsonConverterModelCopyWith<_$_BuiltListJsonConverterModel>
+  _$$BuiltListJsonConverterModelImplCopyWith<_$BuiltListJsonConverterModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -4404,25 +4418,25 @@ class _$BuiltListJsonConverterTemplateModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_BuiltListJsonConverterTemplateModelCopyWith<$Res>
+abstract class _$$BuiltListJsonConverterTemplateModelImplCopyWith<$Res>
     implements $BuiltListJsonConverterTemplateModelCopyWith<$Res> {
-  factory _$$_BuiltListJsonConverterTemplateModelCopyWith(
-          _$_BuiltListJsonConverterTemplateModel value,
-          $Res Function(_$_BuiltListJsonConverterTemplateModel) then) =
-      __$$_BuiltListJsonConverterTemplateModelCopyWithImpl<$Res>;
+  factory _$$BuiltListJsonConverterTemplateModelImplCopyWith(
+          _$BuiltListJsonConverterTemplateModelImpl value,
+          $Res Function(_$BuiltListJsonConverterTemplateModelImpl) then) =
+      __$$BuiltListJsonConverterTemplateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String converterName, String innerReturnType});
 }
 
 /// @nodoc
-class __$$_BuiltListJsonConverterTemplateModelCopyWithImpl<$Res>
+class __$$BuiltListJsonConverterTemplateModelImplCopyWithImpl<$Res>
     extends _$BuiltListJsonConverterTemplateModelCopyWithImpl<$Res,
-        _$_BuiltListJsonConverterTemplateModel>
-    implements _$$_BuiltListJsonConverterTemplateModelCopyWith<$Res> {
-  __$$_BuiltListJsonConverterTemplateModelCopyWithImpl(
-      _$_BuiltListJsonConverterTemplateModel _value,
-      $Res Function(_$_BuiltListJsonConverterTemplateModel) _then)
+        _$BuiltListJsonConverterTemplateModelImpl>
+    implements _$$BuiltListJsonConverterTemplateModelImplCopyWith<$Res> {
+  __$$BuiltListJsonConverterTemplateModelImplCopyWithImpl(
+      _$BuiltListJsonConverterTemplateModelImpl _value,
+      $Res Function(_$BuiltListJsonConverterTemplateModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -4431,7 +4445,7 @@ class __$$_BuiltListJsonConverterTemplateModelCopyWithImpl<$Res>
     Object? converterName = null,
     Object? innerReturnType = null,
   }) {
-    return _then(_$_BuiltListJsonConverterTemplateModel(
+    return _then(_$BuiltListJsonConverterTemplateModelImpl(
       converterName: null == converterName
           ? _value.converterName
           : converterName // ignore: cast_nullable_to_non_nullable
@@ -4446,14 +4460,14 @@ class __$$_BuiltListJsonConverterTemplateModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BuiltListJsonConverterTemplateModel
+class _$BuiltListJsonConverterTemplateModelImpl
     implements _BuiltListJsonConverterTemplateModel {
-  const _$_BuiltListJsonConverterTemplateModel(
+  const _$BuiltListJsonConverterTemplateModelImpl(
       {required this.converterName, required this.innerReturnType});
 
-  factory _$_BuiltListJsonConverterTemplateModel.fromJson(
+  factory _$BuiltListJsonConverterTemplateModelImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_BuiltListJsonConverterTemplateModelFromJson(json);
+      _$$BuiltListJsonConverterTemplateModelImplFromJson(json);
 
   @override
   final String converterName;
@@ -4469,7 +4483,7 @@ class _$_BuiltListJsonConverterTemplateModel
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BuiltListJsonConverterTemplateModel &&
+            other is _$BuiltListJsonConverterTemplateModelImpl &&
             (identical(other.converterName, converterName) ||
                 other.converterName == converterName) &&
             (identical(other.innerReturnType, innerReturnType) ||
@@ -4483,14 +4497,14 @@ class _$_BuiltListJsonConverterTemplateModel
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BuiltListJsonConverterTemplateModelCopyWith<
-          _$_BuiltListJsonConverterTemplateModel>
-      get copyWith => __$$_BuiltListJsonConverterTemplateModelCopyWithImpl<
-          _$_BuiltListJsonConverterTemplateModel>(this, _$identity);
+  _$$BuiltListJsonConverterTemplateModelImplCopyWith<
+          _$BuiltListJsonConverterTemplateModelImpl>
+      get copyWith => __$$BuiltListJsonConverterTemplateModelImplCopyWithImpl<
+          _$BuiltListJsonConverterTemplateModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BuiltListJsonConverterTemplateModelToJson(
+    return _$$BuiltListJsonConverterTemplateModelImplToJson(
       this,
     );
   }
@@ -4501,11 +4515,11 @@ abstract class _BuiltListJsonConverterTemplateModel
   const factory _BuiltListJsonConverterTemplateModel(
           {required final String converterName,
           required final String innerReturnType}) =
-      _$_BuiltListJsonConverterTemplateModel;
+      _$BuiltListJsonConverterTemplateModelImpl;
 
   factory _BuiltListJsonConverterTemplateModel.fromJson(
           Map<String, dynamic> json) =
-      _$_BuiltListJsonConverterTemplateModel.fromJson;
+      _$BuiltListJsonConverterTemplateModelImpl.fromJson;
 
   @override
   String get converterName;
@@ -4513,7 +4527,7 @@ abstract class _BuiltListJsonConverterTemplateModel
   String get innerReturnType;
   @override
   @JsonKey(ignore: true)
-  _$$_BuiltListJsonConverterTemplateModelCopyWith<
-          _$_BuiltListJsonConverterTemplateModel>
+  _$$BuiltListJsonConverterTemplateModelImplCopyWith<
+          _$BuiltListJsonConverterTemplateModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

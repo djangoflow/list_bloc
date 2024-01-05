@@ -6,9 +6,9 @@ part of 'models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RepositoryTemplateModel _$$_RepositoryTemplateModelFromJson(
+_$RepositoryTemplateModelImpl _$$RepositoryTemplateModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_RepositoryTemplateModel(
+    _$RepositoryTemplateModelImpl(
       repositoryName: json['repositoryName'] as String,
       buildForClass: json['buildForClass'] as String,
       baseUrl: json['baseUrl'] as String,
@@ -22,8 +22,8 @@ _$_RepositoryTemplateModel _$$_RepositoryTemplateModelFromJson(
       sendTimeout: json['sendTimeout'] as int,
     );
 
-Map<String, dynamic> _$$_RepositoryTemplateModelToJson(
-        _$_RepositoryTemplateModel instance) =>
+Map<String, dynamic> _$$RepositoryTemplateModelImplToJson(
+        _$RepositoryTemplateModelImpl instance) =>
     <String, dynamic>{
       'repositoryName': instance.repositoryName,
       'buildForClass': instance.buildForClass,
@@ -35,23 +35,23 @@ Map<String, dynamic> _$$_RepositoryTemplateModelToJson(
       'sendTimeout': instance.sendTimeout,
     };
 
-_$_AccessorModel _$$_AccessorModelFromJson(Map<String, dynamic> json) =>
-    _$_AccessorModel(
+_$AccessorModelImpl _$$AccessorModelImplFromJson(Map<String, dynamic> json) =>
+    _$AccessorModelImpl(
       type: json['type'] as String,
       name: json['name'] as String,
       methodName: json['methodName'] as String,
     );
 
-Map<String, dynamic> _$$_AccessorModelToJson(_$_AccessorModel instance) =>
+Map<String, dynamic> _$$AccessorModelImplToJson(_$AccessorModelImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'name': instance.name,
       'methodName': instance.methodName,
     };
 
-_$_FreezedTemplateModel _$$_FreezedTemplateModelFromJson(
+_$FreezedTemplateModelImpl _$$FreezedTemplateModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_FreezedTemplateModel(
+    _$FreezedTemplateModelImpl(
       name: json['name'] as String,
       isPaginated: json['isPaginated'] as bool? ?? true,
       types: (json['types'] as List<dynamic>?)
@@ -65,8 +65,8 @@ _$_FreezedTemplateModel _$$_FreezedTemplateModelFromJson(
       isTypesEmpty: json['isTypesEmpty'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_FreezedTemplateModelToJson(
-        _$_FreezedTemplateModel instance) =>
+Map<String, dynamic> _$$FreezedTemplateModelImplToJson(
+        _$FreezedTemplateModelImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'isPaginated': instance.isPaginated,
@@ -75,7 +75,8 @@ Map<String, dynamic> _$$_FreezedTemplateModelToJson(
       'isTypesEmpty': instance.isTypesEmpty,
     };
 
-_$_TypeModel _$$_TypeModelFromJson(Map<String, dynamic> json) => _$_TypeModel(
+_$TypeModelImpl _$$TypeModelImplFromJson(Map<String, dynamic> json) =>
+    _$TypeModelImpl(
       isRequired: json['isRequired'] as bool,
       isNullable: json['isNullable'] as bool,
       defaultValue: json['defaultValue'] as String?,
@@ -83,7 +84,7 @@ _$_TypeModel _$$_TypeModelFromJson(Map<String, dynamic> json) => _$_TypeModel(
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$_TypeModelToJson(_$_TypeModel instance) =>
+Map<String, dynamic> _$$TypeModelImplToJson(_$TypeModelImpl instance) =>
     <String, dynamic>{
       'isRequired': instance.isRequired,
       'isNullable': instance.isNullable,
@@ -92,25 +93,25 @@ Map<String, dynamic> _$$_TypeModelToJson(_$_TypeModel instance) =>
       'name': instance.name,
     };
 
-_$_TypedefTemplateModel _$$_TypedefTemplateModelFromJson(
+_$TypedefTemplateModelImpl _$$TypedefTemplateModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_TypedefTemplateModel(
+    _$TypedefTemplateModelImpl(
       type: json['type'] as String,
       name: json['name'] as String,
       hasFilter: json['hasFilter'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_TypedefTemplateModelToJson(
-        _$_TypedefTemplateModel instance) =>
+Map<String, dynamic> _$$TypedefTemplateModelImplToJson(
+        _$TypedefTemplateModelImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'name': instance.name,
       'hasFilter': instance.hasFilter,
     };
 
-_$_ListRepositoryTemplateModel _$$_ListRepositoryTemplateModelFromJson(
+_$ListRepositoryTemplateModelImpl _$$ListRepositoryTemplateModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ListRepositoryTemplateModel(
+    _$ListRepositoryTemplateModelImpl(
       api: json['api'] as String,
       name: json['name'] as String,
       hasRequiredParam: json['hasRequiredParam'] ?? false,
@@ -131,8 +132,8 @@ _$_ListRepositoryTemplateModel _$$_ListRepositoryTemplateModelFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$_ListRepositoryTemplateModelToJson(
-        _$_ListRepositoryTemplateModel instance) =>
+Map<String, dynamic> _$$ListRepositoryTemplateModelImplToJson(
+        _$ListRepositoryTemplateModelImpl instance) =>
     <String, dynamic>{
       'api': instance.api,
       'name': instance.name,
@@ -147,9 +148,9 @@ Map<String, dynamic> _$$_ListRepositoryTemplateModelToJson(
       'filterParams': instance.filterParams.map((e) => e.toJson()).toList(),
     };
 
-_$_DataCubitTemplateModel _$$_DataCubitTemplateModelFromJson(
+_$DataCubitTemplateModelImpl _$$DataCubitTemplateModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_DataCubitTemplateModel(
+    _$DataCubitTemplateModelImpl(
       api: json['api'] as String,
       name: json['name'] as String,
       hasRequiredParam: json['hasRequiredParam'] ?? false,
@@ -165,8 +166,8 @@ _$_DataCubitTemplateModel _$$_DataCubitTemplateModelFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$_DataCubitTemplateModelToJson(
-        _$_DataCubitTemplateModel instance) =>
+Map<String, dynamic> _$$DataCubitTemplateModelImplToJson(
+        _$DataCubitTemplateModelImpl instance) =>
     <String, dynamic>{
       'api': instance.api,
       'name': instance.name,
@@ -179,35 +180,37 @@ Map<String, dynamic> _$$_DataCubitTemplateModelToJson(
           instance.additionalParams.map((e) => e.toJson()).toList(),
     };
 
-_$_ParamModel _$$_ParamModelFromJson(Map<String, dynamic> json) =>
-    _$_ParamModel(
+_$ParamModelImpl _$$ParamModelImplFromJson(Map<String, dynamic> json) =>
+    _$ParamModelImpl(
       json['param'] as String,
     );
 
-Map<String, dynamic> _$$_ParamModelToJson(_$_ParamModel instance) =>
+Map<String, dynamic> _$$ParamModelImplToJson(_$ParamModelImpl instance) =>
     <String, dynamic>{
       'param': instance.param,
     };
 
-_$_AnnotationModel _$$_AnnotationModelFromJson(Map<String, dynamic> json) =>
-    _$_AnnotationModel(
+_$AnnotationModelImpl _$$AnnotationModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AnnotationModelImpl(
       json['annotation'] as String,
     );
 
-Map<String, dynamic> _$$_AnnotationModelToJson(_$_AnnotationModel instance) =>
+Map<String, dynamic> _$$AnnotationModelImplToJson(
+        _$AnnotationModelImpl instance) =>
     <String, dynamic>{
       'annotation': instance.annotation,
     };
 
-_$_ArgModelModel _$$_ArgModelModelFromJson(Map<String, dynamic> json) =>
-    _$_ArgModelModel(
+_$ArgModelModelImpl _$$ArgModelModelImplFromJson(Map<String, dynamic> json) =>
+    _$ArgModelModelImpl(
       json['argType'] as String,
       json['argName'] as String,
       json['isNullableArg'] as bool,
       json['isRequiredArg'] as bool,
     );
 
-Map<String, dynamic> _$$_ArgModelModelToJson(_$_ArgModelModel instance) =>
+Map<String, dynamic> _$$ArgModelModelImplToJson(_$ArgModelModelImpl instance) =>
     <String, dynamic>{
       'argType': instance.argType,
       'argName': instance.argName,
@@ -215,8 +218,8 @@ Map<String, dynamic> _$$_ArgModelModelToJson(_$_ArgModelModel instance) =>
       'isRequiredArg': instance.isRequiredArg,
     };
 
-_$_MethodModel _$$_MethodModelFromJson(Map<String, dynamic> json) =>
-    _$_MethodModel(
+_$MethodModelImpl _$$MethodModelImplFromJson(Map<String, dynamic> json) =>
+    _$MethodModelImpl(
       returnType: json['returnType'] as String,
       name: json['name'] as String,
       operation: json['operation'] as String,
@@ -231,7 +234,7 @@ _$_MethodModel _$$_MethodModelFromJson(Map<String, dynamic> json) =>
       shouldUseAsList: json['shouldUseAsList'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
+Map<String, dynamic> _$$MethodModelImplToJson(_$MethodModelImpl instance) =>
     <String, dynamic>{
       'returnType': instance.returnType,
       'name': instance.name,
@@ -243,8 +246,9 @@ Map<String, dynamic> _$$_MethodModelToJson(_$_MethodModel instance) =>
       'shouldUseAsList': instance.shouldUseAsList,
     };
 
-_$_LoaderMethodModel _$$_LoaderMethodModelFromJson(Map<String, dynamic> json) =>
-    _$_LoaderMethodModel(
+_$LoaderMethodModelImpl _$$LoaderMethodModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$LoaderMethodModelImpl(
       returnType: json['returnType'] as String,
       nullabilitySuffix: json['nullabilitySuffix'] as String,
       name: json['name'] as String,
@@ -269,8 +273,8 @@ _$_LoaderMethodModel _$$_LoaderMethodModelFromJson(Map<String, dynamic> json) =>
       shouldUseAsList: json['shouldUseAsList'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_LoaderMethodModelToJson(
-        _$_LoaderMethodModel instance) =>
+Map<String, dynamic> _$$LoaderMethodModelImplToJson(
+        _$LoaderMethodModelImpl instance) =>
     <String, dynamic>{
       'returnType': instance.returnType,
       'nullabilitySuffix': instance.nullabilitySuffix,
@@ -289,32 +293,32 @@ Map<String, dynamic> _$$_LoaderMethodModelToJson(
       'shouldUseAsList': instance.shouldUseAsList,
     };
 
-_$_LoaderRepositoryTemplateModel _$$_LoaderRepositoryTemplateModelFromJson(
-        Map<String, dynamic> json) =>
-    _$_LoaderRepositoryTemplateModel(
-      dataLoader: json['dataLoader'] == null
-          ? null
-          : LoaderTemplateModel.fromJson(
-              json['dataLoader'] as Map<String, dynamic>),
-      listLoader: json['listLoader'] == null
-          ? null
-          : LoaderTemplateModel.fromJson(
-              json['listLoader'] as Map<String, dynamic>),
-      hasDataLoader: json['hasDataLoader'] as bool,
-      hasListLoader: json['hasListLoader'] as bool,
-      crudMethods: (json['crudMethods'] as List<dynamic>)
-          .map((e) => MethodModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      repositoryName: json['repositoryName'] as String,
-      api: json['api'] as String,
-      dataLoaderMethodName: json['dataLoaderMethodName'] as String,
-      listLoaderMethodName: json['listLoaderMethodName'] as String,
-      dataFilterSuffix: json['dataFilterSuffix'] as String,
-      listFilterSuffix: json['listFilterSuffix'] as String,
-    );
+_$LoaderRepositoryTemplateModelImpl
+    _$$LoaderRepositoryTemplateModelImplFromJson(Map<String, dynamic> json) =>
+        _$LoaderRepositoryTemplateModelImpl(
+          dataLoader: json['dataLoader'] == null
+              ? null
+              : LoaderTemplateModel.fromJson(
+                  json['dataLoader'] as Map<String, dynamic>),
+          listLoader: json['listLoader'] == null
+              ? null
+              : LoaderTemplateModel.fromJson(
+                  json['listLoader'] as Map<String, dynamic>),
+          hasDataLoader: json['hasDataLoader'] as bool,
+          hasListLoader: json['hasListLoader'] as bool,
+          crudMethods: (json['crudMethods'] as List<dynamic>)
+              .map((e) => MethodModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+          repositoryName: json['repositoryName'] as String,
+          api: json['api'] as String,
+          dataLoaderMethodName: json['dataLoaderMethodName'] as String,
+          listLoaderMethodName: json['listLoaderMethodName'] as String,
+          dataFilterSuffix: json['dataFilterSuffix'] as String,
+          listFilterSuffix: json['listFilterSuffix'] as String,
+        );
 
-Map<String, dynamic> _$$_LoaderRepositoryTemplateModelToJson(
-        _$_LoaderRepositoryTemplateModel instance) =>
+Map<String, dynamic> _$$LoaderRepositoryTemplateModelImplToJson(
+        _$LoaderRepositoryTemplateModelImpl instance) =>
     <String, dynamic>{
       'dataLoader': instance.dataLoader?.toJson(),
       'listLoader': instance.listLoader?.toJson(),
@@ -329,9 +333,9 @@ Map<String, dynamic> _$$_LoaderRepositoryTemplateModelToJson(
       'listFilterSuffix': instance.listFilterSuffix,
     };
 
-_$_LoaderTemplateModel _$$_LoaderTemplateModelFromJson(
+_$LoaderTemplateModelImpl _$$LoaderTemplateModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_LoaderTemplateModel(
+    _$LoaderTemplateModelImpl(
       api: json['api'] as String,
       hasRequiredParam: json['hasRequiredParam'] ?? false,
       isInline: json['isInline'] as bool? ?? false,
@@ -351,8 +355,8 @@ _$_LoaderTemplateModel _$$_LoaderTemplateModelFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$_LoaderTemplateModelToJson(
-        _$_LoaderTemplateModel instance) =>
+Map<String, dynamic> _$$LoaderTemplateModelImplToJson(
+        _$LoaderTemplateModelImpl instance) =>
     <String, dynamic>{
       'api': instance.api,
       'hasRequiredParam': instance.hasRequiredParam,
@@ -367,9 +371,9 @@ Map<String, dynamic> _$$_LoaderTemplateModelToJson(
       'filterParams': instance.filterParams.map((e) => e.toJson()).toList(),
     };
 
-_$_CubitTemplateModel _$$_CubitTemplateModelFromJson(
+_$CubitTemplateModelImpl _$$CubitTemplateModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CubitTemplateModel(
+    _$CubitTemplateModelImpl(
       name: json['name'] as String,
       returnType: json['returnType'] as String,
       hasFilter: json['hasFilter'] as bool? ?? false,
@@ -382,8 +386,8 @@ _$_CubitTemplateModel _$$_CubitTemplateModelFromJson(
       hasBlocMixins: json['hasBlocMixins'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_CubitTemplateModelToJson(
-        _$_CubitTemplateModel instance) =>
+Map<String, dynamic> _$$CubitTemplateModelImplToJson(
+        _$CubitTemplateModelImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'returnType': instance.returnType,
@@ -395,32 +399,32 @@ Map<String, dynamic> _$$_CubitTemplateModelToJson(
       'hasBlocMixins': instance.hasBlocMixins,
     };
 
-_$_BuiltListJsonConverterModel _$$_BuiltListJsonConverterModelFromJson(
+_$BuiltListJsonConverterModelImpl _$$BuiltListJsonConverterModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_BuiltListJsonConverterModel(
+    _$BuiltListJsonConverterModelImpl(
       converterName: json['converterName'] as String,
       innerReturnType: json['innerReturnType'] as String,
       shouldCreateConverter: json['shouldCreateConverter'] as bool? ?? true,
     );
 
-Map<String, dynamic> _$$_BuiltListJsonConverterModelToJson(
-        _$_BuiltListJsonConverterModel instance) =>
+Map<String, dynamic> _$$BuiltListJsonConverterModelImplToJson(
+        _$BuiltListJsonConverterModelImpl instance) =>
     <String, dynamic>{
       'converterName': instance.converterName,
       'innerReturnType': instance.innerReturnType,
       'shouldCreateConverter': instance.shouldCreateConverter,
     };
 
-_$_BuiltListJsonConverterTemplateModel
-    _$$_BuiltListJsonConverterTemplateModelFromJson(
+_$BuiltListJsonConverterTemplateModelImpl
+    _$$BuiltListJsonConverterTemplateModelImplFromJson(
             Map<String, dynamic> json) =>
-        _$_BuiltListJsonConverterTemplateModel(
+        _$BuiltListJsonConverterTemplateModelImpl(
           converterName: json['converterName'] as String,
           innerReturnType: json['innerReturnType'] as String,
         );
 
-Map<String, dynamic> _$$_BuiltListJsonConverterTemplateModelToJson(
-        _$_BuiltListJsonConverterTemplateModel instance) =>
+Map<String, dynamic> _$$BuiltListJsonConverterTemplateModelImplToJson(
+        _$BuiltListJsonConverterTemplateModelImpl instance) =>
     <String, dynamic>{
       'converterName': instance.converterName,
       'innerReturnType': instance.innerReturnType,

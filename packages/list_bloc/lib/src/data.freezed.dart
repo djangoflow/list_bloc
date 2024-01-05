@@ -112,22 +112,22 @@ class _$DataCopyWithImpl<T, F, $Res, $Val extends Data<T, F>>
 }
 
 /// @nodoc
-abstract class _$$_DataCopyWith<T, F, $Res>
+abstract class _$$DataImplCopyWith<T, F, $Res>
     implements $DataCopyWith<T, F, $Res> {
-  factory _$$_DataCopyWith(
-          _$_Data<T, F> value, $Res Function(_$_Data<T, F>) then) =
-      __$$_DataCopyWithImpl<T, F, $Res>;
+  factory _$$DataImplCopyWith(
+          _$DataImpl<T, F> value, $Res Function(_$DataImpl<T, F>) then) =
+      __$$DataImplCopyWithImpl<T, F, $Res>;
   @override
   @useResult
   $Res call({T? data, F? filter});
 }
 
 /// @nodoc
-class __$$_DataCopyWithImpl<T, F, $Res>
-    extends _$DataCopyWithImpl<T, F, $Res, _$_Data<T, F>>
-    implements _$$_DataCopyWith<T, F, $Res> {
-  __$$_DataCopyWithImpl(
-      _$_Data<T, F> _value, $Res Function(_$_Data<T, F>) _then)
+class __$$DataImplCopyWithImpl<T, F, $Res>
+    extends _$DataCopyWithImpl<T, F, $Res, _$DataImpl<T, F>>
+    implements _$$DataImplCopyWith<T, F, $Res> {
+  __$$DataImplCopyWithImpl(
+      _$DataImpl<T, F> _value, $Res Function(_$DataImpl<T, F>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -136,7 +136,7 @@ class __$$_DataCopyWithImpl<T, F, $Res>
     Object? data = freezed,
     Object? filter = freezed,
   }) {
-    return _then(_$_Data<T, F>(
+    return _then(_$DataImpl<T, F>(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -151,8 +151,8 @@ class __$$_DataCopyWithImpl<T, F, $Res>
 
 /// @nodoc
 
-class _$_Data<T, F> implements _Data<T, F> {
-  const _$_Data({this.data, this.filter});
+class _$DataImpl<T, F> implements _Data<T, F> {
+  const _$DataImpl({this.data, this.filter});
 
   @override
   final T? data;
@@ -168,7 +168,7 @@ class _$_Data<T, F> implements _Data<T, F> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Data<T, F> &&
+            other is _$DataImpl<T, F> &&
             const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality().equals(other.filter, filter));
   }
@@ -182,8 +182,8 @@ class _$_Data<T, F> implements _Data<T, F> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DataCopyWith<T, F, _$_Data<T, F>> get copyWith =>
-      __$$_DataCopyWithImpl<T, F, _$_Data<T, F>>(this, _$identity);
+  _$$DataImplCopyWith<T, F, _$DataImpl<T, F>> get copyWith =>
+      __$$DataImplCopyWithImpl<T, F, _$DataImpl<T, F>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -261,7 +261,7 @@ class _$_Data<T, F> implements _Data<T, F> {
 }
 
 abstract class _Data<T, F> implements Data<T, F> {
-  const factory _Data({final T? data, final F? filter}) = _$_Data<T, F>;
+  const factory _Data({final T? data, final F? filter}) = _$DataImpl<T, F>;
 
   @override
   T? get data;
@@ -269,27 +269,27 @@ abstract class _Data<T, F> implements Data<T, F> {
   F? get filter;
   @override
   @JsonKey(ignore: true)
-  _$$_DataCopyWith<T, F, _$_Data<T, F>> get copyWith =>
+  _$$DataImplCopyWith<T, F, _$DataImpl<T, F>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoadingCopyWith<T, F, $Res>
+abstract class _$$LoadingImplCopyWith<T, F, $Res>
     implements $DataCopyWith<T, F, $Res> {
-  factory _$$LoadingCopyWith(
-          _$Loading<T, F> value, $Res Function(_$Loading<T, F>) then) =
-      __$$LoadingCopyWithImpl<T, F, $Res>;
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl<T, F> value, $Res Function(_$LoadingImpl<T, F>) then) =
+      __$$LoadingImplCopyWithImpl<T, F, $Res>;
   @override
   @useResult
   $Res call({T? data, F? filter});
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<T, F, $Res>
-    extends _$DataCopyWithImpl<T, F, $Res, _$Loading<T, F>>
-    implements _$$LoadingCopyWith<T, F, $Res> {
-  __$$LoadingCopyWithImpl(
-      _$Loading<T, F> _value, $Res Function(_$Loading<T, F>) _then)
+class __$$LoadingImplCopyWithImpl<T, F, $Res>
+    extends _$DataCopyWithImpl<T, F, $Res, _$LoadingImpl<T, F>>
+    implements _$$LoadingImplCopyWith<T, F, $Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl<T, F> _value, $Res Function(_$LoadingImpl<T, F>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -298,7 +298,7 @@ class __$$LoadingCopyWithImpl<T, F, $Res>
     Object? data = freezed,
     Object? filter = freezed,
   }) {
-    return _then(_$Loading<T, F>(
+    return _then(_$LoadingImpl<T, F>(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -313,8 +313,8 @@ class __$$LoadingCopyWithImpl<T, F, $Res>
 
 /// @nodoc
 
-class _$Loading<T, F> implements Loading<T, F> {
-  const _$Loading({this.data, this.filter});
+class _$LoadingImpl<T, F> implements Loading<T, F> {
+  const _$LoadingImpl({this.data, this.filter});
 
   @override
   final T? data;
@@ -330,7 +330,7 @@ class _$Loading<T, F> implements Loading<T, F> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Loading<T, F> &&
+            other is _$LoadingImpl<T, F> &&
             const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality().equals(other.filter, filter));
   }
@@ -344,8 +344,8 @@ class _$Loading<T, F> implements Loading<T, F> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadingCopyWith<T, F, _$Loading<T, F>> get copyWith =>
-      __$$LoadingCopyWithImpl<T, F, _$Loading<T, F>>(this, _$identity);
+  _$$LoadingImplCopyWith<T, F, _$LoadingImpl<T, F>> get copyWith =>
+      __$$LoadingImplCopyWithImpl<T, F, _$LoadingImpl<T, F>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -423,7 +423,7 @@ class _$Loading<T, F> implements Loading<T, F> {
 }
 
 abstract class Loading<T, F> implements Data<T, F> {
-  const factory Loading({final T? data, final F? filter}) = _$Loading<T, F>;
+  const factory Loading({final T? data, final F? filter}) = _$LoadingImpl<T, F>;
 
   @override
   T? get data;
@@ -431,27 +431,27 @@ abstract class Loading<T, F> implements Data<T, F> {
   F? get filter;
   @override
   @JsonKey(ignore: true)
-  _$$LoadingCopyWith<T, F, _$Loading<T, F>> get copyWith =>
+  _$$LoadingImplCopyWith<T, F, _$LoadingImpl<T, F>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$EmptyCopyWith<T, F, $Res>
+abstract class _$$EmptyImplCopyWith<T, F, $Res>
     implements $DataCopyWith<T, F, $Res> {
-  factory _$$EmptyCopyWith(
-          _$Empty<T, F> value, $Res Function(_$Empty<T, F>) then) =
-      __$$EmptyCopyWithImpl<T, F, $Res>;
+  factory _$$EmptyImplCopyWith(
+          _$EmptyImpl<T, F> value, $Res Function(_$EmptyImpl<T, F>) then) =
+      __$$EmptyImplCopyWithImpl<T, F, $Res>;
   @override
   @useResult
   $Res call({T? data, F? filter});
 }
 
 /// @nodoc
-class __$$EmptyCopyWithImpl<T, F, $Res>
-    extends _$DataCopyWithImpl<T, F, $Res, _$Empty<T, F>>
-    implements _$$EmptyCopyWith<T, F, $Res> {
-  __$$EmptyCopyWithImpl(
-      _$Empty<T, F> _value, $Res Function(_$Empty<T, F>) _then)
+class __$$EmptyImplCopyWithImpl<T, F, $Res>
+    extends _$DataCopyWithImpl<T, F, $Res, _$EmptyImpl<T, F>>
+    implements _$$EmptyImplCopyWith<T, F, $Res> {
+  __$$EmptyImplCopyWithImpl(
+      _$EmptyImpl<T, F> _value, $Res Function(_$EmptyImpl<T, F>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -460,7 +460,7 @@ class __$$EmptyCopyWithImpl<T, F, $Res>
     Object? data = freezed,
     Object? filter = freezed,
   }) {
-    return _then(_$Empty<T, F>(
+    return _then(_$EmptyImpl<T, F>(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -475,8 +475,8 @@ class __$$EmptyCopyWithImpl<T, F, $Res>
 
 /// @nodoc
 
-class _$Empty<T, F> implements Empty<T, F> {
-  const _$Empty({this.data, this.filter});
+class _$EmptyImpl<T, F> implements Empty<T, F> {
+  const _$EmptyImpl({this.data, this.filter});
 
   @override
   final T? data;
@@ -492,7 +492,7 @@ class _$Empty<T, F> implements Empty<T, F> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Empty<T, F> &&
+            other is _$EmptyImpl<T, F> &&
             const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality().equals(other.filter, filter));
   }
@@ -506,8 +506,8 @@ class _$Empty<T, F> implements Empty<T, F> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$EmptyCopyWith<T, F, _$Empty<T, F>> get copyWith =>
-      __$$EmptyCopyWithImpl<T, F, _$Empty<T, F>>(this, _$identity);
+  _$$EmptyImplCopyWith<T, F, _$EmptyImpl<T, F>> get copyWith =>
+      __$$EmptyImplCopyWithImpl<T, F, _$EmptyImpl<T, F>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -585,7 +585,7 @@ class _$Empty<T, F> implements Empty<T, F> {
 }
 
 abstract class Empty<T, F> implements Data<T, F> {
-  const factory Empty({final T? data, final F? filter}) = _$Empty<T, F>;
+  const factory Empty({final T? data, final F? filter}) = _$EmptyImpl<T, F>;
 
   @override
   T? get data;
@@ -593,27 +593,27 @@ abstract class Empty<T, F> implements Data<T, F> {
   F? get filter;
   @override
   @JsonKey(ignore: true)
-  _$$EmptyCopyWith<T, F, _$Empty<T, F>> get copyWith =>
+  _$$EmptyImplCopyWith<T, F, _$EmptyImpl<T, F>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ErrorCopyWith<T, F, $Res>
+abstract class _$$ErrorImplCopyWith<T, F, $Res>
     implements $DataCopyWith<T, F, $Res> {
-  factory _$$ErrorCopyWith(
-          _$Error<T, F> value, $Res Function(_$Error<T, F>) then) =
-      __$$ErrorCopyWithImpl<T, F, $Res>;
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl<T, F> value, $Res Function(_$ErrorImpl<T, F>) then) =
+      __$$ErrorImplCopyWithImpl<T, F, $Res>;
   @override
   @useResult
   $Res call({T? data, F? filter, Object? error});
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<T, F, $Res>
-    extends _$DataCopyWithImpl<T, F, $Res, _$Error<T, F>>
-    implements _$$ErrorCopyWith<T, F, $Res> {
-  __$$ErrorCopyWithImpl(
-      _$Error<T, F> _value, $Res Function(_$Error<T, F>) _then)
+class __$$ErrorImplCopyWithImpl<T, F, $Res>
+    extends _$DataCopyWithImpl<T, F, $Res, _$ErrorImpl<T, F>>
+    implements _$$ErrorImplCopyWith<T, F, $Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl<T, F> _value, $Res Function(_$ErrorImpl<T, F>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -623,7 +623,7 @@ class __$$ErrorCopyWithImpl<T, F, $Res>
     Object? filter = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$Error<T, F>(
+    return _then(_$ErrorImpl<T, F>(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -639,8 +639,8 @@ class __$$ErrorCopyWithImpl<T, F, $Res>
 
 /// @nodoc
 
-class _$Error<T, F> implements Error<T, F> {
-  const _$Error({this.data, this.filter, this.error});
+class _$ErrorImpl<T, F> implements Error<T, F> {
+  const _$ErrorImpl({this.data, this.filter, this.error});
 
   @override
   final T? data;
@@ -658,7 +658,7 @@ class _$Error<T, F> implements Error<T, F> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Error<T, F> &&
+            other is _$ErrorImpl<T, F> &&
             const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality().equals(other.filter, filter) &&
             const DeepCollectionEquality().equals(other.error, error));
@@ -674,8 +674,8 @@ class _$Error<T, F> implements Error<T, F> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorCopyWith<T, F, _$Error<T, F>> get copyWith =>
-      __$$ErrorCopyWithImpl<T, F, _$Error<T, F>>(this, _$identity);
+  _$$ErrorImplCopyWith<T, F, _$ErrorImpl<T, F>> get copyWith =>
+      __$$ErrorImplCopyWithImpl<T, F, _$ErrorImpl<T, F>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -754,7 +754,7 @@ class _$Error<T, F> implements Error<T, F> {
 
 abstract class Error<T, F> implements Data<T, F> {
   const factory Error({final T? data, final F? filter, final Object? error}) =
-      _$Error<T, F>;
+      _$ErrorImpl<T, F>;
 
   @override
   T? get data;
@@ -763,6 +763,6 @@ abstract class Error<T, F> implements Data<T, F> {
   Object? get error;
   @override
   @JsonKey(ignore: true)
-  _$$ErrorCopyWith<T, F, _$Error<T, F>> get copyWith =>
+  _$$ErrorImplCopyWith<T, F, _$ErrorImpl<T, F>> get copyWith =>
       throw _privateConstructorUsedError;
 }

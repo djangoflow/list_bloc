@@ -75,22 +75,22 @@ class _$ListPageCopyWithImpl<T, $Res, $Val extends ListPage<T>>
 }
 
 /// @nodoc
-abstract class _$$_ListPageCopyWith<T, $Res>
+abstract class _$$ListPageImplCopyWith<T, $Res>
     implements $ListPageCopyWith<T, $Res> {
-  factory _$$_ListPageCopyWith(
-          _$_ListPage<T> value, $Res Function(_$_ListPage<T>) then) =
-      __$$_ListPageCopyWithImpl<T, $Res>;
+  factory _$$ListPageImplCopyWith(
+          _$ListPageImpl<T> value, $Res Function(_$ListPageImpl<T>) then) =
+      __$$ListPageImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call({List<T>? data, int? count, int number, int size});
 }
 
 /// @nodoc
-class __$$_ListPageCopyWithImpl<T, $Res>
-    extends _$ListPageCopyWithImpl<T, $Res, _$_ListPage<T>>
-    implements _$$_ListPageCopyWith<T, $Res> {
-  __$$_ListPageCopyWithImpl(
-      _$_ListPage<T> _value, $Res Function(_$_ListPage<T>) _then)
+class __$$ListPageImplCopyWithImpl<T, $Res>
+    extends _$ListPageCopyWithImpl<T, $Res, _$ListPageImpl<T>>
+    implements _$$ListPageImplCopyWith<T, $Res> {
+  __$$ListPageImplCopyWithImpl(
+      _$ListPageImpl<T> _value, $Res Function(_$ListPageImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_ListPageCopyWithImpl<T, $Res>
     Object? number = null,
     Object? size = null,
   }) {
-    return _then(_$_ListPage<T>(
+    return _then(_$ListPageImpl<T>(
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -124,8 +124,8 @@ class __$$_ListPageCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_ListPage<T> extends _ListPage<T> {
-  const _$_ListPage(
+class _$ListPageImpl<T> extends _ListPage<T> {
+  const _$ListPageImpl(
       {final List<T>? data,
       this.count,
       required this.number,
@@ -159,7 +159,7 @@ class _$_ListPage<T> extends _ListPage<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ListPage<T> &&
+            other is _$ListPageImpl<T> &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.number, number) || other.number == number) &&
@@ -173,8 +173,8 @@ class _$_ListPage<T> extends _ListPage<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ListPageCopyWith<T, _$_ListPage<T>> get copyWith =>
-      __$$_ListPageCopyWithImpl<T, _$_ListPage<T>>(this, _$identity);
+  _$$ListPageImplCopyWith<T, _$ListPageImpl<T>> get copyWith =>
+      __$$ListPageImplCopyWithImpl<T, _$ListPageImpl<T>>(this, _$identity);
 }
 
 abstract class _ListPage<T> extends ListPage<T> {
@@ -182,7 +182,7 @@ abstract class _ListPage<T> extends ListPage<T> {
       {final List<T>? data,
       final int? count,
       required final int number,
-      required final int size}) = _$_ListPage<T>;
+      required final int size}) = _$ListPageImpl<T>;
   const _ListPage._() : super._();
 
   @override
@@ -195,6 +195,6 @@ abstract class _ListPage<T> extends ListPage<T> {
   int get size;
   @override
   @JsonKey(ignore: true)
-  _$$_ListPageCopyWith<T, _$_ListPage<T>> get copyWith =>
+  _$$ListPageImplCopyWith<T, _$ListPageImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
