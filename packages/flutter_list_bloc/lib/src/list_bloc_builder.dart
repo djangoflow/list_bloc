@@ -79,9 +79,8 @@ class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
         return withRefreshIndicator
             ? RefreshIndicator(
                 child: child,
-                onRefresh: cubit != null
-                    ? () => _refresh(cubit!)
-                    : () => _refresh(context.read<B>()),
+                onRefresh:
+                    cubit != null ? () => _refresh(cubit!) : () => _refresh(context.read<B>()),
               )
             : child;
       },
@@ -93,6 +92,6 @@ class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
     final f = cubit.state.filter is OffsetLimitFilter
         ? (cubit.state.filter as OffsetLimitFilter).copyWithOffset(0)
         : null;
-    cubit.load(f);
+    await cubit.load(f);
   }
 }

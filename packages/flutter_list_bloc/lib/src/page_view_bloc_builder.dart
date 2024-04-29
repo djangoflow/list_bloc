@@ -46,12 +46,10 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
         builder: (context, state) {
           List<Widget> children = [];
 
-          if (widget.headerBuilder != null)
-            children.add(widget.headerBuilder!(context, state));
+          if (widget.headerBuilder != null) children.add(widget.headerBuilder!(context, state));
           if (widget.errorBuilder != null && state is Error) {
-            children.add(Expanded(
-                child: widget.errorBuilder!(
-                    context, state as Error<ListPage<T>, F>)));
+            children.add(
+                Expanded(child: widget.errorBuilder!(context, state as Error<ListPage<T>, F>)));
           }
           if (state.data?.data?.isEmpty ?? true) {
             children.add(Expanded(child: widget.emptyBuilder(context, state)));
@@ -63,12 +61,10 @@ class _PageViewBlocBuilderState<T, F> extends State<PageViewBlocBuilder<T, F>> {
                         : widget.onPageChanged!(context, state, index),
                     controller: _pageController,
                     itemCount: state.data?.pages,
-                    itemBuilder: (context, index) =>
-                        widget.pageBuilder(context, state))));
+                    itemBuilder: (context, index) => widget.pageBuilder(context, state))));
           }
 
-          if (widget.footerBuilder != null)
-            children.add(widget.footerBuilder!(context, state));
+          if (widget.footerBuilder != null) children.add(widget.footerBuilder!(context, state));
 
           return Column(children: children);
         });
