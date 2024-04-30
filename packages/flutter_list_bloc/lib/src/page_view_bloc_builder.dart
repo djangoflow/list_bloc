@@ -4,16 +4,11 @@ import 'package:flutter_list_bloc/flutter_list_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
 class PageViewBlocBuilder<T, F> extends StatefulWidget {
-  final PaginatedCubit<T, F>? cubit;
+  /// [PageViewBlocBuilder] handles building a [PageView] based on state of [PaginatedCubit].
+  /// When new date is loaded, [PageView.builder] is called for new page
 
-  final PageStateBuilder<T, F>? headerBuilder;
-  final PageStateBuilder<T, F>? footerBuilder;
-  final PageStateBuilder<T, F> pageBuilder;
-  final PageStateBuilder<T, F> emptyBuilder;
-  final PageStateBuilder<T, F>? errorBuilder;
-
-  final OnPageChangedBuilder<T, F>? onPageChanged;
-
+  /// Specify the [cubit], otherwise [PageViewBlocBuilder] will automatically
+  /// perform a lookup using [BlocProvider] and the current [BuildContext].
   PageViewBlocBuilder({
     this.cubit,
     this.headerBuilder,
@@ -23,6 +18,26 @@ class PageViewBlocBuilder<T, F> extends StatefulWidget {
     required this.emptyBuilder,
     this.errorBuilder,
   });
+
+  final PaginatedCubit<T, F>? cubit;
+
+  /// [headerBuilder] will be used to build header widget at the top of [PageView]
+  final PageStateBuilder<T, F>? headerBuilder;
+
+  /// [headerBuilder] will be used to build footer widget at the bottom of [PageView]
+  final PageStateBuilder<T, F>? footerBuilder;
+
+  /// [pageBuilder] will be called to build page with given [Data]
+  final PageStateBuilder<T, F> pageBuilder;
+
+  /// [emptyBuilder] will be called when [Data] is empty
+  final PageStateBuilder<T, F> emptyBuilder;
+
+  /// [errorBuilder] will be called when [Data] is [Data.error]
+  final PageStateBuilder<T, F>? errorBuilder;
+
+  /// [onPageChanged] will be passed to [PageView.onPageChanged]
+  final OnPageChangedBuilder<T, F>? onPageChanged;
 
   @override
   State<StatefulWidget> createState() => _PageViewBlocBuilderState<T, F>();
