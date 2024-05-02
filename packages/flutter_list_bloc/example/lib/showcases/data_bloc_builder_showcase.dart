@@ -1,4 +1,6 @@
-import 'package:example/utils/api_emulator.dart';
+import 'dart:math';
+
+import 'package:example/utils/api_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_list_bloc/flutter_list_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
@@ -14,8 +16,10 @@ class DataBlocBuilderShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('DataBlocBuilder')),
-      body: DataBlocBuilder<DataCubit<String, String>, String, String>(
-        create: (context) => DataCubit(([filter]) => APIEmulator.fetchData())..load(),
+      body: DataBlocBuilder<DataCubit<String, int>, String, int>(
+        create: (context) => DataCubit(
+          ([index]) => ApiRepository.fetchData(index: index),
+        )..load(Random().nextInt(100)),
         itemBuilder: (context, state) => ItemTile(item: state.data ?? ''),
         loadingBuilder: (context, state) => const LoadingDataIndicator(),
         emptyBuilder: (context, state) => const EmptyIndicator(),

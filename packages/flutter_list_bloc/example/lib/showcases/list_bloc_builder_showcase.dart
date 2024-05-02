@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_list_bloc/flutter_list_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
-import '../utils/api_emulator.dart';
+import '../utils/api_repository.dart';
 import '../widgets/empty_indicator.dart';
 import '../widgets/item_tile.dart';
 import '../widgets/loading_list_indicator.dart';
@@ -16,7 +16,7 @@ class ListBlocBuilderShowcase extends StatelessWidget {
       appBar: AppBar(title: const Text('ListBlocBuilder')),
       body: ListBlocBuilder<ListCubit<String, String>, String, String>(
         create: (context) => ListCubit<String, String>(
-          ([filter]) => APIEmulator.fetchList(),
+          ([filter]) => ApiRepository.fetchList(),
         )..load(),
         withRefreshIndicator: true,
         builder: (context, state, itemCount, itemBuilder) => ListView.builder(

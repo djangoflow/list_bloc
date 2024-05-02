@@ -1,4 +1,4 @@
-import 'package:example/utils/api_emulator.dart';
+import 'package:example/utils/api_repository.dart';
 import 'package:example/widgets/empty_indicator.dart';
 import 'package:example/widgets/item_tile.dart';
 import 'package:example/widgets/loading_list_indicator.dart';
@@ -24,7 +24,7 @@ class SliverListBlocBuilderShowcase extends StatelessWidget {
             backgroundColor: Colors.white,
           ),
           SliverListBlocBuilder<ListCubit<String, String>, String, String>(
-            create: (context) => ListCubit(([filter]) => APIEmulator.fetchList())..load(),
+            create: (context) => ListCubit(([filter]) => ApiRepository.fetchList())..load(),
             emptyBuilder: (context, state) => const EmptyIndicator(),
             loadingBuilder: (context, state) => const LoadingListIndicator(),
             itemBuilder: (context, state, index, item) => ItemTile(item: item),

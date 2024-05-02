@@ -1,6 +1,6 @@
 import 'package:list_bloc/list_bloc.dart';
 
-abstract class APIEmulator {
+abstract class ApiRepository {
   static const Duration _duration = Duration(seconds: 2);
 
   static Future<List<String>> fetchList({
@@ -33,8 +33,9 @@ abstract class APIEmulator {
     );
   }
 
-  static Future<String> fetchData() async {
+  static Future<String> fetchData({int? index}) async {
     await Future.delayed(_duration);
-    return 'Data loaded at ${DateTime.now().toString()}';
+    final indexMessage = index == null ? '' : '(index $index)';
+    return 'Data loaded at ${DateTime.now().toString()} $indexMessage';
   }
 }

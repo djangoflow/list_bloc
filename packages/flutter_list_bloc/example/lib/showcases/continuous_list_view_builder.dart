@@ -1,4 +1,4 @@
-import 'package:example/utils/api_emulator.dart';
+import 'package:example/utils/api_repository.dart';
 import 'package:example/utils/continuous_offset_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_list_bloc/flutter_list_bloc.dart';
@@ -20,7 +20,7 @@ class ContinuousListViewBlocBuilderShowcase extends StatelessWidget {
       body: ContinuousListViewBlocBuilder<ListCubit<String, ContinuousOffsetFilter>, String,
           ContinuousOffsetFilter>(
         create: (context) => ListCubit(
-          ([filter]) => APIEmulator.fetchList(
+          ([filter]) => ApiRepository.fetchList(
             page: filter?.page,
           ),
         )..load(ContinuousOffsetFilter()),
