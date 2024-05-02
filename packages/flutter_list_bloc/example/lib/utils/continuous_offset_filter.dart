@@ -1,7 +1,10 @@
 import 'package:list_bloc/list_bloc.dart';
 
 class ContinuousOffsetFilter extends OffsetLimitFilter {
-  ContinuousOffsetFilter({this.limit = 1000, this.offset = 0});
+  ContinuousOffsetFilter({
+    this.limit = OffsetLimitFilter.kPageSize,
+    this.offset = 0,
+  });
 
   @override
   final int limit;
@@ -14,5 +17,5 @@ class ContinuousOffsetFilter extends OffsetLimitFilter {
         offset: offset,
       );
 
-  int get page => offset ~/ OffsetLimitFilter.kPageSize;
+  int get page => offset ~/ limit;
 }
