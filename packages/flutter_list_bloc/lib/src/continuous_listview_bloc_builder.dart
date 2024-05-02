@@ -2,25 +2,13 @@ import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_list_bloc/flutter_list_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
 
-class ContinuousListViewBlocBuilder<B extends ListCubit<T, F>, T,
-    F extends OffsetLimitFilter> extends StatelessWidget {
-  final Axis scrollDirection;
-  final B Function(BuildContext context)? create;
-  final B? cubit;
-  final ListItemBuilder<T, F> itemBuilder;
-  final ListStateBuilder<T, F> emptyBuilder;
-  final ListStateBuilder<T, F> loadingBuilder;
-  final ListStateBuilder<T, F>? headerBuilder;
-  final ListErrorStateBuilder<T, F>? errorBuilder;
-  final Function(BuildContext context, ScrollController controller,
-      Widget Function(BuildContext, int) itemBuilder, int itemCount)? builder;
-  final ScrollController? controller;
-  final bool shrinkWrap;
-  final bool withRefreshIndicator;
-  final int loadingItemsCount;
-  final ScrollPhysics? physics;
-  final bool reverse;
+class ContinuousListViewBlocBuilder<B extends ListCubit<T, F>, T, F extends OffsetLimitFilter>
+    extends StatelessWidget {
+  /// [ContinuousListViewBlocBuilder] handles building a scrollable [ListView] based on state of [ListCubit].
+  /// When [ListView] is scrolled to the end, [ListCubit.load] is called to fetch more data
 
+  /// Specify the [cubit] or [create], otherwise [ListViewBlocBuilder] will automatically
+  /// perform a lookup using [BlocProvider] and the current [BuildContext].
   const ContinuousListViewBlocBuilder({
     this.cubit,
     required this.emptyBuilder,
@@ -38,6 +26,46 @@ class ContinuousListViewBlocBuilder<B extends ListCubit<T, F>, T,
     this.withRefreshIndicator = false,
     this.reverse = false,
   });
+
+  final B Function(BuildContext context)? create;
+  final B? cubit;
+
+  final ListItemBuilder<T, F> itemBuilder;
+
+  /// [emptyBuilder] will be called when list of items is empty
+  final ListStateBuilder<T, F> emptyBuilder;
+
+  /// [loadingBuilder] will be called [loadingItemsCount] times.
+  /// Use it for single item placeholder.
+  final ListStateBuilder<T, F> loadingBuilder;
+
+  /// [headerBuilder] will be used to build first item in the list
+  final ListStateBuilder<T, F>? headerBuilder;
+
+  /// [errorBuilder] will be called for [Data.error] state
+  final ListErrorStateBuilder<T, F>? errorBuilder;
+
+  /// [builder] function wraps content into container
+  /// Otherwise, [ListView.builder] will be used
+  final Function(
+    BuildContext context,
+    ScrollController controller,
+    Widget Function(BuildContext, int) itemBuilder,
+    int itemCount,
+  )? builder;
+
+  /// When [withRefreshIndicator] is true
+  /// Then [ListView] is wrapper into [RefreshIndicator] widget
+  final bool withRefreshIndicator;
+
+  final int loadingItemsCount;
+
+  /// Correspons to [ListView] properties
+  final Axis scrollDirection;
+  final ScrollController? controller;
+  final bool shrinkWrap;
+  final ScrollPhysics? physics;
+  final bool reverse;
 
   @override
   Widget build(BuildContext context) => ListBlocBuilder<B, T, F>(

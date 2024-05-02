@@ -5,26 +5,10 @@ import 'package:list_bloc/list_bloc.dart';
 import 'types.dart';
 
 class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
-  final B Function(BuildContext context)? create;
-  final B? cubit;
-  final ListItemBuilder<T, F> itemBuilder;
-  final ListStateBuilder<T, F> emptyBuilder;
-  final ListStateBuilder<T, F> loadingBuilder;
-  final ListStateBuilder<T, F>? headerBuilder;
+  /// [ListBlocBuilder] handles building a widget based on state of [ListCubit].
 
-  // TODO: Currently it replaces any old states with empty state
-  // It can be enhaced in future to support if there was data state before empty state then to show it
-  // else show error state conditionally.
-  final ListErrorStateBuilder<T, F>? errorBuilder;
-  final bool withRefreshIndicator;
-  final Widget Function(
-    BuildContext context,
-    Data<List<T>, F> state,
-    int itemCount,
-    Widget Function(BuildContext context, int index) itemBuilder,
-  ) builder;
-  final int loadingItemsCount;
-
+  /// Specify the [cubit] or [create], otherwise [ListBlocBuilder] will automatically
+  /// perform a lookup using [BlocProvider] and the current [BuildContext].
   const ListBlocBuilder({
     this.cubit,
     required this.itemBuilder,
@@ -37,6 +21,45 @@ class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
     this.withRefreshIndicator = false,
     this.headerBuilder,
   });
+
+  final B Function(BuildContext context)? create;
+
+  final B? cubit;
+
+  /// [itemBuilder] will be invoked for each item of the list
+  /// and passed to [builder]
+  final ListItemBuilder<T, F> itemBuilder;
+
+  /// [emptyBuilder] will be called when list of items is empty
+  final ListStateBuilder<T, F> emptyBuilder;
+
+  /// [loadingBuilder] will be called [loadingItemsCount] times.
+  /// Use it for single item placeholder.
+  final ListStateBuilder<T, F> loadingBuilder;
+
+  /// [headerBuilder] will be used to build first item in the list
+  final ListStateBuilder<T, F>? headerBuilder;
+
+  // TODO: Currently it replaces any old states with empty state
+  // It can be enhaced in future to support if there was data state before empty state then to show it
+  // else show error state conditionally.
+
+  /// [errorBuilder] will be called for [Data.error] state
+  final ListErrorStateBuilder<T, F>? errorBuilder;
+
+  /// When [withRefreshIndicator] is true
+  /// Then [builder] is wrapper into [RefreshIndicator] widget
+  final bool withRefreshIndicator;
+
+  /// [builder] function wraps items into scroll view (for ex. [ListView] or [SingleChildScrollView])
+  /// Use [itemBuilder] param to pass it build list item
+  final Widget Function(
+    BuildContext context,
+    Data<List<T>, F> state,
+    int itemCount,
+    Widget Function(BuildContext context, int index) itemBuilder,
+  ) builder;
+  final int loadingItemsCount;
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +102,8 @@ class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
         return withRefreshIndicator
             ? RefreshIndicator(
                 child: child,
-                onRefresh: cubit != null
-                    ? () => _refresh(cubit!)
-                    : () => _refresh(context.read<B>()),
+                onRefresh:
+                    cubit != null ? () => _refresh(cubit!) : () => _refresh(context.read<B>()),
               )
             : child;
       },
@@ -93,6 +115,6 @@ class ListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
     final f = cubit.state.filter is OffsetLimitFilter
         ? (cubit.state.filter as OffsetLimitFilter).copyWithOffset(0)
         : null;
-    cubit.load(f);
+    await cubit.load(f);
   }
 }
