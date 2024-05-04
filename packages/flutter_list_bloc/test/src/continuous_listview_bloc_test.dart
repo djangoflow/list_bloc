@@ -106,5 +106,6 @@ void main() {
         );
       },
     );
+    tearDownAll(controller.dispose);
   });
 }
