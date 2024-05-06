@@ -106,6 +106,9 @@ void main() {
         );
       },
     );
-    tearDownAll(controller.dispose);
+    tearDownAll(() {
+      controller.dispose();
+      cubit.close();
+    });
   });
 }

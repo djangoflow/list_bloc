@@ -157,5 +157,6 @@ void main() {
         );
       },
     );
+    tearDownAll(cubit.close);
   });
 }
