@@ -2,7 +2,7 @@ const freezedFilterTemplate = r'''
 //Filter for {{name}}Filter 
 
 @freezed
-class {{name}}Filter with _${{name}}Filter{{#isPaginated}} implements OffsetLimitFilter{{/isPaginated}} {
+abstract class {{name}}Filter with _${{name}}Filter{{#isPaginated}} implements OffsetLimitFilter{{/isPaginated}} {
   {{#isPaginated}}
   static const kPageSize = 25;{{/isPaginated}}
   const {{name}}Filter._();

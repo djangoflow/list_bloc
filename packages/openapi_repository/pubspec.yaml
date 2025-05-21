@@ -7,22 +7,22 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  analyzer: ^6.0.0
-  build: ^2.4.1
+  analyzer: ^7.4.5
+  build: ^2.4.2
   built_collection: ^5.1.1
-  built_value: ^8.6.2
-  collection: ^1.17.2
-  freezed_annotation: ^2.4.1
+  built_value: ^8.9.5
+  collection: ^1.19.1
+  freezed_annotation: ^3.0.0
   mustache_template: ^2.0.0
   openapi_repository_annotations: ^1.2.4
-  path: ^1.8.3
+  path: ^1.9.1
   recase: ^4.1.0
-  source_gen: ^1.4.0
+  source_gen: ^2.0.0
   _openapi_repository_internal_models: ^0.0.3+2
 
 dev_dependencies:
-  build_runner: ^2.4.6
-  freezed: ^2.4.1
-  json_serializable: ^6.7.1
-  lints: ^2.1.1
-  test: ^1.24.6
+  build_runner: ^2.4.15
+  freezed: ^3.0.6
+  json_serializable: ^6.9.5
+  lints: ^5.1.1
+  test: ^1.26.2
