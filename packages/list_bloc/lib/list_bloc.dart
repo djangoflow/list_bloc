@@ -1,4 +1,4 @@
-library list_bloc;
+library;
 
 export 'src/cubits/data_cubit.dart';
 export 'src/cubits/list_cubit.dart';

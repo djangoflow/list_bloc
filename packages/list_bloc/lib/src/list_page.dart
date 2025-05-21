@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'list_page.freezed.dart';
 
 @freezed
-class ListPage<T> with _$ListPage<T> {
+abstract class ListPage<T> with _$ListPage<T> {
   static const kPageSize = 25;
 
   const ListPage._();

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,166 +10,101 @@ part of 'data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Data<T, F> {
-  T? get data => throw _privateConstructorUsedError;
-  F? get filter => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(T? data, F? filter) $default, {
-    required TResult Function(T? data, F? filter) loading,
-    required TResult Function(T? data, F? filter) empty,
-    required TResult Function(T? data, F? filter, Object? error) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(T? data, F? filter)? $default, {
-    TResult? Function(T? data, F? filter)? loading,
-    TResult? Function(T? data, F? filter)? empty,
-    TResult? Function(T? data, F? filter, Object? error)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(T? data, F? filter)? $default, {
-    TResult Function(T? data, F? filter)? loading,
-    TResult Function(T? data, F? filter)? empty,
-    TResult Function(T? data, F? filter, Object? error)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_Data<T, F> value) $default, {
-    required TResult Function(Loading<T, F> value) loading,
-    required TResult Function(Empty<T, F> value) empty,
-    required TResult Function(Error<T, F> value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_Data<T, F> value)? $default, {
-    TResult? Function(Loading<T, F> value)? loading,
-    TResult? Function(Empty<T, F> value)? empty,
-    TResult? Function(Error<T, F> value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Data<T, F> value)? $default, {
-    TResult Function(Loading<T, F> value)? loading,
-    TResult Function(Empty<T, F> value)? empty,
-    TResult Function(Error<T, F> value)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  T? get data;
+  F? get filter;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DataCopyWith<T, F, Data<T, F>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$DataCopyWithImpl<T, F, Data<T, F>>(this as Data<T, F>, _$identity);
 
-/// @nodoc
-abstract class $DataCopyWith<T, F, $Res> {
-  factory $DataCopyWith(Data<T, F> value, $Res Function(Data<T, F>) then) =
-      _$DataCopyWithImpl<T, F, $Res, Data<T, F>>;
-  @useResult
-  $Res call({T? data, F? filter});
-}
-
-/// @nodoc
-class _$DataCopyWithImpl<T, F, $Res, $Val extends Data<T, F>>
-    implements $DataCopyWith<T, F, $Res> {
-  _$DataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? data = freezed,
-    Object? filter = freezed,
-  }) {
-    return _then(_value.copyWith(
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as T?,
-      filter: freezed == filter
-          ? _value.filter
-          : filter // ignore: cast_nullable_to_non_nullable
-              as F?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Data<T, F> &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            const DeepCollectionEquality().equals(other.filter, filter));
   }
-}
-
-/// @nodoc
-abstract class _$$DataImplCopyWith<T, F, $Res>
-    implements $DataCopyWith<T, F, $Res> {
-  factory _$$DataImplCopyWith(
-          _$DataImpl<T, F> value, $Res Function(_$DataImpl<T, F>) then) =
-      __$$DataImplCopyWithImpl<T, F, $Res>;
-  @override
-  @useResult
-  $Res call({T? data, F? filter});
-}
-
-/// @nodoc
-class __$$DataImplCopyWithImpl<T, F, $Res>
-    extends _$DataCopyWithImpl<T, F, $Res, _$DataImpl<T, F>>
-    implements _$$DataImplCopyWith<T, F, $Res> {
-  __$$DataImplCopyWithImpl(
-      _$DataImpl<T, F> _value, $Res Function(_$DataImpl<T, F>) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? data = freezed,
-    Object? filter = freezed,
-  }) {
-    return _then(_$DataImpl<T, F>(
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as T?,
-      filter: freezed == filter
-          ? _value.filter
-          : filter // ignore: cast_nullable_to_non_nullable
-              as F?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DataImpl<T, F> implements _Data<T, F> {
-  const _$DataImpl({this.data, this.filter});
 
   @override
-  final T? data;
-  @override
-  final F? filter;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(data),
+      const DeepCollectionEquality().hash(filter));
 
   @override
   String toString() {
     return 'Data<$T, $F>(data: $data, filter: $filter)';
   }
+}
+
+/// @nodoc
+abstract mixin class $DataCopyWith<T, F, $Res> {
+  factory $DataCopyWith(Data<T, F> value, $Res Function(Data<T, F>) _then) =
+      _$DataCopyWithImpl;
+  @useResult
+  $Res call({T? data, F? filter});
+}
+
+/// @nodoc
+class _$DataCopyWithImpl<T, F, $Res> implements $DataCopyWith<T, F, $Res> {
+  _$DataCopyWithImpl(this._self, this._then);
+
+  final Data<T, F> _self;
+  final $Res Function(Data<T, F>) _then;
+
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+    Object? filter = freezed,
+  }) {
+    return _then(_self.copyWith(
+      data: freezed == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as T?,
+      filter: freezed == filter
+          ? _self.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as F?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _Data<T, F> implements Data<T, F> {
+  const _Data({this.data, this.filter});
 
   @override
-  bool operator ==(dynamic other) {
+  final T? data;
+  @override
+  final F? filter;
+
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DataCopyWith<T, F, _Data<T, F>> get copyWith =>
+      __$DataCopyWithImpl<T, F, _Data<T, F>>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DataImpl<T, F> &&
+            other is _Data<T, F> &&
             const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality().equals(other.filter, filter));
   }
@@ -179,132 +115,44 @@ class _$DataImpl<T, F> implements _Data<T, F> {
       const DeepCollectionEquality().hash(data),
       const DeepCollectionEquality().hash(filter));
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DataImplCopyWith<T, F, _$DataImpl<T, F>> get copyWith =>
-      __$$DataImplCopyWithImpl<T, F, _$DataImpl<T, F>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(T? data, F? filter) $default, {
-    required TResult Function(T? data, F? filter) loading,
-    required TResult Function(T? data, F? filter) empty,
-    required TResult Function(T? data, F? filter, Object? error) error,
-  }) {
-    return $default(data, filter);
+  String toString() {
+    return 'Data<$T, $F>(data: $data, filter: $filter)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(T? data, F? filter)? $default, {
-    TResult? Function(T? data, F? filter)? loading,
-    TResult? Function(T? data, F? filter)? empty,
-    TResult? Function(T? data, F? filter, Object? error)? error,
-  }) {
-    return $default?.call(data, filter);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(T? data, F? filter)? $default, {
-    TResult Function(T? data, F? filter)? loading,
-    TResult Function(T? data, F? filter)? empty,
-    TResult Function(T? data, F? filter, Object? error)? error,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(data, filter);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_Data<T, F> value) $default, {
-    required TResult Function(Loading<T, F> value) loading,
-    required TResult Function(Empty<T, F> value) empty,
-    required TResult Function(Error<T, F> value) error,
-  }) {
-    return $default(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_Data<T, F> value)? $default, {
-    TResult? Function(Loading<T, F> value)? loading,
-    TResult? Function(Empty<T, F> value)? empty,
-    TResult? Function(Error<T, F> value)? error,
-  }) {
-    return $default?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Data<T, F> value)? $default, {
-    TResult Function(Loading<T, F> value)? loading,
-    TResult Function(Empty<T, F> value)? empty,
-    TResult Function(Error<T, F> value)? error,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Data<T, F> implements Data<T, F> {
-  const factory _Data({final T? data, final F? filter}) = _$DataImpl<T, F>;
-
-  @override
-  T? get data;
-  @override
-  F? get filter;
-  @override
-  @JsonKey(ignore: true)
-  _$$DataImplCopyWith<T, F, _$DataImpl<T, F>> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<T, F, $Res>
+abstract mixin class _$DataCopyWith<T, F, $Res>
     implements $DataCopyWith<T, F, $Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl<T, F> value, $Res Function(_$LoadingImpl<T, F>) then) =
-      __$$LoadingImplCopyWithImpl<T, F, $Res>;
+  factory _$DataCopyWith(_Data<T, F> value, $Res Function(_Data<T, F>) _then) =
+      __$DataCopyWithImpl;
   @override
   @useResult
   $Res call({T? data, F? filter});
 }
 
 /// @nodoc
-class __$$LoadingImplCopyWithImpl<T, F, $Res>
-    extends _$DataCopyWithImpl<T, F, $Res, _$LoadingImpl<T, F>>
-    implements _$$LoadingImplCopyWith<T, F, $Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl<T, F> _value, $Res Function(_$LoadingImpl<T, F>) _then)
-      : super(_value, _then);
+class __$DataCopyWithImpl<T, F, $Res> implements _$DataCopyWith<T, F, $Res> {
+  __$DataCopyWithImpl(this._self, this._then);
 
-  @pragma('vm:prefer-inline')
+  final _Data<T, F> _self;
+  final $Res Function(_Data<T, F>) _then;
+
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? data = freezed,
     Object? filter = freezed,
   }) {
-    return _then(_$LoadingImpl<T, F>(
+    return _then(_Data<T, F>(
       data: freezed == data
-          ? _value.data
+          ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
               as T?,
       filter: freezed == filter
-          ? _value.filter
+          ? _self.filter
           : filter // ignore: cast_nullable_to_non_nullable
               as F?,
     ));
@@ -313,160 +161,77 @@ class __$$LoadingImplCopyWithImpl<T, F, $Res>
 
 /// @nodoc
 
-class _$LoadingImpl<T, F> implements Loading<T, F> {
-  const _$LoadingImpl({this.data, this.filter});
+class Loading<T, F> implements Data<T, F> {
+  const Loading({this.data, this.filter});
 
   @override
   final T? data;
   @override
   final F? filter;
+
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $LoadingCopyWith<T, F, Loading<T, F>> get copyWith =>
+      _$LoadingCopyWithImpl<T, F, Loading<T, F>>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Loading<T, F> &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            const DeepCollectionEquality().equals(other.filter, filter));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(data),
+      const DeepCollectionEquality().hash(filter));
 
   @override
   String toString() {
     return 'Data<$T, $F>.loading(data: $data, filter: $filter)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadingImpl<T, F> &&
-            const DeepCollectionEquality().equals(other.data, data) &&
-            const DeepCollectionEquality().equals(other.filter, filter));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(data),
-      const DeepCollectionEquality().hash(filter));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadingImplCopyWith<T, F, _$LoadingImpl<T, F>> get copyWith =>
-      __$$LoadingImplCopyWithImpl<T, F, _$LoadingImpl<T, F>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(T? data, F? filter) $default, {
-    required TResult Function(T? data, F? filter) loading,
-    required TResult Function(T? data, F? filter) empty,
-    required TResult Function(T? data, F? filter, Object? error) error,
-  }) {
-    return loading(data, filter);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(T? data, F? filter)? $default, {
-    TResult? Function(T? data, F? filter)? loading,
-    TResult? Function(T? data, F? filter)? empty,
-    TResult? Function(T? data, F? filter, Object? error)? error,
-  }) {
-    return loading?.call(data, filter);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(T? data, F? filter)? $default, {
-    TResult Function(T? data, F? filter)? loading,
-    TResult Function(T? data, F? filter)? empty,
-    TResult Function(T? data, F? filter, Object? error)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(data, filter);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_Data<T, F> value) $default, {
-    required TResult Function(Loading<T, F> value) loading,
-    required TResult Function(Empty<T, F> value) empty,
-    required TResult Function(Error<T, F> value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_Data<T, F> value)? $default, {
-    TResult? Function(Loading<T, F> value)? loading,
-    TResult? Function(Empty<T, F> value)? empty,
-    TResult? Function(Error<T, F> value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Data<T, F> value)? $default, {
-    TResult Function(Loading<T, F> value)? loading,
-    TResult Function(Empty<T, F> value)? empty,
-    TResult Function(Error<T, F> value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Loading<T, F> implements Data<T, F> {
-  const factory Loading({final T? data, final F? filter}) = _$LoadingImpl<T, F>;
-
-  @override
-  T? get data;
-  @override
-  F? get filter;
-  @override
-  @JsonKey(ignore: true)
-  _$$LoadingImplCopyWith<T, F, _$LoadingImpl<T, F>> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$EmptyImplCopyWith<T, F, $Res>
+abstract mixin class $LoadingCopyWith<T, F, $Res>
     implements $DataCopyWith<T, F, $Res> {
-  factory _$$EmptyImplCopyWith(
-          _$EmptyImpl<T, F> value, $Res Function(_$EmptyImpl<T, F>) then) =
-      __$$EmptyImplCopyWithImpl<T, F, $Res>;
+  factory $LoadingCopyWith(
+          Loading<T, F> value, $Res Function(Loading<T, F>) _then) =
+      _$LoadingCopyWithImpl;
   @override
   @useResult
   $Res call({T? data, F? filter});
 }
 
 /// @nodoc
-class __$$EmptyImplCopyWithImpl<T, F, $Res>
-    extends _$DataCopyWithImpl<T, F, $Res, _$EmptyImpl<T, F>>
-    implements _$$EmptyImplCopyWith<T, F, $Res> {
-  __$$EmptyImplCopyWithImpl(
-      _$EmptyImpl<T, F> _value, $Res Function(_$EmptyImpl<T, F>) _then)
-      : super(_value, _then);
+class _$LoadingCopyWithImpl<T, F, $Res>
+    implements $LoadingCopyWith<T, F, $Res> {
+  _$LoadingCopyWithImpl(this._self, this._then);
 
-  @pragma('vm:prefer-inline')
+  final Loading<T, F> _self;
+  final $Res Function(Loading<T, F>) _then;
+
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? data = freezed,
     Object? filter = freezed,
   }) {
-    return _then(_$EmptyImpl<T, F>(
+    return _then(Loading<T, F>(
       data: freezed == data
-          ? _value.data
+          ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
               as T?,
       filter: freezed == filter
-          ? _value.filter
+          ? _self.filter
           : filter // ignore: cast_nullable_to_non_nullable
               as F?,
     ));
@@ -475,24 +240,27 @@ class __$$EmptyImplCopyWithImpl<T, F, $Res>
 
 /// @nodoc
 
-class _$EmptyImpl<T, F> implements Empty<T, F> {
-  const _$EmptyImpl({this.data, this.filter});
+class Empty<T, F> implements Data<T, F> {
+  const Empty({this.data, this.filter});
 
   @override
   final T? data;
   @override
   final F? filter;
 
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Data<$T, $F>.empty(data: $data, filter: $filter)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $EmptyCopyWith<T, F, Empty<T, F>> get copyWith =>
+      _$EmptyCopyWithImpl<T, F, Empty<T, F>>(this, _$identity);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EmptyImpl<T, F> &&
+            other is Empty<T, F> &&
             const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality().equals(other.filter, filter));
   }
@@ -503,162 +271,74 @@ class _$EmptyImpl<T, F> implements Empty<T, F> {
       const DeepCollectionEquality().hash(data),
       const DeepCollectionEquality().hash(filter));
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$EmptyImplCopyWith<T, F, _$EmptyImpl<T, F>> get copyWith =>
-      __$$EmptyImplCopyWithImpl<T, F, _$EmptyImpl<T, F>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(T? data, F? filter) $default, {
-    required TResult Function(T? data, F? filter) loading,
-    required TResult Function(T? data, F? filter) empty,
-    required TResult Function(T? data, F? filter, Object? error) error,
-  }) {
-    return empty(data, filter);
+  String toString() {
+    return 'Data<$T, $F>.empty(data: $data, filter: $filter)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(T? data, F? filter)? $default, {
-    TResult? Function(T? data, F? filter)? loading,
-    TResult? Function(T? data, F? filter)? empty,
-    TResult? Function(T? data, F? filter, Object? error)? error,
-  }) {
-    return empty?.call(data, filter);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(T? data, F? filter)? $default, {
-    TResult Function(T? data, F? filter)? loading,
-    TResult Function(T? data, F? filter)? empty,
-    TResult Function(T? data, F? filter, Object? error)? error,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty(data, filter);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_Data<T, F> value) $default, {
-    required TResult Function(Loading<T, F> value) loading,
-    required TResult Function(Empty<T, F> value) empty,
-    required TResult Function(Error<T, F> value) error,
-  }) {
-    return empty(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_Data<T, F> value)? $default, {
-    TResult? Function(Loading<T, F> value)? loading,
-    TResult? Function(Empty<T, F> value)? empty,
-    TResult? Function(Error<T, F> value)? error,
-  }) {
-    return empty?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Data<T, F> value)? $default, {
-    TResult Function(Loading<T, F> value)? loading,
-    TResult Function(Empty<T, F> value)? empty,
-    TResult Function(Error<T, F> value)? error,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Empty<T, F> implements Data<T, F> {
-  const factory Empty({final T? data, final F? filter}) = _$EmptyImpl<T, F>;
-
-  @override
-  T? get data;
-  @override
-  F? get filter;
-  @override
-  @JsonKey(ignore: true)
-  _$$EmptyImplCopyWith<T, F, _$EmptyImpl<T, F>> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<T, F, $Res>
+abstract mixin class $EmptyCopyWith<T, F, $Res>
     implements $DataCopyWith<T, F, $Res> {
-  factory _$$ErrorImplCopyWith(
-          _$ErrorImpl<T, F> value, $Res Function(_$ErrorImpl<T, F>) then) =
-      __$$ErrorImplCopyWithImpl<T, F, $Res>;
+  factory $EmptyCopyWith(Empty<T, F> value, $Res Function(Empty<T, F>) _then) =
+      _$EmptyCopyWithImpl;
   @override
   @useResult
-  $Res call({T? data, F? filter, Object? error});
+  $Res call({T? data, F? filter});
 }
 
 /// @nodoc
-class __$$ErrorImplCopyWithImpl<T, F, $Res>
-    extends _$DataCopyWithImpl<T, F, $Res, _$ErrorImpl<T, F>>
-    implements _$$ErrorImplCopyWith<T, F, $Res> {
-  __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl<T, F> _value, $Res Function(_$ErrorImpl<T, F>) _then)
-      : super(_value, _then);
+class _$EmptyCopyWithImpl<T, F, $Res> implements $EmptyCopyWith<T, F, $Res> {
+  _$EmptyCopyWithImpl(this._self, this._then);
 
-  @pragma('vm:prefer-inline')
+  final Empty<T, F> _self;
+  final $Res Function(Empty<T, F>) _then;
+
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? data = freezed,
     Object? filter = freezed,
-    Object? error = freezed,
   }) {
-    return _then(_$ErrorImpl<T, F>(
+    return _then(Empty<T, F>(
       data: freezed == data
-          ? _value.data
+          ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
               as T?,
       filter: freezed == filter
-          ? _value.filter
+          ? _self.filter
           : filter // ignore: cast_nullable_to_non_nullable
               as F?,
-      error: freezed == error ? _value.error : error,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ErrorImpl<T, F> implements Error<T, F> {
-  const _$ErrorImpl({this.data, this.filter, this.error});
+class Error<T, F> implements Data<T, F> {
+  const Error({this.data, this.filter, this.error});
 
   @override
   final T? data;
   @override
   final F? filter;
-  @override
   final Object? error;
 
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Data<$T, $F>.error(data: $data, filter: $filter, error: $error)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ErrorCopyWith<T, F, Error<T, F>> get copyWith =>
+      _$ErrorCopyWithImpl<T, F, Error<T, F>>(this, _$identity);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl<T, F> &&
+            other is Error<T, F> &&
             const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality().equals(other.filter, filter) &&
             const DeepCollectionEquality().equals(other.error, error));
@@ -671,98 +351,50 @@ class _$ErrorImpl<T, F> implements Error<T, F> {
       const DeepCollectionEquality().hash(filter),
       const DeepCollectionEquality().hash(error));
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'Data<$T, $F>.error(data: $data, filter: $filter, error: $error)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ErrorCopyWith<T, F, $Res>
+    implements $DataCopyWith<T, F, $Res> {
+  factory $ErrorCopyWith(Error<T, F> value, $Res Function(Error<T, F>) _then) =
+      _$ErrorCopyWithImpl;
+  @override
+  @useResult
+  $Res call({T? data, F? filter, Object? error});
+}
+
+/// @nodoc
+class _$ErrorCopyWithImpl<T, F, $Res> implements $ErrorCopyWith<T, F, $Res> {
+  _$ErrorCopyWithImpl(this._self, this._then);
+
+  final Error<T, F> _self;
+  final $Res Function(Error<T, F>) _then;
+
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<T, F, _$ErrorImpl<T, F>> get copyWith =>
-      __$$ErrorImplCopyWithImpl<T, F, _$ErrorImpl<T, F>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(T? data, F? filter) $default, {
-    required TResult Function(T? data, F? filter) loading,
-    required TResult Function(T? data, F? filter) empty,
-    required TResult Function(T? data, F? filter, Object? error) error,
+  $Res call({
+    Object? data = freezed,
+    Object? filter = freezed,
+    Object? error = freezed,
   }) {
-    return error(data, filter, this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(T? data, F? filter)? $default, {
-    TResult? Function(T? data, F? filter)? loading,
-    TResult? Function(T? data, F? filter)? empty,
-    TResult? Function(T? data, F? filter, Object? error)? error,
-  }) {
-    return error?.call(data, filter, this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(T? data, F? filter)? $default, {
-    TResult Function(T? data, F? filter)? loading,
-    TResult Function(T? data, F? filter)? empty,
-    TResult Function(T? data, F? filter, Object? error)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(data, filter, this.error);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_Data<T, F> value) $default, {
-    required TResult Function(Loading<T, F> value) loading,
-    required TResult Function(Empty<T, F> value) empty,
-    required TResult Function(Error<T, F> value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_Data<T, F> value)? $default, {
-    TResult? Function(Loading<T, F> value)? loading,
-    TResult? Function(Empty<T, F> value)? empty,
-    TResult? Function(Error<T, F> value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Data<T, F> value)? $default, {
-    TResult Function(Loading<T, F> value)? loading,
-    TResult Function(Empty<T, F> value)? empty,
-    TResult Function(Error<T, F> value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
+    return _then(Error<T, F>(
+      data: freezed == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as T?,
+      filter: freezed == filter
+          ? _self.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as F?,
+      error: freezed == error ? _self.error : error,
+    ));
   }
 }
 
-abstract class Error<T, F> implements Data<T, F> {
-  const factory Error({final T? data, final F? filter, final Object? error}) =
-      _$ErrorImpl<T, F>;
-
-  @override
-  T? get data;
-  @override
-  F? get filter;
-  Object? get error;
-  @override
-  @JsonKey(ignore: true)
-  _$$ErrorImplCopyWith<T, F, _$ErrorImpl<T, F>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

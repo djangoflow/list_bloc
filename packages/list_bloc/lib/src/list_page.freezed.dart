@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,90 +10,62 @@ part of 'list_page.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ListPage<T> {
-  List<T>? get data => throw _privateConstructorUsedError;
-  int? get count => throw _privateConstructorUsedError;
-  int get number => throw _privateConstructorUsedError;
-  int get size => throw _privateConstructorUsedError;
+  List<T>? get data;
+  int? get count;
+  int get number;
+  int get size;
 
-  @JsonKey(ignore: true)
-  $ListPageCopyWith<T, ListPage<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ListPageCopyWith<T, $Res> {
-  factory $ListPageCopyWith(
-          ListPage<T> value, $Res Function(ListPage<T>) then) =
-      _$ListPageCopyWithImpl<T, $Res, ListPage<T>>;
-  @useResult
-  $Res call({List<T>? data, int? count, int number, int size});
-}
-
-/// @nodoc
-class _$ListPageCopyWithImpl<T, $Res, $Val extends ListPage<T>>
-    implements $ListPageCopyWith<T, $Res> {
-  _$ListPageCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of ListPage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $ListPageCopyWith<T, ListPage<T>> get copyWith =>
+      _$ListPageCopyWithImpl<T, ListPage<T>>(this as ListPage<T>, _$identity);
+
   @override
-  $Res call({
-    Object? data = freezed,
-    Object? count = freezed,
-    Object? number = null,
-    Object? size = null,
-  }) {
-    return _then(_value.copyWith(
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
-      count: freezed == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int?,
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as int,
-      size: null == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ListPage<T> &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.size, size) || other.size == size));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(data), count, number, size);
+
+  @override
+  String toString() {
+    return 'ListPage<$T>(data: $data, count: $count, number: $number, size: $size)';
   }
 }
 
 /// @nodoc
-abstract class _$$ListPageImplCopyWith<T, $Res>
-    implements $ListPageCopyWith<T, $Res> {
-  factory _$$ListPageImplCopyWith(
-          _$ListPageImpl<T> value, $Res Function(_$ListPageImpl<T>) then) =
-      __$$ListPageImplCopyWithImpl<T, $Res>;
-  @override
+abstract mixin class $ListPageCopyWith<T, $Res> {
+  factory $ListPageCopyWith(
+          ListPage<T> value, $Res Function(ListPage<T>) _then) =
+      _$ListPageCopyWithImpl;
   @useResult
   $Res call({List<T>? data, int? count, int number, int size});
 }
 
 /// @nodoc
-class __$$ListPageImplCopyWithImpl<T, $Res>
-    extends _$ListPageCopyWithImpl<T, $Res, _$ListPageImpl<T>>
-    implements _$$ListPageImplCopyWith<T, $Res> {
-  __$$ListPageImplCopyWithImpl(
-      _$ListPageImpl<T> _value, $Res Function(_$ListPageImpl<T>) _then)
-      : super(_value, _then);
+class _$ListPageCopyWithImpl<T, $Res> implements $ListPageCopyWith<T, $Res> {
+  _$ListPageCopyWithImpl(this._self, this._then);
 
+  final ListPage<T> _self;
+  final $Res Function(ListPage<T>) _then;
+
+  /// Create a copy of ListPage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,21 +74,21 @@ class __$$ListPageImplCopyWithImpl<T, $Res>
     Object? number = null,
     Object? size = null,
   }) {
-    return _then(_$ListPageImpl<T>(
+    return _then(_self.copyWith(
       data: freezed == data
-          ? _value._data
+          ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<T>?,
       count: freezed == count
-          ? _value.count
+          ? _self.count
           : count // ignore: cast_nullable_to_non_nullable
               as int?,
       number: null == number
-          ? _value.number
+          ? _self.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
       size: null == size
-          ? _value.size
+          ? _self.size
           : size // ignore: cast_nullable_to_non_nullable
               as int,
     ));
@@ -124,8 +97,8 @@ class __$$ListPageImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$ListPageImpl<T> extends _ListPage<T> {
-  const _$ListPageImpl(
+class _ListPage<T> extends ListPage<T> {
+  const _ListPage(
       {final List<T>? data,
       this.count,
       required this.number,
@@ -150,16 +123,19 @@ class _$ListPageImpl<T> extends _ListPage<T> {
   @override
   final int size;
 
+  /// Create a copy of ListPage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ListPage<$T>(data: $data, count: $count, number: $number, size: $size)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ListPageCopyWith<T, _ListPage<T>> get copyWith =>
+      __$ListPageCopyWithImpl<T, _ListPage<T>>(this, _$identity);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ListPageImpl<T> &&
+            other is _ListPage<T> &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.number, number) || other.number == number) &&
@@ -170,31 +146,59 @@ class _$ListPageImpl<T> extends _ListPage<T> {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_data), count, number, size);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'ListPage<$T>(data: $data, count: $count, number: $number, size: $size)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ListPageCopyWith<T, $Res>
+    implements $ListPageCopyWith<T, $Res> {
+  factory _$ListPageCopyWith(
+          _ListPage<T> value, $Res Function(_ListPage<T>) _then) =
+      __$ListPageCopyWithImpl;
+  @override
+  @useResult
+  $Res call({List<T>? data, int? count, int number, int size});
+}
+
+/// @nodoc
+class __$ListPageCopyWithImpl<T, $Res> implements _$ListPageCopyWith<T, $Res> {
+  __$ListPageCopyWithImpl(this._self, this._then);
+
+  final _ListPage<T> _self;
+  final $Res Function(_ListPage<T>) _then;
+
+  /// Create a copy of ListPage
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$ListPageImplCopyWith<T, _$ListPageImpl<T>> get copyWith =>
-      __$$ListPageImplCopyWithImpl<T, _$ListPageImpl<T>>(this, _$identity);
+  $Res call({
+    Object? data = freezed,
+    Object? count = freezed,
+    Object? number = null,
+    Object? size = null,
+  }) {
+    return _then(_ListPage<T>(
+      data: freezed == data
+          ? _self._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<T>?,
+      count: freezed == count
+          ? _self.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int?,
+      number: null == number
+          ? _self.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int,
+      size: null == size
+          ? _self.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
-abstract class _ListPage<T> extends ListPage<T> {
-  const factory _ListPage(
-      {final List<T>? data,
-      final int? count,
-      required final int number,
-      required final int size}) = _$ListPageImpl<T>;
-  const _ListPage._() : super._();
-
-  @override
-  List<T>? get data;
-  @override
-  int? get count;
-  @override
-  int get number;
-  @override
-  int get size;
-  @override
-  @JsonKey(ignore: true)
-  _$$ListPageImplCopyWith<T, _$ListPageImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on
