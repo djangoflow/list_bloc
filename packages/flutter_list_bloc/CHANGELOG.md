@@ -1,3 +1,7 @@
+## 5.0.1
+
+ - **REFACTOR**: update sdk constraint. ([daddc2da](https://github.com/djangoflow/list_bloc/commit/daddc2da9221495d03530e333efaff1020a9057e))
+
 ## 5.0.0
 
 > Note: This release has breaking changes.

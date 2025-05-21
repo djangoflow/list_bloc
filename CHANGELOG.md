@@ -11,6 +11,27 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 Packages with breaking changes:
 
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`flutter_list_bloc` - `v5.0.1`](#flutter_list_bloc---v501)
+
+---
+
+#### `flutter_list_bloc` - `v5.0.1`
+
+ - **REFACTOR**: update sdk constraint. ([daddc2da](https://github.com/djangoflow/list_bloc/commit/daddc2da9221495d03530e333efaff1020a9057e))
+
+
+## 2025-05-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
  - [`_openapi_repository_internal_models` - `v0.1.0`](#_openapi_repository_internal_models---v010)
  - [`flutter_list_bloc` - `v5.0.0`](#flutter_list_bloc---v500)
  - [`list_bloc` - `v4.0.0`](#list_bloc---v400)

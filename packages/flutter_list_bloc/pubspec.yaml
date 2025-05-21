@@ -1,6 +1,6 @@
 name: flutter_list_bloc
 description: A Flutter package to display the data loaded with list_bloc.
-version: 5.0.0
+version: 5.0.1
 homepage: https://github.com/djangoflow/list_bloc/
 
 environment:
