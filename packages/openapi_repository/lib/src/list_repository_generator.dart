@@ -15,6 +15,7 @@ import 'package:source_gen/source_gen.dart';
 
 import 'model_visitor.dart';
 
+// TODO: Fix all the deprecated usage and test properly later
 class OpenapiRepositoryGenerator
     extends GeneratorForAnnotation<OpenapiRepository> {
   int _defaultPageSize = 100;
