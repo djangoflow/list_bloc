@@ -94,7 +94,10 @@ abstract class $ApiRepository {}
 ''';
 
   static final generatedFileWithIgnoreListItemEndpoint =
-      r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+      r'''// dart format width=80
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: sort_constructors_first, sort_unnamed_constructors_first
 
 part of 'api_repository.dart';
 
@@ -200,8 +203,10 @@ class ItemDataBloc extends DataCubit<int, ItemReadFilter> with ItemRepository {
 }
 ''';
 
-  static final generatedFileWithBuilderList =
-      r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+  static final generatedFileWithBuilderList = r'''// dart format width=80
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: sort_constructors_first, sort_unnamed_constructors_first
 
 part of 'api_repository.dart';
 
@@ -363,8 +368,10 @@ class ItemListBloc extends ListCubit<int, ItemListFilter> with ItemRepository {
 }
 ''';
 
-  static final generatedFileWithEmptyBuilderList =
-      r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+  static final generatedFileWithEmptyBuilderList = r'''// dart format width=80
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: sort_constructors_first, sort_unnamed_constructors_first
 
 part of 'api_repository.dart';
 
