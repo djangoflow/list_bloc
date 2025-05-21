@@ -1,3 +1,9 @@
+## 5.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **REFACTOR**: update dependencies to latest. ([0002c989](https://github.com/djangoflow/list_bloc/commit/0002c989ec9474dd812665a8052c67cd43e4afcd))
+
 ## 4.1.4
 
  - Update a dependency to the latest release.

@@ -1,3 +1,9 @@
+## 0.1.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **REFACTOR**: update dependencies to latest. ([5d46c818](https://github.com/djangoflow/list_bloc/commit/5d46c8184d3113425b34a9eced035975fa392351))
+
 ## 0.0.3+2
 
  - **REFACTOR**: re-generated files. ([171bbbc7](https://github.com/djangoflow/list_bloc/commit/171bbbc7cba6542f3a1f2bafa564bcbf820135a8))

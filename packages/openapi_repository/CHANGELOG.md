@@ -1,3 +1,9 @@
+## 4.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **REFACTOR**: update dependencies to the latest. ([85f99ff5](https://github.com/djangoflow/list_bloc/commit/85f99ff5ff7443e770cd0bf2ee6a9bc2933917f7))
+
 ## 3.4.5
 
  - **REFACTOR**: update analyzer. ([d0b47a59](https://github.com/djangoflow/list_bloc/commit/d0b47a59c1e20c1cc680005e4960391b2686c7c7))

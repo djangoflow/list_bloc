@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-05-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`_openapi_repository_internal_models` - `v0.1.0`](#_openapi_repository_internal_models---v010)
+ - [`flutter_list_bloc` - `v5.0.0`](#flutter_list_bloc---v500)
+ - [`list_bloc` - `v4.0.0`](#list_bloc---v400)
+ - [`openapi_repository` - `v4.0.0`](#openapi_repository---v400)
+
+Packages with other changes:
+
+ - There are no other changes in this release.
+
+---
+
+#### `_openapi_repository_internal_models` - `v0.1.0`
+
+ - **BREAKING** **REFACTOR**: update dependencies to latest. ([5d46c818](https://github.com/djangoflow/list_bloc/commit/5d46c8184d3113425b34a9eced035975fa392351))
+
+#### `flutter_list_bloc` - `v5.0.0`
+
+ - **BREAKING** **REFACTOR**: update dependencies to latest. ([0002c989](https://github.com/djangoflow/list_bloc/commit/0002c989ec9474dd812665a8052c67cd43e4afcd))
+
+#### `list_bloc` - `v4.0.0`
+
+ - **BREAKING** **REFACTOR**: update dependencies to the latest. ([25afaa83](https://github.com/djangoflow/list_bloc/commit/25afaa838bd4c147091b94a9e982a5e1390271c5))
+
+#### `openapi_repository` - `v4.0.0`
+
+ - **BREAKING** **REFACTOR**: update dependencies to the latest. ([85f99ff5](https://github.com/djangoflow/list_bloc/commit/85f99ff5ff7443e770cd0bf2ee6a9bc2933917f7))
+
+
 ## 2024-01-05
 
 ### Changes
