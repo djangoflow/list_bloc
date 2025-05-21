@@ -3,7 +3,7 @@ part 'models.freezed.dart';
 part 'models.g.dart';
 
 @freezed
-class RepositoryTemplateModel with _$RepositoryTemplateModel {
+abstract class RepositoryTemplateModel with _$RepositoryTemplateModel {
   @JsonSerializable(explicitToJson: true)
   const factory RepositoryTemplateModel({
     required String repositoryName,
@@ -21,7 +21,7 @@ class RepositoryTemplateModel with _$RepositoryTemplateModel {
 }
 
 @freezed
-class AccessorModel with _$AccessorModel {
+abstract class AccessorModel with _$AccessorModel {
   const factory AccessorModel({
     required String type,
     required String name,
@@ -34,7 +34,7 @@ class AccessorModel with _$AccessorModel {
 
 /// This model holds data for writing Filter classes
 @freezed
-class FreezedTemplateModel with _$FreezedTemplateModel {
+abstract class FreezedTemplateModel with _$FreezedTemplateModel {
   @JsonSerializable(explicitToJson: true)
   const factory FreezedTemplateModel({
     required String name,
@@ -49,7 +49,7 @@ class FreezedTemplateModel with _$FreezedTemplateModel {
 }
 
 @freezed
-class TypeModel with _$TypeModel {
+abstract class TypeModel with _$TypeModel {
   const factory TypeModel({
     required bool isRequired,
     required bool isNullable,
@@ -63,7 +63,7 @@ class TypeModel with _$TypeModel {
 }
 
 @freezed
-class TypedefTemplateModel with _$TypedefTemplateModel {
+abstract class TypedefTemplateModel with _$TypedefTemplateModel {
   const factory TypedefTemplateModel({
     required String type,
     required String name,
@@ -75,7 +75,7 @@ class TypedefTemplateModel with _$TypedefTemplateModel {
 }
 
 @freezed
-class ListRepositoryTemplateModel with _$ListRepositoryTemplateModel {
+abstract class ListRepositoryTemplateModel with _$ListRepositoryTemplateModel {
   @JsonSerializable(explicitToJson: true)
   const factory ListRepositoryTemplateModel({
     required String api,
@@ -95,7 +95,7 @@ class ListRepositoryTemplateModel with _$ListRepositoryTemplateModel {
 }
 
 @freezed
-class DataCubitTemplateModel with _$DataCubitTemplateModel {
+abstract class DataCubitTemplateModel with _$DataCubitTemplateModel {
   @JsonSerializable(explicitToJson: true)
   const factory DataCubitTemplateModel({
     required String api,
@@ -113,7 +113,7 @@ class DataCubitTemplateModel with _$DataCubitTemplateModel {
 }
 
 @freezed
-class ParamModel with _$ParamModel {
+abstract class ParamModel with _$ParamModel {
   const factory ParamModel(String param) = _ParamModel;
 
   factory ParamModel.fromJson(Map<String, dynamic> map) =>
@@ -121,7 +121,7 @@ class ParamModel with _$ParamModel {
 }
 
 @freezed
-class AnnotationModel with _$AnnotationModel {
+abstract class AnnotationModel with _$AnnotationModel {
   const factory AnnotationModel(String annotation) = _AnnotationModel;
 
   factory AnnotationModel.fromJson(Map<String, dynamic> map) =>
@@ -129,7 +129,7 @@ class AnnotationModel with _$AnnotationModel {
 }
 
 @freezed
-class ArgModel with _$ArgModel {
+abstract class ArgModel with _$ArgModel {
   const factory ArgModel(String argType, String argName, bool isNullableArg,
       bool isRequiredArg) = _ArgModelModel;
 
@@ -138,7 +138,7 @@ class ArgModel with _$ArgModel {
 }
 
 @freezed
-class MethodModel with _$MethodModel {
+abstract class MethodModel with _$MethodModel {
   @JsonSerializable(explicitToJson: true)
   const factory MethodModel({
     required String returnType,
@@ -158,7 +158,7 @@ class MethodModel with _$MethodModel {
 /// Model for loader methods that will be written in the respective Repository
 /// which will be then used used with `DataCubit` or `ListCubit`
 @freezed
-class LoaderMethodModel with _$LoaderMethodModel {
+abstract class LoaderMethodModel with _$LoaderMethodModel {
   @JsonSerializable(explicitToJson: true)
   const factory LoaderMethodModel({
     required String returnType,
@@ -183,7 +183,8 @@ class LoaderMethodModel with _$LoaderMethodModel {
 }
 
 @freezed
-class LoaderRepositoryTemplateModel with _$LoaderRepositoryTemplateModel {
+abstract class LoaderRepositoryTemplateModel
+    with _$LoaderRepositoryTemplateModel {
   @JsonSerializable(explicitToJson: true)
   const factory LoaderRepositoryTemplateModel({
     LoaderTemplateModel? dataLoader,
@@ -204,7 +205,7 @@ class LoaderRepositoryTemplateModel with _$LoaderRepositoryTemplateModel {
 }
 
 @freezed
-class LoaderTemplateModel with _$LoaderTemplateModel {
+abstract class LoaderTemplateModel with _$LoaderTemplateModel {
   @JsonSerializable(explicitToJson: true)
   const factory LoaderTemplateModel({
     required String api,
@@ -224,7 +225,7 @@ class LoaderTemplateModel with _$LoaderTemplateModel {
 }
 
 @freezed
-class CubitTemplateModel with _$CubitTemplateModel {
+abstract class CubitTemplateModel with _$CubitTemplateModel {
   @JsonSerializable(explicitToJson: true)
   const factory CubitTemplateModel({
     required String name,
@@ -242,7 +243,7 @@ class CubitTemplateModel with _$CubitTemplateModel {
 }
 
 @freezed
-class BuiltListJsonConverterModel with _$BuiltListJsonConverterModel {
+abstract class BuiltListJsonConverterModel with _$BuiltListJsonConverterModel {
   const factory BuiltListJsonConverterModel({
     required String converterName,
     required String innerReturnType,
@@ -254,7 +255,7 @@ class BuiltListJsonConverterModel with _$BuiltListJsonConverterModel {
 }
 
 @freezed
-class BuiltListJsonConverterTemplateModel
+abstract class BuiltListJsonConverterTemplateModel
     with _$BuiltListJsonConverterTemplateModel {
   const factory BuiltListJsonConverterTemplateModel({
     required String converterName,
