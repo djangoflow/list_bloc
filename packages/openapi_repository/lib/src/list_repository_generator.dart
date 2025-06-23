@@ -928,6 +928,10 @@ abstract class _MethodElementProcessor {
     this.ignoreParams = const [],
   });
   DartType? _getInnerMostType(DartType type) {
+    if (type.isDartCoreMap) {
+      return type;
+    }
+
     if (type is ParameterizedType && type.typeArguments.isNotEmpty) {
       final typeArgs = type.typeArguments;
       return typeArgs.first is VoidType
