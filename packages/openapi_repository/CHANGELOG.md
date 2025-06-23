@@ -1,3 +1,7 @@
+## 4.0.1
+
+ - **FIX**: bug regarding not generated map as return type. ([b7640f8b](https://github.com/djangoflow/list_bloc/commit/b7640f8bbf72f68a5bfc472504d6cf6abe5ba4df))
+
 ## 4.0.0
 
 > Note: This release has breaking changes.

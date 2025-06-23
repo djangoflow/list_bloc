@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-06-23
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`openapi_repository` - `v4.0.1`](#openapi_repository---v401)
+
+---
+
+#### `openapi_repository` - `v4.0.1`
+
+ - **FIX**: bug regarding not generated map as return type. ([b7640f8b](https://github.com/djangoflow/list_bloc/commit/b7640f8bbf72f68a5bfc472504d6cf6abe5ba4df))
+
+
 ## 2025-05-21
 
 ### Changes
