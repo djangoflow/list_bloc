@@ -2359,6 +2359,8 @@ mixin _$MethodModel {
   bool get isEmptyArgs;
   bool get isList;
   bool get shouldUseAsList;
+  bool get isInline;
+  String get returnTypeNullabilitySuffix;
 
   /// Create a copy of MethodModel
   /// with the given fields replaced by the non-null parameter values.
@@ -2387,7 +2389,13 @@ mixin _$MethodModel {
                 other.isEmptyArgs == isEmptyArgs) &&
             (identical(other.isList, isList) || other.isList == isList) &&
             (identical(other.shouldUseAsList, shouldUseAsList) ||
-                other.shouldUseAsList == shouldUseAsList));
+                other.shouldUseAsList == shouldUseAsList) &&
+            (identical(other.isInline, isInline) ||
+                other.isInline == isInline) &&
+            (identical(other.returnTypeNullabilitySuffix,
+                    returnTypeNullabilitySuffix) ||
+                other.returnTypeNullabilitySuffix ==
+                    returnTypeNullabilitySuffix));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2401,11 +2409,13 @@ mixin _$MethodModel {
       const DeepCollectionEquality().hash(parameters),
       isEmptyArgs,
       isList,
-      shouldUseAsList);
+      shouldUseAsList,
+      isInline,
+      returnTypeNullabilitySuffix);
 
   @override
   String toString() {
-    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters, isEmptyArgs: $isEmptyArgs, isList: $isList, shouldUseAsList: $shouldUseAsList)';
+    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters, isEmptyArgs: $isEmptyArgs, isList: $isList, shouldUseAsList: $shouldUseAsList, isInline: $isInline, returnTypeNullabilitySuffix: $returnTypeNullabilitySuffix)';
   }
 }
 
@@ -2423,7 +2433,9 @@ abstract mixin class $MethodModelCopyWith<$Res> {
       List<ParamModel> parameters,
       bool isEmptyArgs,
       bool isList,
-      bool shouldUseAsList});
+      bool shouldUseAsList,
+      bool isInline,
+      String returnTypeNullabilitySuffix});
 }
 
 /// @nodoc
@@ -2446,6 +2458,8 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
     Object? isEmptyArgs = null,
     Object? isList = null,
     Object? shouldUseAsList = null,
+    Object? isInline = null,
+    Object? returnTypeNullabilitySuffix = null,
   }) {
     return _then(_self.copyWith(
       returnType: null == returnType
@@ -2480,6 +2494,14 @@ class _$MethodModelCopyWithImpl<$Res> implements $MethodModelCopyWith<$Res> {
           ? _self.shouldUseAsList
           : shouldUseAsList // ignore: cast_nullable_to_non_nullable
               as bool,
+      isInline: null == isInline
+          ? _self.isInline
+          : isInline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      returnTypeNullabilitySuffix: null == returnTypeNullabilitySuffix
+          ? _self.returnTypeNullabilitySuffix
+          : returnTypeNullabilitySuffix // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -2496,7 +2518,9 @@ class _MethodModel implements MethodModel {
       required final List<ParamModel> parameters,
       this.isEmptyArgs = false,
       this.isList = false,
-      this.shouldUseAsList = false})
+      this.shouldUseAsList = false,
+      this.isInline = false,
+      this.returnTypeNullabilitySuffix = ''})
       : _arguments = arguments,
         _parameters = parameters;
   factory _MethodModel.fromJson(Map<String, dynamic> json) =>
@@ -2533,6 +2557,12 @@ class _MethodModel implements MethodModel {
   @override
   @JsonKey()
   final bool shouldUseAsList;
+  @override
+  @JsonKey()
+  final bool isInline;
+  @override
+  @JsonKey()
+  final String returnTypeNullabilitySuffix;
 
   /// Create a copy of MethodModel
   /// with the given fields replaced by the non-null parameter values.
@@ -2567,7 +2597,13 @@ class _MethodModel implements MethodModel {
                 other.isEmptyArgs == isEmptyArgs) &&
             (identical(other.isList, isList) || other.isList == isList) &&
             (identical(other.shouldUseAsList, shouldUseAsList) ||
-                other.shouldUseAsList == shouldUseAsList));
+                other.shouldUseAsList == shouldUseAsList) &&
+            (identical(other.isInline, isInline) ||
+                other.isInline == isInline) &&
+            (identical(other.returnTypeNullabilitySuffix,
+                    returnTypeNullabilitySuffix) ||
+                other.returnTypeNullabilitySuffix ==
+                    returnTypeNullabilitySuffix));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2581,11 +2617,13 @@ class _MethodModel implements MethodModel {
       const DeepCollectionEquality().hash(_parameters),
       isEmptyArgs,
       isList,
-      shouldUseAsList);
+      shouldUseAsList,
+      isInline,
+      returnTypeNullabilitySuffix);
 
   @override
   String toString() {
-    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters, isEmptyArgs: $isEmptyArgs, isList: $isList, shouldUseAsList: $shouldUseAsList)';
+    return 'MethodModel(returnType: $returnType, name: $name, operation: $operation, arguments: $arguments, parameters: $parameters, isEmptyArgs: $isEmptyArgs, isList: $isList, shouldUseAsList: $shouldUseAsList, isInline: $isInline, returnTypeNullabilitySuffix: $returnTypeNullabilitySuffix)';
   }
 }
 
@@ -2605,7 +2643,9 @@ abstract mixin class _$MethodModelCopyWith<$Res>
       List<ParamModel> parameters,
       bool isEmptyArgs,
       bool isList,
-      bool shouldUseAsList});
+      bool shouldUseAsList,
+      bool isInline,
+      String returnTypeNullabilitySuffix});
 }
 
 /// @nodoc
@@ -2628,6 +2668,8 @@ class __$MethodModelCopyWithImpl<$Res> implements _$MethodModelCopyWith<$Res> {
     Object? isEmptyArgs = null,
     Object? isList = null,
     Object? shouldUseAsList = null,
+    Object? isInline = null,
+    Object? returnTypeNullabilitySuffix = null,
   }) {
     return _then(_MethodModel(
       returnType: null == returnType
@@ -2662,6 +2704,14 @@ class __$MethodModelCopyWithImpl<$Res> implements _$MethodModelCopyWith<$Res> {
           ? _self.shouldUseAsList
           : shouldUseAsList // ignore: cast_nullable_to_non_nullable
               as bool,
+      isInline: null == isInline
+          ? _self.isInline
+          : isInline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      returnTypeNullabilitySuffix: null == returnTypeNullabilitySuffix
+          ? _self.returnTypeNullabilitySuffix
+          : returnTypeNullabilitySuffix // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }

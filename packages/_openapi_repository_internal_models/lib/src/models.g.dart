@@ -227,6 +227,9 @@ _MethodModel _$MethodModelFromJson(Map<String, dynamic> json) => _MethodModel(
       isEmptyArgs: json['isEmptyArgs'] as bool? ?? false,
       isList: json['isList'] as bool? ?? false,
       shouldUseAsList: json['shouldUseAsList'] as bool? ?? false,
+      isInline: json['isInline'] as bool? ?? false,
+      returnTypeNullabilitySuffix:
+          json['returnTypeNullabilitySuffix'] as String? ?? '',
     );
 
 Map<String, dynamic> _$MethodModelToJson(_MethodModel instance) =>
@@ -239,6 +242,8 @@ Map<String, dynamic> _$MethodModelToJson(_MethodModel instance) =>
       'isEmptyArgs': instance.isEmptyArgs,
       'isList': instance.isList,
       'shouldUseAsList': instance.shouldUseAsList,
+      'isInline': instance.isInline,
+      'returnTypeNullabilitySuffix': instance.returnTypeNullabilitySuffix,
     };
 
 _LoaderMethodModel _$LoaderMethodModelFromJson(Map<String, dynamic> json) =>

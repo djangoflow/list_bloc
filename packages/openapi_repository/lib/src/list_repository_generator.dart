@@ -606,6 +606,12 @@ class OpenapiRepositoryGenerator
         isEmptyArgs: arguments.isEmpty,
         isList: isList,
         shouldUseAsList: shouldUseAsMap,
+        isInline: listReturntype?.isInline ?? dataReturntype?.isInline ?? false,
+        returnTypeNullabilitySuffix: listReturntype?.nullabilitySuffix != null 
+            ? _getNullabilitySuffix(listReturntype!.nullabilitySuffix) 
+            : (dataReturntype?.nullabilitySuffix != null 
+                ? _getNullabilitySuffix(dataReturntype!.nullabilitySuffix) 
+                : ''),
       );
     } else {
       return null;
@@ -693,6 +699,22 @@ class OpenapiRepositoryGenerator
       }
     }
     return namePrefix;
+  }
+
+  String _getNullabilitySuffix(NullabilitySuffix? nullabilitySuffix) {
+    if (nullabilitySuffix == null) {
+      return '';
+    }
+    switch (nullabilitySuffix) {
+      case NullabilitySuffix.none:
+        return '';
+      case NullabilitySuffix.question:
+        return '?';
+      case NullabilitySuffix.star:
+        return '*';
+      default:
+        return '';
+    }
   }
 }
 

@@ -149,6 +149,8 @@ abstract class MethodModel with _$MethodModel {
     @Default(false) bool isEmptyArgs,
     @Default(false) bool isList,
     @Default(false) bool shouldUseAsList,
+    @Default(false) bool isInline,
+    @Default('') String returnTypeNullabilitySuffix,
   }) = _MethodModel;
 
   factory MethodModel.fromJson(Map<String, dynamic> map) =>

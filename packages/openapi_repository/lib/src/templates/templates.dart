@@ -129,7 +129,7 @@ static Future<List<{{returnType}}>> {{listLoaderMethodName}}({{#additionalParams
       {{/parameters}}
     ));
 
-    return r.data{{#isList}}?.{{#shouldUseAsList}}asList(){{/shouldUseAsList}}{{^shouldUseAsList}}toList(growable:false){{/shouldUseAsList}} ?? []{{/isList}};
+    return r.data{{#isList}}?{{#isInline}}.results{{#returnTypeNullabilitySuffix}}?{{/returnTypeNullabilitySuffix}}{{/isInline}}.{{#shouldUseAsList}}asList(){{/shouldUseAsList}}{{^shouldUseAsList}}toList(growable:false){{/shouldUseAsList}} ?? []{{/isList}};
   }
   {{/crudMethods}}
 }
