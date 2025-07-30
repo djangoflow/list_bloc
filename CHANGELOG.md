@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-07-30
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`_openapi_repository_internal_models` - `v0.1.0+1`](#_openapi_repository_internal_models---v0101)
+ - [`openapi_repository` - `v4.0.2`](#openapi_repository---v402)
+
+---
+
+#### `_openapi_repository_internal_models` - `v0.1.0+1`
+
+ - **FIX**: generate correct method for other methods returning list of items. ([94260cd3](https://github.com/djangoflow/list_bloc/commit/94260cd3a4f457252dea0dcfc5f8f5e6b3958370))
+
+#### `openapi_repository` - `v4.0.2`
+
+ - **FIX**: generate correct method for other methods returning list of items. ([94260cd3](https://github.com/djangoflow/list_bloc/commit/94260cd3a4f457252dea0dcfc5f8f5e6b3958370))
+
+
 ## 2025-06-23
 
 ### Changes

@@ -1,3 +1,7 @@
+## 4.0.2
+
+ - **FIX**: generate correct method for other methods returning list of items. ([94260cd3](https://github.com/djangoflow/list_bloc/commit/94260cd3a4f457252dea0dcfc5f8f5e6b3958370))
+
 ## 4.0.1
 
  - **FIX**: bug regarding not generated map as return type. ([b7640f8b](https://github.com/djangoflow/list_bloc/commit/b7640f8bbf72f68a5bfc472504d6cf6abe5ba4df))

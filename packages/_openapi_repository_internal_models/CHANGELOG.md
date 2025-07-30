@@ -1,3 +1,7 @@
+## 0.1.0+1
+
+ - **FIX**: generate correct method for other methods returning list of items. ([94260cd3](https://github.com/djangoflow/list_bloc/commit/94260cd3a4f457252dea0dcfc5f8f5e6b3958370))
+
 ## 0.1.0
 
 > Note: This release has breaking changes.
