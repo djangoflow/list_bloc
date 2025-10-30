@@ -5,20 +5,10 @@ import 'package:list_bloc/list_bloc.dart';
 import 'types.dart';
 
 class DataBlocBuilder<B extends DataCubit<T, F>, T, F> extends StatelessWidget {
-  final B Function(BuildContext context)? create;
-  final B? cubit;
-  final DataItemBuilder<T, F> itemBuilder;
-  final DataStateBuilder<T, F> emptyBuilder;
-  final DataStateBuilder<T, F> loadingBuilder;
-  final DataErrorStateBuilder<T, F>? errorBuilder;
-  final bool withRefreshIndicator;
+  /// [DataBlocBuilder] handles building a scrollable [ListView] based on state of [ListCubit].
 
-  final Widget Function(
-    BuildContext context,
-    Data<T, F> state,
-    Widget Function(BuildContext context) itemBuilder,
-  ) builder;
-
+  /// Specify the [cubit] or [create], otherwise [DataBlocBuilder] will automatically
+  /// perform a lookup using [BlocProvider] and the current [BuildContext].
   const DataBlocBuilder({
     this.cubit,
     required this.itemBuilder,
@@ -29,6 +19,32 @@ class DataBlocBuilder<B extends DataCubit<T, F>, T, F> extends StatelessWidget {
     this.create,
     this.withRefreshIndicator = false,
   });
+  final B Function(BuildContext context)? create;
+  final B? cubit;
+
+  /// [itemBuilder] will be invoked for each change of [Data]
+  final DataItemBuilder<T, F> itemBuilder;
+
+  /// [emptyBuilder] will be called when [Data] is empty
+  final DataStateBuilder<T, F> emptyBuilder;
+
+  /// [loadingBuilder] will be called when [Data] is [Data.loading]
+  final DataStateBuilder<T, F> loadingBuilder;
+
+  /// [errorBuilder] will be called when [Data] is [Data.error]
+  final DataErrorStateBuilder<T, F>? errorBuilder;
+
+  /// When [withRefreshIndicator] is true
+  /// Then [builder] is wrapper into [RefreshIndicator] widget
+  final bool withRefreshIndicator;
+
+  /// [builder] function wraps content into container
+  /// Use [itemBuilder] param to build content for wrapping
+  final Widget Function(
+    BuildContext context,
+    Data<T, F> state,
+    Widget Function(BuildContext context) itemBuilder,
+  ) builder;
 
   @override
   Widget build(BuildContext context) {

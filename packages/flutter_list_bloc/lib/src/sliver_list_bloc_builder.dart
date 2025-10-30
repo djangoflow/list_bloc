@@ -4,18 +4,11 @@ import 'package:list_bloc/list_bloc.dart';
 import 'list_bloc_builder.dart';
 import 'types.dart';
 
-class SliverListBlocBuilder<B extends ListCubit<T, F>, T, F>
-    extends StatelessWidget {
-  final B Function(BuildContext context)? create;
-  final B? cubit;
-  final ListItemBuilder<T, F> itemBuilder;
-  final ListStateBuilder<T, F> emptyBuilder;
-  final ListStateBuilder<T, F> loadingBuilder;
-  final ListStateBuilder<T, F>? headerBuilder;
-  final ListErrorStateBuilder<T, F>? errorBuilder;
-  final int loadingItemsCount;
-  final bool withRefreshIndicator;
+class SliverListBlocBuilder<B extends ListCubit<T, F>, T, F> extends StatelessWidget {
+  /// [SliverListBlocBuilder] handles building a [SliverList] based on state of [ListCubit].
 
+  /// Specify the [cubit] or [create], otherwise [SliverListBlocBuilder] will automatically
+  /// perform a lookup using [BlocProvider] and the current [BuildContext].
   const SliverListBlocBuilder({
     required this.emptyBuilder,
     required this.itemBuilder,
@@ -27,6 +20,32 @@ class SliverListBlocBuilder<B extends ListCubit<T, F>, T, F>
     this.loadingItemsCount = 3,
     this.withRefreshIndicator = false,
   });
+
+  final B Function(BuildContext context)? create;
+  final B? cubit;
+
+  /// [itemBuilder] will be invoked for each item of the list
+  /// and passed to [SliverList.builder]
+  final ListItemBuilder<T, F> itemBuilder;
+
+  /// [emptyBuilder] will be called when list of items is empty
+  final ListStateBuilder<T, F> emptyBuilder;
+
+  /// [loadingBuilder] will be called [loadingItemsCount] times.
+  /// Use it for single item placeholder.
+  final ListStateBuilder<T, F> loadingBuilder;
+
+  /// [headerBuilder] will be used to build first item in the list
+  final ListStateBuilder<T, F>? headerBuilder;
+
+  /// [errorBuilder] will be called for [Data.error] state
+  final ListErrorStateBuilder<T, F>? errorBuilder;
+
+  /// When [withRefreshIndicator] is true,
+  /// then [ListView] is wrapper into [RefreshIndicator] widget
+  final bool withRefreshIndicator;
+
+  final int loadingItemsCount;
 
   @override
   Widget build(BuildContext context) => ListBlocBuilder<B, T, F>(
